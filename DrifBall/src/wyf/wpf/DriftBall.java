@@ -1,17 +1,33 @@
 package wyf.wpf;				//声明包语句
-import org.openintents.sensorsimulator.hardware.SensorManagerSimulator;//引入相关类
-import android.app.Activity;				//引入相关类
-import android.graphics.Rect;			//引入相关类
-import android.hardware.SensorManager;	//引入相关类
-import android.media.MediaPlayer;	//引入相关类
-import android.os.Bundle;	//引入相关类
-import android.os.Handler;	//引入相关类
-import android.os.Message;	//引入相关类
-import android.view.KeyEvent;	//引入相关类
-import android.view.MotionEvent;	//引入相关类
-import android.view.View;	//引入相关类
-import android.view.Window;	//引入相关类
-import android.view.WindowManager;	//引入相关类
+import org.openintents.sensorsimulator.hardware.Sensor;
+import org.openintents.sensorsimulator.hardware.SensorEventListener;
+import org.openintents.sensorsimulator.hardware.SensorManagerSimulator;
+
+import android.app.Activity;
+import android.graphics.Rect;
+import android.hardware.SensorManager;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
+//引入相关类
 /*
  * 该类为游戏的主类，所有的View对象在这里有所引用，主要的功能是实现游戏
  * 的流程控制，提供游戏需要的常量，在视图之间进行切换。
@@ -45,7 +61,7 @@ public class DriftBall extends Activity {
 	View currView;				//记录当前显示的View
 	GameView gv;				//游戏视图的引用
 	WelcomeView wv;				//欢迎视图的引用
-	BallListener bl;			//继承自SensorListener的监听器
+	SensorEventListener bl;			//继承自SensorListener的监听器
 	HelpView hv;				//帮助视图
 	//@1======对源代码进行如下修改以连接SensorSimulator
 //	SensorManager mySensorManager;
@@ -86,7 +102,8 @@ public class DriftBall extends Activity {
     }
 	 //方法：启动传感器
     public void startSensor(){
-		mySensorManager.registerListener(bl, SensorManager.SENSOR_ORIENTATION,SensorManager.SENSOR_DELAY_GAME);   	
+    	Sensor sensor = mySensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+		mySensorManager.registerListener(bl, sensor,SensorManager.SENSOR_DELAY_GAME);   	
     }
     //暂停传感器
     public void pauseSensor(){

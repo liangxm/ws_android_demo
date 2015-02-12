@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.hardware.SensorEventListener"/>
+<fullyQualifiedTypeName name="org.openintents.sensorsimulator.hardware.SensorEventListener"/>
+<fullyQualifiedTypeName name="org.openintents.sensorsimulator.hardware.Sensor"/>
+</qualifiedTypeNameHistroy>
