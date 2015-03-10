@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_color_bg"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal"
+    android:padding="5dp" >
+
+    <ListView 
+        android:id="@+id/list" 
+        android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:transcriptMode="alwaysScroll"
+		android:background="#EEE"
+		android:cacheColorHint="#00000000"
+		android:divider="#ffffff"
+		android:dividerHeight="2dp"
+		android:layout_marginTop="2dp"
+		android:paddingLeft="1dp"
+		android:paddingRight="1dp"/>
+    
+</RelativeLayout>
