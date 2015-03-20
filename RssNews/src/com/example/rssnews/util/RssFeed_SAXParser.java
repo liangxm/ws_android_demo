@@ -30,7 +30,7 @@ public class RssFeed_SAXParser {
 		SAXParser saxParser = saxParserFactory.newSAXParser(); // 解析工厂生产解析器
 		XMLReader xmlReader = saxParser.getXMLReader(); // 通过saxParser构建xmlReader阅读器
 
-		RssHandler rssHandler = new RssHandler();
+		XmlHandler rssHandler = new XmlHandler();
 		xmlReader.setContentHandler(rssHandler);
 		// 使用url打开流，并将流作为 xmlReader解析的输入源并解析
 

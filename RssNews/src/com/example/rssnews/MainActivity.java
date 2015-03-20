@@ -8,8 +8,11 @@ import org.xml.sax.SAXException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,7 +44,11 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		new Thread(runnable).start();
+		if(isWifi(this))
+			new Thread(runnable).start();
+		else
+			Toast.makeText(MainActivity.this, "No network connection!", Toast.LENGTH_SHORT).show();  
+			
 	}
 
 	/*
@@ -121,6 +128,22 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		// 用android.intent.extra.INTENT的名字来传递参数
 		intent.putExtra("android.intent.extra.rssItem", bundle);
 		startActivityForResult(intent, 0);
+	}
+	
+	/**
+	 * make true current connect service is wifi
+	 * @param mContext
+	 * @return
+	 */
+	private boolean isWifi(Context mContext) {
+		ConnectivityManager connectivityManager = (ConnectivityManager) mContext
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
+		if (activeNetInfo != null
+				&& activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+			return true;
+		}
+		return false;
 	}
 
 	
