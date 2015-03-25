@@ -24,7 +24,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +32,11 @@ import com.example.rssnews.domain.RssFeed;
 import com.example.rssnews.domain.RssItem;
 import com.example.rssnews.util.RssFeed_SAXParser;
 import com.example.rssnews.util.downloadImageTask;
+import com.example.rssnews.view.CornerListView;
 
 public class SecondActivity extends Activity implements OnItemClickListener {
 
-	// ´ÓÍøÂç»ñÈ¡RSSµØÖ·
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡RSSï¿½ï¿½Ö·
 //		public static String RSS_URL = "http://news.qq.com/newsgn/rss_newsgn.xml";
 		public static String RSS_URL = "http://www.ifanr.com/feed";
 
@@ -57,13 +57,13 @@ public class SecondActivity extends Activity implements OnItemClickListener {
 		}
 
 		/*
-		 * °ÑRSSÄÚÈÝ°ó¶¨µ½ui½çÃæ½øÐÐÏÔÊ¾
+		 * ï¿½ï¿½RSSï¿½ï¿½ï¿½Ý°ó¶¨µï¿½uiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
 		 */
 		private void showListView() {
 
-			ListView itemList = (ListView) this.findViewById(R.id.list);
+			CornerListView itemList = (CornerListView) this.findViewById(R.id.list);
 			if (feed == null) {
-				setTitle("·ÃÎÊµÄRSSÎÞÐ§");
+				setTitle("ï¿½ï¿½ï¿½Êµï¿½RSSï¿½ï¿½Ð§");
 				return;
 			}
 			SimpleAdapter simpleAdapter = new SimpleAdapter(this,
@@ -72,7 +72,8 @@ public class SecondActivity extends Activity implements OnItemClickListener {
 							android.R.id.text1, android.R.id.text2 });
 			itemList.setAdapter(simpleAdapter);
 			itemList.setOnItemClickListener(this);
-			itemList.setSelection(1);
+			itemList.setSelection(0);
+			showPanel(0);
 		}
 
 		@Override
@@ -90,13 +91,13 @@ public class SecondActivity extends Activity implements OnItemClickListener {
 	        return true;
 	    }
 		
-		/*×Ô¶¨Òå¶Ô»°¿ò*/
+		/*ï¿½Ô¶ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½*/
 		private void showCustomDia() {
 			AlertDialog.Builder customDia=new AlertDialog.Builder(SecondActivity.this);
 			final View viewDia=LayoutInflater.from(SecondActivity.this).inflate(R.layout.custom_dialog, null);
 			customDia.setTitle("NewFeed");
 			customDia.setView(viewDia);
-			customDia.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+			customDia.setPositiveButton("È·ï¿½ï¿½", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					EditText diaInput=(EditText) viewDia.findViewById(R.id.txt_cusDiaInput);
@@ -105,7 +106,7 @@ public class SecondActivity extends Activity implements OnItemClickListener {
 					new Thread(runnable).start();
 				}
 			});
-			customDia.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			customDia.setNegativeButton("È¡ï¿½ï¿½", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
@@ -114,13 +115,28 @@ public class SecondActivity extends Activity implements OnItemClickListener {
 			customDia.create().show();
 		}
 		
-		/*ÏÔÊ¾µã»÷µÄÄÚÈÝ*/  
+		/*ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/  
 	    private void showClickMessage(String message) {  
-	        Toast.makeText(SecondActivity.this, "ÄãÑ¡ÔñµÄÊÇ: "+message, Toast.LENGTH_SHORT).show();  
+	        Toast.makeText(SecondActivity.this, "ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½: "+message, Toast.LENGTH_SHORT).show();  
 	    }
 
 		@Override
 		public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+			showPanel(position);
+			/*Intent intent = new Intent();
+			intent.setClass(this, ShowDescriptionActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("title", feed.getItem(position).getTitle());
+			bundle.putString("description",feed.getItem(position).getDescription());
+			bundle.putString("link", feed.getItem(position).getLink());
+			bundle.putString("pubdate", feed.getItem(position).getPubdate());
+			bundle.putString("image", feed.getItem(position).getImage());
+			// ï¿½ï¿½android.intent.extra.INTENTï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½
+			intent.putExtra("android.intent.extra.rssItem", bundle);
+			startActivityForResult(intent, 0);*/
+		}
+		
+		private void showPanel(int position){
 			TextView title = (TextView) this.findViewById(R.id.title);
 		    TextView description = (TextView) this.findViewById(R.id.description);
 		    TextView link = (TextView) this.findViewById(R.id.link);
@@ -134,17 +150,6 @@ public class SecondActivity extends Activity implements OnItemClickListener {
             String url = feed.getItem(position).getImage();
             task = new downloadImageTask();
             task.execute(url,imageView);
-			/*Intent intent = new Intent();
-			intent.setClass(this, ShowDescriptionActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("title", feed.getItem(position).getTitle());
-			bundle.putString("description",feed.getItem(position).getDescription());
-			bundle.putString("link", feed.getItem(position).getLink());
-			bundle.putString("pubdate", feed.getItem(position).getPubdate());
-			bundle.putString("image", feed.getItem(position).getImage());
-			// ÓÃandroid.intent.extra.INTENTµÄÃû×ÖÀ´´«µÝ²ÎÊý
-			intent.putExtra("android.intent.extra.rssItem", bundle);
-			startActivityForResult(intent, 0);*/
 		}
 		
 		/**
