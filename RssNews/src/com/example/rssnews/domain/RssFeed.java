@@ -1,29 +1,31 @@
 package com.example.rssnews.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class RssFeed {
+public class RssFeed implements Serializable {
 
-	private String title; // ±êÌâ
-	private String pubdate; // ·¢²¼ÈÕÆÚ
+	private static final long serialVersionUID = 1L;
+	private String title; // æ ‡é¢˜
+	private String pubdate; // å‘å¸ƒæ—¥æœŸ
 	
-	private int itemCount; // ÓÃÓÚ¼ÆËãÁĞ±íµÄÊıÄ¿
-	private List<RssItem> rssItems; // ÓÃÓÚÃèÊöÁĞ±íitem
+	private int itemCount; // ç”¨äºè®¡ç®—åˆ—è¡¨çš„æ•°ç›®
+	private List<RssItem> rssItems; // ç”¨äºæè¿°åˆ—è¡¨item
 
 	public RssFeed() {
 		rssItems = new ArrayList<RssItem>();
 	}
 
-	// Ìí¼ÓRssItemÌõÄ¿,·µ»ØÁĞ±í³¤¶È
+	// æ·»åŠ RssItemæ¡ç›®,è¿”å›åˆ—è¡¨é•¿åº¦
 	public int addItem(RssItem rssItem) {
 		rssItems.add(rssItem);
 		itemCount++;
 		return itemCount;
 	}
 
-	// ¸ù¾İÏÂ±ê»ñÈ¡RssItem
+	// æ ¹æ®ä¸‹æ ‡è·å–RssItem
 	public RssItem getItem(int position) {
 		return rssItems.get(position);
 	}

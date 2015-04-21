@@ -12,13 +12,13 @@ public class RssHandler extends DefaultHandler {
 	private RssFeed rssFeed;
 	private RssItem rssItem;
 
-	private final int RSS_TITLE = 1;		// ÈôÊÇ title ±êÇ©£¬¼Ç×ö1£¬×¢ÒâÓĞÁ½¸ötitle£¬µ«ÎÒÃÇ¶¼±£´æÔÚitemµÄ³ÉÔ±±äÁ¿ÖĞ
-	private final int RSS_LINK = 2;			// ÈôÊÇ link ±êÇ©£¬¼Ç×ö2
+	private final int RSS_TITLE = 1;		// è‹¥æ˜¯ title æ ‡ç­¾ï¼Œè®°åš1ï¼Œæ³¨æ„æœ‰ä¸¤ä¸ªtitleï¼Œä½†æˆ‘ä»¬éƒ½ä¿å­˜åœ¨itemçš„æˆå‘˜å˜é‡ä¸­
+	private final int RSS_LINK = 2;			// è‹¥æ˜¯ link æ ‡ç­¾ï¼Œè®°åš2
 	private final int RSS_AUTHOR = 3;
-	private final int RSS_CATEGORY = 4;		// ÈôÊÇcategory±êÇ©,¼Ç×ö 4
-	private final int RSS_PUBDATE = 5; 		// ÈôÊÇpubdate±êÇ©,¼Ç×ö5,×¢ÒâÓĞÁ½¸öpubdate,µ«ÎÒÃÇ¶¼±£´æÔÚitemµÄpubdate³ÉÔ±±äÁ¿ÖĞ
+	private final int RSS_CATEGORY = 4;		// è‹¥æ˜¯categoryæ ‡ç­¾,è®°åš 4
+	private final int RSS_PUBDATE = 5; 		// è‹¥æ˜¯pubdateæ ‡ç­¾,è®°åš5,æ³¨æ„æœ‰ä¸¤ä¸ªpubdate,ä½†æˆ‘ä»¬éƒ½ä¿å­˜åœ¨itemçš„pubdateæˆå‘˜å˜é‡ä¸­
 	private final int RSS_COMMENTS = 6;
-	private final int RSS_DESCRIPTION = 7;	// ÈôÊÇ description ±êÇ©£¬¼Ç×ö3
+	private final int RSS_DESCRIPTION = 7;	// è‹¥æ˜¯ description æ ‡ç­¾ï¼Œè®°åš3
 	private final int RSS_IMAGE = 8;
 
 	private int currentFlag = 0;
@@ -39,7 +39,7 @@ public class RssHandler extends DefaultHandler {
 			throws SAXException {
 		super.characters(ch, start, length);
 		
-		// »ñÈ¡×Ö·û´®
+		// è·å–å­—ç¬¦ä¸²
 		String text = new String(ch, start, length);
 		Log.i("handler", "currentFlag:" + currentFlag);
 		Log.i("handler", "content:[" + text+"]");
@@ -47,31 +47,31 @@ public class RssHandler extends DefaultHandler {
 		switch (currentFlag) {
 		case RSS_TITLE:
 			rssItem.setTitle(text);
-			currentFlag = 0;// ÉèÖÃÍêºó£¬ÖØÖÃÎª¿ªÊ¼×´Ì¬
+			currentFlag = 0;// è®¾ç½®å®Œåï¼Œé‡ç½®ä¸ºå¼€å§‹çŠ¶æ€
 			break;
 		case RSS_PUBDATE:
 			rssItem.setPubdate(text);
-			currentFlag = 0;// ÉèÖÃÍêºó£¬ÖØÖÃÎª¿ªÊ¼×´Ì¬
+			currentFlag = 0;// è®¾ç½®å®Œåï¼Œé‡ç½®ä¸ºå¼€å§‹çŠ¶æ€
 			break;
 		case RSS_CATEGORY:
 			rssItem.setCategory(text);
-			currentFlag = 0;// ÉèÖÃÍêºó£¬ÖØÖÃÎª¿ªÊ¼×´Ì¬
+			currentFlag = 0;// è®¾ç½®å®Œåï¼Œé‡ç½®ä¸ºå¼€å§‹çŠ¶æ€
 			break;
 		case RSS_LINK:
 			rssItem.setLink(text);
-			currentFlag = 0;// ÉèÖÃÍêºó£¬ÖØÖÃÎª¿ªÊ¼×´Ì¬
+			currentFlag = 0;// è®¾ç½®å®Œåï¼Œé‡ç½®ä¸ºå¼€å§‹çŠ¶æ€
 			break;
 		case RSS_AUTHOR:
 			rssItem.setAuthor(text);
-			currentFlag = 0;// ÉèÖÃÍêºó£¬ÖØÖÃÎª¿ªÊ¼×´Ì¬
+			currentFlag = 0;// è®¾ç½®å®Œåï¼Œé‡ç½®ä¸ºå¼€å§‹çŠ¶æ€
 			break;
 		case RSS_DESCRIPTION:
 			rssItem.setDescription(text);
-			currentFlag = 0;// ÉèÖÃÍêºó£¬ÖØÖÃÎª¿ªÊ¼×´Ì¬
+			currentFlag = 0;// è®¾ç½®å®Œåï¼Œé‡ç½®ä¸ºå¼€å§‹çŠ¶æ€
 			break;
 		case RSS_COMMENTS:
 			rssItem.setComments(text);
-			currentFlag = 0;// ÉèÖÃÍêºó£¬ÖØÖÃÎª¿ªÊ¼×´Ì¬
+			currentFlag = 0;// è®¾ç½®å®Œåï¼Œé‡ç½®ä¸ºå¼€å§‹çŠ¶æ€
 			break;
 		case RSS_IMAGE:
 			rssItem.setImage(text);
@@ -86,7 +86,7 @@ public class RssHandler extends DefaultHandler {
 	public void startElement(String uri, String localName, String qName,
 			Attributes attributes) throws SAXException {
 		super.startElement(uri, localName, qName, attributes);
-		if ("chanel".equals(localName)) { // Õâ¸ö±êÇ©ÄÚÃ»ÓĞÎÒÃÇ¹ØĞÄµÄÄÚÈİ£¬ËùÒÔ²»×÷´¦Àí£¬currentFlag=0
+		if ("chanel".equals(localName)) { // è¿™ä¸ªæ ‡ç­¾å†…æ²¡æœ‰æˆ‘ä»¬å…³å¿ƒçš„å†…å®¹ï¼Œæ‰€ä»¥ä¸ä½œå¤„ç†ï¼ŒcurrentFlag=0
 			currentFlag = 0;
 		} else if ("item".equals(localName)) {
 			rssItem = new RssItem();
@@ -116,7 +116,7 @@ public class RssHandler extends DefaultHandler {
 			throws SAXException {
 		super.endElement(uri, localName, qName);
 		
-		// Èç¹û½âÎöÒ»¸öitem½Úµã½áÊø£¬¾Í½«rssItemÌí¼Óµ½rssFeedÖĞ¡£
+		// å¦‚æœè§£æä¸€ä¸ªitemèŠ‚ç‚¹ç»“æŸï¼Œå°±å°†rssItemæ·»åŠ åˆ°rssFeedä¸­ã€‚
 		if ("item".equals(localName)) {
 			rssFeed.addItem(rssItem);
 		}

@@ -1,7 +1,13 @@
 package com.example.rssnews.domain;
 
-public class RssItem {
+import java.io.Serializable;
 
+public class RssItem implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String title;
 	private String link;
 	private String author;
@@ -10,6 +16,7 @@ public class RssItem {
 	private String comments;
 	private String description;
 	private String image;
+	private String content;
 
 	public static final String TITLE = "title";
 	public static final String PUBDATE = "pubdate";
@@ -19,9 +26,9 @@ public class RssItem {
 	}
 
 	public String getTitle() {
-		/*if (title.length() > 20) {
-			return title.substring(0, 19) + "...";
-		}*/
+		/*
+		 * if (title.length() > 20) { return title.substring(0, 19) + "..."; }
+		 */
 		return title;
 	}
 
@@ -83,6 +90,14 @@ public class RssItem {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	@Override

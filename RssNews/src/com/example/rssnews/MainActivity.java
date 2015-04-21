@@ -33,7 +33,7 @@ import com.example.rssnews.util.RssFeed_SAXParser;
 
 public class MainActivity extends Activity implements OnItemClickListener {
 
-	// ´ÓÍøÂç»ñÈ¡RSSµØÖ·
+	// ä»ç½‘ç»œè·å–RSSåœ°å€
 //	public static String RSS_URL = "http://news.qq.com/newsgn/rss_newsgn.xml";
 	public static String RSS_URL = "http://www.ifanr.com/feed";
 
@@ -44,21 +44,21 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		if(isWifi(this))
+		if(isWifi(this)){
 			new Thread(runnable).start();
-		else
+		}else{
 			Toast.makeText(MainActivity.this, "No network connection!", Toast.LENGTH_SHORT).show();  
-			
+		}
 	}
 
 	/*
-	 * °ÑRSSÄÚÈİ°ó¶¨µ½ui½çÃæ½øĞĞÏÔÊ¾
+	 * æŠŠRSSå†…å®¹ç»‘å®šåˆ°uiç•Œé¢è¿›è¡Œæ˜¾ç¤º
 	 */
 	private void showListView() {
 
 		ListView itemList = (ListView) this.findViewById(R.id.list);
 		if (feed == null) {
-			setTitle("·ÃÎÊµÄRSSÎŞĞ§");
+			setTitle("è®¿é—®çš„RSSæ— æ•ˆ");
 			return;
 		}
 		SimpleAdapter simpleAdapter = new SimpleAdapter(this,
@@ -85,13 +85,13 @@ public class MainActivity extends Activity implements OnItemClickListener {
         return true;
     }
 	
-	/*×Ô¶¨Òå¶Ô»°¿ò*/
+	/*è‡ªå®šä¹‰å¯¹è¯æ¡†*/
 	private void showCustomDia() {
 		AlertDialog.Builder customDia=new AlertDialog.Builder(MainActivity.this);
 		final View viewDia=LayoutInflater.from(MainActivity.this).inflate(R.layout.custom_dialog, null);
 		customDia.setTitle("NewFeed");
 		customDia.setView(viewDia);
-		customDia.setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		customDia.setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				EditText diaInput=(EditText) viewDia.findViewById(R.id.txt_cusDiaInput);
@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				new Thread(runnable).start();
 			}
 		});
-		customDia.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+		customDia.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -109,9 +109,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		customDia.create().show();
 	}
 	
-	/*ÏÔÊ¾µã»÷µÄÄÚÈİ*/  
+	/*æ˜¾ç¤ºç‚¹å‡»çš„å†…å®¹*/  
     private void showClickMessage(String message) {  
-        Toast.makeText(MainActivity.this, "ÄãÑ¡ÔñµÄÊÇ: "+message, Toast.LENGTH_SHORT).show();  
+        Toast.makeText(MainActivity.this, "ä½ é€‰æ‹©çš„æ˜¯: "+message, Toast.LENGTH_SHORT).show();  
     }
 
 	@Override
@@ -125,7 +125,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		bundle.putString("link", feed.getItem(position).getLink());
 		bundle.putString("pubdate", feed.getItem(position).getPubdate());
 		bundle.putString("image", feed.getItem(position).getImage());
-		// ÓÃandroid.intent.extra.INTENTµÄÃû×ÖÀ´´«µİ²ÎÊı
+		// ç”¨android.intent.extra.INTENTçš„åå­—æ¥ä¼ é€’å‚æ•°
 		intent.putExtra("android.intent.extra.rssItem", bundle);
 		startActivityForResult(intent, 0);
 	}

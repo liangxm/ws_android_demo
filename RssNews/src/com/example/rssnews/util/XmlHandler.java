@@ -15,14 +15,15 @@ public class XmlHandler extends DefaultHandler{
 	private RssFeed rssFeed;
 	private RssItem rssItem;
 
-	private final String RSS_TITLE = "title";		// ÈôÊÇ title ±êÇ©£¬¼Ç×ö1£¬×¢ÒâÓĞÁ½¸ötitle£¬µ«ÎÒÃÇ¶¼±£´æÔÚitemµÄ³ÉÔ±±äÁ¿ÖĞ
-	private final String RSS_LINK = "link";			// ÈôÊÇ link ±êÇ©£¬¼Ç×ö2
+	private final String RSS_TITLE = "title";		// è‹¥æ˜¯ title æ ‡ç­¾ï¼Œè®°åš1ï¼Œæ³¨æ„æœ‰ä¸¤ä¸ªtitleï¼Œä½†æˆ‘ä»¬éƒ½ä¿å­˜åœ¨itemçš„æˆå‘˜å˜é‡ä¸­
+	private final String RSS_LINK = "link";			// è‹¥æ˜¯ link æ ‡ç­¾ï¼Œè®°åš2
 	private final String RSS_AUTHOR = "author";
-	private final String RSS_CATEGORY = "category";		// ÈôÊÇcategory±êÇ©,¼Ç×ö 4
-	private final String RSS_PUBDATE = "pubDate"; 		// ÈôÊÇpubdate±êÇ©,¼Ç×ö5,×¢ÒâÓĞÁ½¸öpubdate,µ«ÎÒÃÇ¶¼±£´æÔÚitemµÄpubdate³ÉÔ±±äÁ¿ÖĞ
+	private final String RSS_CATEGORY = "category";		// è‹¥æ˜¯categoryæ ‡ç­¾,è®°åš 4
+	private final String RSS_PUBDATE = "pubDate"; 		// è‹¥æ˜¯pubdateæ ‡ç­¾,è®°åš5,æ³¨æ„æœ‰ä¸¤ä¸ªpubdate,ä½†æˆ‘ä»¬éƒ½ä¿å­˜åœ¨itemçš„pubdateæˆå‘˜å˜é‡ä¸­
 	private final String RSS_COMMENTS = "comments";
-	private final String RSS_DESCRIPTION = "description";	// ÈôÊÇ description ±êÇ©£¬¼Ç×ö3
+	private final String RSS_DESCRIPTION = "description";	// è‹¥æ˜¯ description æ ‡ç­¾ï¼Œè®°åš3
 	private final String RSS_IMAGE = "image";
+	private final String RSS_CONTENT = "content:encoded";
 
 	//parse start time
 	private long start_time;
@@ -87,6 +88,8 @@ public class XmlHandler extends DefaultHandler{
 			rssItem.setComments(value);
 		} else if (RSS_IMAGE.equals(localName)) {
 			rssItem.setImage(value);
+		} else if (RSS_CONTENT.equals(localName)) {
+			rssItem.setContent(value);
 		}
 		
 		
