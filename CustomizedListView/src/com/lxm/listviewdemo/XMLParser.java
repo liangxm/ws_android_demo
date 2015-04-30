@@ -21,13 +21,13 @@ import android.util.Log;
   
 public class XMLParser { 
   
-    // ¹¹Ôì·½·¨
+    // æ„é€ æ–¹æ³•
     public XMLParser() { 
   
     } 
   
     /** 
-     * ´ÓURL»ñÈ¡XMLÊ¹HTTPÇëÇó
+     * ä»URLè·å–XMLä½¿HTTPè¯·æ±‚
      * @param url string 
      * */
     public String getXmlFromUrl(String url) { 
@@ -53,7 +53,7 @@ public class XMLParser {
     } 
   
     /** 
-     * »ñÈ¡XML DOMÔªËØ
+     * è·å–XML DOMå…ƒç´ 
      * @param XML string 
      * */
     public Document getDomElement(String xml){ 
@@ -81,7 +81,7 @@ public class XMLParser {
             return doc; 
     } 
   
-    /** »ñÈ¡½ÚµãÖµ
+    /** è·å–èŠ‚ç‚¹å€¼
       * @param elem element 
       */
      public final String getElementValue( Node elem ) { 
@@ -99,7 +99,7 @@ public class XMLParser {
      } 
   
      /** 
-      * »ñÈ¡½ÚµãÖµ
+      * è·å–èŠ‚ç‚¹å€¼
       * @param Element node 
       * @param key string 
       * */

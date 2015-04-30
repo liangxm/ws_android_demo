@@ -1,2 +1,7 @@
 eclipse.preferences.version=1
+org.eclipse.jdt.core.classpathVariable.ECLIPSE_HOME=C\:/LXM/android/eclipseForJ2eeAndroid
+org.eclipse.jdt.core.classpathVariable.JRE_LIB=C\:/Program Files/Java/jre7/lib/rt.jar
+org.eclipse.jdt.core.classpathVariable.JRE_SRC=
+org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
+org.eclipse.jdt.core.classpathVariable.JUNIT_HOME=C\:/LXM/android/eclipseForJ2eeAndroid/plugins/org.junit_4.11.0.v201303080030/
 org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled

@@ -56,12 +56,12 @@ public class ImageLoader {
     { 
         File f=fileCache.getFile(url); 
   
-        //´Ósd¿¨
+        //ä»sdå¡
         Bitmap b = decodeFile(f); 
         if(b!=null) 
             return b; 
   
-        //´ÓÍøÂç
+        //ä»ç½‘ç»œ
         try { 
             Bitmap bitmap=null; 
             URL imageUrl = new URL(url); 
@@ -105,15 +105,15 @@ public class ImageLoader {
         return bitmap;
    }
   
-    //½âÂëÍ¼ÏñÓÃÀ´¼õÉÙÄÚ´æÏûºÄ
+    //è§£ç å›¾åƒç”¨æ¥å‡å°‘å†…å­˜æ¶ˆè€—
     private Bitmap decodeFile(File f){ 
         try { 
-            //½âÂëÍ¼Ïñ´óĞ¡
+            //è§£ç å›¾åƒå¤§å°
             BitmapFactory.Options o = new BitmapFactory.Options(); 
             o.inJustDecodeBounds = true; 
             BitmapFactory.decodeStream(new FileInputStream(f),null,o); 
   
-            //ÕÒµ½ÕıÈ·µÄ¿Ì¶ÈÖµ£¬ËüÓ¦¸ÃÊÇ2µÄÃİ¡£
+            //æ‰¾åˆ°æ­£ç¡®çš„åˆ»åº¦å€¼ï¼Œå®ƒåº”è¯¥æ˜¯2çš„å¹‚ã€‚
             final int REQUIRED_SIZE=70; 
             int width_tmp=o.outWidth, height_tmp=o.outHeight; 
             int scale=1; 
@@ -132,7 +132,7 @@ public class ImageLoader {
         return null; 
     } 
   
-    //ÈÎÎñ¶ÓÁĞ
+    //ä»»åŠ¡é˜Ÿåˆ—
     private class PhotoToLoad 
     { 
         public String url; 
@@ -170,7 +170,7 @@ public class ImageLoader {
         return false; 
     } 
   
-    //ÓÃÓÚÏÔÊ¾Î»Í¼ÔÚUIÏß³Ì
+    //ç”¨äºæ˜¾ç¤ºä½å›¾åœ¨UIçº¿ç¨‹
     class BitmapDisplayer implements Runnable 
     { 
         Bitmap bitmap; 

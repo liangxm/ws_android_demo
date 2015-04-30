@@ -16,7 +16,7 @@ public class LazyAdapter extends BaseAdapter {
 	private Activity activity;
 	private ArrayList<HashMap<String, String>> data;
 	private static LayoutInflater inflater = null;
-	public ImageLoader imageLoader; // ÓÃÀ´ÏÂÔØÍ¼Æ¬µÄÀà£¬ºóÃæÓĞ½éÉÜ
+	public ImageLoader imageLoader; // ç”¨æ¥ä¸‹è½½å›¾ç‰‡çš„ç±»ï¼Œåé¢æœ‰ä»‹ç»
 
 	public LazyAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
 		activity = a;
@@ -43,15 +43,15 @@ public class LazyAdapter extends BaseAdapter {
 		if (convertView == null)
 			vi = inflater.inflate(R.layout.list_row, null);
 
-		TextView title = (TextView) vi.findViewById(R.id.title); // ±êÌâ
-		TextView artist = (TextView) vi.findViewById(R.id.artist); // ¸èÊÖÃû
-		TextView duration = (TextView) vi.findViewById(R.id.duration); // Ê±³¤
-		ImageView thumb_image = (ImageView) vi.findViewById(R.id.list_image); // ËõÂÔÍ¼
+		TextView title = (TextView) vi.findViewById(R.id.title); // æ ‡é¢˜
+		TextView artist = (TextView) vi.findViewById(R.id.artist); // æ­Œæ‰‹å
+		TextView duration = (TextView) vi.findViewById(R.id.duration); // æ—¶é•¿
+		ImageView thumb_image = (ImageView) vi.findViewById(R.id.list_image); // ç¼©ç•¥å›¾
 
 		HashMap<String, String> song = new HashMap<String, String>();
 		song = data.get(position);
 
-		// ÉèÖÃListViewµÄÏà¹ØÖµ
+		// è®¾ç½®ListViewçš„ç›¸å…³å€¼
 		title.setText(song.get(CustomizedListView.KEY_TITLE));
 		artist.setText(song.get(CustomizedListView.KEY_ARTIST));
 		duration.setText(song.get(CustomizedListView.KEY_DURATION));

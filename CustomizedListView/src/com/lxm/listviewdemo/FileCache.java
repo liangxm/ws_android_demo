@@ -7,7 +7,7 @@ public class FileCache {
     private File cacheDir;
     
     public FileCache(Context context){
-        //找一个用来缓存图片的路径
+        //鎵句竴涓敤鏉ョ紦瀛樺浘鐗囩殑璺緞
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
             cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"LazyList");
         else

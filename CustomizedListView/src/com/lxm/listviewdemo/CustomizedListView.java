@@ -17,9 +17,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class CustomizedListView extends Activity {
-	// ËùÓĞµÄ¾²Ì¬±äÁ¿
-	private static final String URL = "http://api.androidhive.info/music/music.xml";// xmlÄ¿µÄµØÖ·,´ò¿ªµØÖ·¿´Ò»ÏÂ
-	// XML ½Úµã
+	// æ‰€æœ‰çš„é™æ€å˜é‡
+	private static final String URL = "http://api.androidhive.info/music/music.xml";// xmlç›®çš„åœ°å€,æ‰“å¼€åœ°å€çœ‹ä¸€ä¸‹
+	// XML èŠ‚ç‚¹
 	private static final String KEY_SONG = "song"; // parent node
 	private static final String KEY_ID = "id";
 	protected static final String KEY_TITLE = "title";
@@ -43,12 +43,12 @@ public class CustomizedListView extends Activity {
 		adapter = new LazyAdapter(this, songsList);
 		list.setAdapter(adapter);
 
-		// Îªµ¥Ò»ÁĞ±íĞĞÌí¼Óµ¥»÷ÊÂ¼ş
+		// ä¸ºå•ä¸€åˆ—è¡¨è¡Œæ·»åŠ å•å‡»äº‹ä»¶
 		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// ÕâÀï¿ÉÒÔ×ÔÓÉ·¢»Ó£¬±ÈÈç²¥·ÅÒ»Ê×¸èÇúµÈµÈ
+				// è¿™é‡Œå¯ä»¥è‡ªç”±å‘æŒ¥ï¼Œæ¯”å¦‚æ’­æ”¾ä¸€é¦–æ­Œæ›²ç­‰ç­‰
 			}
 		});
 	}
@@ -59,23 +59,23 @@ public class CustomizedListView extends Activity {
 			songsList = new ArrayList<HashMap<String, String>>();
 
 			XMLParser parser = new XMLParser();
-			String xml = parser.getXmlFromUrl(URL); // ´ÓÍøÂç»ñÈ¡xml
-			Document doc = parser.getDomElement(xml); // »ñÈ¡ DOM ½Úµã
+			String xml = parser.getXmlFromUrl(URL); // ä»ç½‘ç»œè·å–xml
+			Document doc = parser.getDomElement(xml); // è·å– DOM èŠ‚ç‚¹
 
 			NodeList nl = doc.getElementsByTagName(KEY_SONG);
-			// Ñ­»·±éÀúËùÓĞµÄ¸è½Úµã <song>
+			// å¾ªç¯éå†æ‰€æœ‰çš„æ­ŒèŠ‚ç‚¹ <song>
 			for (int i = 0; i < nl.getLength(); i++) {
-				// ĞÂ½¨Ò»¸ö HashMap
+				// æ–°å»ºä¸€ä¸ª HashMap
 				HashMap<String, String> map = new HashMap<String, String>();
 				Element e = (Element) nl.item(i);
-				// Ã¿¸ö×Ó½ÚµãÌí¼Óµ½HashMap¹Ø¼ü= >Öµ
+				// æ¯ä¸ªå­èŠ‚ç‚¹æ·»åŠ åˆ°HashMapå…³é”®= >å€¼
 				map.put(KEY_ID, parser.getValue(e, KEY_ID));
 				map.put(KEY_TITLE, parser.getValue(e, KEY_TITLE));
 				map.put(KEY_ARTIST, parser.getValue(e, KEY_ARTIST));
 				map.put(KEY_DURATION, parser.getValue(e, KEY_DURATION));
 				map.put(KEY_THUMB_URL, parser.getValue(e, KEY_THUMB_URL));
 
-				// HashListÌí¼Óµ½Êı×éÁĞ±í
+				// HashListæ·»åŠ åˆ°æ•°ç»„åˆ—è¡¨
 				songsList.add(map);
 			}
 			Message message = new Message(); 
@@ -84,10 +84,10 @@ public class CustomizedListView extends Activity {
 		}
 	};
 
-	// ¶¨ÒåHandler¶ÔÏó
+	// å®šä¹‰Handlerå¯¹è±¡
 	private Handler mHandler = new Handler() {
 		@Override
-		// µ±ÓĞÏûÏ¢·¢ËÍ³öÀ´µÄÊ±ºò¾ÍÖ´ĞĞHandlerµÄÕâ¸ö·½·¨
+		// å½“æœ‰æ¶ˆæ¯å‘é€å‡ºæ¥çš„æ—¶å€™å°±æ‰§è¡ŒHandlerçš„è¿™ä¸ªæ–¹æ³•
 		public void handleMessage(Message msg) {
 			switch (msg.what) { 
             case 1: 

@@ -24,10 +24,10 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 /**
- * HorizontalScrollViewºÍViewPagerÁª¶¯Ğ§¹û
- * ÉÏÃæÎªHorizontalScrollView,ÏÂÃæÎªViewPager
+ * HorizontalScrollViewå’ŒViewPagerè”åŠ¨æ•ˆæœ
+ * ä¸Šé¢ä¸ºHorizontalScrollView,ä¸‹é¢ä¸ºViewPager
  * @author zj
- * 2012-5-23 ÏÂÎç1:07:06
+ * 2012-5-23 ä¸‹åˆ1:07:06
  */
 public class MainActivity extends Activity implements OnCheckedChangeListener{
 	private RadioGroup mRadioGroup;
@@ -37,10 +37,10 @@ public class MainActivity extends Activity implements OnCheckedChangeListener{
 	private RadioButton mRadioButton4;
 	private RadioButton mRadioButton5;
 	private ImageView mImageView;
-	private float mCurrentCheckedRadioLeft;//µ±Ç°±»Ñ¡ÖĞµÄRadioButton¾àÀë×ó²àµÄ¾àÀë
-	private HorizontalScrollView mHorizontalScrollView;//ÉÏÃæµÄË®Æ½¹ö¶¯¿Ø¼ş
-	private ViewPager mViewPager;	//ÏÂ·½µÄ¿ÉºáÏòÍÏ¶¯µÄ¿Ø¼ş
-	private ArrayList<View> mViews;//ÓÃÀ´´æ·ÅÏÂ·½¹ö¶¯µÄlayout(layout_1,layout_2,layout_3)
+	private float mCurrentCheckedRadioLeft;//å½“å‰è¢«é€‰ä¸­çš„RadioButtonè·ç¦»å·¦ä¾§çš„è·ç¦»
+	private HorizontalScrollView mHorizontalScrollView;//ä¸Šé¢çš„æ°´å¹³æ»šåŠ¨æ§ä»¶
+	private ViewPager mViewPager;	//ä¸‹æ–¹çš„å¯æ¨ªå‘æ‹–åŠ¨çš„æ§ä»¶
+	private ArrayList<View> mViews;//ç”¨æ¥å­˜æ”¾ä¸‹æ–¹æ»šåŠ¨çš„layout(layout_1,layout_2,layout_3)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +67,11 @@ public class MainActivity extends Activity implements OnCheckedChangeListener{
     	mViews.add(getLayoutInflater().inflate(R.layout.layout_5, null));
     	mViews.add(getLayoutInflater().inflate(R.layout.layout_0, null));
     	
-    	mViewPager.setAdapter(new MyPagerAdapter());//ÉèÖÃViewPagerµÄÊÊÅäÆ÷
+    	mViewPager.setAdapter(new MyPagerAdapter());//è®¾ç½®ViewPagerçš„é€‚é…å™¨
 	}
     
     /**
-	 * RadioGroupµã»÷CheckedChanged¼àÌı
+	 * RadioGroupç‚¹å‡»CheckedChangedç›‘å¬
 	 */
 	@Override
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -90,9 +90,9 @@ public class MainActivity extends Activity implements OnCheckedChangeListener{
 			_LayoutParams1.setMargins(0, 0, 0, 0);
 			_LayoutParams1.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);*/
 			//mImageView.bringToFront();
-			mImageView.startAnimation(_AnimationSet);//¿ªÊ¼ÉÏÃæÀ¶É«ºáÌõÍ¼Æ¬µÄ¶¯»­ÇĞ»»
+			mImageView.startAnimation(_AnimationSet);//å¼€å§‹ä¸Šé¢è“è‰²æ¨ªæ¡å›¾ç‰‡çš„åŠ¨ç”»åˆ‡æ¢
 			//mImageView.setLayoutParams(_LayoutParams1);
-			mViewPager.setCurrentItem(1);//ÈÃÏÂ·½ViewPager¸úËæÉÏÃæµÄHorizontalScrollViewÇĞ»»
+			mViewPager.setCurrentItem(1);//è®©ä¸‹æ–¹ViewPagerè·Ÿéšä¸Šé¢çš„HorizontalScrollViewåˆ‡æ¢
 		}else if (checkedId == R.id.btn2) {
 			_TranslateAnimation = new TranslateAnimation(mCurrentCheckedRadioLeft, getResources().getDimension(R.dimen.rdo2), 0f, 0f);
 
@@ -142,7 +142,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener{
 			mViewPager.setCurrentItem(5);
 		}
 		
-		mCurrentCheckedRadioLeft = getCurrentCheckedRadioLeft();//¸üĞÂµ±Ç°À¶É«ºáÌõ¾àÀë×ó±ßµÄ¾àÀë
+		mCurrentCheckedRadioLeft = getCurrentCheckedRadioLeft();//æ›´æ–°å½“å‰è“è‰²æ¨ªæ¡è·ç¦»å·¦è¾¹çš„è·ç¦»
 		
 		Log.i("zj", "getCurrentCheckedRadioLeft="+getCurrentCheckedRadioLeft());
 		Log.i("zj", "getDimension="+getResources().getDimension(R.dimen.rdo2));
@@ -151,7 +151,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener{
 	}
     
 	/**
-     * »ñµÃµ±Ç°±»Ñ¡ÖĞµÄRadioButton¾àÀë×ó²àµÄ¾àÀë
+     * è·å¾—å½“å‰è¢«é€‰ä¸­çš„RadioButtonè·ç¦»å·¦ä¾§çš„è·ç¦»
      */
 	private float getCurrentCheckedRadioLeft() {
 		// TODO Auto-generated method stub
@@ -200,9 +200,9 @@ public class MainActivity extends Activity implements OnCheckedChangeListener{
 	}
 
 	/**
-	 * ViewPagerµÄÊÊÅäÆ÷
+	 * ViewPagerçš„é€‚é…å™¨
 	 * @author zj
-	 * 2012-5-24 ÏÂÎç2:26:57
+	 * 2012-5-24 ä¸‹åˆ2:26:57
 	 */
 	private class MyPagerAdapter extends PagerAdapter{
 
@@ -256,9 +256,9 @@ public class MainActivity extends Activity implements OnCheckedChangeListener{
 		
 	}
 	/**
-	 * ViewPagerµÄPageChangeListener(Ò³Ãæ¸Ä±äµÄ¼àÌıÆ÷)
+	 * ViewPagerçš„PageChangeListener(é¡µé¢æ”¹å˜çš„ç›‘å¬å™¨)
 	 * @author zj
-	 * 2012-5-24 ÏÂÎç3:14:27
+	 * 2012-5-24 ä¸‹åˆ3:14:27
 	 */
 	private class MyPagerOnPageChangeListener implements OnPageChangeListener{
 
@@ -274,7 +274,7 @@ public class MainActivity extends Activity implements OnCheckedChangeListener{
 			
 		}
 		/**
-		 * »¬¶¯ViewPagerµÄÊ±ºò,ÈÃÉÏ·½µÄHorizontalScrollView×Ô¶¯ÇĞ»»
+		 * æ»‘åŠ¨ViewPagerçš„æ—¶å€™,è®©ä¸Šæ–¹çš„HorizontalScrollViewè‡ªåŠ¨åˆ‡æ¢
 		 */
 		@Override
 		public void onPageSelected(int position) {
