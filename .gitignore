@@ -1,5 +1,6 @@
-/.metadata/
+.metadata
 Demo/bin
-demoHListView/bin
 ListViewDemo/bin
-ZJ_HorizontalScrollView/bin
+SlideCutListView/bin
+demoHListView/bin
+
