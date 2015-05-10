@@ -3,4 +3,5 @@ Demo/bin
 ListViewDemo/bin
 SlideCutListView/bin
 demoHListView/bin
-
+PWHelper/bin
+PWHelper/language.properties
