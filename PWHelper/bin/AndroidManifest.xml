@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lxm.pwhelp"
+    android:versionCode="1"
+    android:versionName="1.0.0" >
+
+    <uses-sdk android:targetSdkVersion="19" />
+
+    <application
+        android:name="com.lxm.pwhelp.App"
+        android:debuggable="true"
+        android:icon="@drawable/pwdmanager"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.lxm.pwhelp.activity.UnlockGesturePasswordActivity"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.lxm.pwhelp.activity.CreateGesturePasswordActivity" />
+        <activity android:name="com.lxm.pwhelp.activity.GuideGesturePasswordActivity" />
+        <activity android:name="com.lxm.pwhelp.activity.MainActivity" />
+    </application>
+
+</manifest>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lxm="http://schemas.android.com/apk/res/com.lxm.pwhelp"
+    android:layout_width="fill_parent"
+    android:layout_height="60.0dip"
+    android:background="@color/theme_color" >
+
+    <TextView
+        android:id="@id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="密码管理"
+        android:textColor="#ffffffff"
+        android:textSize="20.0sp"
+        android:textStyle="bold" />
+
+    <com.lxm.pwhelp.custom.CircleImageView
+        android:layout_width="45.0dip"
+        android:layout_height="45.0dip"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="8.0dip"
+        android:src="@drawable/top_user"
+        lxm:border_color="@color/theme_color"
+        lxm:border_width="1.0dip" />
+
+</RelativeLayout>
