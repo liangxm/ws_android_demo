@@ -1,8 +1,8 @@
 com.android.ide.eclipse.adt.attrSort=logical
 com.android.ide.eclipse.adt.fixLegacyEditors=1
 com.android.ide.eclipse.adt.lintOnSave=false
-com.android.ide.eclipse.adt.sdk=C\:\\LXM\\android\\sdk
+com.android.ide.eclipse.adt.sdk=C\:\\Program Files\\Android\\android-sdk
 com.android.ide.eclipse.adt.skipLintLibs=true
 com.android.ide.eclipse.adt.xmlEditor=true
-design.palette.flyout.width=150
+design.palette.flyout.width=157
 eclipse.preferences.version=1

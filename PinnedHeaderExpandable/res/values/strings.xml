@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 <resources>
 
     <string name="app_name">PinnedHeaderExpandable</string>
 
 </resources>
+=======
+<resources>
+
+    <string name="app_name">PinnedHeaderExpandable</string>
+
+</resources>
+>>>>>>> 2080111dc5a5c5f7461e2e9e04f22a822e62ecd2

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/manage" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="80.0dip" android:layout_marginTop="8.0dip">
+        <ImageView android:id="@id/personal" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="15.0dip" android:src="@drawable/top_user" />
+        <LinearLayout android:orientation="vertical" android:background="#ffffffff" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginTop="14.0dip" android:layout_centerVertical="true">
+            <TextView android:textSize="18.0dip" android:textColor="#ff787878" android:id="@id/name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:text="Selina" />
+            <TextView android:textSize="18.0dip" android:textColor="#ff787878" android:id="@id/account" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:text="账号: 18221589205" android:layout_below="@id/name" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

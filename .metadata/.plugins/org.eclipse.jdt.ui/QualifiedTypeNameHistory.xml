@@ -26,4 +26,7 @@
 <fullyQualifiedTypeName name="com.example.slidecutlistview.R.layout"/>
 <fullyQualifiedTypeName name="com.example.slidecutlistview.R.id"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="com.lxm.pwhelp.R"/>
+<fullyQualifiedTypeName name="com.lxm.pwhelp.R.id"/>
+<fullyQualifiedTypeName name="com.lxm.pwhelp.R.drawable"/>
 </qualifiedTypeNameHistroy>

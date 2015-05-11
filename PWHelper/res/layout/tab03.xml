@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/manage" android:background="@drawable/layout_selecter" android:clickable="true" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_marginTop="8.0dip">
+        <ImageView android:gravity="center" android:id="@id/btnadd" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="15.0dip" android:src="@drawable/btn_add" />
+        <TextView android:textSize="18.0dip" android:textColor="#ff787878" android:gravity="center" android:id="@id/additem" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="15.0dip" android:text="添加手机上的APP账号和密码" android:layout_toRightOf="@id/btnadd" />
+    </LinearLayout>
+</LinearLayout>
