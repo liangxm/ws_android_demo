@@ -112,33 +112,33 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int back=0x7f040008;
-        public static final int both=0x7f040001;
-        public static final int choice=0x7f040006;
-        public static final int dismiss=0x7f040005;
-        public static final int example_lv_list=0x7f040007;
-        public static final int example_row_b_action_1=0x7f04000a;
-        public static final int example_row_b_action_2=0x7f04000b;
-        public static final int example_row_b_action_3=0x7f04000c;
-        public static final int example_row_tv_title=0x7f04000d;
-        public static final int front=0x7f040009;
-        public static final int left=0x7f040003;
-        public static final int menu_settings=0x7f04000e;
-        public static final int none=0x7f040000;
-        public static final int reveal=0x7f040004;
-        public static final int right=0x7f040002;
+        public static final int back=0x7f070008;
+        public static final int both=0x7f070000;
+        public static final int choice=0x7f070004;
+        public static final int dismiss=0x7f070005;
+        public static final int example_lv_list=0x7f070007;
+        public static final int example_row_b_action_1=0x7f07000a;
+        public static final int example_row_b_action_2=0x7f07000b;
+        public static final int example_row_b_action_3=0x7f07000c;
+        public static final int example_row_tv_title=0x7f07000d;
+        public static final int front=0x7f070009;
+        public static final int left=0x7f070001;
+        public static final int menu_settings=0x7f07000e;
+        public static final int none=0x7f070002;
+        public static final int reveal=0x7f070006;
+        public static final int right=0x7f070003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int package_row=0x7f030001;
     }
     public static final class menu {
-        public static final int activity_main=0x7f070000;
+        public static final int activity_main=0x7f060000;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050001;
-        public static final int menu_settings=0x7f050002;
+        public static final int app_name=0x7f040000;
+        public static final int hello_world=0x7f040001;
+        public static final int menu_settings=0x7f040002;
     }
     public static final class style {
         /** 
@@ -162,11 +162,11 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f050000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f050001;
     }
     public static final class styleable {
         /** Attributes that can be used with a SwipeListView.
@@ -221,7 +221,7 @@ containing a value of this type.
 <tr><td><code>dismiss</code></td><td>1</td><td></td></tr>
 <tr><td><code>choice</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:swipeActionLeft
+          @attr name cn.zhongyun.swipelistviewtest:swipeActionLeft
         */
         public static final int SwipeListView_swipeActionLeft = 8;
         /**
@@ -239,7 +239,7 @@ containing a value of this type.
 <tr><td><code>dismiss</code></td><td>1</td><td></td></tr>
 <tr><td><code>choice</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:swipeActionRight
+          @attr name cn.zhongyun.swipelistviewtest:swipeActionRight
         */
         public static final int SwipeListView_swipeActionRight = 9;
         /**
@@ -253,7 +253,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeAnimationTime
+          @attr name cn.zhongyun.swipelistviewtest:swipeAnimationTime
         */
         public static final int SwipeListView_swipeAnimationTime = 1;
         /**
@@ -263,7 +263,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeBackView
+          @attr name cn.zhongyun.swipelistviewtest:swipeBackView
         */
         public static final int SwipeListView_swipeBackView = 6;
         /**
@@ -277,7 +277,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeCloseAllItemsWhenMoveList
+          @attr name cn.zhongyun.swipelistviewtest:swipeCloseAllItemsWhenMoveList
         */
         public static final int SwipeListView_swipeCloseAllItemsWhenMoveList = 4;
         /**
@@ -287,7 +287,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeDrawableChecked
+          @attr name cn.zhongyun.swipelistviewtest:swipeDrawableChecked
         */
         public static final int SwipeListView_swipeDrawableChecked = 10;
         /**
@@ -297,7 +297,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeDrawableUnchecked
+          @attr name cn.zhongyun.swipelistviewtest:swipeDrawableUnchecked
         */
         public static final int SwipeListView_swipeDrawableUnchecked = 11;
         /**
@@ -307,7 +307,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeFrontView
+          @attr name cn.zhongyun.swipelistviewtest:swipeFrontView
         */
         public static final int SwipeListView_swipeFrontView = 5;
         /**
@@ -326,7 +326,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>right</code></td><td>2</td><td></td></tr>
 <tr><td><code>left</code></td><td>3</td><td></td></tr>
 </table>
-          @attr name android:swipeMode
+          @attr name cn.zhongyun.swipelistviewtest:swipeMode
         */
         public static final int SwipeListView_swipeMode = 7;
         /**
@@ -342,7 +342,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOffsetLeft
+          @attr name cn.zhongyun.swipelistviewtest:swipeOffsetLeft
         */
         public static final int SwipeListView_swipeOffsetLeft = 2;
         /**
@@ -358,7 +358,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOffsetRight
+          @attr name cn.zhongyun.swipelistviewtest:swipeOffsetRight
         */
         public static final int SwipeListView_swipeOffsetRight = 3;
         /**
@@ -372,7 +372,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOpenOnLongPress
+          @attr name cn.zhongyun.swipelistviewtest:swipeOpenOnLongPress
         */
         public static final int SwipeListView_swipeOpenOnLongPress = 0;
     };
