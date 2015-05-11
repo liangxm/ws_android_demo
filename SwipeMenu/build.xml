@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="baozy" default="compile" basedir=".">
+    
+    <property file="local.properties"/>
+    <property name="outdir" value="outdir"/>
+    <property name="outdir-classes" value="${outdir}/classes" />
+    <property name="outdir-gen" value="gen" />
+    <property name="lib" value="libs"/>
+    
+    <!-- 读取目录 -->
+    <property name="resource-dir" value="res" />
+    <property name="src-dir" value="src"/>
+    
+    <!-- 要使用的工具 -->
+    <property name="aapt" value="${sdk-platform-tools}/aapt.exe" />
+    <property name="aidl" value="${sdk-platform-tools}/aidl.exe"/>
+    <property name="android-jar" value="${sdk-platform}/android.jar"/>
+    
+    <target name="init">
+        <delete dir="${outdir}"/>
+        <delete dir="${outdir-classes}"/>
+        <mkdir dir="${outdir}"/>
+        <mkdir dir="${outdir-classes}"/>
+    </target>
+    
+    <!-- appt生成R.java -->
+    <target name="resource-src" depends="init">
+        <echo>Generating R.java...</echo>
+        <exec executable="${aapt}" failonerror="true">
+            <arg value="package"/>
+            <arg value="-m"/>
+            <arg value="-J"/>
+            <arg value="${outdir-gen}"/>
+            <arg value="-M"/>
+            <arg value="AndroidManifest.xml"/>
+            <arg value="-S"/>
+            <arg value="${resource-dir}"/>
+            <arg value="-I"/>
+            <arg value="${android-jar}"/>
+        </exec>
+    </target>
+    
+    <target name="aidl" depends="init">
+        <echo>Compiling aidl files into Java classes...</echo>
+        <apply executable="${aidl}" failonerror="true">
+            <arg value="-p${android-framework}"/>
+            <arg value="-I${src-dir}"/>
+            <fileset dir="${src-dir}">
+                <include name="**/*.aidl"/>
+            </fileset>
+        </apply>
+    </target>
+    
+    <target name="compile" depends="aidl">
+        <javac encoding="GBK" target="1.7" debug="true" includeantruntime="false" extdirs="" srcdir="." destdir="${outdir-classes}" bootclasspath="${android-jar}">
+            <classpath>
+                <fileset dir="${lib}" includes="*.jar">
+            </fileset></classpath>
+        </javac>
+        
+        <jar destfile="${output.dir}/${jarname}" basedir="${outdir-classes}">
+		    <manifest>
+		        <attribute name="Main-class" value="${mainclass}"/>
+		        <attribute name="Class-Path" value="${mf.classpath}"/>
+		    </manifest>
+		</jar>
+		
+    </target>
+    
+</project>
