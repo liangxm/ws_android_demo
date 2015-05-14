@@ -37,4 +37,8 @@
     <string name="text_question1">密保1</string>
     <string name="text_question2">密保2</string>
     
+    <!-- dialog -->
+    <string name="back">返回</string>
+    <string name="submit">提交</string>
+    
 </resources>

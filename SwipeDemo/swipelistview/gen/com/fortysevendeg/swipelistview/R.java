@@ -108,13 +108,13 @@ containing a value of this type.
         public static int swipeOpenOnLongPress=0x7f010000;
     }
     public static final class id {
-        public static int both=0x7f020001;
-        public static int choice=0x7f020006;
+        public static int both=0x7f020000;
+        public static int choice=0x7f020004;
         public static int dismiss=0x7f020005;
-        public static int left=0x7f020003;
-        public static int none=0x7f020000;
-        public static int reveal=0x7f020004;
-        public static int right=0x7f020002;
+        public static int left=0x7f020001;
+        public static int none=0x7f020002;
+        public static int reveal=0x7f020006;
+        public static int right=0x7f020003;
     }
     public static final class styleable {
         /** Attributes that can be used with a SwipeListView.
@@ -169,9 +169,9 @@ containing a value of this type.
 <tr><td><code>dismiss</code></td><td>1</td><td></td></tr>
 <tr><td><code>choice</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:swipeActionLeft
+          @attr name com.fortysevendeg.swipelistview:swipeActionLeft
         */
-        public static final int SwipeListView_swipeActionLeft = 8;
+        public static int SwipeListView_swipeActionLeft = 8;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeActionRight}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -187,9 +187,9 @@ containing a value of this type.
 <tr><td><code>dismiss</code></td><td>1</td><td></td></tr>
 <tr><td><code>choice</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:swipeActionRight
+          @attr name com.fortysevendeg.swipelistview:swipeActionRight
         */
-        public static final int SwipeListView_swipeActionRight = 9;
+        public static int SwipeListView_swipeActionRight = 9;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeAnimationTime}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -201,9 +201,9 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeAnimationTime
+          @attr name com.fortysevendeg.swipelistview:swipeAnimationTime
         */
-        public static final int SwipeListView_swipeAnimationTime = 1;
+        public static int SwipeListView_swipeAnimationTime = 1;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeBackView}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -211,9 +211,9 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeBackView
+          @attr name com.fortysevendeg.swipelistview:swipeBackView
         */
-        public static final int SwipeListView_swipeBackView = 6;
+        public static int SwipeListView_swipeBackView = 6;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeCloseAllItemsWhenMoveList}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -225,9 +225,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeCloseAllItemsWhenMoveList
+          @attr name com.fortysevendeg.swipelistview:swipeCloseAllItemsWhenMoveList
         */
-        public static final int SwipeListView_swipeCloseAllItemsWhenMoveList = 4;
+        public static int SwipeListView_swipeCloseAllItemsWhenMoveList = 4;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeDrawableChecked}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -235,9 +235,9 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeDrawableChecked
+          @attr name com.fortysevendeg.swipelistview:swipeDrawableChecked
         */
-        public static final int SwipeListView_swipeDrawableChecked = 10;
+        public static int SwipeListView_swipeDrawableChecked = 10;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeDrawableUnchecked}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -245,9 +245,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeDrawableUnchecked
+          @attr name com.fortysevendeg.swipelistview:swipeDrawableUnchecked
         */
-        public static final int SwipeListView_swipeDrawableUnchecked = 11;
+        public static int SwipeListView_swipeDrawableUnchecked = 11;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeFrontView}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -255,9 +255,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeFrontView
+          @attr name com.fortysevendeg.swipelistview:swipeFrontView
         */
-        public static final int SwipeListView_swipeFrontView = 5;
+        public static int SwipeListView_swipeFrontView = 5;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeMode}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -274,9 +274,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>right</code></td><td>2</td><td></td></tr>
 <tr><td><code>left</code></td><td>3</td><td></td></tr>
 </table>
-          @attr name android:swipeMode
+          @attr name com.fortysevendeg.swipelistview:swipeMode
         */
-        public static final int SwipeListView_swipeMode = 7;
+        public static int SwipeListView_swipeMode = 7;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeOffsetLeft}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -290,9 +290,9 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOffsetLeft
+          @attr name com.fortysevendeg.swipelistview:swipeOffsetLeft
         */
-        public static final int SwipeListView_swipeOffsetLeft = 2;
+        public static int SwipeListView_swipeOffsetLeft = 2;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeOffsetRight}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -306,9 +306,9 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOffsetRight
+          @attr name com.fortysevendeg.swipelistview:swipeOffsetRight
         */
-        public static final int SwipeListView_swipeOffsetRight = 3;
+        public static int SwipeListView_swipeOffsetRight = 3;
         /**
           <p>This symbol is the offset where the {@link com.fortysevendeg.swipelistview.R.attr#swipeOpenOnLongPress}
           attribute's value can be found in the {@link #SwipeListView} array.
@@ -320,8 +320,8 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOpenOnLongPress
+          @attr name com.fortysevendeg.swipelistview:swipeOpenOnLongPress
         */
-        public static final int SwipeListView_swipeOpenOnLongPress = 0;
+        public static int SwipeListView_swipeOpenOnLongPress = 0;
     };
 }

@@ -16,17 +16,22 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ExpandableListView.OnGroupClickListener;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.adapter.LazyAdapter;
 import com.lxm.pwhelp.view.NoScrollViewPager;
+import com.lxm.pwhelp.adapter.PinnedHeaderExpandableAdapter;
+import com.lxm.pwhelp.view.PinnedHeaderExpandableListView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 	public static final String KEY_ARTIST = "artist";
@@ -41,17 +46,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private ListView lv_list;
 	private ImageButton mAddressImg;
 	private ImageButton mFrdImg;
+	
 	private PagerAdapter mPagerAdapter;
+	private PinnedHeaderExpandableAdapter expandableAdapter;
+	private PinnedHeaderExpandableListView explistview;
+	private String[][] childrenData = new String[10][10];
+	private String[] groupData = new String[5];
+	
 	private ImageButton mSettingImg;
 	private LinearLayout mTabAddress;
 	private LinearLayout mTabFrd;
 	private LinearLayout mTabSetting;
 	private LinearLayout mTabWeiXin;
+
+	private LinearLayout additem;
+
 	private NoScrollViewPager mViewPager;
 	private List<View> mViews;
 	private ImageButton mWeiXinImg;
 	private ArrayList<HashMap<String, String>> songsList;
 	private TextView title;
+	
+	private int expandFlag = -1;//control the list if expand
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,6 +83,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		mTabAddress.setOnClickListener(this);
 		mTabFrd.setOnClickListener(this);
 		mTabSetting.setOnClickListener(this);
+		additem.setOnClickListener(this);
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			/**
 			 * ViewPage左右滑动
@@ -130,63 +147,92 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private void initViewPage() {
 		// 初妈化四个布局
 		LayoutInflater mLayoutInflater = LayoutInflater.from(this);
-	    View tab01 = mLayoutInflater.inflate(R.layout.tab01, null);
+		View tab01 = mLayoutInflater.inflate(R.layout.tab01, null);
 		View tab02 = mLayoutInflater.inflate(R.layout.tab02, null);
 		View tab03 = mLayoutInflater.inflate(R.layout.tab03, null);
 		View tab04 = mLayoutInflater.inflate(R.layout.tab04, null);
+
+		additem = (LinearLayout) tab03.findViewById(R.id.additem);
+		explistview = (PinnedHeaderExpandableListView) tab02.findViewById(R.id.explistview);
+
 		lv_list = (ListView) tab01.findViewById(R.id.list1);
 		songsList = new ArrayList<HashMap<String, String>>();
+
 		HashMap<String, String> map1 = new HashMap<String, String>();
-	    map1.put("title", "新浪微博");
-	    map1.put("artist", "账号：1247983646@qq.com");
-	    map1.put("duration", "密码：***************");
-	    
-	    HashMap<String, String> map2 = new HashMap<String, String>();
-	    map2.put("title", "新浪微博");
-	    map2.put("artist", "账号：837144027@qq.com");
-	    map2.put("duration", "密码：***************");
-	    
-	    HashMap<String, String> map3 = new HashMap<String, String>();
-	    map3.put("title", "新浪微博");
-	    map3.put("artist", "账号：1247983646@qq.com");
-	    map3.put("duration", "密码：***************");
-	    
-	    HashMap<String, String> map4 = new HashMap<String, String>();
-	    map4.put("title", "新浪微博");
-	    map4.put("artist", "账号：837144027@qq.com");
-	    map4.put("duration", "密码：***************");
-	    
-	    HashMap<String, String> map5 = new HashMap<String, String>();
-	    map5.put("title", "新浪微博");
-	    map5.put("artist", "账号：1247983646@qq.com");
-	    map5.put("duration", "密码：***************");
-	    
-	    HashMap<String, String> map6 = new HashMap<String, String>();
-	    map6.put("title", "新浪微博");
-	    map6.put("artist", "账号：1247983646@qq.com");
-	    map6.put("duration", "密码：***************");
-	    
-	    HashMap<String, String> map7 = new HashMap<String, String>();
-	    map7.put("title", "新浪微博");
-	    map7.put("artist", "账号：1247983646@qq.com");
-	    map7.put("duration", "密码：***************");
-	    
-	    songsList.add(map1);
-	    songsList.add(map2);
-	    songsList.add(map3);
-	    songsList.add(map4);
-	    songsList.add(map5);
-	    songsList.add(map6);
-	    songsList.add(map7);
-	    
-	    adapter = new LazyAdapter(this, songsList);
-	    lv_list.setAdapter(adapter);
+		map1.put("title", "新浪微博");
+		map1.put("artist", "账号：1247983646@qq.com");
+		map1.put("duration", "密码：***************");
+
+		HashMap<String, String> map2 = new HashMap<String, String>();
+		map2.put("title", "新浪微博");
+		map2.put("artist", "账号：837144027@qq.com");
+		map2.put("duration", "密码：***************");
+
+		HashMap<String, String> map3 = new HashMap<String, String>();
+		map3.put("title", "新浪微博");
+		map3.put("artist", "账号：1247983646@qq.com");
+		map3.put("duration", "密码：***************");
+
+		HashMap<String, String> map4 = new HashMap<String, String>();
+		map4.put("title", "新浪微博");
+		map4.put("artist", "账号：837144027@qq.com");
+		map4.put("duration", "密码：***************");
+
+		HashMap<String, String> map5 = new HashMap<String, String>();
+		map5.put("title", "新浪微博");
+		map5.put("artist", "账号：1247983646@qq.com");
+		map5.put("duration", "密码：***************");
+
+		HashMap<String, String> map6 = new HashMap<String, String>();
+		map6.put("title", "新浪微博");
+		map6.put("artist", "账号：1247983646@qq.com");
+		map6.put("duration", "密码：***************");
+
+		HashMap<String, String> map7 = new HashMap<String, String>();
+		map7.put("title", "新浪微博");
+		map7.put("artist", "账号：1247983646@qq.com");
+		map7.put("duration", "密码：***************");
 		
+		
+		//expand list data
+		groupData[0] = "默认分组";
+		groupData[1] = "网银密码";
+		groupData[2] = "论坛密码";
+		groupData[3] = "微博密码";
+		groupData[4] = "QQ密码";
+		//for(int i=1;i<10;i++){
+		//	groupData[i] = "分组"+i;
+		//}
+		
+		for(int i=0;i<5;i++){
+			for(int j=0;j<10;j++){
+				childrenData[i][j] = "好友"+i+"-"+j;
+			}
+		}
+		//设置悬浮头部VIEW
+		explistview.setHeaderView(getLayoutInflater().inflate(R.layout.group_head,
+				explistview, false));
+		expandableAdapter = new PinnedHeaderExpandableAdapter(childrenData, groupData, getApplicationContext(),explistview);
+		explistview.setAdapter(expandableAdapter);
+		//设置单个分组展开
+		explistview.setOnGroupClickListener(new GroupClickListener());
+
+		songsList.add(map1);
+		songsList.add(map2);
+		songsList.add(map3);
+		songsList.add(map4);
+		songsList.add(map5);
+		songsList.add(map6);
+		songsList.add(map7);
+
+		adapter = new LazyAdapter(this, songsList);
+		lv_list.setAdapter(adapter);
+
 		mViews.add(tab01);
 		mViews.add(tab02);
 		mViews.add(tab03);
 		mViews.add(tab04);
-		
+
 		// 适配器初始化并设置
 		mPagerAdapter = new PagerAdapter() {
 
@@ -216,9 +262,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				return mViews.size();
 			}
 		};
-		
+
 		mViewPager.setAdapter(mPagerAdapter);
-	  }
+	}
 
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
@@ -254,6 +300,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			title.setText("个人中心");
 			break;
 		}
+		case R.id.additem: {
+			DialogAddItem();
+			break;
+		}
 		}
 	}
 
@@ -268,18 +318,36 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		mSettingImg.setImageResource(R.drawable.person_noselected);
 	}
 
-	protected void dialog() {
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)
+				&& (event.getAction() == KeyEvent.ACTION_DOWN)) {
+			dialogExit();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	private void DialogAddItem(){
+		LayoutInflater inflater = getLayoutInflater();
+		View layout = inflater.inflate(R.layout.add_layout, (ViewGroup) findViewById(R.layout.activity_main));
+		new AlertDialog.Builder(this).setTitle("添加密码项").setView(layout)
+	     .setPositiveButton("提交", null)
+	     .setNegativeButton("返回", null).show();
+	}
+
+	/**
+	 * dialog for exit
+	 */
+	protected void dialogExit() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 		builder.setMessage("确认退出吗？");
 		builder.setTitle("提示");
 		builder.setPositiveButton("确认",
 				new android.content.DialogInterface.OnClickListener() {
-
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-
-						MainActivity.this.finish();
+						finish();
+						System.exit(0);
 					}
 				});
 
@@ -292,5 +360,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					}
 				});
 		builder.create().show();
+	}
+	
+	class GroupClickListener implements OnGroupClickListener{
+		@Override
+		public boolean onGroupClick(ExpandableListView parent, View v,
+				int groupPosition, long id) {
+			if (expandFlag == -1) {
+				// 展开被选的group
+				explistview.expandGroup(groupPosition);
+				// 设置被选中的group置于顶端
+				explistview.setSelectedGroup(groupPosition);
+				expandFlag = groupPosition;
+			} else if (expandFlag == groupPosition) {
+				explistview.collapseGroup(expandFlag);
+				expandFlag = -1;
+			} else {
+				explistview.collapseGroup(expandFlag);
+				// 展开被选的group
+				explistview.expandGroup(groupPosition);
+				// 设置被选中的group置于顶端
+				explistview.setSelectedGroup(groupPosition);
+				expandFlag = groupPosition;
+			}
+			return true;
+		}
 	}
 }

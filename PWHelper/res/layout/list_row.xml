@@ -55,12 +55,16 @@
         android:textColor="#ff343434"
         android:textSize="10.0dip" />
 
-    <ImageView
-        android:id="@id/btnshowpass"
+    <ToggleButton
+        android:id="@+id/mTogBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/btn_close" />
-
+        android:background="@android:color/transparent"
+        android:button="@drawable/toggle_btn"
+        android:checked="false"
+        android:text=""
+        android:textOff=""
+        android:textOn="" />
 </RelativeLayout>
