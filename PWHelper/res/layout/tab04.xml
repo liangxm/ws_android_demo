@@ -22,16 +22,14 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="14.0dip"
-            android:background="#ffffffff"
+            android:layout_marginLeft="15.0dip"
+            android:gravity="center_vertical"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15.0dip"
                 android:text="Selina"
                 android:textColor="#ff787878"
                 android:textSize="18.0dip" />
@@ -41,7 +39,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/name"
-                android:layout_marginLeft="15.0dip"
                 android:text="账号: 18221589205"
                 android:textColor="#ff787878"
                 android:textSize="18.0dip" />

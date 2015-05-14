@@ -9,7 +9,11 @@ import android.support.v4.view.ViewPager;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-
+/**
+ * No Scroll View Pager
+ * @author lianxiao
+ * @version 2015-5-14 14:19:08
+ */
 public class NoScrollViewPager extends ViewPager {
     private boolean noScroll = true;
     
@@ -22,7 +26,7 @@ public class NoScrollViewPager extends ViewPager {
     }
     
     public void setNoScroll(boolean noScroll) {
-        noScroll = noScroll;
+        this.noScroll = noScroll;
     }
     
     public void scrollTo(int x, int y) {

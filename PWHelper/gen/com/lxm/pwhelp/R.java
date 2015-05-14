@@ -192,194 +192,210 @@ containing a value of this type.
         public static final int swipeOpenOnLongPress=0x7f01000c;
     }
     public static final class color {
-        public static final int color_hei_8=0x7f060001;
-        public static final int gesture_background=0x7f060000;
-        public static final int gray=0x7f060003;
-        public static final int normal=0x7f060005;
-        public static final int theme_color=0x7f060002;
-        public static final int transparent_red=0x7f060004;
+        public static final int color_hei_8=0x7f050001;
+        public static final int gesture_background=0x7f050000;
+        public static final int gray=0x7f050003;
+        public static final int normal=0x7f050005;
+        public static final int theme_color=0x7f050002;
+        public static final int transparent_red=0x7f050004;
     }
     public static final class drawable {
         public static final int application_bg_welcome=0x7f020000;
         public static final int bottom_bar=0x7f020001;
         public static final int btn_add=0x7f020002;
-        public static final int btn_close=0x7f020003;
-        public static final int btn_open=0x7f020004;
-        public static final int card_avatar=0x7f020005;
-        public static final int cloud_icon=0x7f020006;
-        public static final int common_btn_green=0x7f020007;
-        public static final int common_btn_red=0x7f020008;
-        public static final int gesture_create_grid_bg=0x7f020009;
-        public static final int gesture_create_grid_selected=0x7f02000a;
-        public static final int gesture_guide_pic=0x7f02000b;
-        public static final int gesture_pattern_item_bg=0x7f02000c;
-        public static final int gesture_pattern_selected=0x7f02000d;
-        public static final int gesture_pattern_selected_wrong=0x7f02000e;
-        public static final int gradient_bg=0x7f02000f;
-        public static final int gradient_bg_hover=0x7f020010;
-        public static final int home_noselected=0x7f020011;
-        public static final int home_selected=0x7f020012;
-        public static final int ic_launcher=0x7f020013;
-        public static final int jbshape=0x7f020014;
-        public static final int layout_selecter=0x7f020015;
-        public static final int list_selector=0x7f020016;
-        public static final int login_default=0x7f020017;
-        public static final int login_default_avatar=0x7f020018;
-        public static final int manage_noselected=0x7f020019;
-        public static final int manage_selected=0x7f02001a;
-        public static final int pass_noselected=0x7f02001b;
-        public static final int pass_selected=0x7f02001c;
-        public static final int person_noselected=0x7f02001d;
-        public static final int person_selected=0x7f02001e;
-        public static final int pwdmanager=0x7f02001f;
-        public static final int recovery_icon=0x7f020020;
-        public static final int red_button=0x7f020021;
-        public static final int scrollbar_handle_vertical=0x7f020022;
-        public static final int search_box=0x7f020023;
-        public static final int searchbox=0x7f020024;
-        public static final int setting_icon=0x7f020025;
-        public static final int skin_color_button=0x7f020026;
-        public static final int skin_common_btn_green_disable=0x7f020027;
-        public static final int skin_common_btn_green_normal=0x7f020028;
-        public static final int skin_common_btn_green_pressed=0x7f020029;
-        public static final int skin_common_btn_red_disabled=0x7f02002a;
-        public static final int skin_common_btn_red_pressed=0x7f02002b;
-        public static final int skin_common_btn_red_unpressed=0x7f02002c;
-        public static final int source_image=0x7f02002d;
-        public static final int tab_address_normal=0x7f02002e;
-        public static final int tab_address_pressed=0x7f02002f;
-        public static final int tab_find_frd_normal=0x7f020030;
-        public static final int tab_find_frd_pressed=0x7f020031;
-        public static final int tab_settings_normal=0x7f020032;
-        public static final int tab_settings_pressed=0x7f020033;
-        public static final int tab_weixin_normal=0x7f020034;
-        public static final int tab_weixin_pressed=0x7f020035;
-        public static final int title_bar=0x7f020036;
-        public static final int top_add=0x7f020037;
-        public static final int top_search=0x7f020038;
-        public static final int top_user=0x7f020039;
-        public static final int trans=0x7f02003b;
-        public static final int welcome_bg=0x7f02003a;
+        public static final int btn_browser=0x7f020003;
+        public static final int btn_browser2=0x7f020004;
+        public static final int btn_close=0x7f020005;
+        public static final int btn_open=0x7f020006;
+        public static final int card_avatar=0x7f020007;
+        public static final int cloud_icon=0x7f020008;
+        public static final int common_btn_green=0x7f020009;
+        public static final int common_btn_red=0x7f02000a;
+        public static final int gesture_create_grid_bg=0x7f02000b;
+        public static final int gesture_create_grid_selected=0x7f02000c;
+        public static final int gesture_guide_pic=0x7f02000d;
+        public static final int gesture_pattern_item_bg=0x7f02000e;
+        public static final int gesture_pattern_selected=0x7f02000f;
+        public static final int gesture_pattern_selected_wrong=0x7f020010;
+        public static final int gradient_bg=0x7f020011;
+        public static final int gradient_bg_hover=0x7f020012;
+        public static final int home_noselected=0x7f020013;
+        public static final int home_selected=0x7f020014;
+        public static final int ic_launcher=0x7f020015;
+        public static final int jbshape=0x7f020016;
+        public static final int layout_selecter=0x7f020017;
+        public static final int list_selector=0x7f020018;
+        public static final int login_default=0x7f020019;
+        public static final int login_default_avatar=0x7f02001a;
+        public static final int manage_noselected=0x7f02001b;
+        public static final int manage_selected=0x7f02001c;
+        public static final int pass_noselected=0x7f02001d;
+        public static final int pass_selected=0x7f02001e;
+        public static final int person_noselected=0x7f02001f;
+        public static final int person_selected=0x7f020020;
+        public static final int pwdmanager=0x7f020021;
+        public static final int recovery_icon=0x7f020022;
+        public static final int red_button=0x7f020023;
+        public static final int scrollbar_handle_vertical=0x7f020024;
+        public static final int search_box=0x7f020025;
+        public static final int searchbox=0x7f020026;
+        public static final int setting_icon=0x7f020027;
+        public static final int skin_color_button=0x7f020028;
+        public static final int skin_common_btn_green_disable=0x7f020029;
+        public static final int skin_common_btn_green_normal=0x7f02002a;
+        public static final int skin_common_btn_green_pressed=0x7f02002b;
+        public static final int skin_common_btn_red_disabled=0x7f02002c;
+        public static final int skin_common_btn_red_pressed=0x7f02002d;
+        public static final int skin_common_btn_red_unpressed=0x7f02002e;
+        public static final int source_image=0x7f02002f;
+        public static final int tab_address_normal=0x7f020030;
+        public static final int tab_address_pressed=0x7f020031;
+        public static final int tab_find_frd_normal=0x7f020032;
+        public static final int tab_find_frd_pressed=0x7f020033;
+        public static final int tab_settings_normal=0x7f020034;
+        public static final int tab_settings_pressed=0x7f020035;
+        public static final int tab_weixin_normal=0x7f020036;
+        public static final int tab_weixin_pressed=0x7f020037;
+        public static final int title_bar=0x7f020038;
+        public static final int toggle_btn=0x7f020039;
+        public static final int top_add=0x7f02003a;
+        public static final int top_search=0x7f02003b;
+        public static final int top_user=0x7f02003c;
+        public static final int trans=0x7f02003e;
+        public static final int welcome_bg=0x7f02003d;
     }
     public static final class id {
-        public static final int account=0x7f050042;
-        public static final int additem=0x7f05003f;
-        public static final int artist=0x7f050037;
-        public static final int back=0x7f050031;
-        public static final int both=0x7f050004;
-        public static final int btnadd=0x7f05003e;
-        public static final int btnshowpass=0x7f050039;
-        public static final int choice=0x7f050009;
-        public static final int cloud=0x7f05005b;
-        public static final int cloud_icon=0x7f05005c;
-        public static final int cloud_label=0x7f05005d;
-        public static final int dismiss=0x7f050008;
-        public static final int duration=0x7f050038;
-        public static final int edit_commit=0x7f050051;
-        public static final int edit_password=0x7f050048;
-        public static final int edit_question1=0x7f050054;
-        public static final int edit_question2=0x7f050057;
-        public static final int edit_type=0x7f05004b;
-        public static final int edit_url=0x7f05004e;
-        public static final int edit_username=0x7f050045;
-        public static final int front=0x7f050033;
-        public static final int gesturepwd_creat_gap1=0x7f050017;
-        public static final int gesturepwd_creat_gap2=0x7f050022;
-        public static final int gesturepwd_creat_gap3=0x7f050024;
-        public static final int gesturepwd_creat_gap4=0x7f050026;
-        public static final int gesturepwd_create_lockview=0x7f050025;
-        public static final int gesturepwd_create_text=0x7f050023;
-        public static final int gesturepwd_guide_btn=0x7f05002a;
-        public static final int gesturepwd_guide_text=0x7f050029;
-        public static final int gesturepwd_root=0x7f05002b;
-        public static final int gesturepwd_setting_preview=0x7f050018;
-        public static final int gesturepwd_setting_preview_0=0x7f050019;
-        public static final int gesturepwd_setting_preview_1=0x7f05001a;
-        public static final int gesturepwd_setting_preview_2=0x7f05001b;
-        public static final int gesturepwd_setting_preview_3=0x7f05001c;
-        public static final int gesturepwd_setting_preview_4=0x7f05001d;
-        public static final int gesturepwd_setting_preview_5=0x7f05001e;
-        public static final int gesturepwd_setting_preview_6=0x7f05001f;
-        public static final int gesturepwd_setting_preview_7=0x7f050020;
-        public static final int gesturepwd_setting_preview_8=0x7f050021;
-        public static final int gesturepwd_unlock_face=0x7f05002c;
-        public static final int gesturepwd_unlock_failtip=0x7f05002e;
-        public static final int gesturepwd_unlock_forget=0x7f050030;
-        public static final int gesturepwd_unlock_lockview=0x7f05002f;
-        public static final int gesturepwd_unlock_text=0x7f05002d;
-        public static final int id_tab_address=0x7f05000e;
-        public static final int id_tab_address_img=0x7f05000f;
-        public static final int id_tab_frd=0x7f050011;
-        public static final int id_tab_frd_img=0x7f050012;
-        public static final int id_tab_settings=0x7f050014;
-        public static final int id_tab_settings_img=0x7f050015;
-        public static final int id_tab_weixin=0x7f05000b;
-        public static final int id_tab_weixin_img=0x7f05000c;
-        public static final int id_viewpage=0x7f05000a;
-        public static final int item1=0x7f050043;
-        public static final int item2=0x7f050046;
-        public static final int item3=0x7f050049;
-        public static final int item4=0x7f05004c;
-        public static final int item5=0x7f05004f;
-        public static final int item6=0x7f050052;
-        public static final int item7=0x7f050055;
-        public static final int label1=0x7f05000d;
-        public static final int label2=0x7f050010;
-        public static final int label3=0x7f050013;
-        public static final int label4=0x7f050016;
-        public static final int left=0x7f050006;
-        public static final int list=0x7f05003c;
-        public static final int list1=0x7f05003b;
-        public static final int lockHeight=0x7f050002;
-        public static final int lockWidth=0x7f050001;
-        public static final int manage=0x7f05003d;
-        public static final int name=0x7f050041;
-        public static final int none=0x7f050003;
-        public static final int personal=0x7f050040;
-        public static final int recovery=0x7f050058;
-        public static final int recovery_icon=0x7f050059;
-        public static final int recovery_label=0x7f05005a;
-        public static final int remove=0x7f050032;
-        public static final int reset_btn=0x7f050027;
-        public static final int reveal=0x7f050007;
-        public static final int right=0x7f050005;
-        public static final int right_btn=0x7f050028;
-        public static final int searchbox=0x7f05003a;
-        public static final int settings=0x7f05005e;
-        public static final int settings_icon=0x7f05005f;
-        public static final int setttings_label=0x7f050060;
-        public static final int square=0x7f050000;
-        public static final int text=0x7f050034;
-        public static final int text_commit=0x7f050050;
-        public static final int text_name=0x7f050044;
-        public static final int text_password=0x7f050047;
-        public static final int text_question1=0x7f050053;
-        public static final int text_question2=0x7f050056;
-        public static final int text_type=0x7f05004a;
-        public static final int text_url=0x7f05004d;
-        public static final int thumbnail=0x7f050035;
-        public static final int title=0x7f050036;
+        public static final int account=0x7f060038;
+        public static final int additem=0x7f060035;
+        public static final int artist=0x7f06002d;
+        public static final int back=0x7f060027;
+        public static final int both=0x7f06003c;
+        public static final int btnadd=0x7f060034;
+        public static final int btnshowpass=0x7f06002f;
+        public static final int childto=0x7f06005b;
+        public static final int choice=0x7f060040;
+        public static final int cloud=0x7f060062;
+        public static final int cloud_icon=0x7f060063;
+        public static final int cloud_label=0x7f060064;
+        public static final int dismiss=0x7f060041;
+        public static final int duration=0x7f06002e;
+        public static final int edit_commit=0x7f060053;
+        public static final int edit_password=0x7f06004a;
+        public static final int edit_question1=0x7f060056;
+        public static final int edit_question2=0x7f060059;
+        public static final int edit_type=0x7f06004d;
+        public static final int edit_url=0x7f060050;
+        public static final int edit_username=0x7f060045;
+        public static final int explistview=0x7f06005e;
+        public static final int front=0x7f060029;
+        public static final int gesturepwd_creat_gap1=0x7f06000d;
+        public static final int gesturepwd_creat_gap2=0x7f060018;
+        public static final int gesturepwd_creat_gap3=0x7f06001a;
+        public static final int gesturepwd_creat_gap4=0x7f06001c;
+        public static final int gesturepwd_create_lockview=0x7f06001b;
+        public static final int gesturepwd_create_text=0x7f060019;
+        public static final int gesturepwd_guide_btn=0x7f060020;
+        public static final int gesturepwd_guide_text=0x7f06001f;
+        public static final int gesturepwd_root=0x7f060021;
+        public static final int gesturepwd_setting_preview=0x7f06000e;
+        public static final int gesturepwd_setting_preview_0=0x7f06000f;
+        public static final int gesturepwd_setting_preview_1=0x7f060010;
+        public static final int gesturepwd_setting_preview_2=0x7f060011;
+        public static final int gesturepwd_setting_preview_3=0x7f060012;
+        public static final int gesturepwd_setting_preview_4=0x7f060013;
+        public static final int gesturepwd_setting_preview_5=0x7f060014;
+        public static final int gesturepwd_setting_preview_6=0x7f060015;
+        public static final int gesturepwd_setting_preview_7=0x7f060016;
+        public static final int gesturepwd_setting_preview_8=0x7f060017;
+        public static final int gesturepwd_unlock_face=0x7f060022;
+        public static final int gesturepwd_unlock_failtip=0x7f060024;
+        public static final int gesturepwd_unlock_forget=0x7f060026;
+        public static final int gesturepwd_unlock_lockview=0x7f060025;
+        public static final int gesturepwd_unlock_text=0x7f060023;
+        public static final int groupIcon=0x7f06005a;
+        public static final int groupto=0x7f06005c;
+        public static final int id_tab_address=0x7f060004;
+        public static final int id_tab_address_img=0x7f060005;
+        public static final int id_tab_frd=0x7f060007;
+        public static final int id_tab_frd_img=0x7f060008;
+        public static final int id_tab_settings=0x7f06000a;
+        public static final int id_tab_settings_img=0x7f06000b;
+        public static final int id_tab_weixin=0x7f060001;
+        public static final int id_tab_weixin_img=0x7f060002;
+        public static final int id_viewpage=0x7f060000;
+        public static final int item1=0x7f060043;
+        public static final int item2=0x7f060046;
+        public static final int item3=0x7f060048;
+        public static final int item4=0x7f06004b;
+        public static final int item5=0x7f06004e;
+        public static final int item6=0x7f060051;
+        public static final int item7=0x7f060054;
+        public static final int item8=0x7f060057;
+        public static final int label1=0x7f060003;
+        public static final int label2=0x7f060006;
+        public static final int label3=0x7f060009;
+        public static final int label4=0x7f06000c;
+        public static final int left=0x7f06003d;
+        public static final int list=0x7f060032;
+        public static final int list1=0x7f060031;
+        public static final int lockHeight=0x7f060039;
+        public static final int lockWidth=0x7f06003a;
+        public static final int mTogBtn=0x7f06005d;
+        public static final int manage=0x7f060033;
+        public static final int name=0x7f060037;
+        public static final int none=0x7f06003e;
+        public static final int personal=0x7f060036;
+        public static final int recovery=0x7f06005f;
+        public static final int recovery_icon=0x7f060060;
+        public static final int recovery_label=0x7f060061;
+        public static final int remove=0x7f060028;
+        public static final int reset_btn=0x7f06001d;
+        public static final int reveal=0x7f060042;
+        public static final int right=0x7f06003f;
+        public static final int right_btn=0x7f06001e;
+        public static final int searchbox=0x7f060030;
+        public static final int settings=0x7f060065;
+        public static final int settings_icon=0x7f060066;
+        public static final int setttings_label=0x7f060067;
+        public static final int square=0x7f06003b;
+        public static final int text=0x7f06002a;
+        public static final int text_commit=0x7f060052;
+        public static final int text_name=0x7f060044;
+        public static final int text_password=0x7f060049;
+        public static final int text_question1=0x7f060055;
+        public static final int text_question2=0x7f060058;
+        public static final int text_type=0x7f06004c;
+        public static final int text_url=0x7f06004f;
+        public static final int text_username=0x7f060047;
+        public static final int thumbnail=0x7f06002b;
+        public static final int title=0x7f06002c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int add_layout=0x7f030001;
         public static final int bottom_layout=0x7f030002;
-        public static final int gesturepassword_create=0x7f030003;
-        public static final int gesturepassword_guide=0x7f030004;
-        public static final int gesturepassword_unlock=0x7f030005;
-        public static final int list_item=0x7f030006;
-        public static final int list_row=0x7f030007;
-        public static final int tab01=0x7f030008;
-        public static final int tab02=0x7f030009;
-        public static final int tab03=0x7f03000a;
-        public static final int tab04=0x7f03000b;
-        public static final int top_layout=0x7f03000c;
+        public static final int child=0x7f030003;
+        public static final int gesturepassword_create=0x7f030004;
+        public static final int gesturepassword_guide=0x7f030005;
+        public static final int gesturepassword_unlock=0x7f030006;
+        public static final int group=0x7f030007;
+        public static final int group_head=0x7f030008;
+        public static final int list_item=0x7f030009;
+        public static final int list_row=0x7f03000a;
+        public static final int tab01=0x7f03000b;
+        public static final int tab02=0x7f03000c;
+        public static final int tab03=0x7f03000d;
+        public static final int tab04=0x7f03000e;
+        public static final int top_layout=0x7f03000f;
     }
     public static final class string {
         /**  manage center 
          */
         public static final int add_label=0x7f070012;
         public static final int app_name=0x7f070000;
+        /**  dialog 
+         */
+        public static final int back=0x7f07001e;
         /**  personal center 
          */
         public static final int cloud_label=0x7f070013;
@@ -402,6 +418,7 @@ containing a value of this type.
         public static final int lockscreen_access_pattern_start=0x7f070001;
         public static final int recovery_label=0x7f070015;
         public static final int settting_label=0x7f070014;
+        public static final int submit=0x7f07001f;
         public static final int text_commit=0x7f07001b;
         /**  add layout 
          */
@@ -416,11 +433,12 @@ containing a value of this type.
     public static final class style {
         /**  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
-        public static final int AppTheme=0x7f080001;
-        public static final int ButtonGreen=0x7f080002;
-        public static final int ButtonRed=0x7f080003;
-        public static final int button_text=0x7f080004;
+        public static final int AppBaseTheme=0x7f080001;
+        public static final int AppTheme=0x7f080002;
+        public static final int ButtonGreen=0x7f080003;
+        public static final int ButtonRed=0x7f080004;
+        public static final int Theme_dialog=0x7f080000;
+        public static final int button_text=0x7f080005;
     }
     public static final class styleable {
         /** Attributes that can be used with a CircleImageView.
@@ -452,7 +470,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_color
+          @attr name com.lxm.pwhelp:border_color
         */
         public static final int CircleImageView_border_color = 1;
         /**
@@ -466,7 +484,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_overlay
+          @attr name com.lxm.pwhelp:border_overlay
         */
         public static final int CircleImageView_border_overlay = 2;
         /**
@@ -482,7 +500,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_width
+          @attr name com.lxm.pwhelp:border_width
         */
         public static final int CircleImageView_border_width = 0;
         /**  LockPatternView class attributes 
@@ -524,7 +542,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:arrowGreenUp
+          @attr name com.lxm.pwhelp:arrowGreenUp
         */
         public static final int LockPatternView_arrowGreenUp = 7;
         /**
@@ -534,7 +552,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:arrowRedUp
+          @attr name com.lxm.pwhelp:arrowRedUp
         */
         public static final int LockPatternView_arrowRedUp = 8;
         /**
@@ -557,7 +575,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>lockHeight</code></td><td>2</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:aspect
+          @attr name com.lxm.pwhelp:aspect
         */
         public static final int LockPatternView_aspect = 0;
         /**
@@ -567,7 +585,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:btnNormal
+          @attr name com.lxm.pwhelp:btnNormal
         */
         public static final int LockPatternView_btnNormal = 2;
         /**
@@ -577,7 +595,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:btnTouched
+          @attr name com.lxm.pwhelp:btnTouched
         */
         public static final int LockPatternView_btnTouched = 3;
         /**
@@ -587,7 +605,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:circleGreen
+          @attr name com.lxm.pwhelp:circleGreen
         */
         public static final int LockPatternView_circleGreen = 5;
         /**
@@ -597,7 +615,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:circleNormal
+          @attr name com.lxm.pwhelp:circleNormal
         */
         public static final int LockPatternView_circleNormal = 4;
         /**
@@ -607,7 +625,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:circleRed
+          @attr name com.lxm.pwhelp:circleRed
         */
         public static final int LockPatternView_circleRed = 6;
         /**
@@ -622,7 +640,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:line
+          @attr name com.lxm.pwhelp:line
         */
         public static final int LockPatternView_line = 1;
         /** Attributes that can be used with a SwipeListView.
@@ -677,7 +695,7 @@ containing a value of this type.
 <tr><td><code>dismiss</code></td><td>1</td><td></td></tr>
 <tr><td><code>choice</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:swipeActionLeft
+          @attr name com.lxm.pwhelp:swipeActionLeft
         */
         public static final int SwipeListView_swipeActionLeft = 8;
         /**
@@ -695,7 +713,7 @@ containing a value of this type.
 <tr><td><code>dismiss</code></td><td>1</td><td></td></tr>
 <tr><td><code>choice</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:swipeActionRight
+          @attr name com.lxm.pwhelp:swipeActionRight
         */
         public static final int SwipeListView_swipeActionRight = 9;
         /**
@@ -709,7 +727,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeAnimationTime
+          @attr name com.lxm.pwhelp:swipeAnimationTime
         */
         public static final int SwipeListView_swipeAnimationTime = 1;
         /**
@@ -719,7 +737,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeBackView
+          @attr name com.lxm.pwhelp:swipeBackView
         */
         public static final int SwipeListView_swipeBackView = 6;
         /**
@@ -733,7 +751,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeCloseAllItemsWhenMoveList
+          @attr name com.lxm.pwhelp:swipeCloseAllItemsWhenMoveList
         */
         public static final int SwipeListView_swipeCloseAllItemsWhenMoveList = 4;
         /**
@@ -743,7 +761,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeDrawableChecked
+          @attr name com.lxm.pwhelp:swipeDrawableChecked
         */
         public static final int SwipeListView_swipeDrawableChecked = 10;
         /**
@@ -753,7 +771,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeDrawableUnchecked
+          @attr name com.lxm.pwhelp:swipeDrawableUnchecked
         */
         public static final int SwipeListView_swipeDrawableUnchecked = 11;
         /**
@@ -763,7 +781,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeFrontView
+          @attr name com.lxm.pwhelp:swipeFrontView
         */
         public static final int SwipeListView_swipeFrontView = 5;
         /**
@@ -782,7 +800,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>right</code></td><td>2</td><td></td></tr>
 <tr><td><code>left</code></td><td>3</td><td></td></tr>
 </table>
-          @attr name android:swipeMode
+          @attr name com.lxm.pwhelp:swipeMode
         */
         public static final int SwipeListView_swipeMode = 7;
         /**
@@ -798,7 +816,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOffsetLeft
+          @attr name com.lxm.pwhelp:swipeOffsetLeft
         */
         public static final int SwipeListView_swipeOffsetLeft = 2;
         /**
@@ -814,7 +832,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOffsetRight
+          @attr name com.lxm.pwhelp:swipeOffsetRight
         */
         public static final int SwipeListView_swipeOffsetRight = 3;
         /**
@@ -828,7 +846,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOpenOnLongPress
+          @attr name com.lxm.pwhelp:swipeOpenOnLongPress
         */
         public static final int SwipeListView_swipeOpenOnLongPress = 0;
     };

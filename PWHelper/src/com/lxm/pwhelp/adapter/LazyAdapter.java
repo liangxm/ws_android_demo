@@ -14,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.lxm.pwhelp.R;
 
@@ -49,23 +51,24 @@ public class LazyAdapter extends BaseAdapter {
 		if (convertView == null)
 			vi = inflater.inflate(R.layout.list_row, null);
 
-		TextView title = (TextView) vi.findViewById(R.id.title); // 标题
-		TextView artist = (TextView) vi.findViewById(R.id.artist); // 歌手名
-		final TextView duration = (TextView) vi.findViewById(R.id.duration); // 时长
-		final ImageView btnshowpass = (ImageView)vi.findViewById(R.id.btnshowpass);
-        btnshowpass.setOnClickListener(new View.OnClickListener(){
+		TextView title = (TextView) vi.findViewById(R.id.title); // 账户类型
+		TextView artist = (TextView) vi.findViewById(R.id.artist); // username
+		final TextView duration = (TextView) vi.findViewById(R.id.duration); // password
+		ToggleButton mTogBtn = (ToggleButton)vi.findViewById(R.id.mTogBtn);
+		mTogBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
 			@Override
-			public void onClick(View arg0) {
-				String pass = duration.getText().toString();
-				if(!pass.contains("*****")){
-					btnshowpass.setImageResource(R.drawable.btn_close);
-					duration.setText("*********************");
-				}else{
-					btnshowpass.setImageResource(R.drawable.btn_open);
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				if(isChecked){
+					//选中
 					duration.setText("xuyuanshigechouxiaoya");
+				}else{
+					//未选中
+					duration.setText("*********************");
 				}
 			}
-        });
+		});
 		HashMap<String, String> song = new HashMap<String, String>();
         song = data.get(position);
         title.setText((CharSequence)song.get("title"));

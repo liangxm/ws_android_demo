@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@id/manage"
+        android:id="@id/additem"
         android:layout_width="fill_parent"
         android:layout_height="60.0dip"
         android:layout_marginTop="8.0dip"

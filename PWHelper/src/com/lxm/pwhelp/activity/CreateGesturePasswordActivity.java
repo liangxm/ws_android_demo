@@ -96,22 +96,22 @@ public class CreateGesturePasswordActivity extends Activity implements
 
 		Introduction(R.string.lockpattern_recording_intro_header,
 				LeftButtonMode.Cancel, RightButtonMode.ContinueDisabled,
-				ID_EMPTY_MESSAGE, true), HelpScreen(
-				R.string.lockpattern_settings_help_how_to_record,
+				ID_EMPTY_MESSAGE, true), 
+		HelpScreen(R.string.lockpattern_settings_help_how_to_record,
 				LeftButtonMode.Gone, RightButtonMode.Ok, ID_EMPTY_MESSAGE,
-				false), ChoiceTooShort(
-				R.string.lockpattern_recording_incorrect_too_short,
+				false), 
+		ChoiceTooShort(R.string.lockpattern_recording_incorrect_too_short,
 				LeftButtonMode.Retry, RightButtonMode.ContinueDisabled,
-				ID_EMPTY_MESSAGE, true), FirstChoiceValid(
-				R.string.lockpattern_pattern_entered_header,
+				ID_EMPTY_MESSAGE, true), 
+		FirstChoiceValid(R.string.lockpattern_pattern_entered_header,
 				LeftButtonMode.Retry, RightButtonMode.Continue,
-				ID_EMPTY_MESSAGE, false), NeedToConfirm(
-				R.string.lockpattern_need_to_confirm, LeftButtonMode.Cancel,
-				RightButtonMode.ConfirmDisabled, ID_EMPTY_MESSAGE, true), ConfirmWrong(
-				R.string.lockpattern_need_to_unlock_wrong,
+				ID_EMPTY_MESSAGE, false), 
+		NeedToConfirm(R.string.lockpattern_need_to_confirm, LeftButtonMode.Cancel,
+				RightButtonMode.ConfirmDisabled, ID_EMPTY_MESSAGE, true), 
+		ConfirmWrong(R.string.lockpattern_need_to_unlock_wrong,
 				LeftButtonMode.Cancel, RightButtonMode.ConfirmDisabled,
-				ID_EMPTY_MESSAGE, true), ChoiceConfirmed(
-				R.string.lockpattern_pattern_confirmed_header,
+				ID_EMPTY_MESSAGE, true), 
+		ChoiceConfirmed(R.string.lockpattern_pattern_confirmed_header,
 				LeftButtonMode.Cancel, RightButtonMode.Confirm,
 				ID_EMPTY_MESSAGE, false);
 
@@ -178,7 +178,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 		initPreviewViews();
 		if (savedInstanceState == null) {
 			updateStage(Stage.Introduction);
-			updateStage(Stage.HelpScreen);
+//			updateStage(Stage.HelpScreen);
 		} else {
 			// restore from previous state
 			final String patternString = savedInstanceState

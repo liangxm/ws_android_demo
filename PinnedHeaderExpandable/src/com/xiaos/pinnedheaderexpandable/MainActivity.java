@@ -52,7 +52,7 @@ public class MainActivity extends Activity{
 		explistview.setAdapter(adapter);
 		
 		//设置单个分组展开
-		//explistview.setOnGroupClickListener(new GroupClickListener());
+		explistview.setOnGroupClickListener(new GroupClickListener());
 	}
 	
 	class GroupClickListener implements OnGroupClickListener{
