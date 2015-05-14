@@ -3,12 +3,10 @@ Demo/bin
 ListViewDemo/bin
 SlideCutListView/bin
 demoHListView/bin
-<<<<<<< HEAD
 PinnedHeaderExpandable/bin
 SwipeMenuSample/bin
 SwipeMenu/bin
-=======
 PWHelper/bin
 PinnedHeaderExpandable/bin
 PWHelper/language.properties
->>>>>>> 2080111dc5a5c5f7461e2e9e04f22a822e62ecd2
+SwipeMenu/outdir
