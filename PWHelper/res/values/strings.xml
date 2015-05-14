@@ -18,4 +18,23 @@
     <string name="lockpattern_recording_inprogress">完成后松开手指</string>
     <string name="gesture_password_guide_text">请先创建一个解锁图案，这样他人在借用你的手机时，将无法打开密码助手。</string>
     <string name="gesture_password_guide_creat_btn">创建手势密码</string>
+    
+    <!-- manage center -->
+    <string name="add_label">添加手机上的APP账号和密码</string>
+    
+    <!-- personal center -->
+    <string name="cloud_label">备份到我的私人邮箱</string>
+    <string name="settting_label">设置</string>
+    <string name="recovery_label">恢复原来的数据</string>
+    
+    <!-- add layout -->
+    <string name="text_name">项目名称</string>
+    <string name="text_username">用户名</string>
+    <string name="text_password">密码</string>
+    <string name="text_type">项目类型</string>
+    <string name="text_url">链接(http)</string>
+    <string name="text_commit">备注</string>
+    <string name="text_question1">密保1</string>
+    <string name="text_question2">密保2</string>
+    
 </resources>

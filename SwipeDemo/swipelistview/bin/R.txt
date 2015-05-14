@@ -10,13 +10,13 @@ int attr swipeMode 0x7f010007
 int attr swipeOffsetLeft 0x7f010002
 int attr swipeOffsetRight 0x7f010003
 int attr swipeOpenOnLongPress 0x7f010000
-int id both 0x7f020000
-int id choice 0x7f020004
+int id both 0x7f020001
+int id choice 0x7f020006
 int id dismiss 0x7f020005
-int id left 0x7f020001
-int id none 0x7f020002
-int id reveal 0x7f020006
-int id right 0x7f020003
+int id left 0x7f020003
+int id none 0x7f020000
+int id reveal 0x7f020004
+int id right 0x7f020002
 int[] styleable SwipeListView { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b }
 int styleable SwipeListView_swipeActionLeft 8
 int styleable SwipeListView_swipeActionRight 9
