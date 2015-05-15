@@ -12,6 +12,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -21,16 +22,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ExpandableListView.OnGroupClickListener;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.adapter.LazyAdapter;
-import com.lxm.pwhelp.view.NoScrollViewPager;
 import com.lxm.pwhelp.adapter.PinnedHeaderExpandableAdapter;
+import com.lxm.pwhelp.bean.PWGroup;
+import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.dao.PWGroupDao;
+import com.lxm.pwhelp.dao.PWItemDao;
+import com.lxm.pwhelp.view.NoScrollViewPager;
 import com.lxm.pwhelp.view.PinnedHeaderExpandableListView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -50,8 +55,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private PagerAdapter mPagerAdapter;
 	private PinnedHeaderExpandableAdapter expandableAdapter;
 	private PinnedHeaderExpandableListView explistview;
-	private String[][] childrenData = new String[10][10];
-	private String[] groupData = new String[5];
+	private String[][] childrenData = new String[6][5];
+	private String[] groupData = new String[6];
 	
 	private ImageButton mSettingImg;
 	private LinearLayout mTabAddress;
@@ -68,6 +73,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private TextView title;
 	
 	private int expandFlag = -1;//control the list if expand
+	
+	private PWItemDao itemDao;
+	private PWGroupDao groupDao;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -127,6 +135,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 
 	private void initView() {
+		itemDao = new PWItemDao(this);
+		groupDao = new PWGroupDao(this);
 		mViews = new ArrayList<View>();
 		mViewPager = (NoScrollViewPager) findViewById(R.id.id_viewpage);
 		mTabWeiXin = (LinearLayout) findViewById(R.id.id_tab_weixin);
@@ -157,42 +167,36 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		lv_list = (ListView) tab01.findViewById(R.id.list1);
 		songsList = new ArrayList<HashMap<String, String>>();
-
-		HashMap<String, String> map1 = new HashMap<String, String>();
-		map1.put("title", "新浪微博");
-		map1.put("artist", "账号：1247983646@qq.com");
-		map1.put("duration", "密码：***************");
-
-		HashMap<String, String> map2 = new HashMap<String, String>();
-		map2.put("title", "新浪微博");
-		map2.put("artist", "账号：837144027@qq.com");
-		map2.put("duration", "密码：***************");
-
-		HashMap<String, String> map3 = new HashMap<String, String>();
-		map3.put("title", "新浪微博");
-		map3.put("artist", "账号：1247983646@qq.com");
-		map3.put("duration", "密码：***************");
-
-		HashMap<String, String> map4 = new HashMap<String, String>();
-		map4.put("title", "新浪微博");
-		map4.put("artist", "账号：837144027@qq.com");
-		map4.put("duration", "密码：***************");
-
-		HashMap<String, String> map5 = new HashMap<String, String>();
-		map5.put("title", "新浪微博");
-		map5.put("artist", "账号：1247983646@qq.com");
-		map5.put("duration", "密码：***************");
-
-		HashMap<String, String> map6 = new HashMap<String, String>();
-		map6.put("title", "新浪微博");
-		map6.put("artist", "账号：1247983646@qq.com");
-		map6.put("duration", "密码：***************");
-
-		HashMap<String, String> map7 = new HashMap<String, String>();
-		map7.put("title", "新浪微博");
-		map7.put("artist", "账号：1247983646@qq.com");
-		map7.put("duration", "密码：***************");
 		
+		List<PWItem> items = itemDao.getPWItemAll();
+		for(PWItem item:items){
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("title", item.getItem_type());
+			map.put("artist", "账号："+item.getItem_username());
+			map.put("duration", "密码："+item.getItem_password());
+			songsList.add(map);
+		}
+		List<PWGroup> groups = groupDao.getGroupAll();
+		if(groups.size()==0){
+			PWGroup group1 = new PWGroup();
+			group1.setGroup_name("默认分组");
+			PWGroup group2 = new PWGroup();
+			group2.setGroup_name("网银密码");
+			PWGroup group3 = new PWGroup();
+			group3.setGroup_name("论坛密码");
+			PWGroup group4 = new PWGroup();
+			group4.setGroup_name("微博密码");
+			PWGroup group5 = new PWGroup();
+			group5.setGroup_name("QQ密码");
+			PWGroup group6 = new PWGroup();
+			group6.setGroup_name("邮箱密码");
+			groupDao.add(group1);
+			groupDao.add(group2);
+			groupDao.add(group3);
+			groupDao.add(group4);
+			groupDao.add(group5);
+			groupDao.add(group6);
+		}
 		
 		//expand list data
 		groupData[0] = "默认分组";
@@ -200,12 +204,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		groupData[2] = "论坛密码";
 		groupData[3] = "微博密码";
 		groupData[4] = "QQ密码";
-		//for(int i=1;i<10;i++){
-		//	groupData[i] = "分组"+i;
-		//}
+		groupData[5] = "邮箱密码";
 		
-		for(int i=0;i<5;i++){
-			for(int j=0;j<10;j++){
+		for(int i=0;i<6;i++){
+			for(int j=0;j<5;j++){
 				childrenData[i][j] = "好友"+i+"-"+j;
 			}
 		}
@@ -216,14 +218,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		explistview.setAdapter(expandableAdapter);
 		//设置单个分组展开
 		explistview.setOnGroupClickListener(new GroupClickListener());
-
-		songsList.add(map1);
-		songsList.add(map2);
-		songsList.add(map3);
-		songsList.add(map4);
-		songsList.add(map5);
-		songsList.add(map6);
-		songsList.add(map7);
 
 		adapter = new LazyAdapter(this, songsList);
 		lv_list.setAdapter(adapter);
@@ -301,7 +295,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			break;
 		}
 		case R.id.additem: {
-			DialogAddItem();
+			//DialogAddItem();
+			Intent intent = new Intent(MainActivity.this,
+					AddItemActivity.class);
+			// 打开新的Activity
+			startActivityForResult(intent,1);
 			break;
 		}
 		}
@@ -317,6 +315,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		mFrdImg.setImageResource(R.drawable.manage_noselected);
 		mSettingImg.setImageResource(R.drawable.person_noselected);
 	}
+	
+	// 回调方法，从第二个页面回来的时候会执行这个方法
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -325,14 +328,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			dialogExit();
 		}
 		return super.onKeyDown(keyCode, event);
-	}
-	
-	private void DialogAddItem(){
-		LayoutInflater inflater = getLayoutInflater();
-		View layout = inflater.inflate(R.layout.add_layout, (ViewGroup) findViewById(R.layout.activity_main));
-		new AlertDialog.Builder(this).setTitle("添加密码项").setView(layout)
-	     .setPositiveButton("提交", null)
-	     .setNegativeButton("返回", null).show();
 	}
 
 	/**
@@ -385,5 +380,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}
 			return true;
 		}
+	}
+	
+	@Override
+	protected void onStart(){
+		List<PWItem> items = itemDao.getPWItemAll();
+		songsList.clear();
+		for(PWItem item:items){
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("title", item.getItem_type());
+			map.put("artist", "账号："+item.getItem_username());
+			map.put("duration", "密码："+item.getItem_password());
+			songsList.add(map);
+		}
+		super.onStart();
+	}
+	
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
 	}
 }

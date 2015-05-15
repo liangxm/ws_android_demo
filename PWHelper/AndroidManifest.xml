@@ -24,6 +24,7 @@
         <activity android:name="com.lxm.pwhelp.activity.CreateGesturePasswordActivity" />
         <activity android:name="com.lxm.pwhelp.activity.GuideGesturePasswordActivity" />
         <activity android:name="com.lxm.pwhelp.activity.MainActivity" />
+        <activity android:name="com.lxm.pwhelp.activity.AddItemActivity" />
     </application>
 
 </manifest>
