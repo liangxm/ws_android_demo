@@ -55,6 +55,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return PWItemDao;
     }
     
+    public void insert(PWItem item){
+    	try {
+			int returnValue = getPWItemDao().create(item);
+			Log.i("test", "插入数据返回值:"+returnValue);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
+    
     public void close() {
         super.close();
         PWItemDao = null;
