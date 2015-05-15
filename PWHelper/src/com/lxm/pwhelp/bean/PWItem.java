@@ -5,20 +5,36 @@
 
 package com.lxm.pwhelp.bean;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "pw_item")
 public class PWItem {
-	
-	private String created;
-	private boolean deleted;
+
+	@DatabaseField(generatedId = true)
 	private int item_id;
+	@DatabaseField
 	private String item_name;
+	@DatabaseField
+	private String item_username;
+	@DatabaseField
 	private String item_password;
+	@DatabaseField
 	private String item_type;
+	@DatabaseField
 	private String item_url;
-	private String item_commit;
-	private String modified;
+	@DatabaseField
+	private String item_comment;
+	@DatabaseField
 	private String question1;
+	@DatabaseField
 	private String question2;
-	private String username;
+	@DatabaseField
+	private String modified;
+	@DatabaseField
+	private String created;
+	@DatabaseField
+	private boolean deleted;
 
 	public PWItem() {
 	}
@@ -28,7 +44,7 @@ public class PWItem {
 		sb.append(item_id + ";");
 		sb.append(item_name + ";");
 		sb.append(item_type + ";");
-		sb.append(username + ";");
+		sb.append(item_username + ";");
 		sb.append(item_password + ";");
 		return sb.toString();
 	}
@@ -89,12 +105,12 @@ public class PWItem {
 		this.item_url = item_url;
 	}
 
-	public String getItem_commit() {
-		return item_commit;
+	public String getItem_comment() {
+		return item_comment;
 	}
 
-	public void setItem_commit(String item_commit) {
-		this.item_commit = item_commit;
+	public void setItem_comment(String item_comment) {
+		this.item_comment = item_comment;
 	}
 
 	public String getModified() {
@@ -121,12 +137,12 @@ public class PWItem {
 		this.question2 = question2;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getItem_username() {
+		return item_username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setItem_username(String item_username) {
+		this.item_username = item_username;
 	}
 
 }
