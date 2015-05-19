@@ -21,6 +21,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
@@ -79,7 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(0x1);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(0x7f030000);
 		initView();
 		initViewPage();

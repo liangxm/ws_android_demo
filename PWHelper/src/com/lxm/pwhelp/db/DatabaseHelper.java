@@ -91,58 +91,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		return dao;
 	}
 	
-<<<<<<< HEAD
-	private static final String DATABASE_NAME = "sqlite-pwhelper.db";
-	private static final int DATABASE_VERSION = 4;
-    private Dao<PWItem, Integer> PWItemDao;
-    
-    private DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-    
-    public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
-        try {
-            TableUtils.createTable(connectionSource, PWItem.class);
-            LogUtil.d("DatabaseHelper.onCreate() ok");
-            return;
-        } catch(SQLException e) {
-            LogUtil.e("Can\'t create database");
-            e.printStackTrace();
-        }
-    }
-    
-    public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            TableUtils.dropTable(connectionSource, PWItem.class, true);
-            onCreate(database, connectionSource);
-            return;
-        } catch(SQLException e) {
-            Log.e(DatabaseHelper.class.getName(), "Can\'t drop databases");
-            e.printStackTrace();
-        }
-    }
-    
-    public Dao<PWItem, Integer> getPWItemDao() throws SQLException {
-        if(PWItemDao == null) {
-            PWItemDao = getDao(PWItem.class);
-        }
-        return PWItemDao;
-    }
-    
-    public void insert(PWItem item){
-    	try {
-			int returnValue = getPWItemDao().create(item);
-			Log.i("test", "插入数据返回值:"+returnValue);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-    }
-    
-    public void close() {
-        super.close();
-        PWItemDao = null;
-    }
-=======
 	/**
 	 * release sources
 	 */
@@ -155,5 +103,4 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			dao = null;
 		}
 	}
->>>>>>> 7796002ce188b2eea83c5bba4bd275382805e03a
 }

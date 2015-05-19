@@ -223,47 +223,50 @@ containing a value of this type.
         public static final int home_selected=0x7f020014;
         public static final int ic_launcher=0x7f020015;
         public static final int jbshape=0x7f020016;
-        public static final int layout_selecter=0x7f020017;
-        public static final int list_selector=0x7f020018;
-        public static final int login_default=0x7f020019;
-        public static final int login_default_avatar=0x7f02001a;
-        public static final int manage_noselected=0x7f02001b;
-        public static final int manage_selected=0x7f02001c;
-        public static final int pass_noselected=0x7f02001d;
-        public static final int pass_selected=0x7f02001e;
-        public static final int person_noselected=0x7f02001f;
-        public static final int person_selected=0x7f020020;
-        public static final int pwdmanager=0x7f020021;
-        public static final int recovery_icon=0x7f020022;
-        public static final int red_button=0x7f020023;
-        public static final int rounded_edittext=0x7f020024;
-        public static final int scrollbar_handle_vertical=0x7f020025;
-        public static final int search_box=0x7f020026;
-        public static final int searchbox=0x7f020027;
-        public static final int setting_icon=0x7f020028;
-        public static final int skin_color_button=0x7f020029;
-        public static final int skin_common_btn_green_disable=0x7f02002a;
-        public static final int skin_common_btn_green_normal=0x7f02002b;
-        public static final int skin_common_btn_green_pressed=0x7f02002c;
-        public static final int skin_common_btn_red_disabled=0x7f02002d;
-        public static final int skin_common_btn_red_pressed=0x7f02002e;
-        public static final int skin_common_btn_red_unpressed=0x7f02002f;
-        public static final int source_image=0x7f020030;
-        public static final int tab_address_normal=0x7f020031;
-        public static final int tab_address_pressed=0x7f020032;
-        public static final int tab_find_frd_normal=0x7f020033;
-        public static final int tab_find_frd_pressed=0x7f020034;
-        public static final int tab_settings_normal=0x7f020035;
-        public static final int tab_settings_pressed=0x7f020036;
-        public static final int tab_weixin_normal=0x7f020037;
-        public static final int tab_weixin_pressed=0x7f020038;
-        public static final int title_bar=0x7f020039;
-        public static final int toggle_btn=0x7f02003a;
-        public static final int top_add=0x7f02003b;
-        public static final int top_search=0x7f02003c;
-        public static final int top_user=0x7f02003d;
-        public static final int trans=0x7f02003f;
-        public static final int welcome_bg=0x7f02003e;
+        public static final int layout_background=0x7f020017;
+        public static final int layout_selecter=0x7f020018;
+        public static final int list_selector=0x7f020019;
+        public static final int login_default=0x7f02001a;
+        public static final int login_default_avatar=0x7f02001b;
+        public static final int manage_noselected=0x7f02001c;
+        public static final int manage_selected=0x7f02001d;
+        public static final int pass_noselected=0x7f02001e;
+        public static final int pass_selected=0x7f02001f;
+        public static final int person_noselected=0x7f020020;
+        public static final int person_selected=0x7f020021;
+        public static final int point_down=0x7f020022;
+        public static final int pwdmanager=0x7f020023;
+        public static final int recovery_icon=0x7f020024;
+        public static final int red_button=0x7f020025;
+        public static final int rounded_button=0x7f020026;
+        public static final int rounded_edittext=0x7f020027;
+        public static final int scrollbar_handle_vertical=0x7f020028;
+        public static final int search_box=0x7f020029;
+        public static final int searchbox=0x7f02002a;
+        public static final int setting_icon=0x7f02002b;
+        public static final int skin_color_button=0x7f02002c;
+        public static final int skin_common_btn_green_disable=0x7f02002d;
+        public static final int skin_common_btn_green_normal=0x7f02002e;
+        public static final int skin_common_btn_green_pressed=0x7f02002f;
+        public static final int skin_common_btn_red_disabled=0x7f020030;
+        public static final int skin_common_btn_red_pressed=0x7f020031;
+        public static final int skin_common_btn_red_unpressed=0x7f020032;
+        public static final int source_image=0x7f020033;
+        public static final int tab_address_normal=0x7f020034;
+        public static final int tab_address_pressed=0x7f020035;
+        public static final int tab_find_frd_normal=0x7f020036;
+        public static final int tab_find_frd_pressed=0x7f020037;
+        public static final int tab_settings_normal=0x7f020038;
+        public static final int tab_settings_pressed=0x7f020039;
+        public static final int tab_weixin_normal=0x7f02003a;
+        public static final int tab_weixin_pressed=0x7f02003b;
+        public static final int title_bar=0x7f02003c;
+        public static final int toggle_btn=0x7f02003d;
+        public static final int top_add=0x7f02003e;
+        public static final int top_search=0x7f02003f;
+        public static final int top_user=0x7f020040;
+        public static final int trans=0x7f020042;
+        public static final int welcome_bg=0x7f020041;
     }
     public static final class id {
         public static final int Dlg_Return=0x7f05005b;
@@ -377,20 +380,21 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int add_layout=0x7f030001;
-        public static final int bottom_layout=0x7f030002;
-        public static final int child=0x7f030003;
-        public static final int gesturepassword_create=0x7f030004;
-        public static final int gesturepassword_guide=0x7f030005;
-        public static final int gesturepassword_unlock=0x7f030006;
-        public static final int group=0x7f030007;
-        public static final int group_head=0x7f030008;
-        public static final int list_item=0x7f030009;
-        public static final int list_row=0x7f03000a;
-        public static final int tab01=0x7f03000b;
-        public static final int tab02=0x7f03000c;
-        public static final int tab03=0x7f03000d;
-        public static final int tab04=0x7f03000e;
-        public static final int top_layout=0x7f03000f;
+        public static final int add_top_layout=0x7f030002;
+        public static final int bottom_layout=0x7f030003;
+        public static final int child=0x7f030004;
+        public static final int gesturepassword_create=0x7f030005;
+        public static final int gesturepassword_guide=0x7f030006;
+        public static final int gesturepassword_unlock=0x7f030007;
+        public static final int group=0x7f030008;
+        public static final int group_head=0x7f030009;
+        public static final int list_item=0x7f03000a;
+        public static final int list_row=0x7f03000b;
+        public static final int tab01=0x7f03000c;
+        public static final int tab02=0x7f03000d;
+        public static final int tab03=0x7f03000e;
+        public static final int tab04=0x7f03000f;
+        public static final int top_layout=0x7f030010;
     }
     public static final class string {
         /**  manage center 
@@ -474,7 +478,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_color
+          @attr name com.lxm.pwhelp:border_color
         */
         public static final int CircleImageView_border_color = 1;
         /**
@@ -488,7 +492,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_overlay
+          @attr name com.lxm.pwhelp:border_overlay
         */
         public static final int CircleImageView_border_overlay = 2;
         /**
@@ -504,7 +508,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:border_width
+          @attr name com.lxm.pwhelp:border_width
         */
         public static final int CircleImageView_border_width = 0;
         /**  LockPatternView class attributes 
@@ -546,7 +550,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:arrowGreenUp
+          @attr name com.lxm.pwhelp:arrowGreenUp
         */
         public static final int LockPatternView_arrowGreenUp = 7;
         /**
@@ -556,7 +560,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:arrowRedUp
+          @attr name com.lxm.pwhelp:arrowRedUp
         */
         public static final int LockPatternView_arrowRedUp = 8;
         /**
@@ -579,7 +583,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>lockHeight</code></td><td>2</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:aspect
+          @attr name com.lxm.pwhelp:aspect
         */
         public static final int LockPatternView_aspect = 0;
         /**
@@ -589,7 +593,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:btnNormal
+          @attr name com.lxm.pwhelp:btnNormal
         */
         public static final int LockPatternView_btnNormal = 2;
         /**
@@ -599,7 +603,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:btnTouched
+          @attr name com.lxm.pwhelp:btnTouched
         */
         public static final int LockPatternView_btnTouched = 3;
         /**
@@ -609,7 +613,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:circleGreen
+          @attr name com.lxm.pwhelp:circleGreen
         */
         public static final int LockPatternView_circleGreen = 5;
         /**
@@ -619,7 +623,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:circleNormal
+          @attr name com.lxm.pwhelp:circleNormal
         */
         public static final int LockPatternView_circleNormal = 4;
         /**
@@ -629,7 +633,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:circleRed
+          @attr name com.lxm.pwhelp:circleRed
         */
         public static final int LockPatternView_circleRed = 6;
         /**
@@ -644,7 +648,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:line
+          @attr name com.lxm.pwhelp:line
         */
         public static final int LockPatternView_line = 1;
         /** Attributes that can be used with a SwipeListView.
@@ -699,7 +703,7 @@ containing a value of this type.
 <tr><td><code>dismiss</code></td><td>1</td><td></td></tr>
 <tr><td><code>choice</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:swipeActionLeft
+          @attr name com.lxm.pwhelp:swipeActionLeft
         */
         public static final int SwipeListView_swipeActionLeft = 8;
         /**
@@ -717,7 +721,7 @@ containing a value of this type.
 <tr><td><code>dismiss</code></td><td>1</td><td></td></tr>
 <tr><td><code>choice</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name android:swipeActionRight
+          @attr name com.lxm.pwhelp:swipeActionRight
         */
         public static final int SwipeListView_swipeActionRight = 9;
         /**
@@ -731,7 +735,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeAnimationTime
+          @attr name com.lxm.pwhelp:swipeAnimationTime
         */
         public static final int SwipeListView_swipeAnimationTime = 1;
         /**
@@ -741,7 +745,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeBackView
+          @attr name com.lxm.pwhelp:swipeBackView
         */
         public static final int SwipeListView_swipeBackView = 6;
         /**
@@ -755,7 +759,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeCloseAllItemsWhenMoveList
+          @attr name com.lxm.pwhelp:swipeCloseAllItemsWhenMoveList
         */
         public static final int SwipeListView_swipeCloseAllItemsWhenMoveList = 4;
         /**
@@ -765,7 +769,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeDrawableChecked
+          @attr name com.lxm.pwhelp:swipeDrawableChecked
         */
         public static final int SwipeListView_swipeDrawableChecked = 10;
         /**
@@ -775,7 +779,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeDrawableUnchecked
+          @attr name com.lxm.pwhelp:swipeDrawableUnchecked
         */
         public static final int SwipeListView_swipeDrawableUnchecked = 11;
         /**
@@ -785,7 +789,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:swipeFrontView
+          @attr name com.lxm.pwhelp:swipeFrontView
         */
         public static final int SwipeListView_swipeFrontView = 5;
         /**
@@ -804,7 +808,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>right</code></td><td>2</td><td></td></tr>
 <tr><td><code>left</code></td><td>3</td><td></td></tr>
 </table>
-          @attr name android:swipeMode
+          @attr name com.lxm.pwhelp:swipeMode
         */
         public static final int SwipeListView_swipeMode = 7;
         /**
@@ -820,7 +824,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOffsetLeft
+          @attr name com.lxm.pwhelp:swipeOffsetLeft
         */
         public static final int SwipeListView_swipeOffsetLeft = 2;
         /**
@@ -836,7 +840,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOffsetRight
+          @attr name com.lxm.pwhelp:swipeOffsetRight
         */
         public static final int SwipeListView_swipeOffsetRight = 3;
         /**
@@ -850,7 +854,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:swipeOpenOnLongPress
+          @attr name com.lxm.pwhelp:swipeOpenOnLongPress
         */
         public static final int SwipeListView_swipeOpenOnLongPress = 0;
     };
