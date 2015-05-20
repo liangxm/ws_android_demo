@@ -20,8 +20,10 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
@@ -34,6 +36,7 @@ import com.lxm.pwhelp.adapter.LazyAdapter;
 import com.lxm.pwhelp.adapter.PinnedHeaderExpandableAdapter;
 import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.view.NoScrollViewPager;
@@ -66,6 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private LinearLayout mTabWeiXin;
 
 	private LinearLayout additem;
+	private LinearLayout backupitem;
 
 	private NoScrollViewPager mViewPager;
 	private List<View> mViews;
@@ -93,6 +97,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		mTabFrd.setOnClickListener(this);
 		mTabSetting.setOnClickListener(this);
 		additem.setOnClickListener(this);
+		backupitem.setOnClickListener(this);
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			/**
 			 * ViewPage左右滑动
@@ -165,6 +170,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		additem = (LinearLayout) tab03.findViewById(R.id.additem);
 		explistview = (PinnedHeaderExpandableListView) tab02.findViewById(R.id.explistview);
+		
+		backupitem = (LinearLayout) tab04.findViewById(R.id.recovery);
 
 		lv_list = (ListView) tab01.findViewById(R.id.list1);
 		songsList = new ArrayList<HashMap<String, String>>();
@@ -303,6 +310,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			startActivityForResult(intent,1);
 			break;
 		}
+		case R.id.recovery: {
+			dialogEmail();
+			break;
+		}
 		}
 	}
 
@@ -329,6 +340,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			dialogExit();
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+	
+	// 弹窗
+	private void dialogEmail() {
+		EmailDialog dialog = new EmailDialog(MainActivity.this);
+		EditText editText = (EditText) dialog.getEditText();
+		dialog.setOnPositiveListener(new OnClickListener(){
+			@Override
+	        public void onClick(View v) {
+	        }
+		});
+		dialog.setOnNegativeListener(new OnClickListener(){
+			@Override
+	        public void onClick(View v) {
+	        }
+		});
+		dialog.show();
 	}
 
 	/**
