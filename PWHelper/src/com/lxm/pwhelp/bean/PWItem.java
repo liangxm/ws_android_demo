@@ -22,6 +22,8 @@ public class PWItem {
 	@DatabaseField
 	private String item_type;
 	@DatabaseField
+	private int item_subtype;
+	@DatabaseField
 	private String item_url;
 	@DatabaseField
 	private String item_comment;
@@ -95,6 +97,14 @@ public class PWItem {
 
 	public void setItem_type(String item_type) {
 		this.item_type = item_type;
+	}
+
+	public int getItem_subtype() {
+		return item_subtype;
+	}
+
+	public void setItem_subtype(int item_subtype) {
+		this.item_subtype = item_subtype;
 	}
 
 	public String getItem_url() {

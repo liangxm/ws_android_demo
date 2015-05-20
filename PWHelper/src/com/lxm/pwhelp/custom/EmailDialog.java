@@ -1,5 +1,4 @@
 package com.lxm.pwhelp.custom;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -21,7 +20,7 @@ public class EmailDialog extends Dialog {
     private TextView title;
  
     public EmailDialog(Context context) {
-        super(context,R.style.dialog);
+        super(context,R.style.Theme_dialog);
         setCustomDialog();
     }
  

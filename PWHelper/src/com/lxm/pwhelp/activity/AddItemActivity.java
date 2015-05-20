@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.lxm.pwhelp.R;
@@ -29,9 +32,13 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	private EditText question1;
 	private EditText question2;
 	private Spinner type;
+	private RadioGroup subtype;
+	private String defaultStr,bankStr,bbsStr,weiboStr,qqStr,emailStr;
+	
+	private LinearLayout item1,item2,item3,item4,item5,item6,item7,item8,item9;
+	
+	private Resources resources;
 
-	private static final String[] m = { "默认分组", "网银密码", "论坛密码", "微博密码", "QQ密码",
-			"邮箱密码" };
 	private ArrayAdapter<String> adapter;
 	private String typeStr;
 
@@ -62,11 +69,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 			String question1Str = question1.getText().toString();
 			String question2Str = question2.getText().toString();
 
-			if (emptyStr(nameStr))
-				new AlertDialog.Builder(this).setTitle("警告")
-						.setMessage("名称不能为空！").setPositiveButton("确定", null)
-						.show();
-			else if (emptyStr(usernameStr))
+			if (emptyStr(usernameStr))
 				new AlertDialog.Builder(this).setTitle("警告")
 						.setMessage("用户名不能为空！").setPositiveButton("确定", null)
 						.show();
@@ -80,6 +83,14 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				item.setItem_username(usernameStr);
 				item.setItem_password(passwordStr);
 				item.setItem_type(typeStr == null ? "" : typeStr);
+				switch(subtype.getCheckedRadioButtonId()){
+				case R.id.radioCash:
+					item.setItem_subtype(0);
+					break;
+				case R.id.radioCredit:
+					item.setItem_subtype(1);
+					break;
+				}
 				item.setItem_url(urlStr);
 				item.setItem_comment(commentStr);
 				item.setQuestion1(question1Str);
@@ -115,6 +126,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	}
 
 	private void init(Context context) {
+		resources = this.getResources();
 		itemDao = new PWItemDao(context);
 		name = (EditText) findViewById(R.id.edit_name);
 		username = (EditText) findViewById(R.id.edit_username);
@@ -124,11 +136,31 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		question1 = (EditText) findViewById(R.id.edit_question1);
 		question2 = (EditText) findViewById(R.id.edit_question2);
 		type = (Spinner) findViewById(R.id.edit_type);
+		subtype = (RadioGroup) findViewById(R.id.radioGroup);
+		
+		item1 = (LinearLayout) findViewById(R.id.item1);
+		item2 = (LinearLayout) findViewById(R.id.item2);
+		item3 = (LinearLayout) findViewById(R.id.item3);
+		item4 = (LinearLayout) findViewById(R.id.item4);
+		item5 = (LinearLayout) findViewById(R.id.item5);
+		item6 = (LinearLayout) findViewById(R.id.item6);
+		item7 = (LinearLayout) findViewById(R.id.item7);
+		item8 = (LinearLayout) findViewById(R.id.item8);
+		item9 = (LinearLayout) findViewById(R.id.item9);
+		
+		// 类型分组名称
+		defaultStr = resources.getString(R.string.group_default);
+		bankStr = resources.getString(R.string.group_bank);
+		bbsStr = resources.getString(R.string.group_bbs);
+		weiboStr = resources.getString(R.string.group_weibo);
+		qqStr = resources.getString(R.string.group_qq);
+		emailStr = resources.getString(R.string.group_email);
+		
 		// 将可选内容与ArrayAdapter连接起来
 		adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, m);
+				android.R.layout.simple_spinner_item, new String[]{defaultStr,bankStr,bbsStr,weiboStr,qqStr,emailStr});
 		// 设置下拉列表的风格
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// 将adapter 添加到spinner中
 		type.setAdapter(adapter);
 		// 添加事件Spinner事件监听
@@ -143,6 +175,68 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			typeStr = adapter.getItem(arg2);
+			if(defaultStr.equals(typeStr)){
+				item1.setVisibility(View.VISIBLE);
+				item3.setVisibility(View.VISIBLE);
+				item4.setVisibility(View.VISIBLE);
+				item6.setVisibility(View.VISIBLE);
+				item2.setVisibility(View.GONE);
+				item5.setVisibility(View.GONE);
+				item7.setVisibility(View.GONE);
+				item8.setVisibility(View.GONE);
+				item9.setVisibility(View.GONE);
+			}else if(bankStr.equals(typeStr)){
+				item1.setVisibility(View.VISIBLE);
+				item3.setVisibility(View.VISIBLE);
+				item4.setVisibility(View.VISIBLE);
+				item6.setVisibility(View.VISIBLE);
+				item2.setVisibility(View.GONE);
+				item5.setVisibility(View.GONE);
+				item7.setVisibility(View.GONE);
+				item8.setVisibility(View.GONE);
+				item9.setVisibility(View.VISIBLE);
+			}else if(bbsStr.equals(typeStr)){
+				item1.setVisibility(View.VISIBLE);
+				item3.setVisibility(View.VISIBLE);
+				item4.setVisibility(View.VISIBLE);
+				item5.setVisibility(View.VISIBLE);
+				item6.setVisibility(View.VISIBLE);
+				item2.setVisibility(View.GONE);
+				item7.setVisibility(View.GONE);
+				item8.setVisibility(View.GONE);
+				item9.setVisibility(View.GONE);
+			}else if(weiboStr.equals(typeStr)){
+				item1.setVisibility(View.VISIBLE);
+				item3.setVisibility(View.VISIBLE);
+				item4.setVisibility(View.VISIBLE);
+				item6.setVisibility(View.VISIBLE);
+				item5.setVisibility(View.VISIBLE);
+				item2.setVisibility(View.GONE);
+				item7.setVisibility(View.GONE);
+				item8.setVisibility(View.GONE);
+				item9.setVisibility(View.GONE);
+			}else if(qqStr.equals(typeStr)){
+				item1.setVisibility(View.VISIBLE);
+				item2.setVisibility(View.VISIBLE);
+				item3.setVisibility(View.VISIBLE);
+				item4.setVisibility(View.VISIBLE);
+				item6.setVisibility(View.VISIBLE);
+				item7.setVisibility(View.VISIBLE);
+				item8.setVisibility(View.VISIBLE);
+				item5.setVisibility(View.GONE);
+				item9.setVisibility(View.GONE);
+			}else if(emailStr.equals(typeStr)){
+				item1.setVisibility(View.VISIBLE);
+				item3.setVisibility(View.VISIBLE);
+				item4.setVisibility(View.VISIBLE);
+				item6.setVisibility(View.VISIBLE);
+				item5.setVisibility(View.VISIBLE);
+				item2.setVisibility(View.GONE);
+				item7.setVisibility(View.GONE);
+				item8.setVisibility(View.GONE);
+				item9.setVisibility(View.GONE);
+			}
+			
 		}
 
 		public void onNothingSelected(AdapterView<?> arg0) {

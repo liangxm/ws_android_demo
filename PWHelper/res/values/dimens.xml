@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="addActivity_label">18sp</dimen>
+    <dimen name="addActivity_edit">16sp</dimen>
+
+</resources>

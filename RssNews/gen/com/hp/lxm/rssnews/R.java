@@ -33,16 +33,18 @@ public final class R {
         public static final int app_list_corner_round_top=0x7f020002;
         public static final int app_list_corner_shape=0x7f020003;
         public static final int ic_launcher=0x7f020004;
-        public static final int shape_listview_background=0x7f020005;
-        public static final int shape_showview_background=0x7f020006;
+        public static final int loading=0x7f020005;
+        public static final int shape_listview_background=0x7f020006;
+        public static final int shape_showview_background=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f090010;
+        public static final int action_settings=0x7f090011;
         public static final int content=0x7f09000d;
         public static final int description=0x7f090009;
         public static final int image=0x7f090007;
         public static final int link=0x7f09000a;
         public static final int list=0x7f090000;
+        public static final int progressBar1=0x7f090010;
         public static final int pubdate=0x7f09000b;
         public static final int slider_view=0x7f090002;
         public static final int title=0x7f090008;
@@ -60,6 +62,7 @@ public final class R {
         public static final int activity_main1=0x7f030001;
         public static final int activity_show_description=0x7f030002;
         public static final int custom_dialog=0x7f030003;
+        public static final int layoout_dialog=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -96,5 +99,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int MyDialogStyle=0x7f070002;
     }
 }

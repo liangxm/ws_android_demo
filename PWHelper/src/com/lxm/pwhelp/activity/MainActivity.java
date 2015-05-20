@@ -207,12 +207,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		
 		//expand list data
-		groupData[0] = "默认分组";
-		groupData[1] = "网银密码";
-		groupData[2] = "论坛密码";
-		groupData[3] = "微博密码";
-		groupData[4] = "QQ密码";
-		groupData[5] = "邮箱密码";
+		groupData[0] = this.getResources().getString(R.string.group_default);
+		groupData[1] = this.getResources().getString(R.string.group_bank);
+		groupData[2] = this.getResources().getString(R.string.group_bbs);
+		
+		groupData[3] = this.getResources().getString(R.string.group_weibo);
+		groupData[4] = this.getResources().getString(R.string.group_qq);
+		groupData[5] = this.getResources().getString(R.string.group_email);
 		
 		for(int i=0;i<6;i++){
 			for(int j=0;j<5;j++){
@@ -344,19 +345,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	// 弹窗
 	private void dialogEmail() {
-		EmailDialog dialog = new EmailDialog(MainActivity.this);
-		EditText editText = (EditText) dialog.getEditText();
-		dialog.setOnPositiveListener(new OnClickListener(){
-			@Override
+		final EmailDialog dialog = new EmailDialog(MainActivity.this);
+	    final EditText editText = (EditText) dialog.getEditText();
+	    dialog.setOnPositiveListener(new OnClickListener() {
+	        @Override
 	        public void onClick(View v) {
+	            //dosomething youself
+	        	dialog.cancel();
 	        }
-		});
-		dialog.setOnNegativeListener(new OnClickListener(){
-			@Override
+	    });
+	    dialog.setOnNegativeListener(new OnClickListener() {
+	        @Override
 	        public void onClick(View v) {
+	        	String email = editText.getText().toString();
 	        }
-		});
-		dialog.show();
+	    });
+	    dialog.show();
 	}
 
 	/**

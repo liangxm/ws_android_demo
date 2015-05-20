@@ -47,30 +47,27 @@ public class LazyAdapter extends BaseAdapter {
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
+		final HashMap<String, String> song = data.get(position);
 		View vi = convertView;
 		if (convertView == null)
 			vi = inflater.inflate(R.layout.list_row, null);
-
 		TextView title = (TextView) vi.findViewById(R.id.title); // 账户类型
 		TextView artist = (TextView) vi.findViewById(R.id.artist); // username
 		final TextView duration = (TextView) vi.findViewById(R.id.duration); // password
 		ToggleButton mTogBtn = (ToggleButton)vi.findViewById(R.id.mTogBtn);
 		mTogBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				if(isChecked){
 					//选中
-					duration.setText("xuyuanshigechouxiaoya");
+					duration.setText(song.get("duration"));
 				}else{
 					//未选中
-					duration.setText("*********************");
+					duration.setText("密码："+"*********************");
 				}
 			}
 		});
-		HashMap<String, String> song = new HashMap<String, String>();
-        song = data.get(position);
         title.setText((CharSequence)song.get("title"));
         artist.setText((CharSequence)song.get("artist"));
         duration.setText((CharSequence)song.get("duration"));
