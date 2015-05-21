@@ -61,4 +61,10 @@
     <string name="cash_card">储蓄卡</string>
     <string name="credit_card">信用卡</string>
     
+    <!-- titles -->
+    <string name="add_title">添加账号和密码</string>
+    <string name="detail_title">密码详情</string>
+
+    <!-- description for images -->
+    <string name="return_desc">返回上层页面</string>
 </resources>

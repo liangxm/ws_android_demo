@@ -23,13 +23,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.adapter.LazyAdapter;
@@ -42,11 +46,8 @@ import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.view.NoScrollViewPager;
 import com.lxm.pwhelp.view.PinnedHeaderExpandableListView;
 
-public class MainActivity extends Activity implements View.OnClickListener {
-	public static final String KEY_ARTIST = "artist";
-	public static final String KEY_DURATION = "duration";
-	public static final String KEY_THUMB_URL = "thumb_url";
-	public static final String KEY_TITLE = "title";
+public class MainActivity extends Activity implements View.OnClickListener, OnItemClickListener {
+	
 	private LazyAdapter adapter;
 	private TextView label1;
 	private TextView label2;
@@ -70,12 +71,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	private LinearLayout additem;
 	private LinearLayout backupitem;
+	private LinearLayout recovery;
 
 	private NoScrollViewPager mViewPager;
 	private List<View> mViews;
 	private ImageButton mWeiXinImg;
 	private ArrayList<HashMap<String, String>> songsList;
 	private TextView title;
+	
+	private ImageView add_group;
 	
 	private int expandFlag = -1;//control the list if expand
 	
@@ -98,6 +102,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		mTabSetting.setOnClickListener(this);
 		additem.setOnClickListener(this);
 		backupitem.setOnClickListener(this);
+		recovery.setOnClickListener(this);
+		add_group.setOnClickListener(this);
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			/**
 			 * ViewPage左右滑动
@@ -114,7 +120,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				case 1: {
 					label2.setTextColor(Color.rgb(115, 215, 107));
 					mAddressImg.setImageResource(R.drawable.pass_selected);
-					title.setText("密码详情");
+					title.setText("密码分组");
 					return;
 				}
 				case 2: {
@@ -158,6 +164,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		label3 = (TextView) findViewById(R.id.label3);
 		label4 = (TextView) findViewById(R.id.label4);
 		title = (TextView) findViewById(R.id.title);
+		add_group = (ImageView) findViewById(R.id.add_group);
 	}
 
 	private void initViewPage() {
@@ -171,7 +178,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		additem = (LinearLayout) tab03.findViewById(R.id.additem);
 		explistview = (PinnedHeaderExpandableListView) tab02.findViewById(R.id.explistview);
 		
-		backupitem = (LinearLayout) tab04.findViewById(R.id.recovery);
+		backupitem = (LinearLayout) tab04.findViewById(R.id.cloud);
+		recovery = (LinearLayout) tab04.findViewById(R.id.recovery);
+		add_group = (ImageView) findViewById(R.id.add_group);
 
 		lv_list = (ListView) tab01.findViewById(R.id.list1);
 		songsList = new ArrayList<HashMap<String, String>>();
@@ -179,9 +188,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		List<PWItem> items = itemDao.getPWItemAll();
 		for(PWItem item:items){
 			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("title", item.getItem_type());
-			map.put("artist", "账号："+item.getItem_username());
-			map.put("duration", "密码："+item.getItem_password());
+			map.put("item_id", String.valueOf(item.getItem_id()));
+			map.put("item_type", item.getItem_type());
+			map.put("item_username", "账号："+item.getItem_username());
+			map.put("item_password", "密码："+item.getItem_password());
 			songsList.add(map);
 		}
 		List<PWGroup> groups = groupDao.getGroupAll();
@@ -230,7 +240,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		adapter = new LazyAdapter(this, songsList);
 		lv_list.setAdapter(adapter);
-
+		lv_list.setOnItemClickListener(this);
 		mViews.add(tab01);
 		mViews.add(tab02);
 		mViews.add(tab03);
@@ -272,6 +282,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.id_tab_weixin: {
+			add_group.setVisibility(View.GONE);
 			mViewPager.setCurrentItem(0);
 			resetImg();
 			label1.setTextColor(Color.rgb(115, 215, 107));
@@ -280,22 +291,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			return;
 		}
 		case R.id.id_tab_address: {
+			add_group.setVisibility(View.VISIBLE);
 			mViewPager.setCurrentItem(1);
 			resetImg();
 			label2.setTextColor(Color.rgb(115, 215, 107));
 			mAddressImg.setImageResource(R.drawable.pass_selected);
-			title.setText("密码详情");
+			title.setText("密码分组");
 			return;
 		}
 		case R.id.id_tab_frd: {
+			add_group.setVisibility(View.GONE);
 			mViewPager.setCurrentItem(2);
 			resetImg();
 			label3.setTextColor(Color.rgb(115, 215, 107));
 			mFrdImg.setImageResource(R.drawable.manage_selected);
 			title.setText("密码管理");
-			return;
+			break;
 		}
 		case R.id.id_tab_settings: {
+			add_group.setVisibility(View.GONE);
 			mViewPager.setCurrentItem(3);
 			resetImg();
 			label4.setTextColor(Color.rgb(115, 215, 107));
@@ -311,18 +325,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			startActivityForResult(intent,1);
 			break;
 		}
-		case R.id.recovery: {
+		case R.id.cloud: {
 			dialogEmail();
+			break;
+		}
+		case R.id.recovery:{
+			showFileChooser();
+			break;
+		}
+		case R.id.add_group:{
 			break;
 		}
 		}
 	}
 
 	private void resetImg() {
-		label1.setTextColor(Color.rgb(0x88, 0x88, 0x88));
-		label2.setTextColor(Color.rgb(0x88, 0x88, 0x88));
-		label3.setTextColor(Color.rgb(0x88, 0x88, 0x88));
-		label4.setTextColor(Color.rgb(0x88, 0x88, 0x88));
+		label1.setTextColor(Color.rgb(88, 88, 88));
+		label2.setTextColor(Color.rgb(88, 88, 88));
+		label3.setTextColor(Color.rgb(88, 88, 88));
+		label4.setTextColor(Color.rgb(88, 88, 88));
 		mWeiXinImg.setImageResource(R.drawable.home_noselected);
 		mAddressImg.setImageResource(R.drawable.pass_noselected);
 		mFrdImg.setImageResource(R.drawable.manage_noselected);
@@ -331,7 +352,31 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	// 回调方法，从第二个页面回来的时候会执行这个方法
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if (resultCode == Activity.RESULT_OK) {
+			// Get the Uri of the selected file
+			/*Uri uri = data.getData();
+			String url;
+			try {
+				url = FileUtils.getPath(this, uri);
+				Log.i("ht", "url" + url);
+				String fileName = url.substring(url.lastIndexOf("/") + 1);
+				Intent intent = new Intent(this, UploadServices.class);
+				intent.putExtra("fileName", fileName);
+				intent.putExtra("url", url);
+				intent.putExtra("type ", "");
+				intent.putExtra("fuid", "");
+				intent.putExtra("type", "");
+
+				startService(intent);
+
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
@@ -341,6 +386,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			dialogExit();
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+	
+	/** 调用文件选择软件来选择文件 **/
+	private void showFileChooser() {
+		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		intent.setType("*/*");
+		intent.addCategory(Intent.CATEGORY_OPENABLE);
+		try {
+			startActivityForResult(Intent.createChooser(intent, "请选择一个要上传的文件"),
+					0);
+		} catch (android.content.ActivityNotFoundException ex) {
+			// Potentially direct the user to the Market with a Dialog
+			Toast.makeText(this, "请安装文件管理器", Toast.LENGTH_SHORT)
+					.show();
+		}
 	}
 	
 	// 弹窗
@@ -416,21 +476,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 	
 	@Override
-	protected void onStart(){
+	protected void onResume(){
 		List<PWItem> items = itemDao.getPWItemAll();
-		songsList.clear();
-		for(PWItem item:items){
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("title", item.getItem_type());
-			map.put("artist", "账号："+item.getItem_username());
-			map.put("duration", "密码："+item.getItem_password());
-			songsList.add(map);
+		if(items.size()!=songsList.size()){
+			songsList.clear();
+			for(PWItem item:items){
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("item_type", item.getItem_type());
+				map.put("item_username", "账号："+item.getItem_username());
+				map.put("item_password", "密码："+item.getItem_password());
+				songsList.add(map);
+			}
 		}
-		super.onStart();
+		super.onResume();
 	}
 	
 	@Override
 	protected void onDestroy(){
 		super.onDestroy();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+		Intent intent = new Intent(MainActivity.this,
+				DetailActivity.class);
+		// 打开新的Activity
+		ArrayList<String> stringList = new ArrayList<String>(); 
+		intent.putStringArrayListExtra("ListString", stringList); 
+		startActivityForResult(intent,1);
 	}
 }

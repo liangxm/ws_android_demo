@@ -51,26 +51,26 @@ public class LazyAdapter extends BaseAdapter {
 		View vi = convertView;
 		if (convertView == null)
 			vi = inflater.inflate(R.layout.list_row, null);
-		TextView title = (TextView) vi.findViewById(R.id.title); // 账户类型
-		TextView artist = (TextView) vi.findViewById(R.id.artist); // username
-		final TextView duration = (TextView) vi.findViewById(R.id.duration); // password
-		ToggleButton mTogBtn = (ToggleButton)vi.findViewById(R.id.mTogBtn);
+		TextView title = (TextView) vi.findViewById(R.id.item_type); // 账户类型
+		TextView artist = (TextView) vi.findViewById(R.id.item_username); // username
+		final TextView duration = (TextView) vi.findViewById(R.id.item_password); // password
+		ToggleButton mTogBtn = (ToggleButton) vi.findViewById(R.id.mTogBtn);
+		title.setText((CharSequence)song.get("item_type"));
+		artist.setText((CharSequence)song.get("item_username"));
+		if(!mTogBtn.isChecked())
+			duration.setText("密码："+"*********************");
 		mTogBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				if(isChecked){
-					//选中
-					duration.setText(song.get("duration"));
+					duration.setText(song.get("item_password"));
 				}else{
 					//未选中
 					duration.setText("密码："+"*********************");
 				}
 			}
 		});
-        title.setText((CharSequence)song.get("title"));
-        artist.setText((CharSequence)song.get("artist"));
-        duration.setText((CharSequence)song.get("duration"));
         return vi;
 	}
 }

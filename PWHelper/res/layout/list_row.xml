@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:lxm="http://schemas.android.com/apk/res/com.lxm.pwhelp"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="#ffffffff"
-    android:orientation="horizontal"
-    android:padding="5.0dip" >
+    android:orientation="horizontal" >
 
     <LinearLayout
         android:id="@id/thumbnail"
@@ -21,7 +19,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@id/title"
+        android:id="@+id/item_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/thumbnail"
@@ -33,22 +31,21 @@
         android:typeface="sans" />
 
     <TextView
-        android:id="@id/artist"
+        android:id="@+id/item_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@+id/item_type"
         android:layout_marginLeft="15.0dip"
         android:layout_marginTop="4.0dip"
         android:layout_toRightOf="@id/thumbnail"
-        android:text="Just gona stand there and ..."
         android:textColor="#ff343434"
         android:textSize="10.0dip" />
 
     <TextView
-        android:id="@id/duration"
+        android:id="@+id/item_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/artist"
+        android:layout_below="@+id/item_username"
         android:layout_marginLeft="15.0dip"
         android:layout_marginTop="4.0dip"
         android:layout_toRightOf="@id/thumbnail"
@@ -59,6 +56,7 @@
         android:id="@+id/mTogBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="5dip"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@android:color/transparent"
