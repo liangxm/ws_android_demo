@@ -10,9 +10,11 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.lxm.pwhelp.R;
+import com.lxm.pwhelp.activity.DetailActivity;
 
 public class LazyAdapter extends BaseAdapter {
 
@@ -69,6 +72,15 @@ public class LazyAdapter extends BaseAdapter {
 					//未选中
 					duration.setText("密码："+"*********************");
 				}
+			}
+		});
+		vi.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(activity, DetailActivity.class);
+				ArrayList<String> stringList = new ArrayList<String>();
+				intent.putStringArrayListExtra("ListString", stringList);
+				activity.startActivityForResult(intent, 1);
 			}
 		});
         return vi;

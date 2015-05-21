@@ -23,9 +23,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
@@ -46,8 +43,8 @@ import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.view.NoScrollViewPager;
 import com.lxm.pwhelp.view.PinnedHeaderExpandableListView;
 
-public class MainActivity extends Activity implements View.OnClickListener, OnItemClickListener {
-	
+public class MainActivity extends Activity implements View.OnClickListener {
+
 	private LazyAdapter adapter;
 	private TextView label1;
 	private TextView label2;
@@ -56,13 +53,13 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 	private ListView lv_list;
 	private ImageButton mAddressImg;
 	private ImageButton mFrdImg;
-	
+
 	private PagerAdapter mPagerAdapter;
 	private PinnedHeaderExpandableAdapter expandableAdapter;
 	private PinnedHeaderExpandableListView explistview;
 	private String[][] childrenData = new String[6][5];
 	private String[] groupData = new String[6];
-	
+
 	private ImageButton mSettingImg;
 	private LinearLayout mTabAddress;
 	private LinearLayout mTabFrd;
@@ -72,24 +69,25 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 	private LinearLayout additem;
 	private LinearLayout backupitem;
 	private LinearLayout recovery;
+	private LinearLayout settings;
 
 	private NoScrollViewPager mViewPager;
 	private List<View> mViews;
 	private ImageButton mWeiXinImg;
 	private ArrayList<HashMap<String, String>> songsList;
 	private TextView title;
-	
+
 	private ImageView add_group;
-	
-	private int expandFlag = -1;//control the list if expand
-	
+
+	private int expandFlag = -1;// control the list if expand
+
 	private PWItemDao itemDao;
 	private PWGroupDao groupDao;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(0x7f030000);
+		setContentView(R.layout.activity_main);
 		initView();
 		initViewPage();
 		initEvent();
@@ -103,6 +101,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 		additem.setOnClickListener(this);
 		backupitem.setOnClickListener(this);
 		recovery.setOnClickListener(this);
+		settings.setOnClickListener(this);
 		add_group.setOnClickListener(this);
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			/**
@@ -165,6 +164,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 		label4 = (TextView) findViewById(R.id.label4);
 		title = (TextView) findViewById(R.id.title);
 		add_group = (ImageView) findViewById(R.id.add_group);
+		add_group.setVisibility(View.GONE);
 	}
 
 	private void initViewPage() {
@@ -176,26 +176,28 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 		View tab04 = mLayoutInflater.inflate(R.layout.tab04, null);
 
 		additem = (LinearLayout) tab03.findViewById(R.id.additem);
-		explistview = (PinnedHeaderExpandableListView) tab02.findViewById(R.id.explistview);
-		
+		explistview = (PinnedHeaderExpandableListView) tab02
+				.findViewById(R.id.explistview);
+
 		backupitem = (LinearLayout) tab04.findViewById(R.id.cloud);
 		recovery = (LinearLayout) tab04.findViewById(R.id.recovery);
+		settings = (LinearLayout) tab04.findViewById(R.id.settings);
 		add_group = (ImageView) findViewById(R.id.add_group);
 
 		lv_list = (ListView) tab01.findViewById(R.id.list1);
 		songsList = new ArrayList<HashMap<String, String>>();
-		
+
 		List<PWItem> items = itemDao.getPWItemAll();
-		for(PWItem item:items){
+		for (PWItem item : items) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("item_id", String.valueOf(item.getItem_id()));
 			map.put("item_type", item.getItem_type());
-			map.put("item_username", "账号："+item.getItem_username());
-			map.put("item_password", "密码："+item.getItem_password());
+			map.put("item_username", "账号：" + item.getItem_username());
+			map.put("item_password", "密码：" + item.getItem_password());
 			songsList.add(map);
 		}
 		List<PWGroup> groups = groupDao.getGroupAll();
-		if(groups.size()==0){
+		if (groups.size() == 0) {
 			PWGroup group1 = new PWGroup();
 			group1.setGroup_name("默认分组");
 			PWGroup group2 = new PWGroup();
@@ -215,32 +217,32 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 			groupDao.add(group5);
 			groupDao.add(group6);
 		}
-		
-		//expand list data
+
+		// expand list data
 		groupData[0] = this.getResources().getString(R.string.group_default);
 		groupData[1] = this.getResources().getString(R.string.group_bank);
 		groupData[2] = this.getResources().getString(R.string.group_bbs);
-		
+
 		groupData[3] = this.getResources().getString(R.string.group_weibo);
 		groupData[4] = this.getResources().getString(R.string.group_qq);
 		groupData[5] = this.getResources().getString(R.string.group_email);
-		
-		for(int i=0;i<6;i++){
-			for(int j=0;j<5;j++){
-				childrenData[i][j] = "好友"+i+"-"+j;
+
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 5; j++) {
+				childrenData[i][j] = "好友" + i + "-" + j;
 			}
 		}
-		//设置悬浮头部VIEW
-		explistview.setHeaderView(getLayoutInflater().inflate(R.layout.group_head,
-				explistview, false));
-		expandableAdapter = new PinnedHeaderExpandableAdapter(childrenData, groupData, getApplicationContext(),explistview);
+		// 设置悬浮头部VIEW
+		explistview.setHeaderView(getLayoutInflater().inflate(
+				R.layout.group_head, explistview, false));
+		expandableAdapter = new PinnedHeaderExpandableAdapter(childrenData,
+				groupData, getApplicationContext(), explistview);
 		explistview.setAdapter(expandableAdapter);
-		//设置单个分组展开
+		// 设置单个分组展开
 		explistview.setOnGroupClickListener(new GroupClickListener());
 
 		adapter = new LazyAdapter(this, songsList);
 		lv_list.setAdapter(adapter);
-		lv_list.setOnItemClickListener(this);
 		mViews.add(tab01);
 		mViews.add(tab02);
 		mViews.add(tab03);
@@ -248,12 +250,10 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 
 		// 适配器初始化并设置
 		mPagerAdapter = new PagerAdapter() {
-
 			@Override
 			public void destroyItem(ViewGroup container, int position,
 					Object object) {
 				container.removeView(mViews.get(position));
-
 			}
 
 			@Override
@@ -318,22 +318,26 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 			break;
 		}
 		case R.id.additem: {
-			//DialogAddItem();
-			Intent intent = new Intent(MainActivity.this,
-					AddItemActivity.class);
+			// DialogAddItem();
+			Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
 			// 打开新的Activity
-			startActivityForResult(intent,1);
+			startActivityForResult(intent, 1);
 			break;
 		}
 		case R.id.cloud: {
 			dialogEmail();
 			break;
 		}
-		case R.id.recovery:{
+		case R.id.recovery: {
 			showFileChooser();
 			break;
 		}
-		case R.id.add_group:{
+		case R.id.add_group: {
+			break;
+		}
+		case R.id.settings: {
+			Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+			startActivityForResult(intent, 1);
 			break;
 		}
 		}
@@ -349,32 +353,27 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 		mFrdImg.setImageResource(R.drawable.manage_noselected);
 		mSettingImg.setImageResource(R.drawable.person_noselected);
 	}
-	
+
 	// 回调方法，从第二个页面回来的时候会执行这个方法
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		if (resultCode == Activity.RESULT_OK) {
 			// Get the Uri of the selected file
-			/*Uri uri = data.getData();
-			String url;
-			try {
-				url = FileUtils.getPath(this, uri);
-				Log.i("ht", "url" + url);
-				String fileName = url.substring(url.lastIndexOf("/") + 1);
-				Intent intent = new Intent(this, UploadServices.class);
-				intent.putExtra("fileName", fileName);
-				intent.putExtra("url", url);
-				intent.putExtra("type ", "");
-				intent.putExtra("fuid", "");
-				intent.putExtra("type", "");
-
-				startService(intent);
-
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+			/*
+			 * Uri uri = data.getData(); String url; try { url =
+			 * FileUtils.getPath(this, uri); Log.i("ht", "url" + url); String
+			 * fileName = url.substring(url.lastIndexOf("/") + 1); Intent intent
+			 * = new Intent(this, UploadServices.class);
+			 * intent.putExtra("fileName", fileName); intent.putExtra("url",
+			 * url); intent.putExtra("type ", ""); intent.putExtra("fuid", "");
+			 * intent.putExtra("type", "");
+			 * 
+			 * startService(intent);
+			 * 
+			 * } catch (URISyntaxException e) { // TODO Auto-generated catch
+			 * block e.printStackTrace(); }
+			 */
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -387,7 +386,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-	
+
 	/** 调用文件选择软件来选择文件 **/
 	private void showFileChooser() {
 		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -398,29 +397,28 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 					0);
 		} catch (android.content.ActivityNotFoundException ex) {
 			// Potentially direct the user to the Market with a Dialog
-			Toast.makeText(this, "请安装文件管理器", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, "请安装文件管理器", Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
 	// 弹窗
 	private void dialogEmail() {
 		final EmailDialog dialog = new EmailDialog(MainActivity.this);
-	    final EditText editText = (EditText) dialog.getEditText();
-	    dialog.setOnPositiveListener(new OnClickListener() {
-	        @Override
-	        public void onClick(View v) {
-	            //dosomething youself
-	        	dialog.cancel();
-	        }
-	    });
-	    dialog.setOnNegativeListener(new OnClickListener() {
-	        @Override
-	        public void onClick(View v) {
-	        	String email = editText.getText().toString();
-	        }
-	    });
-	    dialog.show();
+		// final EditText editText = (EditText) dialog.getEditText();
+		dialog.setOnPositiveListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// dosomething youself
+				dialog.cancel();
+			}
+		});
+		dialog.setOnNegativeListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// String email = editText.getText().toString();
+			}
+		});
+		dialog.show();
 	}
 
 	/**
@@ -449,8 +447,8 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 				});
 		builder.create().show();
 	}
-	
-	class GroupClickListener implements OnGroupClickListener{
+
+	class GroupClickListener implements OnGroupClickListener {
 		@Override
 		public boolean onGroupClick(ExpandableListView parent, View v,
 				int groupPosition, long id) {
@@ -474,35 +472,26 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 			return true;
 		}
 	}
-	
+
 	@Override
-	protected void onResume(){
+	protected void onResume() {
 		List<PWItem> items = itemDao.getPWItemAll();
-		if(items.size()!=songsList.size()){
+		if (items.size() != songsList.size()) {
 			songsList.clear();
-			for(PWItem item:items){
+			for (PWItem item : items) {
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("item_type", item.getItem_type());
-				map.put("item_username", "账号："+item.getItem_username());
-				map.put("item_password", "密码："+item.getItem_password());
+				map.put("item_username", "账号：" + item.getItem_username());
+				map.put("item_password", "密码：" + item.getItem_password());
 				songsList.add(map);
 			}
 		}
 		super.onResume();
 	}
-	
+
 	@Override
-	protected void onDestroy(){
+	protected void onDestroy() {
 		super.onDestroy();
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-		Intent intent = new Intent(MainActivity.this,
-				DetailActivity.class);
-		// 打开新的Activity
-		ArrayList<String> stringList = new ArrayList<String>(); 
-		intent.putStringArrayListExtra("ListString", stringList); 
-		startActivityForResult(intent,1);
-	}
 }

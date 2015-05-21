@@ -231,7 +231,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				item4.setVisibility(View.VISIBLE);
 				item6.setVisibility(View.VISIBLE);
 				item5.setVisibility(View.VISIBLE);
-				item2.setVisibility(View.GONE);
+				item2.setVisibility(View.VISIBLE);
 				item7.setVisibility(View.GONE);
 				item8.setVisibility(View.GONE);
 				item9.setVisibility(View.GONE);

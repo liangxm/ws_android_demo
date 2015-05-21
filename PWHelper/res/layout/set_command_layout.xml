@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/set_command_top_layout" />
+    <LinearLayout 
+        android:id="@+id/set_command_main"
+        android:layout_width="fill_parent"
+        android:layout_height="400dip"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/set_command_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/set_command_icon" />
+        <TextView
+            android:id="@+id/set_command_note"
+            android:layout_width="300dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:text="密码口令是你每次查看密码时需要输入的一个口令，开通密码口令将保证你的密码助手在访客模式下也同样能保证你的密码安全！"
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="#a0a29f" />
+        <Button 
+            android:id="@+id/set_command_btn"
+            android:layout_width="300dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:text="开通口令"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button_common"/>
+    </LinearLayout>
+
+</LinearLayout>

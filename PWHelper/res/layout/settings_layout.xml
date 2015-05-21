@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/settings_top_layout" />
+
+    <RelativeLayout
+        android:id="@+id/set_email"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_marginTop="8.0dip"
+        android:background="#FFFFFF"
+        android:clickable="true" >
+        <TextView android:id="@+id/email_address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6.0dip"
+            android:text="备份的邮箱地址"
+            android:layout_alignParentLeft="true"
+           />
+        <ImageView
+            android:id="@+id/email_right_icon"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6.0dip"
+            android:layout_marginLeft="6.0dip"
+            android:src="@drawable/right_icon2" />
+        <TextView
+            android:id="@+id/email_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/email_right_icon" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/set_command"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_marginTop="8.0dip"
+        android:layout_centerVertical="true"
+        android:background="#FFFFFF"
+        android:clickable="true" >
+        <TextView android:id="@+id/email_address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6.0dip"
+            android:text="密码口令"
+            android:layout_alignParentLeft="true"
+           />
+        <ImageView
+            android:id="@+id/command_right_icon"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6.0dip"
+            android:layout_marginLeft="6.0dip"
+            android:src="@drawable/right_icon2" />
+        <TextView
+            android:id="@+id/command_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/command_right_icon" />
+    </RelativeLayout>
+
+</LinearLayout>
