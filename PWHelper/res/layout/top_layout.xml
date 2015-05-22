@@ -26,8 +26,8 @@
         lxm:border_width="1.0dip" />
     <ImageView 
         android:id="@+id/add_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
         android:layout_marginRight="10.0dip"
         android:layout_marginTop="8.0dip"
         android:layout_alignParentRight="true"

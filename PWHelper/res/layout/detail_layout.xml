@@ -6,24 +6,156 @@
 
     <include layout="@layout/detail_top_layout" />
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/detail_top"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-
+        android:layout_height="230dip"
+        android:orientation="vertical" >
+        
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dip"
             android:layout_gravity="center"
             android:background="#00b214" />
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="26dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="-70dp"
-            android:background="@drawable/source_image" />
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-50dip"
+            android:layout_marginLeft="20dip"
+            android:background="@drawable/weibo_icon" />
+        <TextView 
+            android:id="@+id/detail_title"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_marginTop="-55dip"
+            android:gravity="center"
+            android:text="新浪微博"
+            android:textColor="#787878"
+            android:textSize="22sp"/>
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/detail_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <RelativeLayout 
+            android:id="@+id/item_line1"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg">
+            <TextView 
+                android:id="@+id/item_label1"
+                android:layout_width="80dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="账号昵称"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/item_label2"
+                android:layout_width="180dip"
+                android:layout_height="wrap_content"
+                android:text="默认浅笑"
+                android:gravity="left"
+                android:paddingLeft="20.0dip"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787888"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/item_label3"
+                android:layout_width="40dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="复制"
+                android:textColor="#2baa3f"
+                />
+        </RelativeLayout>
         
-    </FrameLayout>
+		<RelativeLayout 
+            android:id="@+id/item_line2"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg">
+            <TextView 
+                android:id="@+id/item_label1"
+                android:layout_width="80dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="账        号"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/item_label2"
+                android:layout_width="180dip"
+                android:layout_height="wrap_content"
+                android:text="1239234234@qq.com"
+                android:gravity="left"
+                android:paddingLeft="20.0dip"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                />
+            <TextView 
+                android:id="@+id/item_label3"
+                android:layout_width="40dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="复制"
+                android:textColor="#2baa3f"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/item_line3"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg">
+            <TextView 
+                android:id="@+id/item_label1"
+                android:layout_width="80dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:text="密        码"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/item_label2"
+                android:layout_width="180dip"
+                android:layout_height="wrap_content"
+                android:text="1239234234@qq.com"
+                android:gravity="left"
+                android:paddingLeft="20.0dip"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                />
+            <TextView 
+                android:id="@+id/item_label3"
+                android:layout_width="40dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="复制"
+                android:textColor="#2baa3f"
+                />
+        </RelativeLayout>
+        
+    </LinearLayout>
 
 </LinearLayout>
