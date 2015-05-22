@@ -6,24 +6,30 @@
 
     <include layout="@layout/detail_top_layout" />
 
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/detail_top"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:background="#2baa3f">
 
-        <ImageView
+        <View
+            android:id="@+id/detail_top_tap"
             android:layout_width="fill_parent"
+            android:layout_height="100dip" />
+        <ImageView 
+            android:id="@+id/detail_icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#00b214" />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="26dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="-70dp"
-            android:background="@drawable/source_image" />
-
-        
-    </FrameLayout>
+            android:layout_marginTop="-70dip"/>
+        <TextView 
+            android:id="@+id/detail_title"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"/>
+    </RelativeLayout>
+    
+    <LinearLayout android:id="@+id/detail_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        ></LinearLayout>
 
 </LinearLayout>
