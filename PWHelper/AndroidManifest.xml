@@ -30,6 +30,7 @@
         <activity android:name="com.lxm.pwhelp.activity.DetailActivity" />
         <activity android:name="com.lxm.pwhelp.activity.SettingsActivity" />
         <activity android:name="com.lxm.pwhelp.activity.SetCommandActivity" />
+        <activity android:name="com.lxm.pwhelp.activity.SetEmailActivity" />
     </application>
 
 </manifest>

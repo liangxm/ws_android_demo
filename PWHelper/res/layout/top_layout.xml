@@ -26,10 +26,10 @@
         lxm:border_width="1.0dip" />
     <ImageView 
         android:id="@+id/add_group"
-        android:layout_width="40dip"
-        android:layout_height="40dip"
+        android:layout_width="35dip"
+        android:layout_height="35dip"
         android:layout_marginRight="10.0dip"
-        android:layout_marginTop="8.0dip"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/plus_icon"/>
 

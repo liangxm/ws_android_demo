@@ -66,6 +66,7 @@
     <string name="detail_title">密码详情</string>
     <string name="settings_title">设置</string>
     <string name="set_command_title">设置密码口令</string>
+    <string name="set_email_title">邮箱账号</string>
 
     <!-- description for images -->
     <string name="return_desc">返回上层页面</string>

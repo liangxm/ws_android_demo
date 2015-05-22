@@ -13,25 +13,35 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
+import com.baoyz.swipemenulistview.SwipeMenuListView.OnSwipeListener;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.adapter.LazyAdapter;
 import com.lxm.pwhelp.adapter.PinnedHeaderExpandableAdapter;
@@ -50,7 +60,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private TextView label2;
 	private TextView label3;
 	private TextView label4;
-	private ListView lv_list;
+	
+	private SwipeMenuListView lv_list;
+	private List<ApplicationInfo> mAppList;
+	
 	private ImageButton mAddressImg;
 	private ImageButton mFrdImg;
 
@@ -88,6 +101,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
+		
+		mAppList = getPackageManager().getInstalledApplications(0);
+		
 		initView();
 		initViewPage();
 		initEvent();
@@ -184,7 +200,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		settings = (LinearLayout) tab04.findViewById(R.id.settings);
 		add_group = (ImageView) findViewById(R.id.add_group);
 
-		lv_list = (ListView) tab01.findViewById(R.id.list1);
+		lv_list = (SwipeMenuListView) tab01.findViewById(R.id.list1);
 		songsList = new ArrayList<HashMap<String, String>>();
 
 		List<PWItem> items = itemDao.getPWItemAll();
@@ -192,8 +208,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("item_id", String.valueOf(item.getItem_id()));
 			map.put("item_type", item.getItem_type());
-			map.put("item_username", "账号：" + item.getItem_username());
-			map.put("item_password", "密码：" + item.getItem_password());
+			map.put("item_username", item.getItem_username());
+			map.put("item_password", item.getItem_password());
 			songsList.add(map);
 		}
 		List<PWGroup> groups = groupDao.getGroupAll();
@@ -243,6 +259,104 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		adapter = new LazyAdapter(this, songsList);
 		lv_list.setAdapter(adapter);
+		
+		// step 1. create a MenuCreator
+		SwipeMenuCreator creator = new SwipeMenuCreator(){
+			@Override
+			public void create(SwipeMenu menu) {
+				// create "open" item
+				SwipeMenuItem openItem = new SwipeMenuItem(
+						getApplicationContext());
+				// set item background
+				openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
+						0xCE)));
+				// set item width
+				openItem.setWidth(dp2px(90));
+				// set item title
+				openItem.setTitle("Open");
+				// set item title fontsize
+				openItem.setTitleSize(18);
+				// set item title font color
+				openItem.setTitleColor(Color.WHITE);
+				// add to menu
+				menu.addMenuItem(openItem);
+
+				// create "delete" item
+				SwipeMenuItem deleteItem = new SwipeMenuItem(
+						getApplicationContext());
+				// set item background
+				deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+						0x3F, 0x25)));
+				// set item width
+				deleteItem.setWidth(dp2px(90));
+				// set a icon
+				deleteItem.setIcon(R.drawable.ic_delete);
+				// add to menu
+				menu.addMenuItem(deleteItem);
+			}
+		};
+		
+		//set creator
+		lv_list.setMenuCreator(creator);
+		
+		
+		// step 2. listener item click event
+		lv_list.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
+				Toast.makeText(getApplicationContext(), position + " index:"+index, 0).show();
+				HashMap<String, String> song = songsList.get(position);
+				ApplicationInfo item = mAppList.get(position);
+				switch (index) {
+				case 0:
+					// open
+					//open(item);
+					break;
+				case 1:
+					// delete
+//					delete(item);
+					//mAppList.remove(position);
+					//mAdapter.notifyDataSetChanged();
+					break;
+				default:
+					Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putString("item_type", song.get("item_type").toString());
+					bundle.putString("item_username", song.get("item_username").toString());
+					bundle.putString("item_password", song.get("item_password").toString());
+					intent.putExtras(bundle);
+					MainActivity.this.startActivityForResult(intent, 1);
+					break;
+				}
+			}
+		});
+		// set SwipeListener
+		lv_list.setOnSwipeListener(new OnSwipeListener(){
+
+			@Override
+			public void onSwipeStart(int position) {
+				// swipe start
+			}
+			
+			@Override
+			public void onSwipeEnd(int position) {
+				// swipe end
+			}
+			
+		});
+		
+		// test item long click
+		lv_list.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Toast.makeText(getApplicationContext(), position + " long click", 0).show();
+				return false;
+			}
+		});
+		
+		
 		mViews.add(tab01);
 		mViews.add(tab02);
 		mViews.add(tab03);
@@ -472,6 +586,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			return true;
 		}
 	}
+	
+	private int dp2px(int dp) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+				getResources().getDisplayMetrics());
+	}
 
 	@Override
 	protected void onResume() {
@@ -481,8 +600,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			for (PWItem item : items) {
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("item_type", item.getItem_type());
-				map.put("item_username", "账号：" + item.getItem_username());
-				map.put("item_password", "密码：" + item.getItem_password());
+				map.put("item_username", item.getItem_username());
+				map.put("item_password", item.getItem_password());
 				songsList.add(map);
 			}
 		}

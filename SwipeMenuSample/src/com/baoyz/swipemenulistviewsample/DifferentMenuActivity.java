@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -113,6 +114,7 @@ public class DifferentMenuActivity extends Activity {
 		listView.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
+				Toast.makeText(getApplicationContext(), position + " index:"+index, 0).show();
 				ApplicationInfo item = mAppList.get(position);
 				switch (index) {
 				case 0:

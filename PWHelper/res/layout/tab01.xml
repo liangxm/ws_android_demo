@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:focusable="true"
@@ -7,7 +8,8 @@
     android:paddingBottom="1.0dip"
     android:paddingLeft="1.0dip"
     android:paddingRight="1.0dip"
-    android:paddingTop="1.0dip" >
+    android:paddingTop="1.0dip"
+    tools:context="${relativePackage}.${activityClass}" >
 
     <EditText
         android:id="@id/searchbox"
@@ -23,13 +25,12 @@
         android:paddingLeft="10.0dip"
         android:singleLine="true" />
 
-    <ListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@id/list1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/searchbox"
         android:divider="#00000000"
-        android:dividerHeight="5.0dip"
-        android:listSelector="@drawable/list_selector" />
+        android:dividerHeight="5.0dip" />
 
 </RelativeLayout>

@@ -41,23 +41,23 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
         <RelativeLayout 
-            android:id="@+id/item_line1"
+            android:id="@+id/detail_line1"
             android:layout_width="fill_parent"
             android:layout_height="50dip"
             android:background="@drawable/content_bg">
             <TextView 
-                android:id="@+id/item_label1"
+                android:id="@+id/detail_line1_label1"
                 android:layout_width="80dip"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="账号昵称"
+                android:text="账号类型"
                 android:textColor="#787878"
                 android:textSize="16sp"
                 />
             <TextView 
-                android:id="@+id/item_label2"
+                android:id="@+id/detail_line1_label2"
                 android:layout_width="180dip"
                 android:layout_height="wrap_content"
                 android:text="默认浅笑"
@@ -67,9 +67,10 @@
                 android:layout_centerVertical="true"
                 android:textColor="#787888"
                 android:textSize="16sp"
+                android:textIsSelectable="true"
                 />
             <TextView 
-                android:id="@+id/item_label3"
+                android:id="@+id/detail_line1_label3"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="6dip"
@@ -77,16 +78,17 @@
                 android:layout_centerVertical="true"
                 android:text="复制"
                 android:textColor="#2baa3f"
+                android:clickable="true"
                 />
         </RelativeLayout>
         
 		<RelativeLayout 
-            android:id="@+id/item_line2"
+            android:id="@+id/detail_line2"
             android:layout_width="fill_parent"
             android:layout_height="50dip"
             android:background="@drawable/content_bg">
             <TextView 
-                android:id="@+id/item_label1"
+                android:id="@+id/detail_line2_label1"
                 android:layout_width="80dip"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
@@ -97,7 +99,7 @@
                 android:textSize="16sp"
                 />
             <TextView 
-                android:id="@+id/item_label2"
+                android:id="@+id/detail_line2_label2"
                 android:layout_width="180dip"
                 android:layout_height="wrap_content"
                 android:text="1239234234@qq.com"
@@ -105,9 +107,10 @@
                 android:paddingLeft="20.0dip"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
+                android:textIsSelectable="true"
                 />
             <TextView 
-                android:id="@+id/item_label3"
+                android:id="@+id/detail_line2_label3"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="6dip"
@@ -115,16 +118,17 @@
                 android:layout_centerVertical="true"
                 android:text="复制"
                 android:textColor="#2baa3f"
+                android:clickable="true"
                 />
         </RelativeLayout>
         
 		<RelativeLayout 
-            android:id="@+id/item_line3"
+            android:id="@+id/detail_line3"
             android:layout_width="fill_parent"
             android:layout_height="50dip"
             android:background="@drawable/content_bg">
             <TextView 
-                android:id="@+id/item_label1"
+                android:id="@+id/detail_line3_label1"
                 android:layout_width="80dip"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
@@ -135,7 +139,7 @@
                 android:textSize="16sp"
                 />
             <TextView 
-                android:id="@+id/item_label2"
+                android:id="@+id/detail_line3_label2"
                 android:layout_width="180dip"
                 android:layout_height="wrap_content"
                 android:text="1239234234@qq.com"
@@ -143,9 +147,10 @@
                 android:paddingLeft="20.0dip"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
+                android:textIsSelectable="true"
                 />
             <TextView 
-                android:id="@+id/item_label3"
+                android:id="@+id/detail_line3_label3"
                 android:layout_width="40dip"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="6dip"
@@ -153,6 +158,7 @@
                 android:layout_centerVertical="true"
                 android:text="复制"
                 android:textColor="#2baa3f"
+                android:clickable="true"
                 />
         </RelativeLayout>
         

@@ -47,10 +47,12 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 			finish();
 			break;
 		case R.id.set_email:
+			Intent intent2 = new Intent(SettingsActivity.this, SetEmailActivity.class);
+			startActivityForResult(intent2, 1);
 			break;
 		case R.id.set_command:
-			Intent intent2 = new Intent(SettingsActivity.this, SetCommandActivity.class);
-			startActivityForResult(intent2, 1);
+			Intent intent3 = new Intent(SettingsActivity.this, SetCommandActivity.class);
+			startActivityForResult(intent3, 1);
 			break;
 		}
 	}

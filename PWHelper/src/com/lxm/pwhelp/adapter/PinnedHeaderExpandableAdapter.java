@@ -91,6 +91,7 @@ public class PinnedHeaderExpandableAdapter extends  BaseExpandableListAdapter im
 		}
 		else{
 			iv.setImageResource(R.drawable.right_icon);
+			
 		}
         
         TextView text = (TextView)view.findViewById(R.id.groupto);
