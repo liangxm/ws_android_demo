@@ -6,33 +6,6 @@
 
     <include layout="@layout/detail_top_layout" />
 
-<<<<<<< HEAD
-    <RelativeLayout
-        android:id="@+id/detail_top"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#2baa3f">
-
-        <View
-            android:id="@+id/detail_top_tap"
-            android:layout_width="fill_parent"
-            android:layout_height="100dip" />
-        <ImageView 
-            android:id="@+id/detail_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-70dip"/>
-        <TextView 
-            android:id="@+id/detail_title"
-            android:layout_width="fill_parent"
-            android:layout_height="50dip"/>
-    </RelativeLayout>
-    
-    <LinearLayout android:id="@+id/detail_bottom"
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        ></LinearLayout>
-=======
     <LinearLayout
         android:id="@+id/detail_top"
         android:layout_width="fill_parent"
@@ -184,6 +157,5 @@
         </RelativeLayout>
         
     </LinearLayout>
->>>>>>> c8941ade3b44ebea4a7e187e46e8824373d5079a
 
 </LinearLayout>
