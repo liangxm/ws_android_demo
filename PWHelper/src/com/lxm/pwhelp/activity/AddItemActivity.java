@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.dao.PWItemDao;
@@ -95,8 +96,8 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				item.setItem_comment(commentStr);
 				item.setQuestion1(question1Str);
 				item.setQuestion2(question2Str);
-				int code = itemDao.add(item);
-				if (code > 0) {
+				CreateOrUpdateStatus status = itemDao.createOrUpdate(item);
+				if (status.isCreated()) {
 					new AlertDialog.Builder(this)
 							.setTitle("添加成功")
 							.setMessage("密码项添加成功,返回！")

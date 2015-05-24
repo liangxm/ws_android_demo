@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.db.DatabaseHelper;
 
@@ -29,10 +30,35 @@ public class PWItemDao {
 	 * add a new item
 	 * @param item
 	 */
-	public int add(PWItem item){
+	public CreateOrUpdateStatus createOrUpdate(PWItem item){
+		CreateOrUpdateStatus code=null;
+		try {
+			code = itemDaoOpe.createOrUpdate(item);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return code;
+	}
+	
+	/**
+	 * delete a item
+	 * @param item
+	 * @return
+	 */
+	public int delete(int item_id){
 		int code = -1;
 		try {
-			code = itemDaoOpe.create(item);
+			code = itemDaoOpe.deleteById(item_id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return code;
+	}
+	
+	public int update(PWItem item){
+		int code = -1;
+		try {
+			code = itemDaoOpe.update(item);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -54,10 +80,11 @@ public class PWItemDao {
 		return item;
 	}
 	
+	
 	public List<PWItem> getPWItemAll(){
 		List<PWItem> items = null;
 		try {
-			items=itemDaoOpe.queryForAll();
+			items = itemDaoOpe.queryBuilder().where().eq("deleted", false).query();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

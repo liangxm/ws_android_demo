@@ -6,6 +6,7 @@
 package com.lxm.pwhelp.activity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
@@ -41,7 +41,6 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
-import com.baoyz.swipemenulistview.SwipeMenuListView.OnSwipeListener;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.adapter.LazyAdapter;
 import com.lxm.pwhelp.adapter.PinnedHeaderExpandableAdapter;
@@ -52,6 +51,7 @@ import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.view.NoScrollViewPager;
 import com.lxm.pwhelp.view.PinnedHeaderExpandableListView;
+import com.nineoldandroids.util.Conver;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -62,7 +62,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private TextView label4;
 	
 	private SwipeMenuListView lv_list;
-	private List<ApplicationInfo> mAppList;
 	
 	private ImageButton mAddressImg;
 	private ImageButton mFrdImg;
@@ -71,7 +70,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private PinnedHeaderExpandableAdapter expandableAdapter;
 	private PinnedHeaderExpandableListView explistview;
 	private String[][] childrenData = new String[6][5];
-	private String[] groupData = new String[6];
+	private String[] groupData = new String[]{"默认分组","网银密码","论坛密码","微博密码","QQ密码","邮箱密码"};
 
 	private ImageButton mSettingImg;
 	private LinearLayout mTabAddress;
@@ -102,11 +101,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		
-		mAppList = getPackageManager().getInstalledApplications(0);
-		
 		initView();
 		initViewPage();
 		initEvent();
+		initGroup();
+	}
+	
+	private void initGroup(){
+		//List<PWGroup> groups = groupDao.getGroupAll();
+		for(String groupStr:groupData){
+			groupDao.add(new PWGroup(groupStr,"0",false));
+		}
 	}
 
 	private void initEvent() {
@@ -207,31 +212,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		for (PWItem item : items) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("item_id", String.valueOf(item.getItem_id()));
-			map.put("item_type", item.getItem_type());
+			map.put("item_name", item.getItem_name());
 			map.put("item_username", item.getItem_username());
 			map.put("item_password", item.getItem_password());
+			map.put("item_type", item.getItem_type());
+			map.put("item_subtype", String.valueOf(item.getItem_subtype()));
+			map.put("item_url", item.getItem_url());
+			map.put("item_comment", item.getItem_comment());
+			map.put("question1", item.getQuestion1());
+			map.put("question2", item.getQuestion2());
+			map.put("modified", item.getModified());
 			songsList.add(map);
-		}
-		List<PWGroup> groups = groupDao.getGroupAll();
-		if (groups.size() == 0) {
-			PWGroup group1 = new PWGroup();
-			group1.setGroup_name("默认分组");
-			PWGroup group2 = new PWGroup();
-			group2.setGroup_name("网银密码");
-			PWGroup group3 = new PWGroup();
-			group3.setGroup_name("论坛密码");
-			PWGroup group4 = new PWGroup();
-			group4.setGroup_name("微博密码");
-			PWGroup group5 = new PWGroup();
-			group5.setGroup_name("QQ密码");
-			PWGroup group6 = new PWGroup();
-			group6.setGroup_name("邮箱密码");
-			groupDao.add(group1);
-			groupDao.add(group2);
-			groupDao.add(group3);
-			groupDao.add(group4);
-			groupDao.add(group5);
-			groupDao.add(group6);
 		}
 
 		// expand list data
@@ -243,7 +234,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		groupData[4] = this.getResources().getString(R.string.group_qq);
 		groupData[5] = this.getResources().getString(R.string.group_email);
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < groupData.length; i++) {
 			for (int j = 0; j < 5; j++) {
 				childrenData[i][j] = "好友" + i + "-" + j;
 			}
@@ -273,7 +264,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				// set item width
 				openItem.setWidth(dp2px(90));
 				// set item title
-				openItem.setTitle("Open");
+				openItem.setTitle("Edit");
 				// set item title fontsize
 				openItem.setTitleSize(18);
 				// set item title font color
@@ -299,63 +290,54 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		//set creator
 		lv_list.setMenuCreator(creator);
 		
-		
 		// step 2. listener item click event
 		lv_list.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
-				Toast.makeText(getApplicationContext(), position + " index:"+index, 0).show();
-				HashMap<String, String> song = songsList.get(position);
-				ApplicationInfo item = mAppList.get(position);
+				Toast.makeText(getApplicationContext(), position + " index:"+index, Toast.LENGTH_SHORT).show();
+				HashMap<String, String> item = songsList.get(position);
 				switch (index) {
 				case 0:
-					// open
-					//open(item);
+					// edit
+					edit(item);
 					break;
 				case 1:
 					// delete
-//					delete(item);
-					//mAppList.remove(position);
-					//mAdapter.notifyDataSetChanged();
+					delete(item);
+					songsList.remove(item);
+					adapter.notifyDataSetChanged();
 					break;
 				default:
-					Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putString("item_type", song.get("item_type").toString());
-					bundle.putString("item_username", song.get("item_username").toString());
-					bundle.putString("item_password", song.get("item_password").toString());
-					intent.putExtras(bundle);
-					MainActivity.this.startActivityForResult(intent, 1);
 					break;
 				}
 			}
-		});
-		// set SwipeListener
-		lv_list.setOnSwipeListener(new OnSwipeListener(){
-
-			@Override
-			public void onSwipeStart(int position) {
-				// swipe start
-			}
-			
-			@Override
-			public void onSwipeEnd(int position) {
-				// swipe end
-			}
 			
 		});
 		
-		// test item long click
-		lv_list.setOnItemLongClickListener(new OnItemLongClickListener() {
-
+		//lv_list.setCloseInterpolator(new BounceInterpolator());
+		lv_list.setOnItemClickListener(new OnItemClickListener(){
 			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Toast.makeText(getApplicationContext(), position + " long click", 0).show();
-				return false;
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long arg3) {
+				HashMap<String, String> song = songsList.get(position);
+				Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("item_id", song.get("item_id"));
+				bundle.putString("item_name", song.get("item_id"));
+				bundle.putString("item_type", song.get("item_type"));
+				bundle.putString("item_username", song.get("item_username"));
+				bundle.putString("item_password", song.get("item_password"));
+				bundle.putString("item_subtype", song.get("item_subtype"));
+				bundle.putString("item_url", song.get("item_url"));
+				bundle.putString("item_comment", song.get("item_comment"));
+				bundle.putString("question1", song.get("question1"));
+				bundle.putString("question2", song.get("question2"));
+				bundle.putString("modified", song.get("modified"));
+				bundle.putString("created", song.get("created"));
+				intent.putExtras(bundle);
+				MainActivity.this.startActivityForResult(intent, 1);
 			}
 		});
-		
 		
 		mViews.add(tab01);
 		mViews.add(tab02);
@@ -379,13 +361,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 			@Override
 			public boolean isViewFromObject(View arg0, Object arg1) {
-
 				return arg0 == arg1;
 			}
 
 			@Override
 			public int getCount() {
-
 				return mViews.size();
 			}
 		};
@@ -447,6 +427,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			break;
 		}
 		case R.id.add_group: {
+			Intent intent = new Intent(MainActivity.this, AddGroupActivity.class);
+			startActivityForResult(intent, 1);
 			break;
 		}
 		case R.id.settings: {
@@ -466,6 +448,44 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		mAddressImg.setImageResource(R.drawable.pass_noselected);
 		mFrdImg.setImageResource(R.drawable.manage_noselected);
 		mSettingImg.setImageResource(R.drawable.person_noselected);
+	}
+	
+
+	
+	private void delete(HashMap<String, String> itemMap){
+		PWItem item = new PWItem();
+		item.setItem_id(Integer.parseInt(itemMap.get("item_id")));
+		item.setItem_name(itemMap.get("item_name"));
+		item.setItem_username(itemMap.get("item_username"));
+		item.setItem_password(itemMap.get("item_password"));
+		item.setItem_type(itemMap.get("item_type"));
+		item.setItem_subtype(Integer.parseInt(itemMap.get("item_subtype")));
+		item.setItem_url(itemMap.get("item_url"));
+		item.setItem_comment(itemMap.get("item_comment"));
+		item.setQuestion1(itemMap.get("question1"));
+		item.setQuestion2(itemMap.get("question2"));
+		item.setModified(Conver.ConverToString(new Date()));
+		item.setCreated(itemMap.get("created"));
+		item.setDeleted(true);
+		itemDao.update(item);
+	}
+	
+	private void edit(HashMap<String, String> itemMap){
+		PWItem item = new PWItem();
+		item.setItem_id(Integer.parseInt(itemMap.get("item_id")));
+		item.setItem_name(itemMap.get("item_name"));
+		item.setItem_username(itemMap.get("item_username"));
+		item.setItem_password(itemMap.get("item_password"));
+		item.setItem_type(itemMap.get("item_type"));
+		item.setItem_subtype(Integer.parseInt(itemMap.get("item_subtype")));
+		item.setItem_url(itemMap.get("item_url"));
+		item.setItem_comment(itemMap.get("item_comment"));
+		item.setQuestion1(itemMap.get("question1"));
+		item.setQuestion2(itemMap.get("question2"));
+		item.setModified(Conver.ConverToString(new Date()));
+		item.setCreated(itemMap.get("created"));
+		item.setDeleted(Boolean.parseBoolean((itemMap.get("deleted"))));
+		itemDao.update(item);
 	}
 
 	// 回调方法，从第二个页面回来的时候会执行这个方法

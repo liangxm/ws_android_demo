@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -63,5 +64,15 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 				     Toast.LENGTH_SHORT).show();
 			break;
 		}
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK)
+				&& (event.getAction() == KeyEvent.ACTION_DOWN)) {
+			Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+			setResult(1, intent);
+			finish();
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

@@ -57,7 +57,7 @@
         <ImageView
             android:id="@+id/recovery_icon"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15.0dip"
             android:src="@drawable/recovery_icon" />
         
@@ -83,7 +83,7 @@
         <ImageView
             android:id="@+id/cloud_icon"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15.0dip"
             android:src="@drawable/cloud_icon" />
         <TextView
@@ -107,7 +107,7 @@
         <ImageView
             android:id="@+id/settings_icon"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15.0dip"
             android:src="@drawable/setting_icon" />
         <TextView

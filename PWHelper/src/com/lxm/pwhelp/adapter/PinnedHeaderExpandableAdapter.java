@@ -87,10 +87,10 @@ public class PinnedHeaderExpandableAdapter extends  BaseExpandableListAdapter im
 		
 		if (isExpanded) {
 			//iv.setImageResource(R.drawable.btn_browser2);
-			iv.setImageResource(R.drawable.down_icon);
+			iv.setImageResource(R.drawable.triangle_down);
 		}
 		else{
-			iv.setImageResource(R.drawable.right_icon);
+			iv.setImageResource(R.drawable.triangle_right);
 			
 		}
         

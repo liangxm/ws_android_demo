@@ -18,6 +18,14 @@ public class PWGroup {
 	public PWGroup(){
 	}
 	
+	public PWGroup(String group_name, String group_level,
+			boolean deleted) {
+		super();
+		this.group_name = group_name;
+		this.group_level = group_level;
+		this.deleted = deleted;
+	}
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(group_id+";");

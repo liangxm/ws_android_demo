@@ -10,7 +10,6 @@
         android:layout_height="40dip"
         android:paddingLeft="10dip"
         android:src="@null" />
-
     <TextView
         android:id="@+id/childto"
         android:layout_width="match_parent"

@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -88,6 +89,7 @@ public class SimpleActivity extends Activity {
 		mListView.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
+				Toast.makeText(getApplicationContext(), position + " index:"+index, 0).show();
 				ApplicationInfo item = mAppList.get(position);
 				switch (index) {
 				case 0:
@@ -116,10 +118,19 @@ public class SimpleActivity extends Activity {
 			public void onSwipeEnd(int position) {
 				// swipe end
 			}
+			
 		});
 
 		// other setting
-//		listView.setCloseInterpolator(new BounceInterpolator());
+		//mListView.setCloseInterpolator(new BounceInterpolator());
+		mListView.setOnItemClickListener(new OnItemClickListener(){
+			@Override
+			public void onItemClick(AdapterView<?> view, View position, int arg2,
+					long arg3) {
+				Toast.makeText(getApplicationContext(), position + "OnSwipeStart355", 0).show();
+			}
+			
+		});
 		
 		// test item long click
 		mListView.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -193,7 +204,7 @@ public class SimpleActivity extends Activity {
 			ViewHolder holder = (ViewHolder) convertView.getTag();
 			ApplicationInfo item = getItem(position);
 			holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
-			holder.tv_name.setText(item.loadLabel(getPackageManager()));
+			holder.tv_name.setText("sadfa");
 			return convertView;
 		}
 

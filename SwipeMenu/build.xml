@@ -6,6 +6,7 @@
     <property name="outdir-classes" value="${outdir}/classes" />
     <property name="outdir-gen" value="gen" />
     <property name="lib" value="libs"/>
+    <property name="jarname" value="swipemenu.jar"/>
     
     <!-- ¶ÁÈ¡Ä¿Â¼ -->
     <property name="resource-dir" value="res" />
@@ -52,13 +53,13 @@
     </target>
     
     <target name="compile" depends="aidl">
-        <javac encoding="GBK" target="1.7" debug="true" includeantruntime="false" extdirs="" srcdir="." destdir="${outdir-classes}" bootclasspath="${android-jar}">
+        <javac encoding="UTF-8" target="1.7" debug="true" includeantruntime="false" extdirs="" srcdir="." destdir="${outdir-classes}" bootclasspath="${android-jar}">
             <classpath>
                 <fileset dir="${lib}" includes="*.jar">
             </fileset></classpath>
         </javac>
         
-        <jar destfile="${output.dir}/${jarname}" basedir="${outdir-classes}">
+        <jar destfile="${outdir}\${jarname}" basedir="${outdir-classes}">
 		    <manifest>
 		        <attribute name="Main-class" value="${mainclass}"/>
 		        <attribute name="Class-Path" value="${mf.classpath}"/>
