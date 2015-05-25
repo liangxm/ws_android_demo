@@ -69,6 +69,7 @@
     <string name="set_command_title">设置密码口令</string>
     <string name="set_email_title">邮箱账号</string>
     <string name="add_group_title">添加分组</string>
+    <string name="edit_title">修改密码信息</string>
 
     <!-- description for images -->
     <string name="return_desc">返回上层页面</string>

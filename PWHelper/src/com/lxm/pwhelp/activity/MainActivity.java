@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
@@ -82,6 +83,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private LinearLayout backupitem;
 	private LinearLayout recovery;
 	private LinearLayout settings;
+	
+	private LinearLayout noitem;
 
 	private NoScrollViewPager mViewPager;
 	private List<View> mViews;
@@ -90,6 +93,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private TextView title;
 
 	private ImageView add_group;
+	
+	private Button no_add_item;
 
 	private int expandFlag = -1;// control the list if expand
 
@@ -124,6 +129,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		recovery.setOnClickListener(this);
 		settings.setOnClickListener(this);
 		add_group.setOnClickListener(this);
+		no_add_item.setOnClickListener(this);
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			/**
 			 * ViewPage左右滑动
@@ -204,11 +210,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		recovery = (LinearLayout) tab04.findViewById(R.id.recovery);
 		settings = (LinearLayout) tab04.findViewById(R.id.settings);
 		add_group = (ImageView) findViewById(R.id.add_group);
-
+		noitem = (LinearLayout) tab01.findViewById(R.id.noitem);
+		no_add_item = (Button) tab01.findViewById(R.id.no_add_item);
 		lv_list = (SwipeMenuListView) tab01.findViewById(R.id.list1);
 		songsList = new ArrayList<HashMap<String, String>>();
 
 		List<PWItem> items = itemDao.getPWItemAll();
+		switchTheNoItem(items);
 		for (PWItem item : items) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("item_id", String.valueOf(item.getItem_id()));
@@ -294,12 +302,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		lv_list.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
-				Toast.makeText(getApplicationContext(), position + " index:"+index, Toast.LENGTH_SHORT).show();
 				HashMap<String, String> item = songsList.get(position);
 				switch (index) {
 				case 0:
 					// edit
 					edit(item);
+					adapter.notifyDataSetChanged();
 					break;
 				case 1:
 					// delete
@@ -436,6 +444,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			startActivityForResult(intent, 1);
 			break;
 		}
+		case R.id.no_add_item: {
+			Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
+			startActivityForResult(intent, 1);
+			break;
+		}
 		}
 	}
 
@@ -471,21 +484,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 	
 	private void edit(HashMap<String, String> itemMap){
-		PWItem item = new PWItem();
-		item.setItem_id(Integer.parseInt(itemMap.get("item_id")));
-		item.setItem_name(itemMap.get("item_name"));
-		item.setItem_username(itemMap.get("item_username"));
-		item.setItem_password(itemMap.get("item_password"));
-		item.setItem_type(itemMap.get("item_type"));
-		item.setItem_subtype(Integer.parseInt(itemMap.get("item_subtype")));
-		item.setItem_url(itemMap.get("item_url"));
-		item.setItem_comment(itemMap.get("item_comment"));
-		item.setQuestion1(itemMap.get("question1"));
-		item.setQuestion2(itemMap.get("question2"));
-		item.setModified(Conver.ConverToString(new Date()));
-		item.setCreated(itemMap.get("created"));
-		item.setDeleted(Boolean.parseBoolean((itemMap.get("deleted"))));
-		itemDao.update(item);
+		Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
+		Bundle bundle = new Bundle();
+		bundle.putString("item_id", itemMap.get("item_id"));
+		bundle.putString("item_name", itemMap.get("item_id"));
+		bundle.putString("item_type", itemMap.get("item_type"));
+		bundle.putString("item_username", itemMap.get("item_username"));
+		bundle.putString("item_password", itemMap.get("item_password"));
+		bundle.putString("item_subtype", itemMap.get("item_subtype"));
+		bundle.putString("item_url", itemMap.get("item_url"));
+		bundle.putString("item_comment", itemMap.get("item_comment"));
+		bundle.putString("question1", itemMap.get("question1"));
+		bundle.putString("question2", itemMap.get("question2"));
+		bundle.putString("modified", itemMap.get("modified"));
+		bundle.putString("created", itemMap.get("created"));
+		intent.putExtras(bundle);
+		startActivityForResult(intent, 1);
 	}
 
 	// 回调方法，从第二个页面回来的时候会执行这个方法
@@ -616,16 +630,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	protected void onResume() {
 		List<PWItem> items = itemDao.getPWItemAll();
 		if (items.size() != songsList.size()) {
+			switchTheNoItem(items);
 			songsList.clear();
 			for (PWItem item : items) {
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("item_type", item.getItem_type());
 				map.put("item_username", item.getItem_username());
 				map.put("item_password", item.getItem_password());
+				map.put("item_subtype", String.valueOf(item.getItem_subtype()));
+				map.put("item_url", item.getItem_url());
+				map.put("item_comment", item.getItem_comment());
+				map.put("question1", item.getQuestion1());
+				map.put("question2", item.getQuestion2());
+				map.put("modified", item.getModified());
 				songsList.add(map);
 			}
 		}
 		super.onResume();
+	}
+	
+	private void switchTheNoItem(List<PWItem> items){
+		if(items.size()==0){
+			lv_list.setVisibility(View.INVISIBLE);
+			noitem.setVisibility(View.VISIBLE);
+		}else{
+			noitem.setVisibility(View.INVISIBLE);
+			lv_list.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override
