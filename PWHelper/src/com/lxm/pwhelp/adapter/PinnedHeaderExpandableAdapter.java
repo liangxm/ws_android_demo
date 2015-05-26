@@ -86,12 +86,12 @@ public class PinnedHeaderExpandableAdapter extends  BaseExpandableListAdapter im
         ImageView iv = (ImageView)view.findViewById(R.id.groupIcon);
 		
 		if (isExpanded) {
-			//iv.setImageResource(R.drawable.btn_browser2);
 			iv.setImageResource(R.drawable.triangle_down);
+			iv.setScaleType(ImageView.ScaleType.FIT_XY); 
 		}
 		else{
 			iv.setImageResource(R.drawable.triangle_right);
-			
+			iv.setScaleType(ImageView.ScaleType.FIT_XY); 
 		}
         
         TextView text = (TextView)view.findViewById(R.id.groupto);

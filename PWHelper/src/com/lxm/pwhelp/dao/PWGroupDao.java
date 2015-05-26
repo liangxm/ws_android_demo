@@ -57,7 +57,7 @@ public class PWGroupDao {
 	public List<PWGroup> getGroupAll(){
 		List<PWGroup> groups = null;
 		try {
-			groups = groupDaoOpe.queryForAll();
+			groups = groupDaoOpe.queryBuilder().where().eq("deleted", false).query();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

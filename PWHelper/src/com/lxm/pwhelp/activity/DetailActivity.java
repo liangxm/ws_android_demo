@@ -8,14 +8,18 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lxm.pwhelp.R;
+import com.nineoldandroids.util.Conver;
 
 public class DetailActivity extends Activity implements View.OnClickListener {
 	
-	private TextView line1_label2,line2_label2,line3_label2;
+	private RelativeLayout detail_line1,detail_line2,detail_line3;
+	private TextView line1_label2,line2_label2,line3_label2,detail_title;
 	private ClipboardManager cmb;
 	
 	@Override
@@ -31,13 +35,25 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		findViewById(R.id.detail_line2_label3).setOnClickListener(this);
 		findViewById(R.id.detail_line3_label3).setOnClickListener(this);
 		
+		detail_line1 = (RelativeLayout) findViewById(R.id.detail_line1);
+		detail_line2 = (RelativeLayout) findViewById(R.id.detail_line2);
+		detail_line3 = (RelativeLayout) findViewById(R.id.detail_line3);
+		
 		line1_label2 = (TextView) findViewById(R.id.detail_line1_label2);
 		line2_label2 = (TextView) findViewById(R.id.detail_line2_label2);
 		line3_label2 = (TextView) findViewById(R.id.detail_line3_label2);
+		detail_title = (TextView) findViewById(R.id.detail_title);
 		Bundle bundle = this.getIntent().getExtras();
 		line1_label2.setText(bundle.getString("item_type"));
 		line2_label2.setText(bundle.getString("item_username"));
 		line3_label2.setText(bundle.getString("item_password"));
+		
+		line1_label2.setPadding(Conver.dip2px(this, 20), 0, 0, 0);
+		line2_label2.setPadding(Conver.dip2px(this, 20), 0, 0, 0);
+		line3_label2.setPadding(Conver.dip2px(this, 20), 0, 0, 0);
+		detail_line1.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
+		detail_line2.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
+		detail_line3.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
 	}
 	
 	@Override

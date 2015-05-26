@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/groupIcon"
-        android:layout_width="40dip"
+        android:layout_width="wrap_content"
         android:layout_height="40dip"
         android:paddingLeft="10dip"
         android:src="@null" />

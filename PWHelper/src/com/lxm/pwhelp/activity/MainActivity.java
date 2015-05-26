@@ -649,12 +649,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		super.onResume();
 	}
 	
+	/**
+	 * display the no item note and button
+	 * @param items
+	 */
 	private void switchTheNoItem(List<PWItem> items){
 		if(items.size()==0){
-			lv_list.setVisibility(View.INVISIBLE);
+			lv_list.setVisibility(View.GONE);
 			noitem.setVisibility(View.VISIBLE);
 		}else{
-			noitem.setVisibility(View.INVISIBLE);
+			noitem.setVisibility(View.GONE);
 			lv_list.setVisibility(View.VISIBLE);
 		}
 	}
