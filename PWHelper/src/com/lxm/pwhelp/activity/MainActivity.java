@@ -20,7 +20,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -256,7 +255,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
 						0xCE)));
 				// set item width
-				openItem.setWidth(dp2px(90));
+				openItem.setWidth(Conver.dip2px(getApplicationContext(),90));
 				// set item title
 				openItem.setTitle("Edit");
 				// set item title fontsize
@@ -273,7 +272,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
 						0x3F, 0x25)));
 				// set item width
-				deleteItem.setWidth(dp2px(90));
+				deleteItem.setWidth(Conver.dip2px(getApplicationContext(),90));
 				// set a icon
 				deleteItem.setIcon(R.drawable.ic_delete);
 				// add to menu
@@ -582,11 +581,39 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		builder.create().show();
 	}
 
+<<<<<<< HEAD
 	private int dp2px(int dp) {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
 				getResources().getDisplayMetrics());
 	}
 
+=======
+	class GroupClickListener implements OnGroupClickListener {
+		@Override
+		public boolean onGroupClick(ExpandableListView parent, View v,
+				int groupPosition, long id) {
+			if (expandFlag == -1) {
+				// 展开被选的group
+				explistview.expandGroup(groupPosition);
+				// 设置被选中的group置于顶端
+				explistview.setSelectedGroup(groupPosition);
+				expandFlag = groupPosition;
+			} else if (expandFlag == groupPosition) {
+				explistview.collapseGroup(expandFlag);
+				expandFlag = -1;
+			} else {
+				explistview.collapseGroup(expandFlag);
+				// 展开被选的group
+				explistview.expandGroup(groupPosition);
+				// 设置被选中的group置于顶端
+				explistview.setSelectedGroup(groupPosition);
+				expandFlag = groupPosition;
+			}
+			return true;
+		}
+	}
+	
+>>>>>>> b6e5b7c22a5f67fd2f39799a39a97026787e34e3
 	@Override
 	protected void onResume() {
 		List<PWItem> items = itemDao.getPWItemAll();

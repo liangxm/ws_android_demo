@@ -192,19 +192,23 @@ containing a value of this type.
         public static final int swipeOpenOnLongPress=0x7f01000c;
     }
     public static final class color {
-        public static final int color_hei_8=0x7f050001;
-        public static final int gesture_background=0x7f050000;
-        public static final int gray=0x7f050003;
-        public static final int normal=0x7f050005;
-        public static final int theme_color=0x7f050002;
-        public static final int transparent_red=0x7f050004;
+        public static final int color_hei_8=0x7f060001;
+        public static final int gesture_background=0x7f060000;
+        public static final int gray=0x7f060003;
+        public static final int normal=0x7f060005;
+        public static final int theme_color=0x7f060002;
+        public static final int transparent_red=0x7f060004;
     }
     public static final class dimen {
-        public static final int addActivity_edit=0x7f060001;
+        public static final int addActivity_edit=0x7f070001;
         /**  Default screen margins, per the Android Design guidelines. 
          */
+<<<<<<< HEAD
         public static final int addActivity_label=0x7f060000;
         public static final int spacing_medium=0x7f060002;
+=======
+        public static final int addActivity_label=0x7f070000;
+>>>>>>> b6e5b7c22a5f67fd2f39799a39a97026787e34e3
     }
     public static final class drawable {
         public static final int application_bg_welcome=0x7f020000;
@@ -298,6 +302,7 @@ containing a value of this type.
         public static final int welcome_bg=0x7f020057;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int Detail_Return=0x7f070072;
         public static final int Dlg_Return=0x7f070060;
         public static final int Dlg_Submit=0x7f07005f;
@@ -459,6 +464,165 @@ containing a value of this type.
         public static final int text_username=0x7f07004e;
         public static final int thumbnail=0x7f07002b;
         public static final int title=0x7f07002c;
+=======
+        public static final int Detail_Return=0x7f050072;
+        public static final int Dlg_Return=0x7f050060;
+        public static final int Dlg_Submit=0x7f05005f;
+        public static final int Edit_Return=0x7f050074;
+        public static final int Edit_Submit=0x7f050073;
+        public static final int SetCommand_Return=0x7f050082;
+        public static final int SetEmail_Return=0x7f050085;
+        public static final int Settings_Return=0x7f05008d;
+        public static final int account=0x7f050042;
+        public static final int add_group=0x7f05009c;
+        public static final int additem=0x7f05003f;
+        public static final int artist=0x7f050037;
+        public static final int back=0x7f050031;
+        public static final int both=0x7f050004;
+        public static final int btnadd=0x7f05003e;
+        public static final int btnshowpass=0x7f050039;
+        public static final int childto=0x7f050062;
+        public static final int choice=0x7f050009;
+        public static final int cloud=0x7f050096;
+        public static final int cloud_icon=0x7f050097;
+        public static final int cloud_label=0x7f050098;
+        public static final int command_right_icon=0x7f05008b;
+        public static final int command_state=0x7f05008c;
+        public static final int content=0x7f050075;
+        public static final int detail_content=0x7f050065;
+        public static final int detail_line1=0x7f050066;
+        public static final int detail_line1_label1=0x7f050067;
+        public static final int detail_line1_label2=0x7f050068;
+        public static final int detail_line1_label3=0x7f050069;
+        public static final int detail_line2=0x7f05006a;
+        public static final int detail_line2_label1=0x7f05006b;
+        public static final int detail_line2_label2=0x7f05006c;
+        public static final int detail_line2_label3=0x7f05006d;
+        public static final int detail_line3=0x7f05006e;
+        public static final int detail_line3_label1=0x7f05006f;
+        public static final int detail_line3_label2=0x7f050070;
+        public static final int detail_line3_label3=0x7f050071;
+        public static final int detail_title=0x7f050064;
+        public static final int detail_top=0x7f050063;
+        public static final int dismiss=0x7f050008;
+        public static final int duration=0x7f050038;
+        public static final int edit_comment=0x7f050058;
+        public static final int edit_name=0x7f05004c;
+        public static final int edit_password=0x7f050052;
+        public static final int edit_question1=0x7f05005b;
+        public static final int edit_question2=0x7f05005e;
+        public static final int edit_type=0x7f050045;
+        public static final int edit_url=0x7f050055;
+        public static final int edit_username=0x7f05004f;
+        public static final int email_address_label=0x7f050087;
+        public static final int email_right_icon=0x7f050088;
+        public static final int email_state=0x7f050089;
+        public static final int explistview=0x7f050092;
+        public static final int front=0x7f050033;
+        public static final int gesturepwd_creat_gap1=0x7f050017;
+        public static final int gesturepwd_creat_gap2=0x7f050022;
+        public static final int gesturepwd_creat_gap3=0x7f050024;
+        public static final int gesturepwd_creat_gap4=0x7f050026;
+        public static final int gesturepwd_create_lockview=0x7f050025;
+        public static final int gesturepwd_create_text=0x7f050023;
+        public static final int gesturepwd_guide_btn=0x7f05002a;
+        public static final int gesturepwd_guide_text=0x7f050029;
+        public static final int gesturepwd_root=0x7f05002b;
+        public static final int gesturepwd_setting_preview=0x7f050018;
+        public static final int gesturepwd_setting_preview_0=0x7f050019;
+        public static final int gesturepwd_setting_preview_1=0x7f05001a;
+        public static final int gesturepwd_setting_preview_2=0x7f05001b;
+        public static final int gesturepwd_setting_preview_3=0x7f05001c;
+        public static final int gesturepwd_setting_preview_4=0x7f05001d;
+        public static final int gesturepwd_setting_preview_5=0x7f05001e;
+        public static final int gesturepwd_setting_preview_6=0x7f05001f;
+        public static final int gesturepwd_setting_preview_7=0x7f050020;
+        public static final int gesturepwd_setting_preview_8=0x7f050021;
+        public static final int gesturepwd_unlock_face=0x7f05002c;
+        public static final int gesturepwd_unlock_failtip=0x7f05002e;
+        public static final int gesturepwd_unlock_forget=0x7f050030;
+        public static final int gesturepwd_unlock_lockview=0x7f05002f;
+        public static final int gesturepwd_unlock_text=0x7f05002d;
+        public static final int groupIcon=0x7f050061;
+        public static final int groupto=0x7f050079;
+        public static final int id_tab_address=0x7f05000e;
+        public static final int id_tab_address_img=0x7f05000f;
+        public static final int id_tab_frd=0x7f050011;
+        public static final int id_tab_frd_img=0x7f050012;
+        public static final int id_tab_settings=0x7f050014;
+        public static final int id_tab_settings_img=0x7f050015;
+        public static final int id_tab_weixin=0x7f05000b;
+        public static final int id_tab_weixin_img=0x7f05000c;
+        public static final int id_viewpage=0x7f05000a;
+        public static final int item1=0x7f050043;
+        public static final int item2=0x7f05004a;
+        public static final int item3=0x7f05004d;
+        public static final int item4=0x7f050050;
+        public static final int item5=0x7f050053;
+        public static final int item6=0x7f050056;
+        public static final int item7=0x7f050059;
+        public static final int item8=0x7f05005c;
+        public static final int item9=0x7f050046;
+        public static final int item_password=0x7f05007c;
+        public static final int item_type=0x7f05007a;
+        public static final int item_username=0x7f05007b;
+        public static final int label1=0x7f05000d;
+        public static final int label2=0x7f050010;
+        public static final int label3=0x7f050013;
+        public static final int label4=0x7f050016;
+        public static final int left=0x7f050006;
+        public static final int list=0x7f05003c;
+        public static final int list1=0x7f05003b;
+        public static final int lockHeight=0x7f050002;
+        public static final int lockWidth=0x7f050001;
+        public static final int lock_icon=0x7f05008f;
+        public static final int mTogBtn=0x7f05007d;
+        public static final int manage=0x7f05003d;
+        public static final int name=0x7f050041;
+        public static final int negativeButton=0x7f050078;
+        public static final int no_add_item=0x7f050091;
+        public static final int no_item_desc=0x7f050090;
+        public static final int noitem=0x7f05008e;
+        public static final int none=0x7f050003;
+        public static final int number=0x7f050076;
+        public static final int personal=0x7f050040;
+        public static final int positiveButton=0x7f050077;
+        public static final int radioCash=0x7f050048;
+        public static final int radioCredit=0x7f050049;
+        public static final int radioGroup=0x7f050047;
+        public static final int recovery=0x7f050093;
+        public static final int recovery_icon=0x7f050094;
+        public static final int recovery_label=0x7f050095;
+        public static final int remove=0x7f050032;
+        public static final int reset_btn=0x7f050027;
+        public static final int reveal=0x7f050007;
+        public static final int right=0x7f050005;
+        public static final int right_btn=0x7f050028;
+        public static final int searchbox=0x7f05003a;
+        public static final int set_command=0x7f05008a;
+        public static final int set_command_btn=0x7f050081;
+        public static final int set_command_icon=0x7f05007f;
+        public static final int set_command_main=0x7f05007e;
+        public static final int set_command_note=0x7f050080;
+        public static final int set_email=0x7f050086;
+        public static final int set_email_btn=0x7f050084;
+        public static final int set_email_icon=0x7f050083;
+        public static final int settings=0x7f050099;
+        public static final int settings_icon=0x7f05009a;
+        public static final int setttings_label=0x7f05009b;
+        public static final int square=0x7f050000;
+        public static final int text=0x7f050034;
+        public static final int text_comment=0x7f050057;
+        public static final int text_name=0x7f05004b;
+        public static final int text_password=0x7f050051;
+        public static final int text_question1=0x7f05005a;
+        public static final int text_question2=0x7f05005d;
+        public static final int text_type=0x7f050044;
+        public static final int text_url=0x7f050054;
+        public static final int text_username=0x7f05004e;
+        public static final int thumbnail=0x7f050035;
+        public static final int title=0x7f050036;
+>>>>>>> b6e5b7c22a5f67fd2f39799a39a97026787e34e3
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
