@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,10 +31,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,14 +45,13 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.adapter.LazyAdapter;
-import com.lxm.pwhelp.adapter.PinnedHeaderExpandableAdapter;
+import com.lxm.pwhelp.adapter.MyAdapter;
 import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.view.NoScrollViewPager;
-import com.lxm.pwhelp.view.PinnedHeaderExpandableListView;
 import com.nineoldandroids.util.Conver;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -68,10 +68,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private ImageButton mFrdImg;
 
 	private PagerAdapter mPagerAdapter;
-	private PinnedHeaderExpandableAdapter expandableAdapter;
-	private PinnedHeaderExpandableListView explistview;
-	private String[][] childrenData = new String[6][5];
-	private String[] groupData = new String[]{"默认分组","网银密码","论坛密码","微博密码","QQ密码","邮箱密码"};
+	private ExpandableListView mainlistview;
+	private List<String> parent = null;
+	private Map<String, List<String>> map = null;
 
 	private ImageButton mSettingImg;
 	private LinearLayout mTabAddress;
@@ -80,9 +79,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private LinearLayout mTabWeiXin;
 
 	private LinearLayout additem;
-	private LinearLayout backupitem;
-	private LinearLayout recovery;
-	private LinearLayout settings;
+	private RelativeLayout backupitem;
+	private RelativeLayout recovery;
+	private RelativeLayout settings;
 	
 	private LinearLayout noitem;
 
@@ -96,8 +95,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	private Button no_add_item;
 
-	private int expandFlag = -1;// control the list if expand
-
 	private PWItemDao itemDao;
 	private PWGroupDao groupDao;
 
@@ -109,16 +106,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		initView();
 		initViewPage();
 		initEvent();
-		initGroup();
 	}
 	
-	private void initGroup(){
-		//List<PWGroup> groups = groupDao.getGroupAll();
-		for(String groupStr:groupData){
-			groupDao.add(new PWGroup(groupStr,"0",false));
-		}
-	}
-
 	private void initEvent() {
 		mTabWeiXin.setOnClickListener(this);
 		mTabAddress.setOnClickListener(this);
@@ -193,29 +182,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		add_group = (ImageView) findViewById(R.id.add_group);
 		add_group.setVisibility(View.GONE);
 	}
-
-	private void initViewPage() {
-		// 初妈化四个布局
-		LayoutInflater mLayoutInflater = LayoutInflater.from(this);
-		View tab01 = mLayoutInflater.inflate(R.layout.tab01, null);
-		View tab02 = mLayoutInflater.inflate(R.layout.tab02, null);
-		View tab03 = mLayoutInflater.inflate(R.layout.tab03, null);
-		View tab04 = mLayoutInflater.inflate(R.layout.tab04, null);
-
-		additem = (LinearLayout) tab03.findViewById(R.id.additem);
-		explistview = (PinnedHeaderExpandableListView) tab02
-				.findViewById(R.id.explistview);
-
-		backupitem = (LinearLayout) tab04.findViewById(R.id.cloud);
-		recovery = (LinearLayout) tab04.findViewById(R.id.recovery);
-		settings = (LinearLayout) tab04.findViewById(R.id.settings);
-		add_group = (ImageView) findViewById(R.id.add_group);
-		noitem = (LinearLayout) tab01.findViewById(R.id.noitem);
-		no_add_item = (Button) tab01.findViewById(R.id.no_add_item);
-		lv_list = (SwipeMenuListView) tab01.findViewById(R.id.list1);
-		songsList = new ArrayList<HashMap<String, String>>();
-
-		List<PWItem> items = itemDao.getPWItemAll();
+	// 初始化数据
+    public void initData() {
+    	String[] groupData = new String[]{"默认分组","网银密码","论坛密码","微博密码","QQ密码","邮箱密码"};
+    	parent = new ArrayList<String>();
+    	map = new HashMap<String, List<String>>();
+    	for(String groupStr:groupData){
+			groupDao.add(new PWGroup(groupStr,"0",false));
+			parent.add(groupStr);
+			List<String> list = new ArrayList<String>();
+			List<PWItem> itemGroups = itemDao.getPWItemByType(groupStr);
+			for(PWItem item:itemGroups){
+				list.add(item.getItem_username());
+			}
+			map.put(groupStr, list);
+		}
+    	
+    	List<PWItem> items = itemDao.getPWItemAll();
 		switchTheNoItem(items);
 		for (PWItem item : items) {
 			HashMap<String, String> map = new HashMap<String, String>();
@@ -232,30 +215,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			map.put("modified", item.getModified());
 			songsList.add(map);
 		}
+    }
 
-		// expand list data
-		groupData[0] = this.getResources().getString(R.string.group_default);
-		groupData[1] = this.getResources().getString(R.string.group_bank);
-		groupData[2] = this.getResources().getString(R.string.group_bbs);
+	private void initViewPage() {
+		// 初妈化四个布局
+		LayoutInflater mLayoutInflater = LayoutInflater.from(this);
+		View tab01 = mLayoutInflater.inflate(R.layout.tab01, null);
+		View tab02 = mLayoutInflater.inflate(R.layout.tab02, null);
+		View tab03 = mLayoutInflater.inflate(R.layout.tab03, null);
+		View tab04 = mLayoutInflater.inflate(R.layout.tab04, null);
 
-		groupData[3] = this.getResources().getString(R.string.group_weibo);
-		groupData[4] = this.getResources().getString(R.string.group_qq);
-		groupData[5] = this.getResources().getString(R.string.group_email);
+		additem = (LinearLayout) tab03.findViewById(R.id.additem);
+		//explistview = (PinnedHeaderExpandableListView) tab02
+		//		.findViewById(R.id.explistview);
+		mainlistview = (ExpandableListView) tab02.findViewById(R.id.explistview);
 
-		for (int i = 0; i < groupData.length; i++) {
-			for (int j = 0; j < 5; j++) {
-				childrenData[i][j] = "好友" + i + "-" + j;
-			}
-		}
-		// 设置悬浮头部VIEW
-		explistview.setHeaderView(getLayoutInflater().inflate(
-				R.layout.group_head, explistview, false));
-		expandableAdapter = new PinnedHeaderExpandableAdapter(childrenData,
-				groupData, getApplicationContext(), explistview);
-		explistview.setAdapter(expandableAdapter);
+		backupitem = (RelativeLayout) tab04.findViewById(R.id.cloud);
+		recovery = (RelativeLayout) tab04.findViewById(R.id.recovery);
+		settings = (RelativeLayout) tab04.findViewById(R.id.settings);
+		add_group = (ImageView) findViewById(R.id.add_group);
+		noitem = (LinearLayout) tab01.findViewById(R.id.noitem);
+		no_add_item = (Button) tab01.findViewById(R.id.no_add_item);
+		lv_list = (SwipeMenuListView) tab01.findViewById(R.id.list1);
+		songsList = new ArrayList<HashMap<String, String>>();
+
 		// 设置单个分组展开
-		explistview.setOnGroupClickListener(new GroupClickListener());
-
+		initData();
+		mainlistview.setAdapter(new MyAdapter(this,parent,map));
 		adapter = new LazyAdapter(this, songsList);
 		lv_list.setAdapter(adapter);
 		
@@ -596,31 +582,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		builder.create().show();
 	}
 
-	class GroupClickListener implements OnGroupClickListener {
-		@Override
-		public boolean onGroupClick(ExpandableListView parent, View v,
-				int groupPosition, long id) {
-			if (expandFlag == -1) {
-				// 展开被选的group
-				explistview.expandGroup(groupPosition);
-				// 设置被选中的group置于顶端
-				explistview.setSelectedGroup(groupPosition);
-				expandFlag = groupPosition;
-			} else if (expandFlag == groupPosition) {
-				explistview.collapseGroup(expandFlag);
-				expandFlag = -1;
-			} else {
-				explistview.collapseGroup(expandFlag);
-				// 展开被选的group
-				explistview.expandGroup(groupPosition);
-				// 设置被选中的group置于顶端
-				explistview.setSelectedGroup(groupPosition);
-				expandFlag = groupPosition;
-			}
-			return true;
-		}
-	}
-	
 	private int dp2px(int dp) {
 		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
 				getResources().getDisplayMetrics());

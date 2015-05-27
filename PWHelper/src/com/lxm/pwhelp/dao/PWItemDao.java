@@ -94,7 +94,7 @@ public class PWItemDao {
 	public List<PWItem> getPWItemByType(String item_type){
 		List<PWItem> items = null;
 		try {
-			items = itemDaoOpe.queryBuilder().where().eq("item_type", "item_type").query();
+			items = itemDaoOpe.queryBuilder().where().eq("item_type", item_type).query();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

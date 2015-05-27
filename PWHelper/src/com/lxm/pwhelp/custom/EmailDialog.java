@@ -4,9 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.lxm.pwhelp.R;
 /**
  * @Function: 自定义对话框
@@ -16,7 +16,7 @@ import com.lxm.pwhelp.R;
  */
 public class EmailDialog extends Dialog {
     private EditText editText;
-    private Button positiveButton, negativeButton;
+    private TextView positiveButton, negativeButton;
     private TextView title;
  
     public EmailDialog(Context context) {
@@ -28,8 +28,8 @@ public class EmailDialog extends Dialog {
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.email_dialog, null);
         title = (TextView) mView.findViewById(R.id.title);
         editText = (EditText) mView.findViewById(R.id.number);
-        positiveButton = (Button) mView.findViewById(R.id.positiveButton);
-        negativeButton = (Button) mView.findViewById(R.id.negativeButton);
+        positiveButton = (TextView) mView.findViewById(R.id.positiveButton);
+        negativeButton = (TextView) mView.findViewById(R.id.negativeButton);
         super.setContentView(mView);
     }
      
