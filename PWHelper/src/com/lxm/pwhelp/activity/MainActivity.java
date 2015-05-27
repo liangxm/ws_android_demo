@@ -581,39 +581,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		builder.create().show();
 	}
 
-<<<<<<< HEAD
-	private int dp2px(int dp) {
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-				getResources().getDisplayMetrics());
-	}
-
-=======
-	class GroupClickListener implements OnGroupClickListener {
-		@Override
-		public boolean onGroupClick(ExpandableListView parent, View v,
-				int groupPosition, long id) {
-			if (expandFlag == -1) {
-				// 展开被选的group
-				explistview.expandGroup(groupPosition);
-				// 设置被选中的group置于顶端
-				explistview.setSelectedGroup(groupPosition);
-				expandFlag = groupPosition;
-			} else if (expandFlag == groupPosition) {
-				explistview.collapseGroup(expandFlag);
-				expandFlag = -1;
-			} else {
-				explistview.collapseGroup(expandFlag);
-				// 展开被选的group
-				explistview.expandGroup(groupPosition);
-				// 设置被选中的group置于顶端
-				explistview.setSelectedGroup(groupPosition);
-				expandFlag = groupPosition;
-			}
-			return true;
-		}
-	}
-	
->>>>>>> b6e5b7c22a5f67fd2f39799a39a97026787e34e3
 	@Override
 	protected void onResume() {
 		List<PWItem> items = itemDao.getPWItemAll();
