@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="horizontal" 
     android:background="#FFFFFF"
     android:gravity="center_vertical">
@@ -10,9 +10,7 @@
         android:layout_width="20dip"
         android:layout_height="20dip"
         android:contentDescription="@null"
-        android:layout_marginLeft="10dip"
-        android:src="@drawable/right_icon"/>
-     <!--    android:src="@drawable/btn_browser"/> -->
+        android:src="@drawable/triangle_right"/>
     <TextView
         android:id="@+id/groupto"
         android:layout_width="match_parent"

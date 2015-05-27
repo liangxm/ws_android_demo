@@ -88,8 +88,7 @@ public class PinnedHeaderExpandableAdapter extends  BaseExpandableListAdapter im
 		if (isExpanded) {
 			iv.setImageResource(R.drawable.triangle_down);
 			iv.setScaleType(ImageView.ScaleType.FIT_XY); 
-		}
-		else{
+		}else{
 			iv.setImageResource(R.drawable.triangle_right);
 			iv.setScaleType(ImageView.ScaleType.FIT_XY); 
 		}
