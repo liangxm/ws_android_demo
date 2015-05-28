@@ -1,5 +1,7 @@
 package com.lxm.pwhelp.activity;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -39,24 +41,35 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 			finish();
 			break;
 		case R.id.set_email_btn:
-			final EmailDialog dialog = new EmailDialog(SetEmailActivity.this,"请输入邮箱地址");
-			// final EditText editText = (EditText) dialog.getEditText();
+			
+			final List<PWSetting> setting = pwSettingDao.getSettingByName("email_address");
+			String title = null;
+			if(setting!=null&&setting.size()>0){
+				title = "修改你的邮箱地址";
+			}else{
+				title = "请输入邮箱地址";
+			}
+			
+			final EmailDialog dialog = new EmailDialog(SetEmailActivity.this,title);
 			dialog.setOnPositiveListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// dosomething youself
-					dialog.cancel();
+					dialog.dismiss();
 				}
 			});
 			dialog.setOnNegativeListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					PWSetting pwSetting = new PWSetting();
+					if(setting!=null&&setting.size()>0){
+						pwSetting.setSetting_id(setting.get(0).getSetting_id());
+					}
 					pwSetting.setSetting_name("email_address");
-					pwSetting.setSetting_value(dialog.getEditText().toString());
+					pwSetting.setSetting_value(dialog.getEditText().getText().toString());
 					CreateOrUpdateStatus status = pwSettingDao.createOrUpdate(pwSetting);
-					if(status.isCreated()){
+					if(status.isCreated()||status.isUpdated()){
 						showDialog();
+						dialog.dismiss();
 					}
 				}
 			});
@@ -76,9 +89,10 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 					public void onClick(
 							DialogInterface dialog,
 							int which) {
+						dialog.dismiss();
 						Intent intent = new Intent(SetEmailActivity.this, SettingsActivity.class);
-						setResult(1, intent);
-						finish();
+						startActivityForResult(intent,1);
+						SetEmailActivity.this.finish();
 					}
 		}).show();
 	}

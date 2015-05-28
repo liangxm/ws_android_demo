@@ -1,6 +1,7 @@
 package com.lxm.pwhelp.activity;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +9,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +54,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		detail_line1.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
 		detail_line2.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
 		detail_line3.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
+		detail_title.setVisibility(View.GONE);
 	}
 	
 	@Override
@@ -65,17 +66,17 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 			finish();
 			break;
 		case R.id.detail_line1_label3:
-			cmb.setText(line1_label2.getText().toString());
+			cmb.setPrimaryClip(ClipData.newPlainText("item_type", line1_label2.getText().toString()));
 			Toast.makeText(getApplicationContext(), "内容已经被复制到剪切板！",
 				     Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.detail_line2_label3:
-			cmb.setText(line2_label2.getText().toString());
+			cmb.setPrimaryClip(ClipData.newPlainText("item_username", line2_label2.getText().toString()));
 			Toast.makeText(getApplicationContext(), "内容已经被复制到剪切板！",
 				     Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.detail_line3_label3:
-			cmb.setText(line3_label2.getText().toString());
+			cmb.setPrimaryClip(ClipData.newPlainText("item_password", line3_label2.getText().toString()));
 			Toast.makeText(getApplicationContext(), "内容已经被复制到剪切板！",
 				     Toast.LENGTH_SHORT).show();
 			break;

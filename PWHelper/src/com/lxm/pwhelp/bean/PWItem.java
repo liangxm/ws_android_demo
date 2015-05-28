@@ -5,21 +5,25 @@
 
 package com.lxm.pwhelp.bean;
 
+import java.io.Serializable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "pw_item")
-public class PWItem {
+public class PWItem implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@DatabaseField(generatedId = true)
 	private int item_id;
-	@DatabaseField
+	@DatabaseField(defaultValue = "")
 	private String item_name;
-	@DatabaseField
+	@DatabaseField(canBeNull = false)
 	private String item_username;
-	@DatabaseField
+	@DatabaseField(canBeNull = false)
 	private String item_password;
-	@DatabaseField
+	@DatabaseField(canBeNull = false)
 	private String item_type;
 	@DatabaseField
 	private int item_subtype;
@@ -38,9 +42,9 @@ public class PWItem {
 	@DatabaseField
 	private boolean deleted;
 
-	public PWItem() {
-	}
+	public PWItem() {}
 
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(item_id + ";");

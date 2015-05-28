@@ -47,6 +47,8 @@ import com.lxm.pwhelp.adapter.LazyAdapter;
 import com.lxm.pwhelp.adapter.MyAdapter;
 import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.bean.PWSetting;
+import com.lxm.pwhelp.bean.SimpleData;
 import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
@@ -69,8 +71,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	private PagerAdapter mPagerAdapter;
 	private ExpandableListView mainlistview;
-	private List<String> parent;
-	private Map<String, List<String>> map;
+	public List<String> parent;
+	public Map<String, List<SimpleData>> map;
 
 	private ImageButton mSettingImg;
 	private LinearLayout mTabAddress;
@@ -186,20 +188,35 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 	// 初始化数据
     public void initData() {
-    	String[] groupData = new String[]{"默认分组","网银密码","论坛密码","微博密码","QQ密码","邮箱密码"};
+    	//initialize the group data
+    	List<PWGroup> groups = groupDao.getGroupAll();
+    	String[] groupData = new String[]{"默认分组","银行卡密码","论坛密码","微博密码","QQ密码","邮箱密码"};
     	parent = new ArrayList<String>();
-    	map = new HashMap<String, List<String>>();
-    	for(String groupStr:groupData){
-			groupDao.add(new PWGroup(groupStr,"0",false));
-			parent.add(groupStr);
-			List<String> list = new ArrayList<String>();
-			List<PWItem> itemGroups = itemDao.getPWItemByType(groupStr);
-			for(PWItem item:itemGroups){
-				list.add(item.getItem_username());
+    	map = new HashMap<String, List<SimpleData>>();
+    	if(groups.size()==0){
+	    	for(String groupStr:groupData){
+				groupDao.add(new PWGroup(groupStr,"0",false));
+				List<SimpleData> list = new ArrayList<SimpleData>();
+				List<PWItem> itemGroups = itemDao.getPWItemByType(groupStr);
+				parent.add(groupStr+"("+itemGroups.size()+")");
+				for(PWItem item:itemGroups){
+					list.add(new SimpleData(item.getItem_type(),item.getItem_username(),item.getItem_password()));
+				}
+				map.put(groupStr+"("+itemGroups.size()+")", list);
 			}
-			map.put(groupStr, list);
-		}
+    	}else{
+    		for(PWGroup group:groups){
+    			List<SimpleData> list = new ArrayList<SimpleData>();
+				List<PWItem> itemGroups = itemDao.getPWItemByType(group.getGroup_name());
+				parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
+				for(PWItem item:itemGroups){
+					list.add(new SimpleData(item.getItem_type(),item.getItem_username(),item.getItem_password()));
+				}
+				map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
+    		}
+    	}
     	
+    	//initialize the item data
     	List<PWItem> items = itemDao.getPWItemAll();
 		switchTheNoItem(items);
 		for (PWItem item : items) {
@@ -243,7 +260,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		// 设置单个分组展开
 		initData();
-		mainlistview.setAdapter(new MyAdapter(this,parent,map));
+		mainlistview.setAdapter(new MyAdapter(this));
 		adapter = new LazyAdapter(this, songsList);
 		lv_list.setAdapter(adapter);
 		
@@ -539,23 +556,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	// 弹窗
 	private void dialogEmail() {
-		String email=pwSettingDao.getSettingByName("email_address").get(0).getSetting_value();
-		final EmailDialog dialog = new EmailDialog(MainActivity.this,"请输入邮箱地址");
-		// final EditText editText = (EditText) dialog.getEditText();
-		dialog.setOnPositiveListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// dosomething youself
-				dialog.cancel();
-			}
-		});
-		dialog.setOnNegativeListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// String email = editText.getText().toString();
-			}
-		});
-		dialog.show();
+		List<PWSetting> setting = pwSettingDao.getSettingByName("email_address");
+		if(setting!=null&&setting.size()>0){
+			dialogBackup(setting.get(0).getSetting_value());
+		}else{
+			final EmailDialog dialog = new EmailDialog(MainActivity.this,"请输入邮箱地址");
+			// final EditText editText = (EditText) dialog.getEditText();
+			dialog.setOnPositiveListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// dosomething youself
+					dialog.dismiss();
+				}
+			});
+			dialog.setOnNegativeListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// String email = editText.getText().toString();
+				}
+			});
+			dialog.show();
+		}
 	}
 
 	/**
@@ -566,22 +587,43 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		builder.setMessage("确认退出吗？");
 		builder.setTitle("提示");
 		builder.setPositiveButton("确认",
-				new android.content.DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						finish();
-						System.exit(0);
-					}
-				});
+		new android.content.DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				finish();
+				System.exit(0);
+			}
+		});
 
 		builder.setNegativeButton("取消",
-				new android.content.DialogInterface.OnClickListener() {
+		new android.content.DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+	
+	public void dialogBackup(String email){
+		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+		builder.setMessage("开始备份数据到"+email);
+		builder.setTitle("数据备份");
+		builder.setPositiveButton("确认",
+		new android.content.DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			}
+		});
+
+		builder.setNegativeButton("取消",
+		new android.content.DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
 		builder.create().show();
 	}
 
@@ -603,6 +645,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				map.put("question2", item.getQuestion2());
 				map.put("modified", item.getModified());
 				songsList.add(map);
+			}
+			List<PWGroup> groups = groupDao.getGroupAll();
+			parent = new ArrayList<String>();
+			map = new HashMap<String, List<SimpleData>>();
+			for(PWGroup group:groups){
+				List<SimpleData> list = new ArrayList<SimpleData>();
+				List<PWItem> itemGroups = itemDao.getPWItemByType(group.getGroup_name());
+				parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
+				for(PWItem item:itemGroups){
+					list.add(new SimpleData(item.getItem_type(),item.getItem_username(),item.getItem_password()));
+				}
+				map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
 			}
 		}
 		super.onResume();

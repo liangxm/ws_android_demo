@@ -1,0 +1,107 @@
+#
+# generated on 2015/05/28 11:14:37
+#
+# --table-start--
+dataClass=com.lxm.pwhelp.bean.PWGroup
+tableName=pw_group
+# --table-fields-start--
+# --field-start--
+fieldName=group_id
+canBeNull=false
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=group_name
+canBeNull=false
+unique=true
+# --field-end--
+# --field-start--
+fieldName=group_level
+defaultValue=
+# --field-end--
+# --field-start--
+fieldName=created
+# --field-end--
+# --field-start--
+fieldName=deleted
+defaultValue=false
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.lxm.pwhelp.bean.PWItem
+tableName=pw_item
+# --table-fields-start--
+# --field-start--
+fieldName=item_id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=item_name
+defaultValue=
+# --field-end--
+# --field-start--
+fieldName=item_username
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=item_password
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=item_type
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=item_subtype
+# --field-end--
+# --field-start--
+fieldName=item_url
+# --field-end--
+# --field-start--
+fieldName=item_comment
+# --field-end--
+# --field-start--
+fieldName=question1
+# --field-end--
+# --field-start--
+fieldName=question2
+# --field-end--
+# --field-start--
+fieldName=modified
+# --field-end--
+# --field-start--
+fieldName=created
+# --field-end--
+# --field-start--
+fieldName=deleted
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.lxm.pwhelp.bean.PWSetting
+tableName=pw_setting
+# --table-fields-start--
+# --field-start--
+fieldName=setting_id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=setting_name
+unique=true
+# --field-end--
+# --field-start--
+fieldName=setting_value
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=created
+# --field-end--
+# --field-start--
+fieldName=deleted
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

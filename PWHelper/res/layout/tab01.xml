@@ -39,7 +39,8 @@
             android:id="@+id/lock_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/lock_icon"/>
+            android:src="@drawable/lock_icon"
+            android:contentDescription="@null"/>
         <TextView 
             android:id="@+id/no_item_desc"
             android:layout_width="wrap_content"
@@ -47,14 +48,14 @@
             android:singleLine="true"
             android:textSize="20sp"
             android:layout_margin="20dip"
-            android:text="您暂时还没有记录任何密码！"/>
+            android:text="@string/string_noitem_note"/>
         <Button 
             android:id="@+id/no_add_item"
             android:layout_width="260dip"
             android:layout_height="wrap_content"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="添加您的密码和账号"
+            android:text="@string/string_add_item"
             android:textColor="#ffffff"
             android:background="@drawable/rounded_button_common"/>
     </LinearLayout>

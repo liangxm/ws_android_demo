@@ -1,25 +1,29 @@
 package com.lxm.pwhelp.bean;
 
+import java.io.Serializable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "pw_setting")
-public class PWSetting {
+public class PWSetting implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@DatabaseField(generatedId = true)
 	private int setting_id;
 	@DatabaseField(unique = true)
 	private String setting_name;
-	@DatabaseField
+	@DatabaseField(canBeNull = false)
 	private String setting_value;
 	@DatabaseField
 	private String created;
 	@DatabaseField
 	private Boolean deleted;
 
-	public PWSetting() {
-	}
+	public PWSetting() {}
 	
+	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("setting_id"+";");

@@ -22,6 +22,10 @@
     <!-- btn_value -->
     <string name="string_ok">确定</string>
     <string name="string_cancel">取消</string>
+    <string name="string_add_item">添加您的密码和账号</string>
+    
+    <!-- textview_value -->
+    <string name="string_noitem_note">您暂时还没有记录任何密码！</string>
     
     <!-- manage center -->
     <string name="add_label">添加手机上的APP账号和密码</string>

@@ -1,9 +1,5 @@
 package com.lxm.pwhelp.adapter;
 
-import java.util.List;
-import java.util.Map;
-
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -14,24 +10,22 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
+import com.lxm.pwhelp.activity.MainActivity;
+import com.lxm.pwhelp.bean.SimpleData;
 
 public class MyAdapter extends BaseExpandableListAdapter {
 
-	private Activity activity;
-	private Map<String, List<String>> map;
-	private List<String> parent;
+	private MainActivity activity;
 	
-	public MyAdapter(Activity activity, List<String> parent, Map<String, List<String>> map){
+	public MyAdapter(MainActivity activity){
 		this.activity = activity;
-		this.parent = parent;
-		this.map = map;
 	}
 
 	// get item related data
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
-		String key = parent.get(groupPosition);
-		return (map.get(key).get(childPosition));
+		String key = activity.parent.get(groupPosition);
+		return (activity.map.get(key).get(childPosition));
 	}
 
 	// get item id
@@ -43,34 +37,39 @@ public class MyAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		String key = this.parent.get(groupPosition);
-		String info = map.get(key).get(childPosition);
+		String key = activity.parent.get(groupPosition);
+		SimpleData info = activity.map.get(key).get(childPosition);
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.layout_children, null);
 		}
-		TextView tv = (TextView) convertView.findViewById(R.id.second_textview);
-		tv.setText(info);
-		tv.setBackgroundColor(Color.WHITE);
-		return tv;
+		TextView tv1 = (TextView) convertView.findViewById(R.id.one_textview);
+		TextView tv2 = (TextView) convertView.findViewById(R.id.two_textview);
+		TextView tv3 = (TextView) convertView.findViewById(R.id.three_textview);
+		tv1.setText(info.getItem_type());
+		tv2.setText(info.getItem_username());
+		tv3.setText(info.getItem_password());
+		tv1.setBackgroundColor(Color.WHITE);
+		
+		return convertView;
 	}
 
 	@Override
 	public int getChildrenCount(int groupPosition) {
-		String key = parent.get(groupPosition);
-		int size = map.get(key).size();
+		String key = activity.parent.get(groupPosition);
+		int size = activity.map.get(key).size();
 		return size;
 	}
 
 	@Override
 	public Object getGroup(int groupPosition) {
-		return parent.get(groupPosition);
+		return activity.parent.get(groupPosition);
 	}
 
 	@Override
 	public int getGroupCount() {
-		return parent.size();
+		return activity.parent.size();
 	}
 
 	@Override
@@ -87,7 +86,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
 			convertView = inflater.inflate(R.layout.layout_parent, null);
 		}
 		TextView tv = (TextView) convertView.findViewById(R.id.parent_textview);
-		tv.setText(this.parent.get(groupPosition));
+		tv.setText(activity.parent.get(groupPosition));
 		tv.setBackgroundColor(Color.WHITE);
 		tv = getTextView(tv);
 		return tv;

@@ -1,24 +1,27 @@
 package com.lxm.pwhelp.bean;
 
+import java.io.Serializable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "pw_group")
-public class PWGroup {
+public class PWGroup implements Serializable {
 
-	@DatabaseField(generatedId = true)
+	private static final long serialVersionUID = 1L;
+	
+	@DatabaseField(generatedId = true,canBeNull = false)
 	private int group_id;
-	@DatabaseField
+	@DatabaseField(unique = true,canBeNull = false)
 	private String group_name;
-	@DatabaseField
+	@DatabaseField(defaultValue = "")
 	private String group_level;
 	@DatabaseField
 	private String created;
-	@DatabaseField
+	@DatabaseField(defaultValue = "false")
 	private boolean deleted;
 	
-	public PWGroup(){
-	}
+	public PWGroup(){}
 	
 	public PWGroup(String group_name, String group_level,
 			boolean deleted) {
@@ -28,6 +31,7 @@ public class PWGroup {
 		this.deleted = deleted;
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(group_id+";");
