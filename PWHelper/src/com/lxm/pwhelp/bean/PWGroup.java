@@ -13,6 +13,8 @@ public class PWGroup {
 	@DatabaseField
 	private String group_level;
 	@DatabaseField
+	private String created;
+	@DatabaseField
 	private boolean deleted;
 	
 	public PWGroup(){
@@ -55,6 +57,14 @@ public class PWGroup {
 
 	public void setGroup_level(String group_level) {
 		this.group_level = group_level;
+	}
+	
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
 	}
 
 	public boolean isDeleted() {

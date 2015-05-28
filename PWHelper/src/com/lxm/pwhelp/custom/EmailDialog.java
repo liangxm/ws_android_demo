@@ -19,21 +19,24 @@ public class EmailDialog extends Dialog {
     private TextView positiveButton, negativeButton;
     private TextView title;
  
-    public EmailDialog(Context context) {
+    public EmailDialog(Context context,String title) {
         super(context,R.style.Theme_dialog);
-        setCustomDialog();
+        setCustomDialog(title);
     }
  
-    private void setCustomDialog() {
+    private void setCustomDialog(String titleStr) {
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.email_dialog, null);
         title = (TextView) mView.findViewById(R.id.title);
-        editText = (EditText) mView.findViewById(R.id.number);
+        editText = (EditText) mView.findViewById(R.id.editText);
         positiveButton = (TextView) mView.findViewById(R.id.positiveButton);
         negativeButton = (TextView) mView.findViewById(R.id.negativeButton);
+        title.setText(titleStr);
+        editText.setHint(titleStr);
+        editText.setHint(R.string.email_hint);
         super.setContentView(mView);
     }
      
-    public View getEditText(){
+    public EditText getEditText(){
         return editText;
     }
      

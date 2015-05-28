@@ -18,6 +18,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.bean.PWSetting;
 
 /**
  * database helper
@@ -43,6 +44,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			TableUtils.createTable(connectionSource, PWItem.class);
 			TableUtils.createTable(connectionSource, PWGroup.class);
+			TableUtils.createTable(connectionSource, PWSetting.class);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -54,6 +56,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			TableUtils.dropTable(connectionSource, PWItem.class, true);
 			TableUtils.dropTable(connectionSource, PWGroup.class, true);
+			TableUtils.dropTable(connectionSource, PWSetting.class, true);
 			onCreate(database, connectionSource);
 		} catch (SQLException e) {
 			e.printStackTrace();

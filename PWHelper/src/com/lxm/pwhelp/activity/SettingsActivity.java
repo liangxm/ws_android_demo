@@ -1,5 +1,7 @@
 package com.lxm.pwhelp.activity;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
+import com.lxm.pwhelp.bean.PWSetting;
+import com.lxm.pwhelp.dao.PWSettingDao;
 
 public class SettingsActivity extends Activity implements View.OnClickListener {
 	
@@ -17,6 +21,8 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 	
 	private RelativeLayout setEmail;
 	private RelativeLayout setCommand;
+	
+	private PWSettingDao pwSettingDao;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -34,8 +40,19 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		setCommand = (RelativeLayout) findViewById(R.id.set_command);
 		setEmail.setOnClickListener(this);
 		setCommand.setOnClickListener(this);
-		emailState.setText("未绑定");
-		commandState.setText("未开启");
+		pwSettingDao=new PWSettingDao(this);
+		List<PWSetting> settingList1 = pwSettingDao.getSettingByName("email_address");
+		if(settingList1!=null&&settingList1.size()>0){
+			emailState.setText("已绑定");
+		}else{
+			emailState.setText("未绑定");
+		}
+		List<PWSetting> settingList2 = pwSettingDao.getSettingByName("pw_command");
+		if(settingList2!=null&&settingList2.size()>0){
+			commandState.setText("已开启");	
+		}else{
+			commandState.setText("未开启");
+		}
 	}
 
 	@Override
@@ -55,6 +72,23 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 			startActivityForResult(intent3, 1);
 			break;
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		List<PWSetting> settingList1 = pwSettingDao.getSettingByName("email_address");
+		if(settingList1!=null&&settingList1.size()>0){
+			emailState.setText("已绑定");
+		}else{
+			emailState.setText("未绑定");
+		}
+		List<PWSetting> settingList2 = pwSettingDao.getSettingByName("pw_command");
+		if(settingList2!=null&&settingList2.size()>0){
+			commandState.setText("已开启");	
+		}else{
+			commandState.setText("未开启");
+		}
+		super.onResume();
 	}
 
 }

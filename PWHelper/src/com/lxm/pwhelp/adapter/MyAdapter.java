@@ -5,9 +5,11 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
@@ -50,6 +52,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
 		}
 		TextView tv = (TextView) convertView.findViewById(R.id.second_textview);
 		tv.setText(info);
+		tv.setBackgroundColor(Color.WHITE);
 		return tv;
 	}
 
@@ -85,9 +88,19 @@ public class MyAdapter extends BaseExpandableListAdapter {
 		}
 		TextView tv = (TextView) convertView.findViewById(R.id.parent_textview);
 		tv.setText(this.parent.get(groupPosition));
+		tv.setBackgroundColor(Color.WHITE);
+		tv = getTextView(tv);
 		return tv;
 	}
 
+	private TextView getTextView(TextView textView){
+		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,120);
+		textView.setLayoutParams(lp);
+		textView.setPadding(96, 0, 0, 0);
+		textView.setTextSize(16);
+		return textView;
+	}
+	
 	@Override
 	public boolean hasStableIds() {
 		return true;

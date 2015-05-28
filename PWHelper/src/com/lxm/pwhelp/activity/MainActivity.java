@@ -50,6 +50,7 @@ import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
+import com.lxm.pwhelp.dao.PWSettingDao;
 import com.lxm.pwhelp.view.NoScrollViewPager;
 import com.nineoldandroids.util.Conver;
 
@@ -68,8 +69,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	private PagerAdapter mPagerAdapter;
 	private ExpandableListView mainlistview;
-	private List<String> parent = null;
-	private Map<String, List<String>> map = null;
+	private List<String> parent;
+	private Map<String, List<String>> map;
 
 	private ImageButton mSettingImg;
 	private LinearLayout mTabAddress;
@@ -96,6 +97,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	private PWItemDao itemDao;
 	private PWGroupDao groupDao;
+	private PWSettingDao pwSettingDao;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -163,6 +165,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private void initView() {
 		itemDao = new PWItemDao(this);
 		groupDao = new PWGroupDao(this);
+		pwSettingDao = new PWSettingDao(this);
 		mViews = new ArrayList<View>();
 		mViewPager = (NoScrollViewPager) findViewById(R.id.id_viewpage);
 		mTabWeiXin = (LinearLayout) findViewById(R.id.id_tab_weixin);
@@ -536,7 +539,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	// 弹窗
 	private void dialogEmail() {
-		final EmailDialog dialog = new EmailDialog(MainActivity.this);
+		String email=pwSettingDao.getSettingByName("email_address").get(0).getSetting_value();
+		final EmailDialog dialog = new EmailDialog(MainActivity.this,"请输入邮箱地址");
 		// final EditText editText = (EditText) dialog.getEditText();
 		dialog.setOnPositiveListener(new OnClickListener() {
 			@Override
