@@ -79,6 +79,8 @@
     <string name="set_email_title">邮箱账号</string>
     <string name="add_group_title">添加分组</string>
     <string name="edit_title">修改密码信息</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
 
     <!-- description for images -->
     <string name="return_desc">返回上层页面</string>

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.lxm.pwhelp.R;
+import com.nineoldandroids.util.Conver;
 
 public class LazyAdapter extends BaseAdapter {
 

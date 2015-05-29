@@ -1,34 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="60.0dip"
-    android:background="@color/theme_color" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/add_group_title"
-        android:textColor="#ffffffff"
-        android:textSize="20.0sp"
-        android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60.0dip"
+        android:background="@color/theme_color">
+        <TextView
+            android:id="@+id/group_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:text="@string/cancel"
+            android:textColor="#ffffffff"
+            android:textSize="16.0sp"/>
+        <TextView
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/add_group_title"
+            android:textColor="#ffffffff"
+            android:textSize="20.0sp"
+            android:textStyle="bold" />
 
-   <!--  <ImageView
-        android:id="@+id/Group_Return"
-        android:layout_width="25.0dip"
-        android:layout_height="25.0dip"
-        android:layout_marginLeft="10.0dip"
-        android:layout_centerVertical="true"
-        android:src="@drawable/left_icon"
-        android:contentDescription="@string/return_desc" />
-    <ImageView
-        android:id="@+id/Group_Submit"
-        android:layout_width="25.0dip"
-        android:layout_height="25.0dip"
-        android:layout_marginLeft="10.0dip"
-        android:layout_centerVertical="true"
-        android:src="@drawable/right_icon"
-        android:contentDescription="@string/return_desc" /> -->
+        <TextView
+            android:id="@+id/group_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:text="@string/save"
+            android:textColor="#ffffffff"
+            android:textSize="16.0sp" />
+    </RelativeLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <EditText 
+            android:inputType="text"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"/>
+        <TextView 
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:text="添加一个新的分组"/>
+    </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

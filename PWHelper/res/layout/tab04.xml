@@ -52,14 +52,16 @@
             android:id="@+id/head_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/head_icon" />
+            android:src="@drawable/head_icon"
+            android:background="@drawable/shadow_icon"
+            android:contentDescription="@null" />
 
         <TextView
             android:id="@+id/nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:text="无名氏" />
+            android:text="selina_listener"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,7 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5.0dip"
                 android:layout_centerVertical="true"
-                android:src="@drawable/recovery_icon" />
+                android:src="@drawable/recovery_icon"
+                android:contentDescription="@null" />
 
             <TextView
                 android:id="@+id/recovery_label"
@@ -98,14 +101,14 @@
 	            android:layout_alignParentRight="true"
 	            android:layout_centerVertical="true"
 	            android:layout_marginRight="6.0dip"
-	            android:src="@drawable/right_icon2" />
+	            android:src="@drawable/right_icon2"
+	            android:contentDescription="@null" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/cloud"
             android:layout_width="fill_parent"
             android:layout_height="45dip"
-            android:layout_centerVertical="true"
             android:clickable="true"
            	android:background="@drawable/layout_border" >
 
@@ -115,7 +118,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5.0dip"
                 android:layout_centerVertical="true"
-                android:src="@drawable/cloud_icon" />
+                android:src="@drawable/cloud_icon"
+                android:contentDescription="@null" />
 
             <TextView
                 android:id="@+id/cloud_label"
@@ -134,7 +138,8 @@
 	            android:layout_alignParentRight="true"
 	            android:layout_centerVertical="true"
 	            android:layout_marginRight="6.0dip"
-	            android:src="@drawable/right_icon2" />
+	            android:src="@drawable/right_icon2"
+	            android:contentDescription="@null" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -150,7 +155,8 @@
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5.0dip"
                 android:layout_centerVertical="true"
-                android:src="@drawable/setting_icon" />
+                android:src="@drawable/setting_icon"
+                android:contentDescription="@null" />
 
             <TextView
                 android:id="@+id/setttings_label"
@@ -170,7 +176,8 @@
 	            android:layout_alignParentRight="true"
 	            android:layout_centerVertical="true"
 	            android:layout_marginRight="6.0dip"
-	            android:src="@drawable/right_icon2" />
+	            android:src="@drawable/right_icon2"
+	            android:contentDescription="@null" />
         </RelativeLayout>
     </LinearLayout>
 

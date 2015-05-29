@@ -84,6 +84,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private RelativeLayout backupitem;
 	private RelativeLayout recovery;
 	private RelativeLayout settings;
+	private ImageView head_icon;
 	
 	private LinearLayout noitem;
 
@@ -252,6 +253,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		backupitem = (RelativeLayout) tab04.findViewById(R.id.cloud);
 		recovery = (RelativeLayout) tab04.findViewById(R.id.recovery);
 		settings = (RelativeLayout) tab04.findViewById(R.id.settings);
+		head_icon = (ImageView) tab04.findViewById(R.id.head_icon);
+		head_icon.setMaxWidth(Conver.dip2px(this, 250));
+		head_icon.setMaxHeight(Conver.dip2px(this, 250));
+		head_icon.setPadding(Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15));
+		
 		add_group = (ImageView) findViewById(R.id.add_group);
 		noitem = (LinearLayout) tab01.findViewById(R.id.noitem);
 		no_add_item = (Button) tab01.findViewById(R.id.no_add_item);

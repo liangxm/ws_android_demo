@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.activity.MainActivity;
 import com.lxm.pwhelp.bean.SimpleData;
+import com.nineoldandroids.util.Conver;
 
 public class MyAdapter extends BaseExpandableListAdapter {
 
@@ -93,9 +94,9 @@ public class MyAdapter extends BaseExpandableListAdapter {
 	}
 
 	private TextView getTextView(TextView textView){
-		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,120);
+		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,Conver.dip2px(activity, 40));
 		textView.setLayoutParams(lp);
-		textView.setPadding(96, 0, 0, 0);
+		textView.setPadding(Conver.dip2px(activity, 40), 0, 0, 0);
 		textView.setTextSize(16);
 		return textView;
 	}

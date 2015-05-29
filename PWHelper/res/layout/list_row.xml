@@ -51,7 +51,7 @@
         android:layout_toRightOf="@id/thumbnail"
         android:textColor="#ff343434"
         android:textSize="10.0dip" />
-
+    
     <ToggleButton
         android:id="@+id/mTogBtn"
         android:layout_width="wrap_content"
