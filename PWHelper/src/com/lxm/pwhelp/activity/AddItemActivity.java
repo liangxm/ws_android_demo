@@ -1,5 +1,7 @@
 package com.lxm.pwhelp.activity;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,7 +21,9 @@ import android.widget.Spinner;
 
 import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
+import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 
 public class AddItemActivity extends Activity implements View.OnClickListener {
@@ -42,6 +46,8 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 
 	private ArrayAdapter<String> adapter;
 	private String typeStr;
+	
+	private PWGroupDao groupDao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +133,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	}
 
 	private void init(Context context) {
+		groupDao = new PWGroupDao(this);
 		resources = this.getResources();
 		itemDao = new PWItemDao(context);
 		name = (EditText) findViewById(R.id.edit_name);
@@ -157,9 +164,15 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		qqStr = resources.getString(R.string.group_qq);
 		emailStr = resources.getString(R.string.group_email);
 		
+		List<PWGroup> pwGroups = groupDao.getGroupAll();
+		String[] spinnerArr=new String[pwGroups.size()];
+		for(int i=0;i<pwGroups.size();i++){
+			spinnerArr[i] = pwGroups.get(i).getGroup_name();
+		}
+		
 		// 将可选内容与ArrayAdapter连接起来
 		adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, new String[]{defaultStr,bankStr,bbsStr,weiboStr,qqStr,emailStr});
+				android.R.layout.simple_spinner_item, spinnerArr);
 		// 设置下拉列表的风格
 		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// 将adapter 添加到spinner中
@@ -233,6 +246,16 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				item6.setVisibility(View.VISIBLE);
 				item5.setVisibility(View.VISIBLE);
 				item2.setVisibility(View.VISIBLE);
+				item7.setVisibility(View.GONE);
+				item8.setVisibility(View.GONE);
+				item9.setVisibility(View.GONE);
+			}else{
+				item1.setVisibility(View.VISIBLE);
+				item3.setVisibility(View.VISIBLE);
+				item4.setVisibility(View.VISIBLE);
+				item6.setVisibility(View.VISIBLE);
+				item2.setVisibility(View.GONE);
+				item5.setVisibility(View.GONE);
 				item7.setVisibility(View.GONE);
 				item8.setVisibility(View.GONE);
 				item9.setVisibility(View.GONE);

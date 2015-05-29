@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.lxm.pwhelp.R;
-import com.nineoldandroids.util.Conver;
 
 public class LazyAdapter extends BaseAdapter {
 
@@ -52,10 +51,10 @@ public class LazyAdapter extends BaseAdapter {
 		final String password = getItem(position).get("item_password");
 		holder.item_type.setText(getItem(position).get("item_type"));
 		holder.item_username.setText("账号：" + getItem(position).get("item_username"));
-		holder.item_password.setText("密码："+"*********************");
 		
-		if(!holder.mTogBtn.isChecked())
+		if(!holder.mTogBtn.isChecked()){
 			holder.item_password.setText("密码："+"*********************");
+		}
 		holder.mTogBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,

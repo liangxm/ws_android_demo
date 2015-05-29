@@ -16,6 +16,7 @@
         android:textStyle="bold" />
 
     <com.lxm.pwhelp.custom.CircleImageView
+        android:id="@+id/top_header"
         android:layout_width="45.0dip"
         android:layout_height="45.0dip"
         android:layout_marginLeft="10.0dip"

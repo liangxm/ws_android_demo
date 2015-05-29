@@ -54,6 +54,7 @@
     <string name="question2_hint">输入密保问题答案……</string>
     <string name="search_bar_hint">你输入您要搜索的关键字</string>
     <string name="email_hint">输入你的邮箱地址……</string>
+    <string name="group_name_hint">输入一个分组名...</string>
     
     <!-- dialog -->
     <string name="back">返回</string>

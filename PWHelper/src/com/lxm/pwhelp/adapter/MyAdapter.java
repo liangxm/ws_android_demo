@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.activity.MainActivity;
 import com.lxm.pwhelp.bean.SimpleData;
-import com.nineoldandroids.util.Conver;
+import com.lxm.pwhelp.utils.Conver;
 
 public class MyAdapter extends BaseExpandableListAdapter {
 

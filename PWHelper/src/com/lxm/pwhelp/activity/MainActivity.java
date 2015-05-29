@@ -5,6 +5,9 @@
 
 package com.lxm.pwhelp.activity;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,9 +18,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
@@ -49,12 +58,15 @@ import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.bean.PWSetting;
 import com.lxm.pwhelp.bean.SimpleData;
+import com.lxm.pwhelp.custom.CircleImageView;
 import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.dao.PWSettingDao;
+import com.lxm.pwhelp.utils.Conver;
+import com.lxm.pwhelp.utils.SharedPreferencesUtils;
+import com.lxm.pwhelp.utils.Tools;
 import com.lxm.pwhelp.view.NoScrollViewPager;
-import com.nineoldandroids.util.Conver;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -81,10 +93,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private LinearLayout mTabWeiXin;
 
 	private LinearLayout additem;
+	private LinearLayout shodow_head;
 	private RelativeLayout backupitem;
 	private RelativeLayout recovery;
 	private RelativeLayout settings;
-	private ImageView head_icon;
+	private CircleImageView head_icon;
+	private CircleImageView top_header;
 	
 	private LinearLayout noitem;
 
@@ -120,6 +134,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		additem.setOnClickListener(this);
 		backupitem.setOnClickListener(this);
 		recovery.setOnClickListener(this);
+		head_icon.setOnClickListener(this);
 		settings.setOnClickListener(this);
 		add_group.setOnClickListener(this);
 		no_add_item.setOnClickListener(this);
@@ -196,7 +211,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     	map = new HashMap<String, List<SimpleData>>();
     	if(groups.size()==0){
 	    	for(String groupStr:groupData){
-				groupDao.add(new PWGroup(groupStr,"0",false));
+				groupDao.createOrUpdate(new PWGroup(groupStr,"0",false));
 				List<SimpleData> list = new ArrayList<SimpleData>();
 				List<PWItem> itemGroups = itemDao.getPWItemByType(groupStr);
 				parent.add(groupStr+"("+itemGroups.size()+")");
@@ -246,6 +261,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		View tab04 = mLayoutInflater.inflate(R.layout.tab04, null);
 
 		additem = (LinearLayout) tab03.findViewById(R.id.additem);
+		shodow_head = (LinearLayout) tab04.findViewById(R.id.shodow_head);
 		//explistview = (PinnedHeaderExpandableListView) tab02
 		//		.findViewById(R.id.explistview);
 		mainlistview = (ExpandableListView) tab02.findViewById(R.id.explistview);
@@ -253,10 +269,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		backupitem = (RelativeLayout) tab04.findViewById(R.id.cloud);
 		recovery = (RelativeLayout) tab04.findViewById(R.id.recovery);
 		settings = (RelativeLayout) tab04.findViewById(R.id.settings);
-		head_icon = (ImageView) tab04.findViewById(R.id.head_icon);
+		head_icon = (CircleImageView) tab04.findViewById(R.id.head_icon);
 		head_icon.setMaxWidth(Conver.dip2px(this, 250));
 		head_icon.setMaxHeight(Conver.dip2px(this, 250));
-		head_icon.setPadding(Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15));
+		shodow_head.setPadding(Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15));
+		top_header = (CircleImageView) findViewById(R.id.top_header);
 		
 		add_group = (ImageView) findViewById(R.id.add_group);
 		noitem = (LinearLayout) tab01.findViewById(R.id.noitem);
@@ -445,6 +462,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			showFileChooser();
 			break;
 		}
+		case R.id.head_icon: {
+			showDialog();
+			//Intent intent = new Intent(MainActivity.this, SettingHeaderActivity.class);
+			//startActivityForResult(intent, 1);
+			break;
+		}
 		case R.id.add_group: {
 			Intent intent = new Intent(MainActivity.this, AddGroupActivity.class);
 			startActivityForResult(intent, 1);
@@ -516,23 +539,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	// 回调方法，从第二个页面回来的时候会执行这个方法
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		if (resultCode == Activity.RESULT_OK) {
-			// Get the Uri of the selected file
-			/*
-			 * Uri uri = data.getData(); String url; try { url =
-			 * FileUtils.getPath(this, uri); Log.i("ht", "url" + url); String
-			 * fileName = url.substring(url.lastIndexOf("/") + 1); Intent intent
-			 * = new Intent(this, UploadServices.class);
-			 * intent.putExtra("fileName", fileName); intent.putExtra("url",
-			 * url); intent.putExtra("type ", ""); intent.putExtra("fuid", "");
-			 * intent.putExtra("type", "");
-			 * 
-			 * startService(intent);
-			 * 
-			 * } catch (URISyntaxException e) { // TODO Auto-generated catch
-			 * block e.printStackTrace(); }
-			 */
+		if (resultCode != RESULT_OK) {
+			return;
+		} else {
+			switch (requestCode){
+			case IMAGE_REQUEST_CODE:
+				resizeImage(data.getData());
+				break;
+			case CAMERA_REQUEST_CODE:
+				if (Tools.hasSdcard()){
+					resizeImage(getImageUri());
+				} else {
+					Toast.makeText(MainActivity.this, "未找到存储卡，无法存储照片!", Toast.LENGTH_LONG);
+				}
+				break;
+			case RESIZE_REQUEST_CODE:
+				if (data != null) {
+					showResizeImage(data);
+				}
+				break;
+			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -665,6 +691,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
 			}
 		}
+		
+		//头像更新
+		String imageUri = String.valueOf(SharedPreferencesUtils.getParam(MainActivity.this, SharedPreferencesUtils.PHOTO_PATH, new String()));
+		Uri uri = null;
+		if(imageUri!=null){
+			uri = Uri.fromFile(new File(imageUri));
+			top_header.setImageURI(uri);
+			head_icon.setImageURI(uri);
+			
+		}else{
+			top_header.setImageResource(R.drawable.head_icon);
+			head_icon.setImageResource(R.drawable.head_icon);
+		}
 		super.onResume();
 	}
 	
@@ -686,5 +725,105 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	protected void onDestroy() {
 		super.onDestroy();
 	}
+	
+    /** 
+     * 显示选择对话框 
+     */  
+    private void showDialog() {  
+        new AlertDialog.Builder(this)  
+                .setTitle("设置头像")  
+                .setItems(new String[] {"选择本地图片", "拍照"}, new DialogInterface.OnClickListener() {  
+                    @Override  
+                    public void onClick(DialogInterface dialog, int which) {  
+                        switch (which) {  
+                        case 0:  
+                            Intent intentFromGallery = new Intent();  
+                            intentFromGallery.setType("image/*"); // 设置文件类型  
+                            intentFromGallery  
+                                    .setAction(Intent.ACTION_GET_CONTENT);  
+                            startActivityForResult(intentFromGallery,  
+                                    IMAGE_REQUEST_CODE);  
+                            break;  
+                        case 1:  
+                            Intent intentFromCapture = new Intent(  
+                                    MediaStore.ACTION_IMAGE_CAPTURE);  
+                            // 判断存储卡是否可以用，可用进行存储  
+                            if (Tools.hasSdcard()) {  
+                            	intentFromCapture.putExtra(
+										MediaStore.EXTRA_OUTPUT,
+										Uri.fromFile(new File(Environment
+												.getExternalStorageDirectory(),
+												IMAGE_FILE_NAME)));
+                            }  
+  
+                            startActivityForResult(intentFromCapture,CAMERA_REQUEST_CODE);  
+                            break;  
+                        }  
+                    }  
+                })  
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {  
+  
+                    @Override  
+                    public void onClick(DialogInterface dialog, int which) {  
+                        dialog.dismiss();  
+                    }  
+                }).show();  
+  
+    }
+    
+	private void resizeImage(Uri uri) {
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(uri, "image/*");
+		intent.putExtra("crop", "true");
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		intent.putExtra("outputX", 180);
+		intent.putExtra("outputY", 180);
+		intent.putExtra("return-data", true);
+		startActivityForResult(intent, RESIZE_REQUEST_CODE);
+	}
 
+	private void showResizeImage(Intent data) {
+		Bundle extras = data.getExtras();
+		if (extras != null) {
+			Bitmap photo = extras.getParcelable("data");
+			savePic(photo);
+			Drawable drawable = new BitmapDrawable(this.getResources(),photo);
+			head_icon.setImageDrawable(drawable);
+		}
+	}
+	
+	private void savePic(Bitmap photo){
+    	long l2 = System.currentTimeMillis();
+	    String fileName = l2 + ".jpg";
+        String tempImgPath = getCacheDir().getAbsolutePath() + "/sysfiles/temp/" + fileName;
+        String dir = getDir(tempImgPath);
+		File dirFile = new File(dir);
+		dirFile.mkdirs();
+		if (!dirFile.exists()) {
+			Toast.makeText(MainActivity.this, "无法创建SD卡目录,图片无法保存", Toast.LENGTH_LONG).show();
+		}
+		try {
+        	BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(tempImgPath));
+        	photo.compress(Bitmap.CompressFormat.JPEG, 75, bos);// (0 - 100)压缩文件  
+        	SharedPreferencesUtils.setParam(MainActivity.this, SharedPreferencesUtils.PHOTO_PATH, tempImgPath);
+        } catch (Exception e) {
+			e.printStackTrace();
+        }  
+    }
+	
+	public  String getDir(String filePath) {
+		int lastSlastPos = filePath.lastIndexOf('/');
+		return filePath.substring(0, lastSlastPos);
+	}
+
+	private Uri getImageUri() {
+		return Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+				IMAGE_FILE_NAME));
+	}
+	
+	private static final int IMAGE_REQUEST_CODE = 0;
+	private static final int CAMERA_REQUEST_CODE = 1;
+	private static final int RESIZE_REQUEST_CODE = 2;
+	private static final String IMAGE_FILE_NAME = "header.jpg";
 }

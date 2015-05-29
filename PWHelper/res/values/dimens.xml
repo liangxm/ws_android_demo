@@ -4,5 +4,14 @@
     <dimen name="addActivity_label">18sp</dimen>
     <dimen name="addActivity_edit">16sp</dimen>
     <dimen name="spacing_medium">1dp</dimen>
+    <dimen name="widget_padding">5dip</dimen>
+    <dimen name="widget_margin">8dip</dimen>
+    <dimen name="widget_height">40dip</dimen>
+    <dimen name="editview_paddingleft">4dip</dimen>
+    <dimen name="textview_marginLeft">12dip</dimen>
+    
+    <!-- font size -->
+    <dimen name="title_font__size">20sp</dimen>
+    <dimen name="common_font_size">16sp</dimen>
 
 </resources>

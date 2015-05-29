@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.db.DatabaseHelper;
 
@@ -29,10 +30,10 @@ public class PWGroupDao {
 	 * add a new group
 	 * @param group
 	 */
-	public int add(PWGroup group){
-		int code = -1;
+	public CreateOrUpdateStatus createOrUpdate(PWGroup group){
+		CreateOrUpdateStatus code=null;
 		try {
-			code = groupDaoOpe.create(group);
+			code = groupDaoOpe.createOrUpdate(group);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

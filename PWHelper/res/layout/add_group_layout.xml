@@ -16,7 +16,9 @@
             android:layout_centerInParent="true"
             android:text="@string/cancel"
             android:textColor="#ffffffff"
-            android:textSize="16.0sp"/>
+            android:textSize="16.0sp"
+            android:layout_marginLeft="@dimen/widget_margin"
+            android:clickable="true"/>
         <TextView
             android:id="@id/title"
             android:layout_width="wrap_content"
@@ -24,7 +26,7 @@
             android:layout_centerInParent="true"
             android:text="@string/add_group_title"
             android:textColor="#ffffffff"
-            android:textSize="20.0sp"
+            android:textSize="@dimen/title_font__size"
             android:textStyle="bold" />
 
         <TextView
@@ -35,20 +37,30 @@
             android:layout_centerInParent="true"
             android:text="@string/save"
             android:textColor="#ffffffff"
-            android:textSize="16.0sp" />
+            android:textSize="@dimen/common_font_size"
+            android:layout_marginRight="@dimen/widget_margin"
+            android:clickable="true" />
     </RelativeLayout>
     <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
         <EditText 
+            android:id="@+id/new_group"
             android:inputType="text"
             android:layout_width="fill_parent"
-            android:layout_height="40dip"/>
+            android:layout_height="@dimen/widget_height"
+            android:background="@drawable/rounded_edittext"
+            android:layout_margin="@dimen/widget_margin"
+            android:paddingLeft="@dimen/editview_paddingleft"
+            android:hint="@string/group_name_hint"/>
         <TextView 
             android:layout_width="fill_parent"
-            android:layout_height="40dip"
-            android:text="添加一个新的分组"/>
+            android:layout_height="@dimen/widget_height"
+            android:text="添加一个新的分组"
+            android:layout_marginRight="@dimen/widget_margin"
+            android:layout_marginLeft="@dimen/textview_marginLeft"
+            android:textSize="@dimen/common_font_size"/>
     </LinearLayout>
 
 </LinearLayout>

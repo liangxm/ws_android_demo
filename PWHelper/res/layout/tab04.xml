@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lxm="http://schemas.android.com/apk/res/com.lxm.pwhelp"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -48,14 +49,19 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/head_icon"
+        <LinearLayout
+            android:id="@+id/shodow_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/head_icon"
-            android:background="@drawable/shadow_icon"
-            android:contentDescription="@null" />
-
+            android:gravity="center"
+            android:background="@drawable/shadow_icon">
+	        <com.lxm.pwhelp.custom.CircleImageView
+	            android:id="@+id/head_icon"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:src="@drawable/head_icon"
+	            android:contentDescription="@null" />
+		</LinearLayout>
         <TextView
             android:id="@+id/nickname"
             android:layout_width="wrap_content"

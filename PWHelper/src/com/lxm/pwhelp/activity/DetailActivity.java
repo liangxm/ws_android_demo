@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lxm.pwhelp.R;
-import com.nineoldandroids.util.Conver;
+import com.lxm.pwhelp.utils.Conver;
 
 public class DetailActivity extends Activity implements View.OnClickListener {
 	
