@@ -46,6 +46,16 @@ public class PWSettingDao {
 		return code;
 	}
 	
+	public int delete(PWSetting setting){
+		int code = -1;
+		try {
+			code = settingDaoOpe.delete(setting);
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return code;
+	}
+	
 	public List<PWSetting> getSettingByName(String name){
 		List<PWSetting> setting = null;
 		try {

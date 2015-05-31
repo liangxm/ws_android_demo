@@ -100,4 +100,14 @@ public class PWItemDao {
 		}
 		return items;
 	}
+	
+	public List<PWItem> getPWItemByName(String filterKey){
+		List<PWItem> items = null;
+		try {
+			items = itemDaoOpe.queryBuilder().where().like("item_username", "%"+filterKey+"%").query();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
 }

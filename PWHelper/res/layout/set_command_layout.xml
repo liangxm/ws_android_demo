@@ -15,23 +15,30 @@
             android:id="@+id/set_command_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/set_command_icon" />
+            android:src="@drawable/set_command_icon"
+            android:contentDescription="@null" />
         <TextView
             android:id="@+id/set_command_note"
             android:layout_width="300dip"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:text="密码口令是你每次查看密码时需要输入的一个口令，开通密码口令将保证你的密码助手在访客模式下也同样能保证你的密码安全！"
             android:lineSpacingMultiplier="1.2"
             android:textColor="#a0a29f" />
         <Button 
-            android:id="@+id/set_command_btn"
+            android:id="@+id/enable_command_btn"
             android:layout_width="300dip"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:text="开通口令"
             android:textColor="#FFFFFF"
             android:background="@drawable/rounded_button_common"/>
+        <Button 
+            android:id="@+id/disable_command_btn"
+            android:layout_width="300dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button_common"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </LinearLayout>

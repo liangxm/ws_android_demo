@@ -1,9 +1,12 @@
 package com.lxm.pwhelp.utils;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Environment;
 /**
  * 
- * @author XuZhiwei (xuzw13@gmail.com)
+ * @author listener (xiaoman.test@gmail.com)
  * Create at 2012-8-17 锟斤拷锟斤拷10:14:40
  */
 public class Tools {
@@ -18,5 +21,42 @@ public class Tools {
 		}else{
 			return false;
 		}
+	}
+	
+	/**
+	 * show warning dialog
+	 * @param title
+	 * @param message
+	 */
+	public static void showWarningDialog(Context context,String title,String message){
+		new AlertDialog.Builder(context).setTitle(title)
+		.setMessage(message).setPositiveButton("确定", null)
+		.show();
+	}
+	
+	/**
+	 * show sucess dialog
+	 * @param context
+	 * @param title
+	 * @param message
+	 * @param listener
+	 */
+	public static void showSucessDialog(Context context,String title,String message,OnClickListener listener){
+		new AlertDialog.Builder(context)
+		.setTitle(title)
+		.setMessage(message)
+		.setPositiveButton("确定",listener).show();
+	}
+	
+	/**
+	 * show info dialog
+	 * @param context
+	 * @param title
+	 * @param message
+	 */
+	public static void showErrorDialog(Context context,String title,String message){
+		new AlertDialog.Builder(context).setTitle(title)
+		.setMessage(message).setPositiveButton("确定", null)
+		.show();
 	}
 }

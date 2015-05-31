@@ -13,6 +13,7 @@ import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.dao.PWGroupDao;
+import com.lxm.pwhelp.utils.Tools;
 /**
  * Add group activity
  * @author lianxiao
@@ -44,11 +45,15 @@ public class AddGroupActivity extends Activity implements View.OnClickListener {
 			break;
 		case R.id.group_save:
 			String group_name = new_group.getText().toString();
-			CreateOrUpdateStatus status = groupDao.createOrUpdate(new PWGroup(group_name,"0",false));
-			if(status.isCreated()){
-				showDialog("添加成功","添加新分组成功！返回！");
+			if(group_name.trim().length()==0){
+				Tools.showErrorDialog(this, "警告", "请输入有效的分组名称！");
 			}else{
-				showDialog("添加失败","添加新分组失败！返回！");
+				CreateOrUpdateStatus status = groupDao.createOrUpdate(new PWGroup(group_name,"0",false));
+				if(status.isCreated()){
+					showDialog("添加成功","添加新分组成功！返回！");
+				}else{
+					showDialog("添加失败","添加新分组失败！返回！");
+				}
 			}
 			break;
 		}

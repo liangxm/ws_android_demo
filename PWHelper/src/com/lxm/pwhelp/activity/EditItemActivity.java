@@ -81,8 +81,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 						.setMessage("密码不能为空！").setPositiveButton("确定", null)
 						.show();
 			else {
-				PWItem item = new PWItem();
-				item.setItem_id(Integer.parseInt(bundle.getString("item_id")));
+				PWItem item = (PWItem) bundle.getSerializable("item");
 				item.setItem_name(nameStr);
 				item.setItem_username(usernameStr);
 				item.setItem_password(passwordStr);
@@ -130,6 +129,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 	}
 
 	private void init(Context context) {
+		PWItem item = (PWItem) bundle.getSerializable("item");
 		resources = this.getResources();
 		itemDao = new PWItemDao(context);
 		name = (EditText) findViewById(R.id.edit_name);
@@ -142,13 +142,13 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 		type = (Spinner) findViewById(R.id.edit_type);
 		subtype = (RadioGroup) findViewById(R.id.radioGroup);
 		
-		name.setText(bundle.getString("item_name"));
-		username.setText(bundle.getString("item_username"));
-		password.setText(bundle.getString("item_password"));
-		url.setText(bundle.getString("url"));
-		comment.setText(bundle.getString("item_comment"));
-		question1.setText(bundle.getString("question1"));
-		question2.setText(bundle.getString("question2"));
+		name.setText(item.getItem_name());
+		username.setText(item.getItem_username());
+		password.setText(item.getItem_password());
+		url.setText(item.getItem_url());
+		comment.setText(item.getItem_comment());
+		question1.setText(item.getQuestion1());
+		question2.setText(item.getQuestion2());
 		subtype.setSelected(false);
 		
 		item1 = (LinearLayout) findViewById(R.id.item1);
@@ -180,7 +180,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 		type.setOnItemSelectedListener(new SpinnerSelectedListener());
 		// 设置默认值
 		type.setVisibility(View.VISIBLE);
-		type.setTag(bundle.get("item_type"));
+		type.setTag(item.getItem_type());
 	}
 
 	// 使用数组形式操作

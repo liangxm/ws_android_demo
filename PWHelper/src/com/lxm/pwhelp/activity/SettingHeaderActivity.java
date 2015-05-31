@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -31,11 +32,14 @@ public class SettingHeaderActivity extends Activity implements OnClickListener {
 	private static final String IMAGE_FILE_NAME = "header.jpg";
 
 	private ImageView mImageHeader;
+	
+	private Resources resources;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.header_image_layout);
+		resources=this.getResources();
 		setupViews();
 	}
 
@@ -63,7 +67,7 @@ public class SettingHeaderActivity extends Activity implements OnClickListener {
 				cameraIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
 				startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
 			} else {
-				Toast.makeText(view.getContext(), "请插入sd卡", Toast.LENGTH_LONG);
+				Toast.makeText(view.getContext(), "请插入sd卡", Toast.LENGTH_LONG).show();
 			}
 			break;
 		}
@@ -82,7 +86,7 @@ public class SettingHeaderActivity extends Activity implements OnClickListener {
 				if (isSdcardExisting()){
 					resizeImage(getImageUri());
 				} else {
-					Toast.makeText(SettingHeaderActivity.this, "未找到存储卡，无法存储照片!", Toast.LENGTH_LONG);
+					Toast.makeText(SettingHeaderActivity.this, "未找到存储卡，无法存储照片!", Toast.LENGTH_LONG).show();
 				}
 				break;
 			case RESIZE_REQUEST_CODE:
@@ -121,7 +125,7 @@ public class SettingHeaderActivity extends Activity implements OnClickListener {
 		if (extras != null) {
 			Bitmap photo = extras.getParcelable("data");
 			savePic(photo);
-			Drawable drawable = new BitmapDrawable(photo);
+			Drawable drawable = new BitmapDrawable(resources,photo);
 			mImageHeader.setImageDrawable(drawable);
 		}
 	}

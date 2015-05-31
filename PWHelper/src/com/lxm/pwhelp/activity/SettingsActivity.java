@@ -21,6 +21,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 	
 	private RelativeLayout setEmail;
 	private RelativeLayout setCommand;
+	private RelativeLayout resetPattern;
 	
 	private PWSettingDao pwSettingDao;
 	
@@ -38,8 +39,10 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		commandState = (TextView) findViewById(R.id.command_state);
 		setEmail = (RelativeLayout) findViewById(R.id.set_email);
 		setCommand = (RelativeLayout) findViewById(R.id.set_command);
+		resetPattern = (RelativeLayout) findViewById(R.id.reset_lockpattern);
 		setEmail.setOnClickListener(this);
 		setCommand.setOnClickListener(this);
+		resetPattern.setOnClickListener(this);
 		pwSettingDao=new PWSettingDao(this);
 		List<PWSetting> settingList1 = pwSettingDao.getSettingByName("email_address");
 		if(settingList1!=null&&settingList1.size()>0){
@@ -70,6 +73,10 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		case R.id.set_command:
 			Intent intent3 = new Intent(SettingsActivity.this, SetCommandActivity.class);
 			startActivityForResult(intent3, 1);
+			break;
+		case R.id.reset_lockpattern:
+			Intent intent4 = new Intent(SettingsActivity.this,UnlockGesturePasswordActivity.class);
+			startActivityForResult(intent4,1);
 			break;
 		}
 	}

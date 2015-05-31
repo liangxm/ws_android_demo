@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.activity.MainActivity;
-import com.lxm.pwhelp.bean.SimpleData;
+import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.utils.Conver;
 
 public class MyAdapter extends BaseExpandableListAdapter {
@@ -38,8 +38,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		String key = activity.parent.get(groupPosition);
-		SimpleData info = activity.map.get(key).get(childPosition);
+		PWItem info = (PWItem) getChild(groupPosition,childPosition);
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,7 +51,6 @@ public class MyAdapter extends BaseExpandableListAdapter {
 		tv2.setText(info.getItem_username());
 		tv3.setText(info.getItem_password());
 		tv1.setBackgroundColor(Color.WHITE);
-		
 		return convertView;
 	}
 

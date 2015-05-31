@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lxm.pwhelp.R;
+import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.utils.Conver;
 
 public class DetailActivity extends Activity implements View.OnClickListener {
@@ -44,9 +45,10 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		line3_label2 = (TextView) findViewById(R.id.detail_line3_label2);
 		detail_title = (TextView) findViewById(R.id.detail_title);
 		Bundle bundle = this.getIntent().getExtras();
-		line1_label2.setText(bundle.getString("item_type"));
-		line2_label2.setText(bundle.getString("item_username"));
-		line3_label2.setText(bundle.getString("item_password"));
+		PWItem item = (PWItem) bundle.getSerializable("item");
+		line1_label2.setText(item.getItem_type());
+		line2_label2.setText(item.getItem_username());
+		line3_label2.setText(item.getItem_password());
 		
 		line1_label2.setPadding(Conver.dip2px(this, 20), 0, 0, 0);
 		line2_label2.setPadding(Conver.dip2px(this, 20), 0, 0, 0);

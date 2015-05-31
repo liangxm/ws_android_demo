@@ -12,7 +12,8 @@ public class LogUtil {
     private static final boolean DEBUG_TRACE = true;
     
     public static void i(String msg) {
-        Log.i("pwhelper", msg);
+    	if(DEBUG_TRACE)
+    		Log.i(DEBUG_TAG, msg);
     }
     
     public static void d(String msg) {

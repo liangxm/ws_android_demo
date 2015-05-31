@@ -15,13 +15,13 @@
             android:id="@+id/set_email_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/set_email_icon" />
+            android:src="@drawable/set_email_icon"
+            android:contentDescription="@null" />
         <TextView
-            android:id="@+id/set_command_note"
+            android:id="@+id/set_email_note"
             android:layout_width="300dip"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:text="为了确保您的密码绝对安全，密码助手被设计成一款纯客户端App。您的任何数据将不被上传到服务器， 为了确保您的密码不被丢失，您可以设置您的email地址，以便备份您的密码！"
             android:lineSpacingMultiplier="1.2"
             android:textColor="#a0a29f" />
         <Button 
@@ -29,7 +29,6 @@
             android:layout_width="300dip"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
-            android:text="修改备份邮箱地址"
             android:textColor="#FFFFFF"
             android:background="@drawable/rounded_button_common"/>
     </LinearLayout>

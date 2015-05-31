@@ -62,7 +62,6 @@ public class UnlockGesturePasswordActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
 		if (!App.getInstance().getLockPatternUtils().savedPatternExists()) {
 			startActivity(new Intent(this, GuideGesturePasswordActivity.class));
 			finish();
@@ -156,7 +155,6 @@ public class UnlockGesturePasswordActivity extends Activity {
 						mHeadTextView.setText("请绘制手势密码");
 						mHeadTextView.setTextColor(Color.WHITE);
 					}
-
 				}
 
 				@Override

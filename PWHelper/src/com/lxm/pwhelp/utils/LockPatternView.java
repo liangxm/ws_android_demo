@@ -1116,7 +1116,7 @@ public class LockPatternView extends View {
 			dest.writeValue(mTactileFeedbackEnabled);
 		}
 
-		public static final Parcelable.Creator<SavedState> CREATOR = new Creator<SavedState>() {
+		/*public static final Parcelable.Creator<SavedState> CREATOR = new Creator<SavedState>() {
 			public SavedState createFromParcel(Parcel in) {
 				return new SavedState(in);
 			}
@@ -1124,6 +1124,6 @@ public class LockPatternView extends View {
 			public SavedState[] newArray(int size) {
 				return new SavedState[size];
 			}
-		};
+		};*/
 	}
 }
