@@ -64,12 +64,15 @@
         android:text=""
         android:textOff=""
         android:textOn="" /> -->
-    <com.lxm.pwhelp.custom.ToggleButton 
-	     android:id="@+id/mTogBtn"
-	     android:layout_width="70dip"
-	     android:layout_height="40dip"
-	     android:layout_alignParentRight="true"
-         android:layout_centerVertical="true"
-	     android:layout_marginTop="10dip"
-	     android:layout_marginLeft="5dip" />
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+         	android:layout_centerVertical="true"
+         	android:layout_marginRight="8.0dip">
+		    <com.lxm.pwhelp.custom.ToggleButton 
+			     android:id="@+id/mTogBtn"
+			     android:layout_width="70dip"
+			     android:layout_height="40dip" />
+        </LinearLayout>
 </RelativeLayout>

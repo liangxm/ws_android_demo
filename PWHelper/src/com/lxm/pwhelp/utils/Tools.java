@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Environment;
+import android.view.Gravity;
+import android.widget.Toast;
 /**
  * 
  * @author listener (xiaoman.test@gmail.com)
@@ -58,5 +60,11 @@ public class Tools {
 		new AlertDialog.Builder(context).setTitle(title)
 		.setMessage(message).setPositiveButton("È·¶¨", null)
 		.show();
+	}
+	
+	public static void showToast(Context context,CharSequence message) {
+		Toast mToast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+		mToast.setGravity(Gravity.CENTER, 0, 0);
+		mToast.show();
 	}
 }

@@ -555,45 +555,45 @@ containing a value of this type.
         public static final int ormlite_config=0x7f050000;
     }
     public static final class string {
-        public static final int add_group_title=0x7f090041;
+        public static final int add_group_title=0x7f090042;
         /**  manage center 
          */
-        public static final int add_label=0x7f09001c;
+        public static final int add_label=0x7f09001d;
         /**  titles 
          */
-        public static final int add_title=0x7f09003c;
+        public static final int add_title=0x7f09003d;
         public static final int app_name=0x7f090000;
         /**  dialog 
          */
-        public static final int back=0x7f090032;
-        public static final int cancel=0x7f090043;
+        public static final int back=0x7f090033;
+        public static final int cancel=0x7f090044;
         /**  sub type strings 
          */
-        public static final int cash_card=0x7f09003a;
+        public static final int cash_card=0x7f09003b;
         /**  personal center 
          */
-        public static final int cloud_label=0x7f09001d;
-        public static final int command_label=0x7f09001a;
-        public static final int comment_hint=0x7f09002c;
-        public static final int credit_card=0x7f09003b;
-        public static final int detail_title=0x7f09003d;
+        public static final int cloud_label=0x7f09001e;
+        public static final int command_label=0x7f09001b;
+        public static final int comment_hint=0x7f09002d;
+        public static final int credit_card=0x7f09003c;
+        public static final int detail_title=0x7f09003e;
         public static final int draw_figtion_password=0x7f090012;
-        public static final int edit_title=0x7f090042;
-        public static final int email_address_label=0x7f090019;
-        public static final int email_hint=0x7f090030;
-        public static final int five_wrong_retry=0x7f090013;
-        public static final int forget_password=0x7f090014;
+        public static final int edit_title=0x7f090043;
+        public static final int email_address_label=0x7f09001a;
+        public static final int email_hint=0x7f090031;
+        public static final int five_wrong_retry=0x7f090014;
+        public static final int forget_password=0x7f090015;
         public static final int gesture_password_guide_creat_btn=0x7f090011;
         public static final int gesture_password_guide_text=0x7f090010;
-        public static final int group_bank=0x7f090035;
-        public static final int group_bbs=0x7f090036;
+        public static final int group_bank=0x7f090036;
+        public static final int group_bbs=0x7f090037;
         /**  type strings 
          */
-        public static final int group_default=0x7f090034;
-        public static final int group_email=0x7f090039;
-        public static final int group_name_hint=0x7f090031;
-        public static final int group_qq=0x7f090038;
-        public static final int group_weibo=0x7f090037;
+        public static final int group_default=0x7f090035;
+        public static final int group_email=0x7f09003a;
+        public static final int group_name_hint=0x7f090032;
+        public static final int group_qq=0x7f090039;
+        public static final int group_weibo=0x7f090038;
         public static final int lockpattern_confirm_button_text=0x7f090007;
         public static final int lockpattern_continue_button_text=0x7f090006;
         public static final int lockpattern_need_to_confirm=0x7f09000c;
@@ -609,42 +609,43 @@ containing a value of this type.
         public static final int lockscreen_access_pattern_cleared=0x7f090002;
         public static final int lockscreen_access_pattern_detected=0x7f090004;
         public static final int lockscreen_access_pattern_start=0x7f090001;
-        public static final int modify_lockpattern_label=0x7f09001b;
-        public static final int name_hint=0x7f090028;
-        public static final int password_hint=0x7f09002a;
-        public static final int question1_hint=0x7f09002d;
-        public static final int question2_hint=0x7f09002e;
-        public static final int recovery_label=0x7f09001f;
+        public static final int modify_lockpattern_label=0x7f09001c;
+        public static final int name_hint=0x7f090029;
+        public static final int password_hint=0x7f09002b;
+        public static final int question1_hint=0x7f09002e;
+        public static final int question2_hint=0x7f09002f;
+        public static final int recovery_label=0x7f090020;
         /**  description for images 
          */
-        public static final int return_desc=0x7f090045;
-        public static final int save=0x7f090044;
-        public static final int search_bar_hint=0x7f09002f;
-        public static final int set_command_title=0x7f09003f;
-        public static final int set_email_title=0x7f090040;
-        public static final int settings_title=0x7f09003e;
-        public static final int settting_label=0x7f09001e;
-        public static final int string_add_item=0x7f090017;
-        public static final int string_cancel=0x7f090016;
+        public static final int return_desc=0x7f090046;
+        public static final int save=0x7f090045;
+        public static final int search_bar_hint=0x7f090030;
+        public static final int set_command_title=0x7f090040;
+        public static final int set_email_title=0x7f090041;
+        public static final int settings_title=0x7f09003f;
+        public static final int settting_label=0x7f09001f;
+        public static final int string_add_item=0x7f090018;
+        public static final int string_cancel=0x7f090017;
         /**  textview_value 
          */
-        public static final int string_noitem_note=0x7f090018;
+        public static final int string_noitem_note=0x7f090019;
         /**  btn_value 
          */
-        public static final int string_ok=0x7f090015;
-        public static final int submit=0x7f090033;
-        public static final int text_comment=0x7f090025;
-        public static final int text_name=0x7f090021;
-        public static final int text_password=0x7f090023;
-        public static final int text_question1=0x7f090026;
-        public static final int text_question2=0x7f090027;
+        public static final int string_ok=0x7f090016;
+        public static final int submit=0x7f090034;
+        public static final int text_comment=0x7f090026;
+        public static final int text_name=0x7f090022;
+        public static final int text_password=0x7f090024;
+        public static final int text_question1=0x7f090027;
+        public static final int text_question2=0x7f090028;
         /**  add layout 
          */
-        public static final int text_type=0x7f090020;
-        public static final int text_url=0x7f090024;
-        public static final int text_username=0x7f090022;
-        public static final int url_hint=0x7f09002b;
-        public static final int username_hint=0x7f090029;
+        public static final int text_type=0x7f090021;
+        public static final int text_url=0x7f090025;
+        public static final int text_username=0x7f090023;
+        public static final int url_hint=0x7f09002c;
+        public static final int username_hint=0x7f09002a;
+        public static final int verify_figtion_password=0x7f090013;
     }
     public static final class style {
         /**  API 14 theme customizations can go here. 

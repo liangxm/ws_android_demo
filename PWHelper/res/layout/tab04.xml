@@ -56,8 +56,8 @@
             android:background="@drawable/shadow_icon">
 	        <com.lxm.pwhelp.custom.CircleImageView
 	            android:id="@+id/head_icon"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+	            android:layout_width="120dip"
+	            android:layout_height="120dip"
 	            android:src="@drawable/head_icon"
 	            android:contentDescription="@null" />
 		</LinearLayout>

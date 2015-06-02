@@ -13,8 +13,6 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -89,16 +87,15 @@ public class PWItemAdapter extends BaseAdapter {
 									dialog.dismiss();
 								}else{
 									Tools.showWarningDialog(activity,"口令错误","口令错误，请重试！");
-									holder.mTogBtn.setSelected(false);
+									holder.mTogBtn.setToggleOff();
 									dialog.dismiss();
-									return;
 								}
 							}
 						});
 						builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
-										holder.mTogBtn.setSelected(false);
+										holder.mTogBtn.setToggleOff();
 										dialog.dismiss();
 									}
 						});

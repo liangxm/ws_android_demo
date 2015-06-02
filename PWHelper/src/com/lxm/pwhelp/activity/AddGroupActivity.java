@@ -40,7 +40,7 @@ public class AddGroupActivity extends Activity implements View.OnClickListener {
 		switch (v.getId()) {
 		case R.id.group_cancel:
 			Intent intent = new Intent(AddGroupActivity.this, MainActivity.class);
-			setResult(1, intent);
+			setResult(RESULT_OK, intent);
 			finish();
 			break;
 		case R.id.group_save:
@@ -72,8 +72,8 @@ public class AddGroupActivity extends Activity implements View.OnClickListener {
 							int which) {
 						dialog.dismiss();
 						Intent intent = new Intent(AddGroupActivity.this, MainActivity.class);
-						startActivityForResult(intent,1);
-						AddGroupActivity.this.finish();
+						setResult(RESULT_OK, intent);
+						finish();
 					}
 		}).show();
 	}

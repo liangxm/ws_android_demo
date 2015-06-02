@@ -287,7 +287,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("item", item);
 				intent.putExtras(bundle);
-				MainActivity.this.startActivityForResult(intent, 1);
+				startActivity(intent);
 				return true;
 			}
 		});
@@ -367,7 +367,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("item", item);
 				intent.putExtras(bundle);
-				MainActivity.this.startActivityForResult(intent, 1);
+				startActivity(intent);
 			}
 		});
 		
@@ -415,7 +415,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			label1.setTextColor(Color.rgb(115, 215, 107));
 			mWeiXinImg.setImageResource(R.drawable.home_selected);
 			title.setText("首页");
-			return;
+			break;
 		}
 		case R.id.id_tab_address: {
 			add_group.setVisibility(View.VISIBLE);
@@ -425,7 +425,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			label2.setTextColor(Color.rgb(115, 215, 107));
 			mAddressImg.setImageResource(R.drawable.pass_selected);
 			title.setText("密码分组");
-			return;
+			break;
 		}
 		case R.id.id_tab_frd: {
 			add_group.setVisibility(View.GONE);
@@ -464,23 +464,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		case R.id.head_icon: {
 			showDialog();
-			//Intent intent = new Intent(MainActivity.this, SettingHeaderActivity.class);
-			//startActivityForResult(intent, 1);
 			break;
 		}
 		case R.id.add_group: {
 			Intent intent = new Intent(MainActivity.this, AddGroupActivity.class);
-			startActivityForResult(intent, 1);
+			startActivityForResult(intent, ADD_GROUP_CODE);
 			break;
 		}
 		case R.id.settings: {
 			Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-			startActivityForResult(intent, 1);
+			startActivity(intent);
 			break;
 		}
 		case R.id.no_add_item: {
 			Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
-			startActivityForResult(intent, 1);
+			startActivity(intent);
 			break;
 		}
 		}
@@ -517,6 +515,36 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 	};
 	
+	class UpdateListView implements Runnable {
+		private boolean isChanged;
+		public UpdateListView(boolean isChanged){
+			this.isChanged = isChanged;
+		}
+		@Override
+		public void run() {
+			List<PWItem> items = itemDao.getPWItemAll();
+			if (items.size() != itemList.size() || isChanged) {
+				switchTheNoItem(items);
+				itemList.clear();
+				for (PWItem item : items) {
+					itemList.add(item);
+				}
+				List<PWGroup> groups = groupDao.getGroupAll();
+				parent = new ArrayList<String>();
+				map = new HashMap<String, List<PWItem>>();
+				for(PWGroup group:groups){
+					List<PWItem> list = new ArrayList<PWItem>();
+					List<PWItem> itemGroups = itemDao.getPWItemByType(group.getGroup_name());
+					parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
+					for(PWItem item:itemGroups){
+						list.add(item);
+					}
+					map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
+				}
+			}
+		}
+	}
+	
 	private void resetImg() {
 		label1.setTextColor(Color.rgb(88, 88, 88));
 		label2.setTextColor(Color.rgb(88, 88, 88));
@@ -538,7 +566,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("item", item);
 		intent.putExtras(bundle);
-		startActivityForResult(intent, 1);
+		startActivityForResult(intent, EDIT_ITEM_CODE);
 	}
 
 	// 回调方法，从第二个页面回来的时候会执行这个方法
@@ -562,6 +590,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				if (data != null) {
 					showResizeImage(data);
 				}
+				break;
+			case EDIT_ITEM_CODE:
+			case ADD_GROUP_CODE:
+				Runnable update = new UpdateListView(true);
+				handler.post(update);
 				break;
 			}
 		}
@@ -643,7 +676,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		builder.create().show();
 	}
 	
-	public void dialogBackup(String email){
+	public void dialogBackup(final String email){
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 		builder.setMessage("开始备份数据到"+email);
 		builder.setTitle("数据备份");
@@ -651,6 +684,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		new android.content.DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				Intent intent=new Intent(Intent.ACTION_SEND);	//发送邮件使用ACTION_SEND
+        		intent.setType("plain/text");					//设置类型
+        		//调用系统发送邮件
+        		intent.putExtra(Intent.EXTRA_EMAIL,email);
+        		intent.putExtra(Intent.EXTRA_SUBJECT,"数据备份");
+        		intent.putExtra(Intent.EXTRA_TEXT,"密码助手，数据备份！");
+        		MainActivity.this.startActivity(intent);
 			}
 		});
 
@@ -666,27 +706,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	@Override
 	protected void onResume() {
-		List<PWItem> items = itemDao.getPWItemAll();
-		if (items.size() != itemList.size()) {
-			switchTheNoItem(items);
-			itemList.clear();
-			for (PWItem item : items) {
-				itemList.add(item);
-			}
-			List<PWGroup> groups = groupDao.getGroupAll();
-			parent = new ArrayList<String>();
-			map = new HashMap<String, List<PWItem>>();
-			for(PWGroup group:groups){
-				List<PWItem> list = new ArrayList<PWItem>();
-				List<PWItem> itemGroups = itemDao.getPWItemByType(group.getGroup_name());
-				parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
-				for(PWItem item:itemGroups){
-					list.add(item);
-				}
-				map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
-			}
-		}
-		
+		Runnable updateListView = new UpdateListView(false);
+		handler.post(updateListView);
 		//头像更新
 		String imageUri = String.valueOf(SharedPreferencesUtils.getParam(MainActivity.this, SharedPreferencesUtils.PHOTO_PATH, new String()));
 		File file = new File(imageUri);
@@ -695,7 +716,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			uri = Uri.fromFile(file);
 			top_header.setImageURI(uri);
 			head_icon.setImageURI(uri);
-			
 		}else{
 			top_header.setImageResource(R.drawable.head_icon);
 			head_icon.setImageResource(R.drawable.head_icon);
@@ -773,9 +793,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		intent.putExtra("crop", "true");
 		intent.putExtra("aspectX", 1);
 		intent.putExtra("aspectY", 1);
-		intent.putExtra("outputX", 180);
-		intent.putExtra("outputY", 180);
+		intent.putExtra("outputX", Conver.dip2px(this, 120));
+		intent.putExtra("outputY", Conver.dip2px(this, 120));
+		intent.putExtra("scale", true);
 		intent.putExtra("return-data", true);
+		intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+		intent.putExtra("noFaceDetection", true); // no face detection
 		startActivityForResult(intent, RESIZE_REQUEST_CODE);
 	}
 
@@ -821,5 +844,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private static final int IMAGE_REQUEST_CODE = 0;
 	private static final int CAMERA_REQUEST_CODE = 1;
 	private static final int RESIZE_REQUEST_CODE = 2;
+	private static final int EDIT_ITEM_CODE = 3;
+	private static final int ADD_GROUP_CODE = 4;
 	private static final String IMAGE_FILE_NAME = "header.jpg";
 }
