@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:toggle="http://schemas.android.com/apk/res/com.lxm.pwhelp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffffffff"
@@ -52,7 +52,7 @@
         android:textColor="#ff343434"
         android:textSize="10.0dip" />
     
-    <ToggleButton
+    <!-- <ToggleButton
         android:id="@+id/mTogBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,5 +63,13 @@
         android:checked="false"
         android:text=""
         android:textOff=""
-        android:textOn="" />
+        android:textOn="" /> -->
+    <com.lxm.pwhelp.custom.ToggleButton 
+	     android:id="@+id/mTogBtn"
+	     android:layout_width="70dip"
+	     android:layout_height="40dip"
+	     android:layout_alignParentRight="true"
+         android:layout_centerVertical="true"
+	     android:layout_marginTop="10dip"
+	     android:layout_marginLeft="5dip" />
 </RelativeLayout>

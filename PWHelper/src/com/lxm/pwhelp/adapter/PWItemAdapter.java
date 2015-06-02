@@ -17,11 +17,12 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.bean.PWSetting;
+import com.lxm.pwhelp.custom.ToggleButton;
+import com.lxm.pwhelp.custom.ToggleButton.OnToggleChanged;
 import com.lxm.pwhelp.dao.PWSettingDao;
 import com.lxm.pwhelp.utils.Tools;
 /**
@@ -65,10 +66,53 @@ public class PWItemAdapter extends BaseAdapter {
 		holder.item_type.setText(getItem(position).getItem_type());
 		holder.item_username.setText("账号：" + getItem(position).getItem_username());
 		
-		if(!holder.mTogBtn.isChecked()){
+		if(!holder.mTogBtn.isSelected()){
 			holder.item_password.setText("密码："+"*********************");
 		}
-		holder.mTogBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		holder.mTogBtn.setOnToggleChanged(new OnToggleChanged(){
+			@Override
+			public void onToggle(boolean on) {
+				if(on){
+					List<PWSetting> commands = pwSettingDao.getSettingByName("pw_command");
+					if(commands!=null&&commands.size()>0){
+						command = commands.get(0).getSetting_value();
+						final EditText commandStr = new EditText(activity);
+						AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+						builder.setTitle("请输入口令");
+						builder.setIcon(android.R.drawable.ic_dialog_info);
+						builder.setView(commandStr);
+						builder.setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								if(command.equals(commandStr.getText().toString())){
+									holder.item_password.setText("密码：" + password);
+									dialog.dismiss();
+								}else{
+									Tools.showWarningDialog(activity,"口令错误","口令错误，请重试！");
+									holder.mTogBtn.setSelected(false);
+									dialog.dismiss();
+									return;
+								}
+							}
+						});
+						builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										holder.mTogBtn.setSelected(false);
+										dialog.dismiss();
+									}
+						});
+						builder.setCancelable(false);
+						builder.show();
+					}else{
+						holder.item_password.setText("密码：" + password);
+					}
+				}else{
+					holder.item_password.setText("密码："+"*********************");
+				}
+			}
+		});
+		/*holder.mTogBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(final CompoundButton buttonView,
 					boolean isChecked) {
@@ -111,7 +155,7 @@ public class PWItemAdapter extends BaseAdapter {
 					holder.item_password.setText("密码："+"*********************");
 				}
 			}
-		});
+		});*/
         return convertView;
 	}
 	
