@@ -63,8 +63,8 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.Dlg_Return:
-			Intent intent = new Intent(AddItemActivity.this, MainActivity.class);
-			setResult(1, intent);
+			Intent intent = new Intent(this, MainActivity.class);
+			setResult(RESULT_OK, intent);
 			finish();
 			break;
 		case R.id.Dlg_Submit:
@@ -115,8 +115,9 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 												DialogInterface dialog,
 												int which) {
 											Intent intent = new Intent(AddItemActivity.this, MainActivity.class);
-											setResult(1, intent);
-											finish();
+											AddItemActivity.this.setResult(RESULT_OK, intent);
+											AddItemActivity.this.finish();
+											dialog.dismiss();
 										}
 							}).show();
 				}

@@ -13,6 +13,8 @@
         android:normalScreens="true" 
         android:smallScreens="true"  
         android:anyDensity="true"/>
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.lxm.pwhelp.App"

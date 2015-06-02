@@ -22,6 +22,9 @@
     <string name="verify_figtion_password">验证手势密码</string>
     <string name="five_wrong_retry">5次失败后，需要重新登录。</string>
     <string name="forget_password">忘记密码</string>
+    <string name="draw_unlock_map">绘制解锁图案</string>
+    <string name="gesturepassword_retry">重绘</string>
+    <string name="gesturepassword_save">保存</string>
     
     <!-- btn_value -->
     <string name="string_ok">确定</string>
@@ -92,4 +95,11 @@
 
     <!-- description for images -->
     <string name="return_desc">返回上层页面</string>
+    
+    <!-- author -->
+    <string name="author">Listener</string>
+    
+    <!-- email related -->
+    <string name="email_subject">来自密码助手的数据备份</string>
+    <string name="email_content">此邮件由您的密码助手APP发出，附件是您的密码数据备份文件（数据信息已加密），请妥善保管，以便您更换手机或丢失手机后恢复您的数据！</string>
 </resources>

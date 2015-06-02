@@ -30,6 +30,7 @@ import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -55,6 +56,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
+import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.adapter.MyAdapter;
 import com.lxm.pwhelp.adapter.PWItemAdapter;
@@ -66,6 +68,8 @@ import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.dao.PWSettingDao;
+import com.lxm.pwhelp.email.MailSenderInfo;
+import com.lxm.pwhelp.email.SimpleMailSender;
 import com.lxm.pwhelp.utils.Conver;
 import com.lxm.pwhelp.utils.SharedPreferencesUtils;
 import com.lxm.pwhelp.utils.Tools;
@@ -287,7 +291,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("item", item);
 				intent.putExtras(bundle);
-				startActivity(intent);
+				startActivityForResult(intent,VIEW_ITEM_DETAIL);
 				return true;
 			}
 		});
@@ -342,13 +346,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				case 0:
 					// edit
 					edit(item);
-					adapter.notifyDataSetChanged();
 					break;
 				case 1:
-					// delete
-					delete(item);
-					itemList.remove(item);
-					adapter.notifyDataSetChanged();
+					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+					builder.setMessage("确定要删除吗？");
+					builder.setTitle("提示");
+					builder.setPositiveButton("确认",new ClickListener(item,"delete"));
+					builder.setNegativeButton("取消",new ClickListener(item,"destory"));
+					builder.show();
 					break;
 				default:
 					break;
@@ -448,10 +453,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			break;
 		}
 		case R.id.additem: {
-			// DialogAddItem();
-			Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
-			// 打开新的Activity
-			startActivityForResult(intent, 1);
+			Intent intent = new Intent(this, AddItemActivity.class);
+			startActivityForResult(intent, ADD_ITEM_CODE);
 			break;
 		}
 		case R.id.cloud: {
@@ -467,7 +470,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			break;
 		}
 		case R.id.add_group: {
-			Intent intent = new Intent(MainActivity.this, AddGroupActivity.class);
+			Intent intent = new Intent(this, AddGroupActivity.class);
 			startActivityForResult(intent, ADD_GROUP_CODE);
 			break;
 		}
@@ -515,32 +518,84 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 	};
 	
-	class UpdateListView implements Runnable {
-		private boolean isChanged;
-		public UpdateListView(boolean isChanged){
-			this.isChanged = isChanged;
-		}
+	private class UpdateListView implements Runnable {
 		@Override
 		public void run() {
 			List<PWItem> items = itemDao.getPWItemAll();
-			if (items.size() != itemList.size() || isChanged) {
-				switchTheNoItem(items);
-				itemList.clear();
-				for (PWItem item : items) {
-					itemList.add(item);
+			switchTheNoItem(items);
+			itemList.clear();
+			for (PWItem item : items) {
+				itemList.add(item);
+			}
+			List<PWGroup> groups = groupDao.getGroupAll();
+			parent = new ArrayList<String>();
+			map = new HashMap<String, List<PWItem>>();
+			for(PWGroup group:groups){
+				List<PWItem> list = new ArrayList<PWItem>();
+				List<PWItem> itemGroups = itemDao.getPWItemByType(group.getGroup_name());
+				parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
+				for(PWItem item:itemGroups){
+					list.add(item);
 				}
-				List<PWGroup> groups = groupDao.getGroupAll();
-				parent = new ArrayList<String>();
-				map = new HashMap<String, List<PWItem>>();
-				for(PWGroup group:groups){
-					List<PWItem> list = new ArrayList<PWItem>();
-					List<PWItem> itemGroups = itemDao.getPWItemByType(group.getGroup_name());
-					parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
-					for(PWItem item:itemGroups){
-						list.add(item);
-					}
-					map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
-				}
+				map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
+			}
+		}
+	}
+	private class SendEmail implements Runnable {
+		private String email;
+		public SendEmail(String email){
+			this.email=email;
+		}
+		@Override
+		public void run() {
+			MailSenderInfo mailInfo = new MailSenderInfo();   
+		    mailInfo.setMailServerHost("smtp.163.com");   
+		    mailInfo.setMailServerPort("25");   
+		    mailInfo.setValidate(true);   
+		    mailInfo.setUserName("liangxm_tom@163.com");   
+		    mailInfo.setPassword("@@lxm19901210");//您的邮箱密码   
+		    mailInfo.setFromAddress("liangxm_tom@163.com");   
+		    mailInfo.setToAddress(email);   
+		    mailInfo.setSubject(MainActivity.this.getResources().getString(R.string.email_subject));   
+		    mailInfo.setContent(MainActivity.this.getResources().getString(R.string.email_content));   
+		    //这个类主要来发送邮件  
+		    SimpleMailSender sms = new SimpleMailSender();  
+		    sms.sendTextMail(mailInfo);//发送文体格式   
+		    //sms.sendHtmlMail(mailInfo);//发送html格式
+		}
+	}
+	private class ClickListener implements android.content.DialogInterface.OnClickListener {
+		private PWItem item;
+		private String type;
+		private String email;
+		public ClickListener(PWItem item,String type){
+			this.item = item;
+			this.type = type;
+		}
+		public ClickListener(String email,String type){
+			this.email = email;
+			this.type = type;
+		}
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			if("delete".equals(type)){
+				delete(dialog);
+			}else if("destory".equals(type)){
+				dialog.dismiss();
+			}else if("email".equals(type)){
+				Thread thread = new Thread(new SendEmail(email));
+				thread.start();
+			}
+		}
+		private void delete(DialogInterface dialog){
+			item.setDeleted(true);
+			CreateOrUpdateStatus status = itemDao.createOrUpdate(item);
+			if(status.isUpdated()){
+				itemList.remove(item);
+				adapter.notifyDataSetChanged();
+				dialog.dismiss();
+				Runnable update = new UpdateListView();
+				handler.post(update);
 			}
 		}
 	}
@@ -556,11 +611,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		mSettingImg.setImageResource(R.drawable.person_noselected);
 	}
 	
-	private void delete(PWItem item){
-		item.setDeleted(true);
-		itemDao.update(item);
-	}
-	
+	/**
+	 * modify the item
+	 * @param item
+	 */
 	private void edit(PWItem item){
 		Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
 		Bundle bundle = new Bundle();
@@ -593,7 +647,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				break;
 			case EDIT_ITEM_CODE:
 			case ADD_GROUP_CODE:
-				Runnable update = new UpdateListView(true);
+			case ADD_ITEM_CODE:
+				Runnable update = new UpdateListView();
 				handler.post(update);
 				break;
 			}
@@ -631,18 +686,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			dialogBackup(setting.get(0).getSetting_value());
 		}else{
 			final EmailDialog dialog = new EmailDialog(MainActivity.this,"请输入邮箱地址");
-			// final EditText editText = (EditText) dialog.getEditText();
+			final EditText editText = (EditText) dialog.getEditText();
+			editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 			dialog.setOnPositiveListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// dosomething youself
+					String email_address = editText.getText().toString();
+					if (!Tools.isEmail(email_address)) {
+						Tools.showWarningDialog(MainActivity.this, "警告",
+								"请输入有效的邮箱地址！");
+					}else{
+						PWSetting pwSetting = new PWSetting();
+						pwSetting.setSetting_name("email_address");
+						pwSetting.setSetting_value(email_address);
+						CreateOrUpdateStatus status = pwSettingDao
+								.createOrUpdate(pwSetting);
+						dialogBackup(email_address);
+					}
 					dialog.dismiss();
 				}
 			});
 			dialog.setOnNegativeListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// String email = editText.getText().toString();
+					dialog.dismiss();
 				}
 			});
 			dialog.show();
@@ -667,7 +734,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		builder.setNegativeButton("取消",
 		new android.content.DialogInterface.OnClickListener() {
-
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -677,37 +743,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 	
 	public void dialogBackup(final String email){
-		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("开始备份数据到"+email);
 		builder.setTitle("数据备份");
-		builder.setPositiveButton("确认",
-		new android.content.DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent intent=new Intent(Intent.ACTION_SEND);	//发送邮件使用ACTION_SEND
-        		intent.setType("plain/text");					//设置类型
-        		//调用系统发送邮件
-        		intent.putExtra(Intent.EXTRA_EMAIL,email);
-        		intent.putExtra(Intent.EXTRA_SUBJECT,"数据备份");
-        		intent.putExtra(Intent.EXTRA_TEXT,"密码助手，数据备份！");
-        		MainActivity.this.startActivity(intent);
-			}
-		});
-
-		builder.setNegativeButton("取消",
-		new android.content.DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
-		builder.create().show();
+		builder.setPositiveButton("确认",new ClickListener(email,"email"));
+		builder.setNegativeButton("取消",new ClickListener(email,"destory"));
+		builder.show();
 	}
 
 	@Override
 	protected void onResume() {
-		Runnable updateListView = new UpdateListView(false);
-		handler.post(updateListView);
 		//头像更新
 		String imageUri = String.valueOf(SharedPreferencesUtils.getParam(MainActivity.this, SharedPreferencesUtils.PHOTO_PATH, new String()));
 		File file = new File(imageUri);
@@ -846,5 +891,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private static final int RESIZE_REQUEST_CODE = 2;
 	private static final int EDIT_ITEM_CODE = 3;
 	private static final int ADD_GROUP_CODE = 4;
+	private static final int ADD_ITEM_CODE = 5;
+	private static final int VIEW_ITEM_DETAIL = 6;
 	private static final String IMAGE_FILE_NAME = "header.jpg";
 }

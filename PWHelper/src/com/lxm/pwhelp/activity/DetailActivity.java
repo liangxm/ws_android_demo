@@ -64,8 +64,8 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		switch(item.getId()){
 		case R.id.Detail_Return:
 			Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-			startActivity(intent);
-			DetailActivity.this.finish();
+			setResult(RESULT_OK, intent);
+			finish();
 			break;
 		case R.id.detail_line1_label3:
 			cmb.setPrimaryClip(ClipData.newPlainText("item_type", line1_label2.getText().toString()));
@@ -89,8 +89,8 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)
 				&& (event.getAction() == KeyEvent.ACTION_DOWN)) {
 			Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-			startActivity(intent);
-			DetailActivity.this.finish();
+			setResult(RESULT_OK, intent);
+			finish();
 		}
 		return super.onKeyDown(keyCode, event);
 	}

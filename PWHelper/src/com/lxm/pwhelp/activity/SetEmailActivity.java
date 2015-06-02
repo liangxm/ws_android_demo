@@ -1,8 +1,6 @@
 package com.lxm.pwhelp.activity;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -80,15 +78,9 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 			dialog.setOnPositiveListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					dialog.dismiss();
-				}
-			});
-			dialog.setOnNegativeListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
 					String email_address = dialog.getEditText().getText()
 							.toString();
-					if (!isEmail(email_address)) {
+					if (!Tools.isEmail(email_address)) {
 						Tools.showWarningDialog(SetEmailActivity.this, "警告",
 								"请输入有效的邮箱地址！");
 					} else {
@@ -110,6 +102,12 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 					}
 				}
 			});
+			dialog.setOnNegativeListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
 			dialog.show();
 			break;
 		}
@@ -125,12 +123,5 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 			dialog.dismiss();
 		}
 	};
-
-	public boolean isEmail(String email) {
-		String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
-		Pattern p = Pattern.compile(str);
-		Matcher m = p.matcher(email);
-		return m.matches();
-	}
 
 }
