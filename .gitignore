@@ -12,3 +12,6 @@ PWHelper/language.properties
 SwipeMenu/outdir
 CompoundButtonView/bin
 sample/bin
+ToggleButtonLib
+ToggleButtonSample
+LockPattern

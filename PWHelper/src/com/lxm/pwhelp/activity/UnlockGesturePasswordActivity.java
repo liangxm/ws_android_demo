@@ -13,17 +13,16 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lxm.pwhelp.App;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.utils.LockPatternUtils;
 import com.lxm.pwhelp.utils.LockPatternView;
 import com.lxm.pwhelp.utils.LockPatternView.Cell;
+import com.lxm.pwhelp.utils.Tools;
 
 public class UnlockGesturePasswordActivity extends Activity {
 	private LockPatternView mLockPatternView;
@@ -32,19 +31,10 @@ public class UnlockGesturePasswordActivity extends Activity {
 	private Handler mHandler = new Handler();
 	private TextView mHeadTextView;
 	private Animation mShakeAnim;
-
-	private Toast mToast;
-
-	private void showToast(CharSequence message) {
-		if (null == mToast) {
-			mToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-			mToast.setGravity(Gravity.CENTER, 0, 0);
-		} else {
-			mToast.setText(message);
-		}
-
-		mToast.show();
-	}
+	
+	private Bundle bundle;
+	private static final String RESET="reset";
+	private static boolean isReset = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +47,18 @@ public class UnlockGesturePasswordActivity extends Activity {
 		mLockPatternView.setTactileFeedbackEnabled(true);
 		mHeadTextView = (TextView) findViewById(R.id.gesturepwd_unlock_text);
 		mShakeAnim = AnimationUtils.loadAnimation(this, R.anim.shake_x);
+		init();
+	}
+	
+	private void init(){
+		bundle = this.getIntent().getExtras();
+		String reset = null;
+		if(bundle!=null)
+			reset = bundle.getString("action");
+		if(RESET.equals(reset)){
+			mHeadTextView.setText(this.getResources().getString(R.string.verify_figtion_password));
+			isReset = true;
+		}
 	}
 
 	@Override
@@ -95,14 +97,21 @@ public class UnlockGesturePasswordActivity extends Activity {
 			if (pattern == null)
 				return;
 			if (App.getInstance().getLockPatternUtils().checkPattern(pattern)) {
-				mLockPatternView
-						.setDisplayMode(LockPatternView.DisplayMode.Correct);
-				Intent intent = new Intent(UnlockGesturePasswordActivity.this,
-						MainActivity.class);
-				// 打开新的Activity
-				startActivity(intent);
-				showToast("解锁成功");
-				finish();
+				if(!isReset){
+					mLockPatternView
+							.setDisplayMode(LockPatternView.DisplayMode.Correct);
+					Intent intent = new Intent(UnlockGesturePasswordActivity.this,
+							MainActivity.class);
+					// 打开新的Activity
+					startActivity(intent);
+					Tools.showToast(UnlockGesturePasswordActivity.this,"解锁成功");
+					finish();
+				}else{
+					Intent intent = new Intent(UnlockGesturePasswordActivity.this,CreateGesturePasswordActivity.class);
+					intent.putExtra("reset", "YES");
+					startActivityForResult(intent,1);
+					finish();
+				}
 			} else {
 				mLockPatternView
 						.setDisplayMode(LockPatternView.DisplayMode.Wrong);
@@ -112,14 +121,14 @@ public class UnlockGesturePasswordActivity extends Activity {
 							- mFailedPatternAttemptsSinceLastTimeout;
 					if (retry >= 0) {
 						if (retry == 0)
-							showToast("您已5次输错密码，请30秒后再试");
+							Tools.showToast(UnlockGesturePasswordActivity.this,"您已5次输错密码，请30秒后再试");
 						mHeadTextView.setText("密码错误，还可以再输入" + retry + "次");
 						mHeadTextView.setTextColor(Color.RED);
 						mHeadTextView.startAnimation(mShakeAnim);
 					}
 
 				}else{
-					showToast("输入长度不够，请重试");
+					Tools.showToast(UnlockGesturePasswordActivity.this,"输入长度不够，请重试");
 				}
 
 				if (mFailedPatternAttemptsSinceLastTimeout >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {

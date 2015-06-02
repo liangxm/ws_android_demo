@@ -38,6 +38,8 @@ public class CreateGesturePasswordActivity extends Activity implements
 	 * The patten used during the help screen to show how to draw a pattern.
 	 */
 	private final List<LockPatternView.Cell> mAnimatePattern = new ArrayList<LockPatternView.Cell>();
+	
+	private static boolean isReset = false;
 
 	/**
 	 * The states of the left footer button.
@@ -203,6 +205,9 @@ public class CreateGesturePasswordActivity extends Activity implements
 		mPreviewViews[2][0] = findViewById(R.id.gesturepwd_setting_preview_6);
 		mPreviewViews[2][1] = findViewById(R.id.gesturepwd_setting_preview_7);
 		mPreviewViews[2][2] = findViewById(R.id.gesturepwd_setting_preview_8);
+		if("YES".equals(this.getIntent().getStringExtra("reset"))){
+			isReset = true;
+		}
 	}
 
 	private void updatePreviewViews() {
@@ -412,8 +417,15 @@ public class CreateGesturePasswordActivity extends Activity implements
 
 	private void saveChosenPatternAndFinish() {
 		App.getInstance().getLockPatternUtils().saveLockPattern(mChosenPattern);
-		showToast("密码设置成功");
-		startActivity(new Intent(this,UnlockGesturePasswordActivity.class));
-		finish();
+		if(!isReset){
+			showToast("手势密码设置成功");
+			startActivity(new Intent(this,UnlockGesturePasswordActivity.class));
+			finish();
+		}else{
+			showToast("手势密码修改成功");
+			Intent intent = new Intent(this,SettingsActivity.class);
+			setResult(RESULT_OK, intent);
+			finish();
+		}
 	}
 }

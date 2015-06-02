@@ -63,20 +63,23 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		switch(item.getId()){
 		case R.id.Settings_Return:
 			Intent intent1 = new Intent(SettingsActivity.this,MainActivity.class);
-			setResult(1,intent1);
-			finish();
+			startActivity(intent1);
 			break;
 		case R.id.set_email:
 			Intent intent2 = new Intent(SettingsActivity.this, SetEmailActivity.class);
-			startActivityForResult(intent2, 1);
+			startActivity(intent2);
 			break;
 		case R.id.set_command:
 			Intent intent3 = new Intent(SettingsActivity.this, SetCommandActivity.class);
-			startActivityForResult(intent3, 1);
+			startActivity(intent3);
 			break;
 		case R.id.reset_lockpattern:
 			Intent intent4 = new Intent(SettingsActivity.this,UnlockGesturePasswordActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("action", "reset");
+			intent4.putExtras(bundle);
 			startActivityForResult(intent4,1);
+			finish();
 			break;
 		}
 	}

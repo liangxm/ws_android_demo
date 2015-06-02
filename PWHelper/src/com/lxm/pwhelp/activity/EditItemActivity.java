@@ -60,7 +60,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 		switch (v.getId()) {
 		case R.id.Edit_Return:
 			Intent intent = new Intent(EditItemActivity.this, MainActivity.class);
-			setResult(1, intent);
+			setResult(RESULT_OK, intent);
 			finish();
 			break;
 		case R.id.Edit_Submit:
@@ -111,7 +111,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 												DialogInterface dialog,
 												int which) {
 											Intent intent = new Intent(EditItemActivity.this, MainActivity.class);
-											setResult(1, intent);
+											setResult(RESULT_OK, intent);
 											finish();
 										}
 							}).show();
