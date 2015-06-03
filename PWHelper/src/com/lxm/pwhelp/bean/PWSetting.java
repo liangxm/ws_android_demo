@@ -19,16 +19,18 @@ public class PWSetting implements Serializable {
 	@DatabaseField
 	private String created;
 	@DatabaseField
-	private Boolean deleted;
+	private boolean deleted;
 
 	public PWSetting() {}
 	
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("setting_id"+";");
-		sb.append("setting_name"+";");
-		sb.append("setting_value"+";");
+		sb.append(setting_id+"|");
+		sb.append(setting_name+"|");
+		sb.append(setting_value+"|");
+		sb.append(created+"|");
+		sb.append(deleted);
 		return sb.toString();
 	}
 

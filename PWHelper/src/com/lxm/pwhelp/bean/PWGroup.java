@@ -10,15 +10,15 @@ public class PWGroup implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@DatabaseField(generatedId = true,canBeNull = false)
+	@DatabaseField(generatedId = true)
 	private int group_id;
-	@DatabaseField(unique = true,canBeNull = false)
+	@DatabaseField(unique = true)
 	private String group_name;
-	@DatabaseField(defaultValue = "")
+	@DatabaseField(defaultValue = "0")
 	private String group_level;
 	@DatabaseField
 	private String created;
-	@DatabaseField(defaultValue = "false")
+	@DatabaseField
 	private boolean deleted;
 	
 	public PWGroup(){}
@@ -34,8 +34,11 @@ public class PWGroup implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(group_id+";");
-		sb.append(group_name+";");
+		sb.append(group_id+"|");
+		sb.append(group_name+"|");
+		sb.append(group_level+"|");
+		sb.append(created+"|");
+		sb.append(deleted);
 		return sb.toString();
 	}
 

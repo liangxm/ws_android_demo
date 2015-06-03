@@ -47,11 +47,19 @@ public class PWItem implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(item_id + ";");
-		sb.append(item_name + ";");
-		sb.append(item_type + ";");
-		sb.append(item_username + ";");
-		sb.append(item_password + ";");
+		sb.append(item_id + "|");
+		sb.append(item_name + "|");
+		sb.append(item_username + "|");
+		sb.append(item_password + "|");
+		sb.append(item_type + "|");
+		sb.append(item_subtype+"|");
+		sb.append(item_url+"|");
+		sb.append(item_comment+"|");
+		sb.append(question1+"|");
+		sb.append(question2+"|");
+		sb.append(modified+"|");
+		sb.append(created+"|");
+		sb.append(deleted);
 		return sb.toString();
 	}
 

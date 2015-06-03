@@ -55,7 +55,11 @@ public class PWGroupDao {
 		return group;
 	}
 	
-	public List<PWGroup> getGroupAll(){
+	/**
+	 * get all of groups which is available 
+	 * @return
+	 */
+	public List<PWGroup> getAvailableGroup(){
 		List<PWGroup> groups = null;
 		try {
 			groups = groupDaoOpe.queryBuilder().where().eq("deleted", false).query();
@@ -63,5 +67,29 @@ public class PWGroupDao {
 			e.printStackTrace();
 		}
 		return groups;
+	}
+	
+	/**
+	 * get all of groups
+	 * @return
+	 */
+	public List<PWGroup> getGroupAll(){
+		List<PWGroup> groups = null;
+		try {
+			groups = groupDaoOpe.queryBuilder().query();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return groups;
+	}
+	
+	public int deleteAll(){
+		int code = -1;
+		try {
+			code = groupDaoOpe.delete(getGroupAll());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return code;
 	}
 }

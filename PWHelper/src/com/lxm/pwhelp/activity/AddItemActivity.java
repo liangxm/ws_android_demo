@@ -165,7 +165,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		qqStr = resources.getString(R.string.group_qq);
 		emailStr = resources.getString(R.string.group_email);
 		
-		List<PWGroup> pwGroups = groupDao.getGroupAll();
+		List<PWGroup> pwGroups = groupDao.getAvailableGroup();
 		String[] spinnerArr=new String[pwGroups.size()];
 		for(int i=0;i<pwGroups.size();i++){
 			spinnerArr[i] = pwGroups.get(i).getGroup_name();

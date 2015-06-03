@@ -56,6 +56,16 @@ public class PWSettingDao {
 		return code;
 	}
 	
+	public List<PWSetting> getSettingAll(){
+		List<PWSetting> settings = null;
+		try {
+			settings = settingDaoOpe.queryBuilder().query();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return settings;
+	}
+	
 	public List<PWSetting> getSettingByName(String name){
 		List<PWSetting> setting = null;
 		try {
@@ -64,5 +74,20 @@ public class PWSettingDao {
 			e.printStackTrace();
 		}
 		return setting;
+	}
+	
+	/**
+	 * delete all data
+	 * @return
+	 */
+	public int deleteAll(){
+		int code = -1;
+		try {
+			code = settingDaoOpe.delete(getSettingAll());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return code;
+		
 	}
 }

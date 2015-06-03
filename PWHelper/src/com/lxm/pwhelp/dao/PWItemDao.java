@@ -80,11 +80,28 @@ public class PWItemDao {
 		return item;
 	}
 	
-	
-	public List<PWItem> getPWItemAll(){
+	/**
+	 * get all of available Item
+	 * @return
+	 */
+	public List<PWItem> getAvailablePWItem(){
 		List<PWItem> items = null;
 		try {
 			items = itemDaoOpe.queryBuilder().where().eq("deleted", false).query();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+	
+	/**
+	 * get all of items
+	 * @return
+	 */
+	public List<PWItem> getPWItemAll(){
+		List<PWItem> items = null;
+		try {
+			items = itemDaoOpe.queryBuilder().query();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -109,5 +126,15 @@ public class PWItemDao {
 			e.printStackTrace();
 		}
 		return items;
+	}
+	
+	public int deleteAll(){
+		int code = -1;
+		try {
+			code = itemDaoOpe.delete(getPWItemAll());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return code;
 	}
 }

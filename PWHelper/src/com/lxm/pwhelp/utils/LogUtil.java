@@ -20,7 +20,7 @@ public class LogUtil {
         Log.d("pwhelper", msg);
     }
     
-    public static void e(String msg) {
+    public static void e(String tag,String msg) {
         Log.e("pwhelper", msg);
     }
 }
