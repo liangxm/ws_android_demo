@@ -164,7 +164,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 		// 类型分组名称
 		defaultStr = resources.getString(R.string.group_default);
 		bankStr = resources.getString(R.string.group_bank);
-		bbsStr = resources.getString(R.string.group_bbs);
+		bbsStr = resources.getString(R.string.group_web);
 		weiboStr = resources.getString(R.string.group_weibo);
 		qqStr = resources.getString(R.string.group_qq);
 		emailStr = resources.getString(R.string.group_email);

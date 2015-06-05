@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
@@ -61,6 +62,28 @@ public class PWItemAdapter extends BaseAdapter {
 		
 		final ViewHolder holder = (ViewHolder) convertView.getTag();
 		final String password = getItem(position).getItem_password();
+		String default_str = Tools.getResources(activity, R.string.group_default);
+		//String bank_str = Tools.getResources(activity, R.string.group_bank);
+		//String web_str = Tools.getResources(activity, R.string.group_web);
+		String weibo_str = Tools.getResources(activity, R.string.group_weibo);
+		String qq_str = Tools.getResources(activity, R.string.group_qq);
+		String email_str = Tools.getResources(activity, R.string.group_email);
+		String alipay_str = Tools.getResources(activity, R.string.group_alipay);
+		String item_type = getItem(position).getItem_type();
+		if(default_str.equals(item_type))
+			holder.item_logo.setImageResource(R.drawable.default_item_icon);
+		else if(weibo_str.equals(item_type))
+			holder.item_logo.setImageResource(R.drawable.sina_item_icon);
+		else if(qq_str.equals(item_type))
+			holder.item_logo.setImageResource(R.drawable.qq_item_icon);
+		else if(email_str.equals(item_type))
+			holder.item_logo.setImageResource(R.drawable.email_item_icon);
+		else if(alipay_str.equals(item_type))
+			holder.item_logo.setImageResource(R.drawable.alipay_item_icon);
+		else
+			holder.item_logo.setImageResource(R.drawable.default_item_icon);
+		
+			
 		holder.item_type.setText(getItem(position).getItem_type());
 		holder.item_username.setText("账号：" + getItem(position).getItem_username());
 		
@@ -109,60 +132,18 @@ public class PWItemAdapter extends BaseAdapter {
 				}
 			}
 		});
-		/*holder.mTogBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(final CompoundButton buttonView,
-					boolean isChecked) {
-				if(isChecked){
-					List<PWSetting> commands = pwSettingDao.getSettingByName("pw_command");
-					if(commands!=null&&commands.size()>0){
-						command = commands.get(0).getSetting_value();
-						final EditText commandStr = new EditText(activity);
-						AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-						builder.setTitle("请输入口令");
-						builder.setIcon(android.R.drawable.ic_dialog_info);
-						builder.setView(commandStr);
-						builder.setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								if(command.equals(commandStr.getText().toString())){
-									holder.item_password.setText("密码：" + password);
-									dialog.dismiss();
-								}else{
-									Tools.showWarningDialog(activity,"口令错误","口令错误，请重试！");
-									buttonView.setChecked(false);
-									dialog.dismiss();
-									return;
-								}
-							}
-						});
-						builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										buttonView.setChecked(false);
-										dialog.dismiss();
-									}
-						});
-						builder.setCancelable(false);
-						builder.show();
-					}else{
-						holder.item_password.setText("密码：" + password);
-					}
-				}else{
-					holder.item_password.setText("密码："+"*********************");
-				}
-			}
-		});*/
         return convertView;
 	}
 	
 	class ViewHolder{
+		ImageView item_logo;
 		TextView item_type;
 		TextView item_username;
 		TextView item_password;
 		ToggleButton mTogBtn;
 		
 		public ViewHolder(View view){
+			item_logo = (ImageView) view.findViewById(R.id.item_logo);
 			item_type = (TextView) view.findViewById(R.id.item_type);
 			item_username = (TextView) view.findViewById(R.id.item_username);
 			item_password = (TextView) view.findViewById(R.id.item_password);

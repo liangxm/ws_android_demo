@@ -225,7 +225,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void initData() {
     	//initialize the group data
     	List<PWGroup> groups = pwGroupDao.getAvailableGroup();
-    	String[] groupData = new String[]{"默认分组","银行卡密码","论坛密码","微博密码","QQ密码","邮箱密码"};
+    	String[] groupData = new String[]{
+    			Tools.getResources(this, R.string.group_default),
+    			Tools.getResources(this, R.string.group_bank),
+    			Tools.getResources(this, R.string.group_web),
+    			Tools.getResources(this, R.string.group_weibo),
+    			Tools.getResources(this, R.string.group_qq),
+    			Tools.getResources(this, R.string.group_email),
+    			Tools.getResources(this, R.string.group_alipay)
+    	};
     	parent = new ArrayList<String>();
     	map = new HashMap<String, List<PWItem>>();
     	if(groups.size()==0){
@@ -571,12 +579,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					
 					//send email with attachment
 					MailSenderInfo mailInfo = new MailSenderInfo();   
-				    mailInfo.setMailServerHost("smtp.163.com");   
-				    mailInfo.setMailServerPort("25");   
+				    mailInfo.setMailServerHost(getString(R.string.email_host));   
+				    mailInfo.setMailServerPort(getString(R.string.email_port));   
 				    mailInfo.setValidate(true);   
-				    mailInfo.setUserName("liangxm_tom@163.com");   
-				    mailInfo.setPassword("@@lxm19901210");//您的邮箱密码   
-				    mailInfo.setFromAddress("liangxm_tom@163.com");   
+				    mailInfo.setUserName(getString(R.string.email_user));   
+				    mailInfo.setPassword(getString(R.string.email_password));//您的邮箱密码   
+				    mailInfo.setFromAddress(getString(R.string.email_user));   
 				    mailInfo.setToAddress(email);   
 				    mailInfo.setAttachFileNames(new String[]{Environment.getExternalStorageDirectory()
 							+ File.separator + "pwhelper.pw"});
@@ -607,6 +615,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			Looper.prepare();
 			Tools.showToast(MainActivity.this, message);
 			Looper.loop();
+		}
+		
+		private String getString(int id){
+			return MainActivity.this.getResources().getString(id);
 		}
 		private String buildDataString(){
 			//data loading
@@ -722,6 +734,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			case FILE_SELECT_CODE:
 				Uri fileUri = data.getData();
 				String path = fileUri.getPath();
+				if(!path.endsWith(".pw")){
+					Tools.showToast(this, "文件格式错误，请选择正确的备份文件");
+				}else{
 				try {
 					String content = FileUtil.loadFileFromSdcard(this, path);
 					System.out.println("content:"+content);
@@ -778,6 +793,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					Tools.showToast(this, "文件读取失败！"+path);
 				} catch (Exception e) {
 					e.printStackTrace();
+				}
 				}
 				break;
 			}

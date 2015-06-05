@@ -38,7 +38,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	private EditText question2;
 	private Spinner type;
 	private RadioGroup subtype;
-	private String defaultStr,bankStr,bbsStr,weiboStr,qqStr,emailStr;
+	private String defaultStr,bankStr,bbsStr,weiboStr,qqStr,emailStr,alipayStr;
 	
 	private LinearLayout item1,item2,item3,item4,item5,item6,item7,item8,item9;
 	
@@ -160,10 +160,11 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		// 类型分组名称
 		defaultStr = resources.getString(R.string.group_default);
 		bankStr = resources.getString(R.string.group_bank);
-		bbsStr = resources.getString(R.string.group_bbs);
+		bbsStr = resources.getString(R.string.group_web);
 		weiboStr = resources.getString(R.string.group_weibo);
 		qqStr = resources.getString(R.string.group_qq);
 		emailStr = resources.getString(R.string.group_email);
+		alipayStr = resources.getString(R.string.group_alipay);
 		
 		List<PWGroup> pwGroups = groupDao.getAvailableGroup();
 		String[] spinnerArr=new String[pwGroups.size()];

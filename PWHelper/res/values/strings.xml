@@ -73,10 +73,11 @@
     <!-- type strings -->
     <string name="group_default">默认分组</string>
     <string name="group_bank">银行卡密码</string>
-    <string name="group_bbs">论坛密码</string>
+    <string name="group_web">网站密码</string>
     <string name="group_weibo">微博密码</string>
     <string name="group_qq">QQ密码</string>
     <string name="group_email">邮箱密码</string>
+    <string name="group_alipay">支付宝密码</string>
     
     <!-- sub type strings -->
     <string name="cash_card">储蓄卡</string>
@@ -100,6 +101,11 @@
     <string name="author">Listener</string>
     
     <!-- email related -->
+    <string name="email_host">smtp.163.com</string>
+    <string name="email_port">25</string>
     <string name="email_subject">来自密码助手的数据备份</string>
     <string name="email_content">此邮件由您的密码助手APP发出，附件是您的密码数据备份文件（数据信息已加密），请妥善保管，以便您更换手机或丢失手机后恢复您的数据！</string>
+    <string name="email_user">pwhelper@163.com</string>
+    <string name="email_password">rmnjyhtcaowbpnma</string>
+    
 </resources>

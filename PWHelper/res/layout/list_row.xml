@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:toggle="http://schemas.android.com/apk/res/com.lxm.pwhelp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffffffff"
@@ -11,11 +10,12 @@
         android:layout_height="60.0dip" >
 
         <com.lxm.pwhelp.custom.CircleImageView
+            android:id="@+id/item_logo"
             android:layout_width="44.0dip"
             android:layout_height="44.0dip"
             android:layout_marginLeft="8.0dip"
             android:layout_marginTop="8.0dip"
-            android:src="@drawable/source_image" />
+            android:src="@drawable/default_item_icon" />
     </LinearLayout>
     
     <TextView

@@ -108,4 +108,11 @@ public class Tools {
 		}
 		return false;
 	}
+	
+	/**
+	 * get string resources
+	 */
+	public static String getResources(Context context,int resId){
+		return context.getResources().getString(resId);
+	}
 }
