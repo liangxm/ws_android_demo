@@ -62,7 +62,7 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 		case R.id.SetEmail_Return:
 			Intent intent = new Intent(SetEmailActivity.this,
 					SettingsActivity.class);
-			setResult(1, intent);
+			setResult(RESULT_OK, intent);
 			finish();
 			break;
 		case R.id.set_email_btn:
@@ -118,7 +118,7 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 		public void onClick(DialogInterface dialog, int which) {
 			Intent intent = new Intent(SetEmailActivity.this,
 					SettingsActivity.class);
-			startActivityForResult(intent, 1);
+			setResult(RESULT_OK, intent);
 			finish();
 			dialog.dismiss();
 		}

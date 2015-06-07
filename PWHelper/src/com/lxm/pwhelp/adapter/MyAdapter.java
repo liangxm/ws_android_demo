@@ -7,19 +7,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.activity.MainActivity;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.utils.Conver;
+import com.lxm.pwhelp.utils.GroupType;
 
 public class MyAdapter extends BaseExpandableListAdapter {
 
 	private MainActivity activity;
 	
+	private String default_str,bank_str,web_str,weibo_str,qq_str,email_str,alipay_str;
+	
 	public MyAdapter(MainActivity activity){
 		this.activity = activity;
+		initGroupStr();
+	}
+	
+	private void initGroupStr(){
+		default_str = GroupType.Type_Default.getType();
+		bank_str = GroupType.Type_Bank.getType();
+		web_str = GroupType.Type_Web.getType();
+		weibo_str = GroupType.Type_WeiBo.getType();
+		qq_str = GroupType.Type_QQ.getType();
+		email_str = GroupType.Type_Email.getType();
+		alipay_str = GroupType.Type_Alipay.getType();
 	}
 
 	// get item related data
@@ -44,6 +59,24 @@ public class MyAdapter extends BaseExpandableListAdapter {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.layout_children, null);
 		}
+		ImageView item_logo = (ImageView) convertView.findViewById(R.id.item_logo);
+		String item_type = info.getItem_type();
+		if(default_str.equals(item_type))
+			item_logo.setImageResource(R.drawable.default_item_icon);
+		else if(bank_str.equals(item_type))
+			item_logo.setImageResource(R.drawable.bank_item_icon);
+		else if(web_str.equals(item_type))
+			item_logo.setImageResource(R.drawable.www_item_icon);
+		else if(weibo_str.equals(item_type))
+			item_logo.setImageResource(R.drawable.sina_item_icon);
+		else if(qq_str.equals(item_type))
+			item_logo.setImageResource(R.drawable.qq_item_icon);
+		else if(email_str.equals(item_type))
+			item_logo.setImageResource(R.drawable.email_item_icon);
+		else if(alipay_str.equals(item_type))
+			item_logo.setImageResource(R.drawable.alipay_item_icon);
+		else
+			item_logo.setImageResource(R.drawable.default_item_icon);
 		TextView tv1 = (TextView) convertView.findViewById(R.id.one_textview);
 		TextView tv2 = (TextView) convertView.findViewById(R.id.two_textview);
 		TextView tv3 = (TextView) convertView.findViewById(R.id.three_textview);

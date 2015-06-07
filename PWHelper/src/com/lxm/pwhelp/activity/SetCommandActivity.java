@@ -72,7 +72,7 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 		switch(item.getId()){
 		case R.id.SetCommand_Return:
 			Intent intent = new Intent(SetCommandActivity.this,SettingsActivity.class);
-			setResult(1,intent);
+			setResult(RESULT_OK, intent);
 			finish();
 			break;
 		case R.id.enable_command_btn:
@@ -91,12 +91,6 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 			dialog.setOnPositiveListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					dialog.cancel();
-				}
-			});
-			dialog.setOnNegativeListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
 					String command = dialog.getEditText().getText().toString();
 					if(command==null||command.trim().length()!=4){
 						Tools.showWarningDialog(SetCommandActivity.this,"警告","请输入四位有效数字的口令！");
@@ -111,6 +105,12 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 							Tools.showSucessDialog(SetCommandActivity.this, "开启成功", "密码查看口令开启成功,返回！", listener);
 						}
 					}
+				}
+			});
+			dialog.setOnNegativeListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.cancel();
 				}
 			});
 			dialog.show();
@@ -131,7 +131,7 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 				DialogInterface dialog,
 				int which) {
 			Intent intent = new Intent(SetCommandActivity.this, SettingsActivity.class);
-			setResult(1, intent);
+			setResult(RESULT_OK, intent);
 			finish();
 			dialog.dismiss();
 		}

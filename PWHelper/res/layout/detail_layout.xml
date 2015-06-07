@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lxm="http://schemas.android.com/apk/res/com.lxm.pwhelp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -16,14 +17,17 @@
             android:layout_width="fill_parent"
             android:layout_height="150dip"
             android:layout_gravity="center"
-            android:background="#00b214" />
+            android:background="#00b214"
+            android:contentDescription="@null" />
 
-        <ImageView
+        <com.lxm.pwhelp.custom.CircleImageView
+            android:id="@+id/item_logo_big"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-50dip"
             android:layout_marginLeft="20dip"
-            android:background="@drawable/weibo_icon" />
+            lxm:border_color="@color/theme_color"
+            android:contentDescription="@null" />
         <TextView 
             android:id="@+id/detail_title"
             android:layout_width="fill_parent"

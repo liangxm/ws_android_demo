@@ -20,6 +20,7 @@
             android:orientation="vertical"
             android:padding="20dip" >
 
+            <!-- item_type -->
             <LinearLayout
                 android:id="@+id/item1"
                 android:layout_width="fill_parent"
@@ -47,6 +48,7 @@
                     android:spinnerMode="dropdown" />
             </LinearLayout>
 
+            <!-- bank card type radiobutton group -->
             <LinearLayout
                 android:id="@+id/item9"
                 android:layout_width="fill_parent"
@@ -64,7 +66,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="30dip"
                     android:layout_weight="4"
-                    android:contentDescription="银行卡类型"
                     android:orientation="horizontal" >
                     <RadioButton
                         android:id="@+id/radioCash"
@@ -82,6 +83,7 @@
                 </RadioGroup>
             </LinearLayout>
 
+            <!-- username -->
             <LinearLayout
                 android:id="@+id/item2"
                 android:layout_width="fill_parent"
@@ -111,6 +113,7 @@
                     android:textSize="@dimen/addActivity_edit" />
             </LinearLayout>
 
+            <!-- password -->
             <LinearLayout
                 android:id="@+id/item3"
                 android:layout_width="fill_parent"
@@ -140,6 +143,7 @@
                     android:textSize="@dimen/addActivity_edit" />
             </LinearLayout>
 
+            <!-- password -->
             <LinearLayout
                 android:id="@+id/item4"
                 android:layout_width="fill_parent"
@@ -170,6 +174,7 @@
                     android:textSize="@dimen/addActivity_edit" />
             </LinearLayout>
 
+            <!-- url -->
             <LinearLayout
                 android:id="@+id/item5"
                 android:layout_width="fill_parent"
@@ -200,6 +205,7 @@
                     android:textSize="@dimen/addActivity_edit" />
             </LinearLayout>
 
+            <!-- comment -->
             <LinearLayout
                 android:id="@+id/item6"
                 android:layout_width="fill_parent"
@@ -229,6 +235,7 @@
                     android:textSize="@dimen/addActivity_edit" />
             </LinearLayout>
 
+            <!-- question1 -->
             <LinearLayout
                 android:id="@+id/item7"
                 android:layout_width="fill_parent"
@@ -258,6 +265,7 @@
                     android:textSize="@dimen/addActivity_edit" />
             </LinearLayout>
 
+            <!-- question2 -->
             <LinearLayout
                 android:id="@+id/item8"
                 android:layout_width="fill_parent"

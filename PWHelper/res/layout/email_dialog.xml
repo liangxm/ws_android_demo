@@ -42,7 +42,7 @@
             android:text="@string/string_cancel"
             android:gravity="center"
             android:textSize="20sp"
-            android:background="@drawable/textview_bottomright"/>
+            android:background="@drawable/textview_bottomleft"/>
         <TextView 
             android:id="@+id/positiveButton"
             android:layout_width="0dip"
@@ -51,7 +51,7 @@
             android:text="@string/string_ok"
             android:gravity="center"
             android:textSize="20sp"
-            android:background="@drawable/textview_bottomleft"/>
+            android:background="@drawable/textview_bottomright"/>
     </LinearLayout>
 
 </LinearLayout>

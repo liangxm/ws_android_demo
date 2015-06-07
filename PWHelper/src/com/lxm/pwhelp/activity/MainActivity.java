@@ -20,6 +20,7 @@ import javax.mail.MessagingException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
@@ -135,6 +136,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private PWGroupDao pwGroupDao;
 	private PWSettingDao pwSettingDao;
 	
+	private ProgressDialog dialog;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -200,6 +203,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 
 	private void initView() {
+		dialog = ProgressDialog.show(this, null, "程序正在加载，请稍后...");
 		pwItemDao = new PWItemDao(this);
 		pwGroupDao = new PWGroupDao(this);
 		pwSettingDao = new PWSettingDao(this);
@@ -496,13 +500,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			break;
 		}
 		case R.id.settings: {
-			Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-			startActivity(intent);
+			Intent intent = new Intent(this, SettingsActivity.class);
+			startActivityForResult(intent,SYSY_SETTING_CODE);
 			break;
 		}
 		case R.id.no_add_item: {
-			Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
-			startActivity(intent);
+			Intent intent = new Intent(this, AddItemActivity.class);
+			startActivityForResult(intent,FIRST_ADD_CODE);
 			break;
 		}
 		}
@@ -728,6 +732,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			case EDIT_ITEM_CODE:
 			case ADD_GROUP_CODE:
 			case ADD_ITEM_CODE:
+			case FIRST_ADD_CODE:
 				Runnable update = new UpdateListView();
 				handler.post(update);
 				break;
@@ -1042,6 +1047,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private static final int ADD_ITEM_CODE = 5;
 	private static final int VIEW_ITEM_CODE = 6;
 	private static final int FILE_SELECT_CODE = 7;
+	private static final int SYSY_SETTING_CODE = 8;
+	private static final int FIRST_ADD_CODE = 9;
 	private static final String IMAGE_FILE_NAME = "header.jpg";
 	
 	//backup and recovery tag

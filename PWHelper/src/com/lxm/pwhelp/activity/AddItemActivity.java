@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -25,6 +24,7 @@ import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
+import com.lxm.pwhelp.utils.GroupType;
 
 public class AddItemActivity extends Activity implements View.OnClickListener {
 
@@ -38,11 +38,9 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	private EditText question2;
 	private Spinner type;
 	private RadioGroup subtype;
-	private String defaultStr,bankStr,bbsStr,weiboStr,qqStr,emailStr,alipayStr;
 	
-	private LinearLayout item1,item2,item3,item4,item5,item6,item7,item8,item9;
+	private LinearLayout line_type,line_name,line_username,line_password,line_url,line_comment,line_question1,line_question2,line_banktype;
 	
-	private Resources resources;
 
 	private ArrayAdapter<String> adapter;
 	private String typeStr;
@@ -115,8 +113,8 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 												DialogInterface dialog,
 												int which) {
 											Intent intent = new Intent(AddItemActivity.this, MainActivity.class);
-											AddItemActivity.this.setResult(RESULT_OK, intent);
-											AddItemActivity.this.finish();
+											setResult(RESULT_OK, intent);
+											finish();
 											dialog.dismiss();
 										}
 							}).show();
@@ -135,7 +133,6 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 
 	private void init(Context context) {
 		groupDao = new PWGroupDao(this);
-		resources = this.getResources();
 		itemDao = new PWItemDao(context);
 		name = (EditText) findViewById(R.id.edit_name);
 		username = (EditText) findViewById(R.id.edit_username);
@@ -147,24 +144,15 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		type = (Spinner) findViewById(R.id.edit_type);
 		subtype = (RadioGroup) findViewById(R.id.radioGroup);
 		
-		item1 = (LinearLayout) findViewById(R.id.item1);
-		item2 = (LinearLayout) findViewById(R.id.item2);
-		item3 = (LinearLayout) findViewById(R.id.item3);
-		item4 = (LinearLayout) findViewById(R.id.item4);
-		item5 = (LinearLayout) findViewById(R.id.item5);
-		item6 = (LinearLayout) findViewById(R.id.item6);
-		item7 = (LinearLayout) findViewById(R.id.item7);
-		item8 = (LinearLayout) findViewById(R.id.item8);
-		item9 = (LinearLayout) findViewById(R.id.item9);
-		
-		// 类型分组名称
-		defaultStr = resources.getString(R.string.group_default);
-		bankStr = resources.getString(R.string.group_bank);
-		bbsStr = resources.getString(R.string.group_web);
-		weiboStr = resources.getString(R.string.group_weibo);
-		qqStr = resources.getString(R.string.group_qq);
-		emailStr = resources.getString(R.string.group_email);
-		alipayStr = resources.getString(R.string.group_alipay);
+		line_type = (LinearLayout) findViewById(R.id.item1);
+		line_name = (LinearLayout) findViewById(R.id.item2);
+		line_username = (LinearLayout) findViewById(R.id.item3);
+		line_password = (LinearLayout) findViewById(R.id.item4);
+		line_url = (LinearLayout) findViewById(R.id.item5);
+		line_comment = (LinearLayout) findViewById(R.id.item6);
+		line_question1 = (LinearLayout) findViewById(R.id.item7);
+		line_question2 = (LinearLayout) findViewById(R.id.item8);
+		line_banktype = (LinearLayout) findViewById(R.id.item9);
 		
 		List<PWGroup> pwGroups = groupDao.getAvailableGroup();
 		String[] spinnerArr=new String[pwGroups.size()];
@@ -191,76 +179,76 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
 			typeStr = adapter.getItem(arg2);
-			if(defaultStr.equals(typeStr)){
-				item1.setVisibility(View.VISIBLE);
-				item3.setVisibility(View.VISIBLE);
-				item4.setVisibility(View.VISIBLE);
-				item6.setVisibility(View.VISIBLE);
-				item2.setVisibility(View.GONE);
-				item5.setVisibility(View.GONE);
-				item7.setVisibility(View.GONE);
-				item8.setVisibility(View.GONE);
-				item9.setVisibility(View.GONE);
-			}else if(bankStr.equals(typeStr)){
-				item1.setVisibility(View.VISIBLE);
-				item3.setVisibility(View.VISIBLE);
-				item4.setVisibility(View.VISIBLE);
-				item6.setVisibility(View.VISIBLE);
-				item2.setVisibility(View.GONE);
-				item5.setVisibility(View.GONE);
-				item7.setVisibility(View.GONE);
-				item8.setVisibility(View.GONE);
-				item9.setVisibility(View.VISIBLE);
-			}else if(bbsStr.equals(typeStr)){
-				item1.setVisibility(View.VISIBLE);
-				item3.setVisibility(View.VISIBLE);
-				item4.setVisibility(View.VISIBLE);
-				item5.setVisibility(View.VISIBLE);
-				item6.setVisibility(View.VISIBLE);
-				item2.setVisibility(View.GONE);
-				item7.setVisibility(View.GONE);
-				item8.setVisibility(View.GONE);
-				item9.setVisibility(View.GONE);
-			}else if(weiboStr.equals(typeStr)){
-				item1.setVisibility(View.VISIBLE);
-				item3.setVisibility(View.VISIBLE);
-				item4.setVisibility(View.VISIBLE);
-				item6.setVisibility(View.VISIBLE);
-				item5.setVisibility(View.VISIBLE);
-				item2.setVisibility(View.GONE);
-				item7.setVisibility(View.GONE);
-				item8.setVisibility(View.GONE);
-				item9.setVisibility(View.GONE);
-			}else if(qqStr.equals(typeStr)){
-				item1.setVisibility(View.VISIBLE);
-				item2.setVisibility(View.VISIBLE);
-				item3.setVisibility(View.VISIBLE);
-				item4.setVisibility(View.VISIBLE);
-				item6.setVisibility(View.VISIBLE);
-				item7.setVisibility(View.VISIBLE);
-				item8.setVisibility(View.VISIBLE);
-				item5.setVisibility(View.GONE);
-				item9.setVisibility(View.GONE);
-			}else if(emailStr.equals(typeStr)){
-				item1.setVisibility(View.VISIBLE);
-				item3.setVisibility(View.VISIBLE);
-				item4.setVisibility(View.VISIBLE);
-				item6.setVisibility(View.VISIBLE);
-				item5.setVisibility(View.VISIBLE);
-				item2.setVisibility(View.VISIBLE);
-				item7.setVisibility(View.GONE);
-				item8.setVisibility(View.GONE);
-				item9.setVisibility(View.GONE);
+			if(GroupType.Type_Default.getType().equals(typeStr)){
+				line_type.setVisibility(View.VISIBLE);
+				line_username.setVisibility(View.VISIBLE);
+				line_password.setVisibility(View.VISIBLE);
+				line_comment.setVisibility(View.VISIBLE);
+				line_name.setVisibility(View.GONE);
+				line_url.setVisibility(View.GONE);
+				line_question1.setVisibility(View.GONE);
+				line_question2.setVisibility(View.GONE);
+				line_banktype.setVisibility(View.GONE);
+			}else if(GroupType.Type_Bank.getType().equals(typeStr)){
+				line_type.setVisibility(View.VISIBLE);
+				line_username.setVisibility(View.VISIBLE);
+				line_password.setVisibility(View.VISIBLE);
+				line_comment.setVisibility(View.VISIBLE);
+				line_name.setVisibility(View.GONE);
+				line_url.setVisibility(View.GONE);
+				line_question1.setVisibility(View.GONE);
+				line_question2.setVisibility(View.GONE);
+				line_banktype.setVisibility(View.VISIBLE);
+			}else if(GroupType.Type_Web.getType().equals(typeStr)){
+				line_type.setVisibility(View.VISIBLE);
+				line_username.setVisibility(View.VISIBLE);
+				line_password.setVisibility(View.VISIBLE);
+				line_url.setVisibility(View.VISIBLE);
+				line_comment.setVisibility(View.VISIBLE);
+				line_name.setVisibility(View.GONE);
+				line_question1.setVisibility(View.GONE);
+				line_question2.setVisibility(View.GONE);
+				line_banktype.setVisibility(View.GONE);
+			}else if(GroupType.Type_WeiBo.getType().equals(typeStr)){
+				line_type.setVisibility(View.VISIBLE);
+				line_username.setVisibility(View.VISIBLE);
+				line_password.setVisibility(View.VISIBLE);
+				line_comment.setVisibility(View.VISIBLE);
+				line_url.setVisibility(View.VISIBLE);
+				line_name.setVisibility(View.GONE);
+				line_question1.setVisibility(View.GONE);
+				line_question2.setVisibility(View.GONE);
+				line_banktype.setVisibility(View.GONE);
+			}else if(GroupType.Type_QQ.getType().equals(typeStr)){
+				line_type.setVisibility(View.VISIBLE);
+				line_name.setVisibility(View.VISIBLE);
+				line_username.setVisibility(View.VISIBLE);
+				line_password.setVisibility(View.VISIBLE);
+				line_comment.setVisibility(View.VISIBLE);
+				line_question1.setVisibility(View.VISIBLE);
+				line_question2.setVisibility(View.VISIBLE);
+				line_url.setVisibility(View.GONE);
+				line_banktype.setVisibility(View.GONE);
+			}else if(GroupType.Type_Email.getType().equals(typeStr)){
+				line_type.setVisibility(View.VISIBLE);
+				line_username.setVisibility(View.VISIBLE);
+				line_password.setVisibility(View.VISIBLE);
+				line_comment.setVisibility(View.VISIBLE);
+				line_url.setVisibility(View.VISIBLE);
+				line_name.setVisibility(View.VISIBLE);
+				line_question1.setVisibility(View.GONE);
+				line_question2.setVisibility(View.GONE);
+				line_banktype.setVisibility(View.GONE);
 			}else{
-				item1.setVisibility(View.VISIBLE);
-				item3.setVisibility(View.VISIBLE);
-				item4.setVisibility(View.VISIBLE);
-				item6.setVisibility(View.VISIBLE);
-				item2.setVisibility(View.GONE);
-				item5.setVisibility(View.GONE);
-				item7.setVisibility(View.GONE);
-				item8.setVisibility(View.GONE);
-				item9.setVisibility(View.GONE);
+				line_type.setVisibility(View.VISIBLE);
+				line_username.setVisibility(View.VISIBLE);
+				line_password.setVisibility(View.VISIBLE);
+				line_comment.setVisibility(View.VISIBLE);
+				line_name.setVisibility(View.GONE);
+				line_url.setVisibility(View.GONE);
+				line_question1.setVisibility(View.GONE);
+				line_question2.setVisibility(View.GONE);
+				line_banktype.setVisibility(View.GONE);
 			}
 			
 		}

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,11 +17,14 @@ import android.widget.Toast;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.utils.Conver;
+import com.lxm.pwhelp.utils.GroupType;
 
 public class DetailActivity extends Activity implements View.OnClickListener {
 	
 	private RelativeLayout detail_line1,detail_line2,detail_line3;
 	private TextView line1_label2,line2_label2,line3_label2,detail_title;
+	private String default_str,bank_str,web_str,weibo_str,qq_str,email_str,alipay_str;
+	private ImageView item_logo_big;
 	private ClipboardManager cmb;
 	
 	@Override
@@ -57,6 +61,38 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		detail_line2.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
 		detail_line3.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
 		detail_title.setVisibility(View.GONE);
+		
+		item_logo_big = (ImageView) findViewById(R.id.item_logo_big);
+		item_logo_big.setMaxHeight(Conver.dip2px(this, 162));
+		item_logo_big.setMaxWidth(Conver.dip2px(this, 162));
+		initGroupStr(item);
+	}
+	
+	private void initGroupStr(PWItem item){
+		default_str = GroupType.Type_Default.getType();
+		bank_str = GroupType.Type_Bank.getType();
+		web_str = GroupType.Type_Web.getType();
+		weibo_str = GroupType.Type_WeiBo.getType();
+		qq_str = GroupType.Type_QQ.getType();
+		email_str = GroupType.Type_Email.getType();
+		alipay_str = GroupType.Type_Alipay.getType();
+		String item_type = item.getItem_type();
+		if(default_str.equals(item_type))
+			item_logo_big.setImageResource(R.drawable.default_item_icon_big);
+		else if(bank_str.equals(item_type))
+			item_logo_big.setImageResource(R.drawable.bank_item_icon_big);
+		else if(web_str.equals(item_type))
+			item_logo_big.setImageResource(R.drawable.www_item_icon_big);
+		else if(weibo_str.equals(item_type))
+			item_logo_big.setImageResource(R.drawable.sina_item_icon_big);
+		else if(qq_str.equals(item_type))
+			item_logo_big.setImageResource(R.drawable.qq_item_icon_big);
+		else if(email_str.equals(item_type))
+			item_logo_big.setImageResource(R.drawable.email_item_icon_big);
+		else if(alipay_str.equals(item_type))
+			item_logo_big.setImageResource(R.drawable.alipay_item_icon_big);
+		else
+			item_logo_big.setImageResource(R.drawable.default_item_icon_big);
 	}
 	
 	@Override

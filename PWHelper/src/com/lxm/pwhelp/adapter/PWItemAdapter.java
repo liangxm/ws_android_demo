@@ -23,6 +23,7 @@ import com.lxm.pwhelp.bean.PWSetting;
 import com.lxm.pwhelp.custom.ToggleButton;
 import com.lxm.pwhelp.custom.ToggleButton.OnToggleChanged;
 import com.lxm.pwhelp.dao.PWSettingDao;
+import com.lxm.pwhelp.utils.GroupType;
 import com.lxm.pwhelp.utils.Tools;
 /**
  * pwItem list adapter
@@ -35,11 +36,24 @@ public class PWItemAdapter extends BaseAdapter {
 	private List<PWItem> data;
 	private String command;
 	private PWSettingDao pwSettingDao;
+	
+	private String default_str,bank_str,web_str,weibo_str,qq_str,email_str,alipay_str;
 
 	public PWItemAdapter(Activity activity, List<PWItem> data) {
 		this.activity = activity;
 		this.data = data;
 		pwSettingDao=new PWSettingDao(activity);
+		initGroupStr();
+	}
+	
+	private void initGroupStr(){
+		default_str = GroupType.Type_Default.getType();
+		bank_str = GroupType.Type_Bank.getType();
+		web_str = GroupType.Type_Web.getType();
+		weibo_str = GroupType.Type_WeiBo.getType();
+		qq_str = GroupType.Type_QQ.getType();
+		email_str = GroupType.Type_Email.getType();
+		alipay_str = GroupType.Type_Alipay.getType();
 	}
 
 	public int getCount() {
@@ -62,16 +76,13 @@ public class PWItemAdapter extends BaseAdapter {
 		
 		final ViewHolder holder = (ViewHolder) convertView.getTag();
 		final String password = getItem(position).getItem_password();
-		String default_str = Tools.getResources(activity, R.string.group_default);
-		//String bank_str = Tools.getResources(activity, R.string.group_bank);
-		//String web_str = Tools.getResources(activity, R.string.group_web);
-		String weibo_str = Tools.getResources(activity, R.string.group_weibo);
-		String qq_str = Tools.getResources(activity, R.string.group_qq);
-		String email_str = Tools.getResources(activity, R.string.group_email);
-		String alipay_str = Tools.getResources(activity, R.string.group_alipay);
 		String item_type = getItem(position).getItem_type();
 		if(default_str.equals(item_type))
 			holder.item_logo.setImageResource(R.drawable.default_item_icon);
+		else if(bank_str.equals(item_type))
+			holder.item_logo.setImageResource(R.drawable.bank_item_icon);
+		else if(web_str.equals(item_type))
+			holder.item_logo.setImageResource(R.drawable.www_item_icon);
 		else if(weibo_str.equals(item_type))
 			holder.item_logo.setImageResource(R.drawable.sina_item_icon);
 		else if(qq_str.equals(item_type))
