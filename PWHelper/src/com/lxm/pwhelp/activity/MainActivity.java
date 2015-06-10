@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -136,7 +137,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private PWGroupDao pwGroupDao;
 	private PWSettingDao pwSettingDao;
 	
-	private ProgressDialog dialog;
+	private ProgressDialog progressDialog;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -203,7 +204,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 
 	private void initView() {
-		dialog = ProgressDialog.show(this, null, "程序正在加载，请稍后...");
 		pwItemDao = new PWItemDao(this);
 		pwGroupDao = new PWGroupDao(this);
 		pwSettingDao = new PWSettingDao(this);
@@ -515,7 +515,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private TextWatcher textWatcher = new TextWatcher() {
 		@Override
 		public void afterTextChanged(Editable s) {
-			handler.post(eChanged);               
+			new Thread(eChanged).start();
 		}
 		@Override
 		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
@@ -526,7 +526,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 	};
 	
-	private Handler handler = new Handler();
+	// use of the handler update the ui
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg){
+			switch (msg.arg1) {
+			case 1:
+				adapter.notifyDataSetChanged();
+				break;
+			case 2:
+				if(progressDialog!=null)
+					progressDialog.dismiss();
+				break;
+			}
+		}
+	};
 	private Runnable eChanged = new Runnable() {
 		@Override
 		public void run() {
@@ -539,7 +553,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			for(PWItem item:newItemList){
 				itemList.add(item);
 			}
-			adapter.notifyDataSetChanged();
+			handler.sendEmptyMessage(1);
 		}
 	};
 	
@@ -564,6 +578,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				}
 				map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
 			}
+			handler.sendEmptyMessage(1);
 		}
 	}
 	private class SendEmail implements Runnable {
@@ -613,7 +628,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				wrapToast("邮件发送失败，请检查您的备份邮箱地址后重试！");
 			} catch (Exception e) {
 				wrapToast("未知错误，已发送错误报告给作者！");
-			} 
+			}
+			handler.sendEmptyMessage(2);
 		}
 		private void wrapToast(String message){
 			Looper.prepare();
@@ -648,6 +664,80 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			return settingBuffer.toString()+groupBuffer.toString()+itemBuffer.toString();
 		}
 	}
+	
+	private class DataRecovery implements Runnable {
+		private Uri fileUri;
+		public DataRecovery(Uri fileUri) {
+			this.fileUri = fileUri;
+		}
+		@Override
+		public void run() {
+			String path = fileUri.getPath();
+			if(!path.endsWith(".pw")){
+				Tools.showToast(MainActivity.this, "文件格式错误，请选择正确的备份文件");
+			}else{
+				try {
+					String content = FileUtil.loadFileFromSdcard(MainActivity.this, path);
+					System.out.println("content:"+content);
+					DesUtils des = new DesUtils();
+					String wrapLine = System.getProperty("line.separator");
+					content = content.substring(0, content.length()-wrapLine.length());
+					String decryptContent = des.decrypt(content);
+					String[] wholeData = decryptContent.split(wrapLine);
+					for(String line:wholeData){
+						String[] row = line.split("[|]");
+						if(BR_TAG_ITEM.equals(row[0])){
+							if(pwItemDao.deleteAll()>=0){
+								PWItem item = new PWItem();
+								item.setItem_id(Integer.parseInt(row[1]));
+								item.setItem_name(row[2]);
+								item.setItem_username(row[3]);
+								item.setItem_password(row[4]);
+								item.setItem_type(row[5]);
+								item.setItem_subtype(Integer.parseInt(row[6]));
+								item.setItem_url(row[7]);
+								item.setItem_comment(row[8]);
+								item.setQuestion1(row[9]);
+								item.setQuestion2(row[10]);
+								item.setModified(row[11]);
+								item.setCreated(row[12]);
+								item.setDeleted(Boolean.valueOf(row[13]));
+								pwItemDao.createOrUpdate(item);
+							}
+						}else if(BR_TAG_GROUP.equals(row[0])){
+							if(pwGroupDao.deleteAll()>=0){
+								PWGroup group = new PWGroup();
+								group.setGroup_id(Integer.parseInt(row[1]));
+								group.setGroup_name(row[2]);
+								group.setGroup_level(row[3]);
+								group.setCreated(row[4]);
+								group.setDeleted(Boolean.valueOf(row[5]));
+							}
+						}else if(BR_TAG_SETTING.equals(row[0])){
+							if(pwSettingDao.deleteAll()>=0){
+								PWSetting setting = new PWSetting();
+								setting.setSetting_id(Integer.parseInt(row[1]));
+								setting.setSetting_name(row[2]);
+								setting.setSetting_value(row[3]);
+								setting.setCreated(row[4]);
+								setting.setDeleted(Boolean.valueOf(row[5]));
+							}
+						}
+					}
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+					Tools.showToast(MainActivity.this, "文件没有读到！"+path);
+				} catch (IOException e2) {
+					e2.printStackTrace();
+					Tools.showToast(MainActivity.this, "文件读取失败！"+path);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				handler.sendEmptyMessage(2);
+			}
+		}
+	}
+	
 	private class ClickListener implements android.content.DialogInterface.OnClickListener {
 		private PWItem item;
 		private String type;
@@ -667,8 +757,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}else if("destory".equals(type)){
 				dialog.dismiss();
 			}else if("email".equals(type)){
-				Thread thread = new Thread(new SendEmail(email));
-				thread.start();
+				progressDialog = ProgressDialog.show(MainActivity.this, "数据备份", "正在尝试将您的数据发送到备份邮箱，请稍后...",true, true);
+				new Thread(new SendEmail(email)).start();
 			}
 		}
 		private void delete(DialogInterface dialog){
@@ -678,8 +768,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				itemList.remove(item);
 				adapter.notifyDataSetChanged();
 				dialog.dismiss();
-				Runnable update = new UpdateListView();
-				handler.post(update);
+				new Thread(new UpdateListView()).start();
 			}
 		}
 	}
@@ -733,73 +822,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			case ADD_GROUP_CODE:
 			case ADD_ITEM_CODE:
 			case FIRST_ADD_CODE:
-				Runnable update = new UpdateListView();
-				handler.post(update);
+				new Thread(new UpdateListView()).start();
 				break;
 			case FILE_SELECT_CODE:
 				Uri fileUri = data.getData();
-				String path = fileUri.getPath();
-				if(!path.endsWith(".pw")){
-					Tools.showToast(this, "文件格式错误，请选择正确的备份文件");
-				}else{
-				try {
-					String content = FileUtil.loadFileFromSdcard(this, path);
-					System.out.println("content:"+content);
-					DesUtils des = new DesUtils();
-					String wrapLine = System.getProperty("line.separator");
-					content = content.substring(0, content.length()-wrapLine.length());
-					String decryptContent = des.decrypt(content);
-					String[] wholeData = decryptContent.split(wrapLine);
-					for(String line:wholeData){
-						String[] row = line.split("[|]");
-						if(BR_TAG_ITEM.equals(row[0])){
-							if(pwItemDao.deleteAll()>=0){
-								PWItem item = new PWItem();
-								item.setItem_id(Integer.parseInt(row[1]));
-								item.setItem_name(row[2]);
-								item.setItem_username(row[3]);
-								item.setItem_password(row[4]);
-								item.setItem_type(row[5]);
-								item.setItem_subtype(Integer.parseInt(row[6]));
-								item.setItem_url(row[7]);
-								item.setItem_comment(row[8]);
-								item.setQuestion1(row[9]);
-								item.setQuestion2(row[10]);
-								item.setModified(row[11]);
-								item.setCreated(row[12]);
-								item.setDeleted(Boolean.valueOf(row[13]));
-								pwItemDao.createOrUpdate(item);
-							}
-						}else if(BR_TAG_GROUP.equals(row[0])){
-							if(pwGroupDao.deleteAll()>=0){
-								PWGroup group = new PWGroup();
-								group.setGroup_id(Integer.parseInt(row[1]));
-								group.setGroup_name(row[2]);
-								group.setGroup_level(row[3]);
-								group.setCreated(row[4]);
-								group.setDeleted(Boolean.valueOf(row[5]));
-							}
-						}else if(BR_TAG_SETTING.equals(row[0])){
-							if(pwSettingDao.deleteAll()>=0){
-								PWSetting setting = new PWSetting();
-								setting.setSetting_id(Integer.parseInt(row[1]));
-								setting.setSetting_name(row[2]);
-								setting.setSetting_value(row[3]);
-								setting.setCreated(row[4]);
-								setting.setDeleted(Boolean.valueOf(row[5]));
-							}
-						}
-					}
-				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
-					Tools.showToast(this, "文件没有读到！"+path);
-				} catch (IOException e2) {
-					e2.printStackTrace();
-					Tools.showToast(this, "文件读取失败！"+path);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				}
+				progressDialog = ProgressDialog.show(MainActivity.this, "数据恢复", "正在尝试恢复您的数据，请稍后...",true, true);
+				new Thread(new DataRecovery(fileUri)).start();
 				break;
 			}
 		}
