@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
@@ -67,7 +67,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
-import com.lxm.pwhelp.adapter.MyAdapter;
+import com.lxm.pwhelp.adapter.GroupAdapter;
 import com.lxm.pwhelp.adapter.PWItemAdapter;
 import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.bean.PWItem;
@@ -89,6 +89,7 @@ import com.lxm.pwhelp.view.NoScrollViewPager;
 public class MainActivity extends Activity implements View.OnClickListener {
 
 	private PWItemAdapter adapter;
+	private GroupAdapter groupAdapter;
 	private TextView label1;
 	private TextView label2;
 	private TextView label3;
@@ -301,7 +302,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		itemList = new ArrayList<PWItem>();
 		// 设置单个分组展开
 		initData();
-		mainlistview.setAdapter(new MyAdapter(this));
+		groupAdapter=new GroupAdapter(this);
+		mainlistview.setAdapter(groupAdapter);
 		mainlistview.setOnChildClickListener(new OnChildClickListener(){
 			@Override
 			public boolean onChildClick(ExpandableListView parentlist, View view,
@@ -512,6 +514,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 	}
 	
+	// main tab search box watcher
 	private TextWatcher textWatcher = new TextWatcher() {
 		@Override
 		public void afterTextChanged(Editable s) {
@@ -532,53 +535,74 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		public void handleMessage(Message msg){
 			switch (msg.arg1) {
 			case 1:
-				adapter.notifyDataSetChanged();
+				updateListView();
 				break;
 			case 2:
-				if(progressDialog!=null)
+				Tools.showToast(MainActivity.this, msg.obj.toString());
+				if(progressDialog.isShowing())
 					progressDialog.dismiss();
+				if(msg.arg2==0){
+					updateListView();
+				}
+				break;
+			case 3:
+				String data = searchbox.getText().toString();
+				itemList.clear();
+				if (data != null && !"".equals(data)) 
+					newItemList = pwItemDao.getPWItemByName(data);
+				else
+					newItemList = pwItemDao.getAvailablePWItem();
+				for(PWItem item:newItemList){
+					itemList.add(item);
+				}
+				adapter.notifyDataSetChanged();
 				break;
 			}
 		}
 	};
+	
+	// main list view update
+	private void updateListView(){
+		List<PWItem> items = pwItemDao.getAvailablePWItem();
+		switchTheNoItem(items);
+		itemList.clear();
+		for (PWItem item : items) {
+			itemList.add(item);
+			//reverse the list so that newer item is up
+			Collections.reverse(itemList);
+		}
+		List<PWGroup> groups = pwGroupDao.getAvailableGroup();
+		adapter.notifyDataSetChanged();
+		parent = new ArrayList<String>();
+		map = new HashMap<String, List<PWItem>>();
+		for(PWGroup group:groups){
+			List<PWItem> list = new ArrayList<PWItem>();
+			List<PWItem> itemGroups = pwItemDao.getPWItemByType(group.getGroup_name());
+			parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
+			for(PWItem item:itemGroups){
+				list.add(item);
+			}
+			map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
+		}
+		groupAdapter.notifyDataSetChanged();
+	}
+	
+	//search box update
 	private Runnable eChanged = new Runnable() {
 		@Override
 		public void run() {
-			String data = searchbox.getText().toString();
-			itemList.clear();
-			if (data != null && !"".equals(data)) 
-				newItemList = pwItemDao.getPWItemByName(data);
-			else
-				newItemList = pwItemDao.getAvailablePWItem();
-			for(PWItem item:newItemList){
-				itemList.add(item);
-			}
-			handler.sendEmptyMessage(1);
+			Message message = Message.obtain();
+			message.arg1=3;
+			handler.sendMessage(message);
 		}
 	};
 	
 	private class UpdateListView implements Runnable {
 		@Override
 		public void run() {
-			List<PWItem> items = pwItemDao.getAvailablePWItem();
-			switchTheNoItem(items);
-			itemList.clear();
-			for (PWItem item : items) {
-				itemList.add(item);
-			}
-			List<PWGroup> groups = pwGroupDao.getAvailableGroup();
-			parent = new ArrayList<String>();
-			map = new HashMap<String, List<PWItem>>();
-			for(PWGroup group:groups){
-				List<PWItem> list = new ArrayList<PWItem>();
-				List<PWItem> itemGroups = pwItemDao.getPWItemByType(group.getGroup_name());
-				parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
-				for(PWItem item:itemGroups){
-					list.add(item);
-				}
-				map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
-			}
-			handler.sendEmptyMessage(1);
+			Message message = Message.obtain();
+			message.arg1=1;
+			handler.sendMessage(message);
 		}
 	}
 	private class SendEmail implements Runnable {
@@ -588,9 +612,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		@Override
 		public void run() {
+			Message message = Message.obtain();
+			message.arg1=2;
 			try {
 				if(!FileUtil.createFile("pwhelper.pw")){
-					wrapToast("文件创建失败！");
+					message.obj = "文件创建失败！";
 				}else{
 					//write data to file
 					DesUtils des = new DesUtils();
@@ -612,29 +638,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				    //这个类主要来发送邮件  
 				    SimpleMailSender sms = new SimpleMailSender();  
 				    if(sms.sendTextMail(mailInfo)){
-				    	wrapToast("数据备份成功！");
+				    	message.obj="数据备份成功！";
 				    }
 				    //sms.sendHtmlMail(mailInfo);//发送html格式
 				}
 			} catch (NotFoundException e) {
-				wrapToast("文件没有发现，请在应用管理界面为此App开启文件读写权限！");
+				message.obj="文件没有发现，请在应用管理界面为此App开启文件读写权限！";
 			} catch (FileNotFoundException e) {
-				wrapToast("文件没有发现，请在应用管理界面为此App开启文件读写权限！");
+				message.obj="文件没有发现，请在应用管理界面为此App开启文件读写权限！";
 			} catch (UnsupportedEncodingException e) {
-				wrapToast("数据流编码失败，请尝试重装密码助手！");
+				message.obj="数据流编码失败，请尝试重装密码助手！";
 			} catch (IOException e) {
-				wrapToast("文件写入或创建失败，请检查您的SD卡是否正常！");
+				message.obj="文件写入或创建失败，请检查您的SD卡是否正常！";
 			} catch (MessagingException e) {
-				wrapToast("邮件发送失败，请检查您的备份邮箱地址后重试！");
+				message.obj="邮件发送失败，请检查您的备份邮箱地址后重试！";
 			} catch (Exception e) {
-				wrapToast("未知错误，已发送错误报告给作者！");
+				message.obj="未知错误，已发送错误报告给作者！"+e.getMessage();
 			}
-			handler.sendEmptyMessage(2);
-		}
-		private void wrapToast(String message){
-			Looper.prepare();
-			Tools.showToast(MainActivity.this, message);
-			Looper.loop();
+			handler.sendMessage(message);
 		}
 		
 		private String getString(int id){
@@ -642,7 +663,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		private String buildDataString(){
 			//data loading
-			String wrapLine = System.getProperty("line.separator");
+			String wrapLine = "\n";
 			StringBuffer settingBuffer = new StringBuffer();
 			StringBuffer groupBuffer = new StringBuffer();
 			StringBuffer itemBuffer = new StringBuffer();
@@ -672,68 +693,73 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		@Override
 		public void run() {
+			Message message = Message.obtain();
+			message.arg1=2;
 			String path = fileUri.getPath();
 			if(!path.endsWith(".pw")){
-				Tools.showToast(MainActivity.this, "文件格式错误，请选择正确的备份文件");
+				message.obj="文件格式错误，请选择正确的备份文件";
 			}else{
 				try {
 					String content = FileUtil.loadFileFromSdcard(MainActivity.this, path);
 					System.out.println("content:"+content);
 					DesUtils des = new DesUtils();
-					String wrapLine = System.getProperty("line.separator");
-					content = content.substring(0, content.length()-wrapLine.length());
+					String wrapLine = "\n";
+					//content = content.substring(0, content.length());
 					String decryptContent = des.decrypt(content);
 					String[] wholeData = decryptContent.split(wrapLine);
+					//clear the database
+					pwItemDao.deleteAll();
+					pwGroupDao.deleteAll();
+					pwSettingDao.deleteAll();
+					//load the data
 					for(String line:wholeData){
+						System.out.println(line);
 						String[] row = line.split("[|]");
 						if(BR_TAG_ITEM.equals(row[0])){
-							if(pwItemDao.deleteAll()>=0){
-								PWItem item = new PWItem();
-								item.setItem_id(Integer.parseInt(row[1]));
-								item.setItem_name(row[2]);
-								item.setItem_username(row[3]);
-								item.setItem_password(row[4]);
-								item.setItem_type(row[5]);
-								item.setItem_subtype(Integer.parseInt(row[6]));
-								item.setItem_url(row[7]);
-								item.setItem_comment(row[8]);
-								item.setQuestion1(row[9]);
-								item.setQuestion2(row[10]);
-								item.setModified(row[11]);
-								item.setCreated(row[12]);
-								item.setDeleted(Boolean.valueOf(row[13]));
-								pwItemDao.createOrUpdate(item);
-							}
+							PWItem item = new PWItem();
+							item.setItem_id(Integer.parseInt(row[1]));
+							item.setItem_name(row[2]);
+							item.setItem_username(row[3]);
+							item.setItem_password(row[4]);
+							item.setItem_type(row[5]);
+							item.setItem_subtype(Integer.parseInt(row[6]));
+							item.setItem_url(row[7]);
+							item.setItem_comment(row[8]);
+							item.setQuestion1(row[9]);
+							item.setQuestion2(row[10]);
+							item.setModified(row[11]);
+							item.setCreated(row[12]);
+							item.setDeleted(Boolean.valueOf(row[13]));
+							pwItemDao.createOrUpdate(item);
 						}else if(BR_TAG_GROUP.equals(row[0])){
-							if(pwGroupDao.deleteAll()>=0){
-								PWGroup group = new PWGroup();
-								group.setGroup_id(Integer.parseInt(row[1]));
-								group.setGroup_name(row[2]);
-								group.setGroup_level(row[3]);
-								group.setCreated(row[4]);
-								group.setDeleted(Boolean.valueOf(row[5]));
-							}
+							PWGroup group = new PWGroup();
+							group.setGroup_id(Integer.parseInt(row[1]));
+							group.setGroup_name(row[2]);
+							group.setGroup_level(row[3]);
+							group.setCreated(row[4]);
+							group.setDeleted(Boolean.valueOf(row[5]));
+							pwGroupDao.createOrUpdate(group);
 						}else if(BR_TAG_SETTING.equals(row[0])){
-							if(pwSettingDao.deleteAll()>=0){
-								PWSetting setting = new PWSetting();
-								setting.setSetting_id(Integer.parseInt(row[1]));
-								setting.setSetting_name(row[2]);
-								setting.setSetting_value(row[3]);
-								setting.setCreated(row[4]);
-								setting.setDeleted(Boolean.valueOf(row[5]));
-							}
+							PWSetting setting = new PWSetting();
+							setting.setSetting_id(Integer.parseInt(row[1]));
+							setting.setSetting_name(row[2]);
+							setting.setSetting_value(row[3]);
+							setting.setCreated(row[4]);
+							setting.setDeleted(Boolean.valueOf(row[5]));
+							pwSettingDao.createOrUpdate(setting);
 						}
 					}
+					message.obj="数据恢复成功！";
+					message.arg2=0;
 				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
-					Tools.showToast(MainActivity.this, "文件没有读到！"+path);
+					message.obj="文件没有读到！"+path;
 				} catch (IOException e2) {
-					e2.printStackTrace();
-					Tools.showToast(MainActivity.this, "文件读取失败！"+path);
+					message.obj="文件读取失败！"+path;
 				} catch (Exception e) {
 					e.printStackTrace();
+					message.obj="未知错误："+e.getMessage();
 				}
-				handler.sendEmptyMessage(2);
+				handler.sendMessage(message);
 			}
 		}
 	}

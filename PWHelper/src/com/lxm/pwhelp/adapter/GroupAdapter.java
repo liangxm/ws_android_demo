@@ -13,16 +13,17 @@ import android.widget.TextView;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.activity.MainActivity;
 import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.custom.ToggleButton;
 import com.lxm.pwhelp.utils.Conver;
 import com.lxm.pwhelp.utils.GroupType;
 
-public class MyAdapter extends BaseExpandableListAdapter {
+public class GroupAdapter extends BaseExpandableListAdapter {
 
 	private MainActivity activity;
 	
 	private String default_str,bank_str,web_str,weibo_str,qq_str,email_str,alipay_str;
 	
-	public MyAdapter(MainActivity activity){
+	public GroupAdapter(MainActivity activity){
 		this.activity = activity;
 		initGroupStr();
 	}
@@ -58,33 +59,47 @@ public class MyAdapter extends BaseExpandableListAdapter {
 			LayoutInflater inflater = (LayoutInflater) activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.layout_children, null);
+			new ViewHolderChild(convertView);
 		}
-		ImageView item_logo = (ImageView) convertView.findViewById(R.id.item_logo);
+		final ViewHolderChild holder = (ViewHolderChild) convertView.getTag();
 		String item_type = info.getItem_type();
 		if(default_str.equals(item_type))
-			item_logo.setImageResource(R.drawable.default_item_icon);
+			holder.item_logo.setImageResource(R.drawable.default_item_icon);
 		else if(bank_str.equals(item_type))
-			item_logo.setImageResource(R.drawable.bank_item_icon);
+			holder.item_logo.setImageResource(R.drawable.bank_item_icon);
 		else if(web_str.equals(item_type))
-			item_logo.setImageResource(R.drawable.www_item_icon);
+			holder.item_logo.setImageResource(R.drawable.www_item_icon);
 		else if(weibo_str.equals(item_type))
-			item_logo.setImageResource(R.drawable.sina_item_icon);
+			holder.item_logo.setImageResource(R.drawable.sina_item_icon);
 		else if(qq_str.equals(item_type))
-			item_logo.setImageResource(R.drawable.qq_item_icon);
+			holder.item_logo.setImageResource(R.drawable.qq_item_icon);
 		else if(email_str.equals(item_type))
-			item_logo.setImageResource(R.drawable.email_item_icon);
+			holder.item_logo.setImageResource(R.drawable.email_item_icon);
 		else if(alipay_str.equals(item_type))
-			item_logo.setImageResource(R.drawable.alipay_item_icon);
+			holder.item_logo.setImageResource(R.drawable.alipay_item_icon);
 		else
-			item_logo.setImageResource(R.drawable.default_item_icon);
-		TextView tv1 = (TextView) convertView.findViewById(R.id.one_textview);
-		TextView tv2 = (TextView) convertView.findViewById(R.id.two_textview);
-		TextView tv3 = (TextView) convertView.findViewById(R.id.three_textview);
-		tv1.setText(info.getItem_type());
-		tv2.setText(info.getItem_username());
-		tv3.setText(info.getItem_password());
-		tv1.setBackgroundColor(Color.WHITE);
+			holder.item_logo.setImageResource(R.drawable.default_item_icon);
+		holder.item_type.setText(item_type);
+		holder.item_username.setText(info.getItem_username());
+		holder.item_password.setText(info.getItem_password());
+		holder.item_type.setBackgroundColor(Color.WHITE);
 		return convertView;
+	}
+	
+	class ViewHolderChild{
+		ImageView item_logo;
+		TextView item_type;
+		TextView item_username;
+		TextView item_password;
+		ToggleButton mTogBtn;
+		
+		public ViewHolderChild(View view){
+			item_logo = (ImageView) view.findViewById(R.id.item_logo);
+			item_type = (TextView) view.findViewById(R.id.one_textview);
+			item_username = (TextView) view.findViewById(R.id.two_textview);
+			item_password = (TextView) view.findViewById(R.id.three_textview);
+			view.setTag(this);
+		}
 	}
 
 	@Override
@@ -123,7 +138,7 @@ public class MyAdapter extends BaseExpandableListAdapter {
 		tv = getTextView(tv);
 		return tv;
 	}
-
+	
 	private TextView getTextView(TextView textView){
 		AbsListView.LayoutParams lp = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,Conver.dip2px(activity, 40));
 		textView.setLayoutParams(lp);
