@@ -4,14 +4,26 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <!--
     <LinearLayout
-        android:id="@+id/manage"
+        android:id="@+id/profiles"
         android:layout_width="fill_parent"
-        android:layout_height="160.0dip"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8.0dip"
         android:background="@drawable/layout_selecter"
         android:clickable="true" >
+        
+        <LinearLayout
+            android:id="@+id/shodow_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+	        <com.lxm.pwhelp.custom.CircleImageView
+	            android:id="@+id/head_icon"
+	            android:layout_width="60dip"
+	            android:layout_height="60dip"
+	            android:src="@drawable/head_icon"
+	            android:contentDescription="@null" />
+		</LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -38,9 +50,8 @@
                 android:textSize="18.0dip" />
         </LinearLayout>
     </LinearLayout>
-    -->
 
-    <LinearLayout
+    <!-- <LinearLayout
         android:id="@id/manage"
         android:layout_width="fill_parent"
         android:layout_height="230dip"
@@ -67,11 +78,12 @@
             android:layout_height="wrap_content"
             android:text="@string/author"
             android:textColor="#FFFFFF" />
-    </LinearLayout>
+    </LinearLayout> -->
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5.0dip"
         android:orientation="vertical"
         android:background="#FFFFFF" >
         <RelativeLayout

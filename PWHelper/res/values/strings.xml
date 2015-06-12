@@ -44,6 +44,9 @@
     <string name="cloud_label">备份到我的私人邮箱</string>
     <string name="settting_label">设置</string>
     <string name="recovery_label">恢复原来的数据</string>
+    <string name="touxiang_label">头像</string>
+    <string name="nickname_label">昵称</string>
+    <string name="nickname_value">Selina</string>
     
     <!-- add layout -->
     <string name="text_type">账号类型</string>
@@ -91,6 +94,7 @@
     <string name="set_email_title">邮箱账号</string>
     <string name="add_group_title">添加分组</string>
     <string name="edit_title">修改密码信息</string>
+    <string name="personal_info">个人信息</string>
     <string name="cancel">取消</string>
     <string name="save">保存</string>
 

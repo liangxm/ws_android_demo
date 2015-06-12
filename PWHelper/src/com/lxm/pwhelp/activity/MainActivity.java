@@ -5,10 +5,8 @@
 
 package com.lxm.pwhelp.activity;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -25,17 +23,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.Editable;
@@ -74,6 +68,7 @@ import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.bean.PWSetting;
 import com.lxm.pwhelp.custom.CircleImageView;
 import com.lxm.pwhelp.custom.EmailDialog;
+import com.lxm.pwhelp.custom.ToggleButton;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.dao.PWSettingDao;
@@ -113,6 +108,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	private LinearLayout additem;
 	private LinearLayout shodow_head;
+	private LinearLayout profiles;
 	private RelativeLayout backupitem;
 	private RelativeLayout recovery;
 	private RelativeLayout settings;
@@ -158,7 +154,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		additem.setOnClickListener(this);
 		backupitem.setOnClickListener(this);
 		recovery.setOnClickListener(this);
-		head_icon.setOnClickListener(this);
+		profiles.setOnClickListener(this);
 		settings.setOnClickListener(this);
 		add_group.setOnClickListener(this);
 		no_add_item.setOnClickListener(this);
@@ -242,6 +238,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     	parent = new ArrayList<String>();
     	map = new HashMap<String, List<PWItem>>();
     	if(groups.size()==0){
+    		//initialize the group data
 	    	for(String groupStr:groupData){
 				pwGroupDao.createOrUpdate(new PWGroup(groupStr,"0",false));
 				List<PWItem> list = new ArrayList<PWItem>();
@@ -252,6 +249,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				}
 				map.put(groupStr+"("+itemGroups.size()+")", list);
 			}
+	    	//initialize the settings
+	    	PWSetting pwSetting1 = new PWSetting();
+	    	pwSetting1.setSetting_name("pw_command");
+	    	pwSetting1.setSetting_value("8888");
+	    	pwSettingDao.createOrUpdate(pwSetting1);
+	    	
+	    	PWSetting pwSetting2 = new PWSetting();
+	    	pwSetting2.setSetting_name("pw_nickname");
+	    	pwSetting2.setSetting_value("Selina");
+	    	pwSettingDao.createOrUpdate(pwSetting2);
     	}else{
     		for(PWGroup group:groups){
     			List<PWItem> list = new ArrayList<PWItem>();
@@ -282,6 +289,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 		additem = (LinearLayout) tab03.findViewById(R.id.additem);
 		shodow_head = (LinearLayout) tab04.findViewById(R.id.shodow_head);
+		profiles = (LinearLayout) tab04.findViewById(R.id.profiles);
 		mainlistview = (ExpandableListView) tab02.findViewById(R.id.explistview);
 
 		backupitem = (RelativeLayout) tab04.findViewById(R.id.cloud);
@@ -290,7 +298,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		head_icon = (CircleImageView) tab04.findViewById(R.id.head_icon);
 		head_icon.setMaxWidth(Conver.dip2px(this, 250));
 		head_icon.setMaxHeight(Conver.dip2px(this, 250));
-		shodow_head.setPadding(Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15));
+		shodow_head.setPadding(Conver.dip2px(this, 5), Conver.dip2px(this, 5), Conver.dip2px(this, 5), Conver.dip2px(this, 5));
 		top_header = (CircleImageView) findViewById(R.id.top_header);
 		
 		add_group = (ImageView) findViewById(R.id.add_group);
@@ -302,20 +310,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		itemList = new ArrayList<PWItem>();
 		// 设置单个分组展开
 		initData();
-		groupAdapter=new GroupAdapter(this);
+		groupAdapter=new GroupAdapter(this, parent, map);
 		mainlistview.setAdapter(groupAdapter);
 		mainlistview.setOnChildClickListener(new OnChildClickListener(){
 			@Override
 			public boolean onChildClick(ExpandableListView parentlist, View view,
 					int groupPosition, int childPosition, long id) {
-				String key = parent.get(groupPosition);
-				PWItem item = map.get(key).get(childPosition);
-				Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putSerializable("item", item);
-				intent.putExtras(bundle);
-				startActivityForResult(intent,VIEW_ITEM_CODE);
-				return true;
+				ToggleButton toggleButton = (ToggleButton)view.findViewById(R.id.mTogBtn);
+				if(!toggleButton.isSelected()){
+					Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
+					return false;
+				}else{
+					String key = parent.get(groupPosition);
+					PWItem item = map.get(key).get(childPosition);
+					Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("item", item);
+					intent.putExtras(bundle);
+					startActivityForResult(intent,VIEW_ITEM_CODE);
+					return true;
+				}
 			}
 		});
 		adapter = new PWItemAdapter(MainActivity.this, itemList);
@@ -385,17 +399,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			
 		});
 		
-		//lv_list.setCloseInterpolator(new BounceInterpolator());
 		lv_list.setOnItemClickListener(new OnItemClickListener(){
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long arg3) {
-				PWItem item = itemList.get(position);
-				Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putSerializable("item", item);
-				intent.putExtras(bundle);
-				startActivity(intent);
+				ToggleButton toggleButton = (ToggleButton)view.findViewById(R.id.mTogBtn);
+				if(!toggleButton.isSelected()){
+					Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
+				}else{
+					PWItem item = itemList.get(position);
+					Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("item", item);
+					intent.putExtras(bundle);
+					startActivityForResult(intent,VIEW_ITEM_CODE);
+				}
 			}
 		});
 		
@@ -488,12 +506,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}
 			break;
 		}
-		case R.id.recovery: {
-			showFileChooser();
+		case R.id.profiles: {
+			Intent intent = new Intent(this, PersonalActivity.class);
+			startActivityForResult(intent,PROFILE_SETTING_CODE);
 			break;
 		}
-		case R.id.head_icon: {
-			showDialog();
+		case R.id.recovery: {
+			showFileChooser();
 			break;
 		}
 		case R.id.add_group: {
@@ -571,10 +590,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			//reverse the list so that newer item is up
 			Collections.reverse(itemList);
 		}
-		List<PWGroup> groups = pwGroupDao.getAvailableGroup();
 		adapter.notifyDataSetChanged();
-		parent = new ArrayList<String>();
-		map = new HashMap<String, List<PWItem>>();
+		
+		List<PWGroup> groups = pwGroupDao.getAvailableGroup();
+		parent.clear();
+		map.clear();
 		for(PWGroup group:groups){
 			List<PWItem> list = new ArrayList<PWItem>();
 			List<PWItem> itemGroups = pwItemDao.getPWItemByType(group.getGroup_name());
@@ -687,15 +707,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 	
 	private class DataRecovery implements Runnable {
-		private Uri fileUri;
-		public DataRecovery(Uri fileUri) {
-			this.fileUri = fileUri;
+		private String path;
+		public DataRecovery(String path) {
+			this.path = path;
 		}
 		@Override
 		public void run() {
 			Message message = Message.obtain();
 			message.arg1=2;
-			String path = fileUri.getPath();
 			if(!path.endsWith(".pw")){
 				message.obj="文件格式错误，请选择正确的备份文件";
 			}else{
@@ -829,21 +848,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			return;
 		} else {
 			switch (requestCode){
-			case IMAGE_REQUEST_CODE:
-				resizeImage(data.getData());
-				break;
-			case CAMERA_REQUEST_CODE:
-				if (Tools.hasSdcard()){
-					resizeImage(getImageUri());
-				} else {
-					Toast.makeText(MainActivity.this, "未找到存储卡，无法存储照片!", Toast.LENGTH_LONG).show();
-				}
-				break;
-			case RESIZE_REQUEST_CODE:
-				if (data != null) {
-					showResizeImage(data);
-				}
-				break;
 			case EDIT_ITEM_CODE:
 			case ADD_GROUP_CODE:
 			case ADD_ITEM_CODE:
@@ -852,8 +856,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				break;
 			case FILE_SELECT_CODE:
 				Uri fileUri = data.getData();
-				progressDialog = ProgressDialog.show(MainActivity.this, "数据恢复", "正在尝试恢复您的数据，请稍后...",true, true);
-				new Thread(new DataRecovery(fileUri)).start();
+				String path = fileUri.getPath();
+				if(!path.endsWith(".pw")){
+					Tools.showToast(this, "文件选择错误,请选择正确的备份文件！");
+				}else{
+					progressDialog = ProgressDialog.show(MainActivity.this, "数据恢复", "正在尝试恢复您的数据，请稍后...",true, true);
+					new Thread(new DataRecovery(path)).start();
+				}
 				break;
 			}
 		}
@@ -993,109 +1002,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		super.onDestroy();
 	}
 	
-    /** 
-     * 显示选择对话框 
-     */  
-    private void showDialog() {  
-        new AlertDialog.Builder(this)  
-                .setTitle("设置头像")  
-                .setItems(new String[] {"选择本地图片", "拍照"}, new DialogInterface.OnClickListener() {  
-                    @Override  
-                    public void onClick(DialogInterface dialog, int which) {  
-                        switch (which) {  
-                        case 0:  
-                            Intent intentFromGallery = new Intent();  
-                            intentFromGallery.setType("image/*"); // 设置文件类型  
-                            intentFromGallery  
-                                    .setAction(Intent.ACTION_GET_CONTENT);  
-                            startActivityForResult(intentFromGallery,  
-                                    IMAGE_REQUEST_CODE);  
-                            break;  
-                        case 1:  
-                            Intent intentFromCapture = new Intent(  
-                                    MediaStore.ACTION_IMAGE_CAPTURE);  
-                            // 判断存储卡是否可以用，可用进行存储  
-                            if (Tools.hasSdcard()) {  
-                            	intentFromCapture.putExtra(
-										MediaStore.EXTRA_OUTPUT,
-										Uri.fromFile(new File(Environment
-												.getExternalStorageDirectory(),
-												IMAGE_FILE_NAME)));
-                            }  
-  
-                            startActivityForResult(intentFromCapture,CAMERA_REQUEST_CODE);  
-                            break;  
-                        }  
-                    }  
-                })  
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {  
-  
-                    @Override  
-                    public void onClick(DialogInterface dialog, int which) {  
-                        dialog.dismiss();  
-                    }  
-                }).show();  
-  
-    }
-    
-	private void resizeImage(Uri uri) {
-		Intent intent = new Intent("com.android.camera.action.CROP");
-		intent.setDataAndType(uri, "image/*");
-		intent.putExtra("crop", "true");
-		intent.putExtra("aspectX", 1);
-		intent.putExtra("aspectY", 1);
-		intent.putExtra("outputX", Conver.dip2px(this, 120));
-		intent.putExtra("outputY", Conver.dip2px(this, 120));
-		intent.putExtra("scale", true);
-		intent.putExtra("return-data", true);
-		intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-		intent.putExtra("noFaceDetection", true); // no face detection
-		startActivityForResult(intent, RESIZE_REQUEST_CODE);
-	}
-
-	private void showResizeImage(Intent data) {
-		Bundle extras = data.getExtras();
-		if (extras != null) {
-			Bitmap photo = extras.getParcelable("data");
-			savePic(photo);
-			Drawable drawable = new BitmapDrawable(this.getResources(),photo);
-			head_icon.setImageDrawable(drawable);
-		}
-	}
-	
-	private void savePic(Bitmap photo){
-    	long l2 = System.currentTimeMillis();
-	    String fileName = l2 + ".jpg";
-        String tempImgPath = getCacheDir().getAbsolutePath() + "/sysfiles/temp/" + fileName;
-        String dir = getDir(tempImgPath);
-		File dirFile = new File(dir);
-		dirFile.mkdirs();
-		if (!dirFile.exists()) {
-			Toast.makeText(MainActivity.this, "无法创建SD卡目录,图片无法保存", Toast.LENGTH_LONG).show();
-		}
-		try {
-        	BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(tempImgPath));
-        	photo.compress(Bitmap.CompressFormat.JPEG, 75, bos);// (0 - 100)压缩文件  
-        	SharedPreferencesUtils.setParam(MainActivity.this, SharedPreferencesUtils.PHOTO_PATH, tempImgPath);
-        } catch (Exception e) {
-			e.printStackTrace();
-        }  
-    }
-	
-	public  String getDir(String filePath) {
-		int lastSlastPos = filePath.lastIndexOf('/');
-		return filePath.substring(0, lastSlastPos);
-	}
-
-	private Uri getImageUri() {
-		return Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-				IMAGE_FILE_NAME));
-	}
-	
 	//requestCode
-	private static final int IMAGE_REQUEST_CODE = 0;
-	private static final int CAMERA_REQUEST_CODE = 1;
-	private static final int RESIZE_REQUEST_CODE = 2;
 	private static final int EDIT_ITEM_CODE = 3;
 	private static final int ADD_GROUP_CODE = 4;
 	private static final int ADD_ITEM_CODE = 5;
@@ -1103,7 +1010,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private static final int FILE_SELECT_CODE = 7;
 	private static final int SYSY_SETTING_CODE = 8;
 	private static final int FIRST_ADD_CODE = 9;
-	private static final String IMAGE_FILE_NAME = "header.jpg";
+	private static final int PROFILE_SETTING_CODE = 10;
 	
 	//backup and recovery tag
 	private static final String BR_TAG_ITEM = "item";

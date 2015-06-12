@@ -90,8 +90,7 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 									.getSetting_id());
 						}
 						pwSetting.setSetting_name("email_address");
-						pwSetting.setSetting_value(dialog.getEditText()
-								.getText().toString());
+						pwSetting.setSetting_value(email_address);
 						CreateOrUpdateStatus status = pwSettingDao
 								.createOrUpdate(pwSetting);
 						if (status.isCreated() || status.isUpdated()) {

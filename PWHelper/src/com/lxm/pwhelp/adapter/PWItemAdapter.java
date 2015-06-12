@@ -10,6 +10,9 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.InputFilter.LengthFilter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -69,39 +72,52 @@ public class PWItemAdapter extends BaseAdapter {
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if (convertView == null){
+		final ViewHolder mViewHolder;
+		if (null == convertView){
 			convertView = View.inflate(activity.getApplicationContext(),R.layout.list_row, null);
-			new ViewHolder(convertView);
+			mViewHolder = new ViewHolder();
+			mViewHolder.item_logo = (ImageView) convertView.findViewById(R.id.item_logo);
+			mViewHolder.item_type = (TextView) convertView.findViewById(R.id.item_type);
+			mViewHolder.item_username = (TextView) convertView.findViewById(R.id.item_username);
+			mViewHolder.item_password = (TextView) convertView.findViewById(R.id.item_password);
+			mViewHolder.mTogBtn = (ToggleButton) convertView.findViewById(R.id.mTogBtn);
+			convertView.setTag(mViewHolder);
+		}else{
+			mViewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		final ViewHolder holder = (ViewHolder) convertView.getTag();
 		final String password = getItem(position).getItem_password();
 		String item_type = getItem(position).getItem_type();
+		String appendType = "";
 		if(default_str.equals(item_type))
-			holder.item_logo.setImageResource(R.drawable.default_item_icon);
-		else if(bank_str.equals(item_type))
-			holder.item_logo.setImageResource(R.drawable.bank_item_icon);
-		else if(web_str.equals(item_type))
-			holder.item_logo.setImageResource(R.drawable.www_item_icon);
+			mViewHolder.item_logo.setImageResource(R.drawable.default_item_icon);
+		else if(bank_str.equals(item_type)){
+			mViewHolder.item_logo.setImageResource(R.drawable.bank_item_icon);
+			if(getItem(position).getItem_subtype()==0){
+				appendType="(储蓄卡)";
+			}else if(getItem(position).getItem_subtype()==1){
+				appendType="(信用卡)";
+			}
+		}else if(web_str.equals(item_type))
+			mViewHolder.item_logo.setImageResource(R.drawable.www_item_icon);
 		else if(weibo_str.equals(item_type))
-			holder.item_logo.setImageResource(R.drawable.sina_item_icon);
+			mViewHolder.item_logo.setImageResource(R.drawable.sina_item_icon);
 		else if(qq_str.equals(item_type))
-			holder.item_logo.setImageResource(R.drawable.qq_item_icon);
+			mViewHolder.item_logo.setImageResource(R.drawable.qq_item_icon);
 		else if(email_str.equals(item_type))
-			holder.item_logo.setImageResource(R.drawable.email_item_icon);
+			mViewHolder.item_logo.setImageResource(R.drawable.email_item_icon);
 		else if(alipay_str.equals(item_type))
-			holder.item_logo.setImageResource(R.drawable.alipay_item_icon);
+			mViewHolder.item_logo.setImageResource(R.drawable.alipay_item_icon);
 		else
-			holder.item_logo.setImageResource(R.drawable.default_item_icon);
-		
+			mViewHolder.item_logo.setImageResource(R.drawable.default_item_icon);
 			
-		holder.item_type.setText(getItem(position).getItem_type());
-		holder.item_username.setText("账号：" + getItem(position).getItem_username());
+		mViewHolder.item_type.setText(getItem(position).getItem_type()+appendType);
+		mViewHolder.item_username.setText("账号：" + getItem(position).getItem_username());
 		
-		if(!holder.mTogBtn.isSelected()){
-			holder.item_password.setText("密码："+"*********************");
+		if(!mViewHolder.mTogBtn.isSelected()){
+			mViewHolder.item_password.setText("密码："+"*********************");
 		}
-		holder.mTogBtn.setOnToggleChanged(new OnToggleChanged(){
+		mViewHolder.mTogBtn.setOnToggleChanged(new OnToggleChanged(){
 			@Override
 			public void onToggle(boolean on) {
 				if(on){
@@ -109,6 +125,10 @@ public class PWItemAdapter extends BaseAdapter {
 					if(commands!=null&&commands.size()>0){
 						command = commands.get(0).getSetting_value();
 						final EditText commandStr = new EditText(activity);
+						commandStr.setInputType(InputType.TYPE_CLASS_NUMBER);
+						InputFilter[] filters = {new LengthFilter(4)};
+						commandStr.setFilters(filters);
+						commandStr.setHint("默认口令是8888");
 						AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 						builder.setTitle("请输入口令");
 						builder.setIcon(android.R.drawable.ic_dialog_info);
@@ -117,11 +137,11 @@ public class PWItemAdapter extends BaseAdapter {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								if(command.equals(commandStr.getText().toString())){
-									holder.item_password.setText("密码：" + password);
+									mViewHolder.item_password.setText("密码：" + password);
 									dialog.dismiss();
 								}else{
 									Tools.showWarningDialog(activity,"口令错误","口令错误，请重试！");
-									holder.mTogBtn.setToggleOff();
+									mViewHolder.mTogBtn.setToggleOff();
 									dialog.dismiss();
 								}
 							}
@@ -129,37 +149,28 @@ public class PWItemAdapter extends BaseAdapter {
 						builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
-										holder.mTogBtn.setToggleOff();
+										mViewHolder.mTogBtn.setToggleOff();
 										dialog.dismiss();
 									}
 						});
 						builder.setCancelable(false);
 						builder.show();
 					}else{
-						holder.item_password.setText("密码：" + password);
+						mViewHolder.item_password.setText("密码：" + password);
 					}
 				}else{
-					holder.item_password.setText("密码："+"*********************");
+					mViewHolder.item_password.setText("密码："+"*********************");
 				}
 			}
 		});
         return convertView;
 	}
 	
-	class ViewHolder{
+	private class ViewHolder{
 		ImageView item_logo;
 		TextView item_type;
 		TextView item_username;
 		TextView item_password;
 		ToggleButton mTogBtn;
-		
-		public ViewHolder(View view){
-			item_logo = (ImageView) view.findViewById(R.id.item_logo);
-			item_type = (TextView) view.findViewById(R.id.item_type);
-			item_username = (TextView) view.findViewById(R.id.item_username);
-			item_password = (TextView) view.findViewById(R.id.item_password);
-			mTogBtn = (ToggleButton) view.findViewById(R.id.mTogBtn);
-			view.setTag(this);
-		}
 	}
 }
