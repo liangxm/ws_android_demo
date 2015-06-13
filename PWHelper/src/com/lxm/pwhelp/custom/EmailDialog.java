@@ -32,7 +32,6 @@ public class EmailDialog extends Dialog {
         negativeButton = (TextView) mView.findViewById(R.id.negativeButton);
         title.setText(titleStr);
         editText.setHint(titleStr);
-        editText.setHint(R.string.email_hint);
         super.setContentView(mView);
     }
      

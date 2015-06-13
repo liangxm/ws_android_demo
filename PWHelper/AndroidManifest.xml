@@ -48,6 +48,7 @@
         <activity android:name="com.lxm.pwhelp.activity.AddGroupActivity"/>
         <activity android:name="com.lxm.pwhelp.activity.EditItemActivity"/>
         <activity android:name="com.lxm.pwhelp.activity.SettingHeaderActivity"/>
+        <activity android:name="com.lxm.pwhelp.activity.PersonalActivity"/>
     </application>
 
 </manifest>

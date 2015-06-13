@@ -319,4 +319,8 @@ public class ToggleButton extends View{
 		this.defaultAnimate = animate;
 	}
 	
+	@Override
+	public boolean isSelected(){
+		return toggleOn;
+	}
 }
