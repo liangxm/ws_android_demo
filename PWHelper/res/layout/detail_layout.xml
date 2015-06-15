@@ -35,7 +35,6 @@
             android:layout_marginTop="-55dip"
             android:layout_marginLeft="20dip"
             android:gravity="center"
-            android:text="新浪微博"
             android:textColor="#787878"
             android:textSize="22sp"/>
     </LinearLayout>
@@ -48,7 +47,7 @@
         <RelativeLayout 
             android:id="@+id/detail_line1"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg">
             <TextView 
                 android:id="@+id/detail_line1_label1"
@@ -56,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="账号类型"
+                android:text="@string/text_type"
                 android:textColor="#787878"
                 android:textSize="16sp"
                 />
@@ -76,10 +75,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="复制"
+                android:text="@string/textview_copy"
                 android:textColor="#2baa3f"
                 android:clickable="true"
-                />
+                android:visibility="gone"/>
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -93,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="账        号"
+                android:text="@string/textview_account"
                 android:textColor="#787878"
                 android:textSize="16sp"
                 />
@@ -113,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="复制"
+                android:text="@string/textview_copy"
                 android:textColor="#2baa3f"
                 android:clickable="true"
                 />
@@ -130,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="密        码"
+                android:text="@string/textview_password"
                 android:textColor="#787878"
                 android:textSize="16sp"
                 />
@@ -150,9 +149,199 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="复制"
+                android:text="@string/textview_copy"
                 android:textColor="#2baa3f"
                 android:clickable="true"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/detail_line4"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line4_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line4_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line4_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/detail_line5"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line5_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line5_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line5_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/detail_line6"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line6_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line6_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line6_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/detail_line7"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line7_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line7_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line7_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/detail_line8"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line8_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line8_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line8_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
+                />
+        </RelativeLayout>
+        
+		
+		<RelativeLayout 
+            android:id="@+id/detail_line9"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line9_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line9_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line9_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/detail_line10"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line10_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line10_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line10_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
                 />
         </RelativeLayout>
         

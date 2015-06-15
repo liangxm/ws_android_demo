@@ -56,7 +56,7 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 		setting = pwSettingDao.getSettingByName("pw_command");
 		if(setting!=null&&setting.size()>0){
 			isOn=true;
-			set_command_note.setText("您当前的密码口令是:"+setting.get(0).getSetting_value());
+			//set_command_note.setText("您当前的密码口令是:"+setting.get(0).getSetting_value());
 			set_command_note.setGravity(Gravity.CENTER);
 			enable_command_btn.setText("修改口令");
 			disable_command_btn.setText("关闭口令");
@@ -76,50 +76,120 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 			finish();
 			break;
 		case R.id.enable_command_btn:
-			String title = null;
-			if(setting!=null&&setting.size()>0){
-				title = "修改你的密码查看口令";
-			}else{
-				title = "请输入四位数字口令";
-			}
-			final EmailDialog dialog = new EmailDialog(SetCommandActivity.this,title);
-			final EditText editText = (EditText) dialog.getEditText();
-			editText.setHint("请设置您的密码查看口令");
-			editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-			InputFilter[] filters = {new LengthFilter(4)};
-			editText.setFilters(filters);
-			dialog.setOnPositiveListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					String command = dialog.getEditText().getText().toString();
-					if(command==null||command.trim().length()!=4){
-						Tools.showWarningDialog(SetCommandActivity.this,"警告","请输入四位有效数字的口令！");
-					}else{
-						PWSetting pwSetting = new PWSetting();
-						if(isOn)
+			if(isOn){
+				final EmailDialog dialog = new EmailDialog(SetCommandActivity.this,"修改你的密码查看口令");
+				final EditText editText = (EditText) dialog.getEditText();
+				final EditText editText1 = (EditText) dialog.getEditText1();
+				editText1.setVisibility(View.VISIBLE);
+				editText.setHint("请输入旧口令");
+				editText1.setHint("请输入新口令");
+				editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+				editText1.setInputType(InputType.TYPE_CLASS_NUMBER);
+				InputFilter[] filters = {new LengthFilter(4)};
+				editText.setFilters(filters);
+				editText1.setFilters(filters);
+				dialog.setOnPositiveListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						String oldCommand = editText.getText().toString();
+						String newCommand = editText1.getText().toString();
+						if(oldCommand==null||oldCommand.trim().length()!=4){
+							Tools.showWarningDialog(SetCommandActivity.this,"警告","请输入四位有效数字的口令！");
+							editText.requestFocus();
+						} else if (newCommand==null||newCommand.trim().length()!=4) {
+							Tools.showWarningDialog(SetCommandActivity.this,"警告","请输入四位有效数字的口令！");
+							editText1.requestFocus();
+						} else if (!setting.get(0).getSetting_value().equals(oldCommand)) {
+							Tools.showWarningDialog(SetCommandActivity.this,"警告","旧口令输入有误，请重试！");
+							editText.requestFocus();
+						} else {
+							PWSetting pwSetting = new PWSetting();
 							pwSetting.setSetting_id(setting.get(0).getSetting_id());
-						pwSetting.setSetting_name("pw_command");
-						pwSetting.setSetting_value(command);
-						CreateOrUpdateStatus status = pwSettingDao.createOrUpdate(pwSetting);
-						if(status.isCreated()||status.isUpdated()){
-							Tools.showSucessDialog(SetCommandActivity.this, "开启成功", "密码查看口令开启成功,返回！", listener);
+							pwSetting.setSetting_name("pw_command");
+							pwSetting.setSetting_value(newCommand);
+							CreateOrUpdateStatus status = pwSettingDao.createOrUpdate(pwSetting);
+							if(status.isUpdated()){
+								Tools.showSucessDialog(SetCommandActivity.this, "修改成功", "密码查看口令修改成功,返回！", listener);
+								dialog.dismiss();
+							}
 						}
 					}
-				}
-			});
-			dialog.setOnNegativeListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dialog.cancel();
-				}
-			});
-			dialog.show();
+				});
+				dialog.setOnNegativeListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
+				dialog.show();
+			} else {
+				final EmailDialog dialog = new EmailDialog(SetCommandActivity.this,"设置您的密码查看口令");
+				final EditText editText = (EditText) dialog.getEditText();
+				editText.setHint("输入密码查看口令");
+				editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+				InputFilter[] filters = {new LengthFilter(4)};
+				editText.setFilters(filters);
+				dialog.setOnPositiveListener(new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						String command = editText.getText().toString();
+						if(command==null||command.trim().length()!=4){
+							Tools.showWarningDialog(SetCommandActivity.this,"警告","请输入四位有效数字的口令！");
+						}else{
+							PWSetting pwSetting = new PWSetting();
+							pwSetting.setSetting_name("pw_command");
+							pwSetting.setSetting_value(command);
+							CreateOrUpdateStatus status = pwSettingDao.createOrUpdate(pwSetting);
+							if(status.isCreated()){
+								Tools.showSucessDialog(SetCommandActivity.this, "开启成功", "密码查看口令开启成功,返回！", listener);
+								dialog.dismiss();
+							}
+						}
+					}
+				});
+				dialog.setOnNegativeListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
+				dialog.show();
+			}
 			break;
 		case R.id.disable_command_btn:
-			PWSetting pwSetting = setting.get(0);
-			int status = pwSettingDao.delete(pwSetting);
-			if(status>0){
-				Tools.showSucessDialog(SetCommandActivity.this, "关闭成功", "密码查看口令关闭成功,返回！", listener);
+			if(isOn){
+				final EmailDialog dialog = new EmailDialog(SetCommandActivity.this,"验证口令");
+				final EditText editText = (EditText) dialog.getEditText();
+				editText.setHint("请输入口令");
+				editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+				InputFilter[] filters = {new LengthFilter(4)};
+				editText.setFilters(filters);
+				dialog.setOnPositiveListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						String command = editText.getText().toString();
+						if(command==null||command.trim().length()!=4){
+							Tools.showWarningDialog(SetCommandActivity.this,"警告","请输入四位有效数字的口令！");
+						}else if (!setting.get(0).getSetting_value().equals(command)) {
+							Tools.showWarningDialog(SetCommandActivity.this,"警告","口令输入有误，请重试！");
+							editText.requestFocus();
+						} else {
+							PWSetting pwSetting = setting.get(0);
+							int status = pwSettingDao.delete(pwSetting);
+							if(status>0){
+								Tools.showSucessDialog(SetCommandActivity.this, "关闭成功", "密码查看口令关闭成功,返回！", listener);
+								dialog.dismiss();
+							}
+						}
+					}
+				});
+				dialog.setOnNegativeListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
+				dialog.show();
 			}
 			break;
 		}

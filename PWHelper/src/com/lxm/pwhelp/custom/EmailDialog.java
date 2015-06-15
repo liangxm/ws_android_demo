@@ -15,31 +15,35 @@ import com.lxm.pwhelp.R;
  * @author Tom.Cai
  */
 public class EmailDialog extends Dialog {
-    private EditText editText;
+    private EditText editText,editText1;
     private TextView positiveButton, negativeButton;
     private TextView title;
  
     public EmailDialog(Context context,String title) {
         super(context,R.style.Theme_dialog);
-        setCustomDialog(title);
+        setEmailDialog(title);
     }
- 
-    private void setCustomDialog(String titleStr) {
+    
+    private void setEmailDialog(String titleStr) {
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.email_dialog, null);
         title = (TextView) mView.findViewById(R.id.title);
         editText = (EditText) mView.findViewById(R.id.editText);
+        editText1 = (EditText) mView.findViewById(R.id.editText1);
         positiveButton = (TextView) mView.findViewById(R.id.positiveButton);
         negativeButton = (TextView) mView.findViewById(R.id.negativeButton);
         title.setText(titleStr);
-        editText.setHint(titleStr);
         super.setContentView(mView);
     }
-     
+    
     public EditText getEditText(){
         return editText;
     }
-     
-     @Override
+    
+    public EditText getEditText1() {
+		return editText1;
+	}
+
+	@Override
     public void setContentView(int layoutResID) {
     }
  
