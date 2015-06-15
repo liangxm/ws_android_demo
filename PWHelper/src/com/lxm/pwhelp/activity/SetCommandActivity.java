@@ -170,14 +170,10 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 						String command = editText.getText().toString();
 						if(command==null||command.trim().length()!=4){
 							Tools.showWarningDialog(SetCommandActivity.this,"警告","请输入四位有效数字的口令！");
-<<<<<<< HEAD
 						}else if (!setting.get(0).getSetting_value().equals(command)) {
 							Tools.showWarningDialog(SetCommandActivity.this,"警告","口令输入有误，请重试！");
 							editText.requestFocus();
 						} else {
-=======
-						} else if (!setting.get(0).getSetting_value().equals(command)) {
->>>>>>> 9dd3522f0d5d462f12acad93a1c1e69f40929d26
 							PWSetting pwSetting = setting.get(0);
 							int status = pwSettingDao.delete(pwSetting);
 							if(status>0){

@@ -150,11 +150,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:text="@string/textview_copy"
-<<<<<<< HEAD
-=======
                 android:textColor="#2baa3f"
-                android:clickable="true"
-                />
+                android:clickable="true"/>
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -300,119 +297,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:text="@string/textview_copy"
->>>>>>> 9dd3522f0d5d462f12acad93a1c1e69f40929d26
                 android:textColor="#2baa3f"
-                android:clickable="true"
-                />
+                android:clickable="true"/>
         </RelativeLayout>
         
-		<RelativeLayout 
-            android:id="@+id/detail_line4"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/content_bg"
-            android:visibility="gone">
-            <TextView 
-                android:id="@+id/detail_line4_label1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textColor="#787878"
-                android:textSize="16sp"
-                />
-            <TextView 
-                android:id="@+id/detail_line4_label2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/detail_line4_label1"
-                android:gravity="left"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:textIsSelectable="true"
-                />
-        </RelativeLayout>
-        
-		<RelativeLayout 
-            android:id="@+id/detail_line5"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/content_bg"
-            android:visibility="gone">
-            <TextView 
-                android:id="@+id/detail_line5_label1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textColor="#787878"
-                android:textSize="16sp"
-                />
-            <TextView 
-                android:id="@+id/detail_line5_label2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/detail_line5_label1"
-                android:gravity="left"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:textIsSelectable="true"
-                />
-        </RelativeLayout>
-        
-		<RelativeLayout 
-            android:id="@+id/detail_line6"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/content_bg"
-            android:visibility="gone">
-            <TextView 
-                android:id="@+id/detail_line6_label1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textColor="#787878"
-                android:textSize="16sp"
-                />
-            <TextView 
-                android:id="@+id/detail_line6_label2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/detail_line6_label1"
-                android:gravity="left"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:textIsSelectable="true"
-                />
-        </RelativeLayout>
-        
-		<RelativeLayout 
-            android:id="@+id/detail_line7"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/content_bg"
-            android:visibility="gone">
-            <TextView 
-                android:id="@+id/detail_line7_label1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textColor="#787878"
-                android:textSize="16sp"
-                />
-            <TextView 
-                android:id="@+id/detail_line7_label2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/detail_line7_label1"
-                android:gravity="left"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:textIsSelectable="true"
-                />
-        </RelativeLayout>
         
 		<RelativeLayout 
             android:id="@+id/detail_line8"
