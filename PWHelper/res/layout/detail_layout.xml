@@ -84,7 +84,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line2"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg">
             <TextView 
                 android:id="@+id/detail_line2_label1"
@@ -121,7 +121,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line3"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg">
             <TextView 
                 android:id="@+id/detail_line3_label1"
@@ -158,7 +158,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line4"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg"
             android:visibility="gone">
             <TextView 
@@ -185,7 +185,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line5"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg"
             android:visibility="gone">
             <TextView 
@@ -212,7 +212,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line6"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg"
             android:visibility="gone">
             <TextView 
@@ -239,7 +239,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line7"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg"
             android:visibility="gone">
             <TextView 
@@ -266,7 +266,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line8"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg"
             android:visibility="gone">
             <TextView 
@@ -294,7 +294,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line9"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg"
             android:visibility="gone">
             <TextView 
@@ -321,7 +321,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line10"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg"
             android:visibility="gone">
             <TextView 
@@ -338,6 +338,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/detail_line10_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/detail_line11"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line11_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line11_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line11_label1"
+                android:gravity="left"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:textIsSelectable="true"
+                />
+        </RelativeLayout>
+        
+		<RelativeLayout 
+            android:id="@+id/detail_line12"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/content_bg"
+            android:visibility="gone">
+            <TextView 
+                android:id="@+id/detail_line12_label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textColor="#787878"
+                android:textSize="16sp"
+                />
+            <TextView 
+                android:id="@+id/detail_line12_label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/detail_line12_label1"
                 android:gravity="left"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
