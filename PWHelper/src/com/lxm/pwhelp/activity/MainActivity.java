@@ -464,6 +464,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			break;
 		}
 		case R.id.id_tab_address: {
+			mainlistview.requestFocusFromTouch();
 			add_group.setVisibility(View.VISIBLE);
 			top_header.setVisibility(View.VISIBLE);
 			mViewPager.setCurrentItem(1);

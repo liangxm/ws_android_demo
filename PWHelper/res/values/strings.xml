@@ -36,6 +36,9 @@
     <string name="email_address_label">备份的邮箱地址</string>
     <string name="command_label">密码口令</string>
     <string name="modify_lockpattern_label">修改手势密码</string>
+    <string name="textview_copy">复制</string>
+    <string name="textview_account">账        号</string>
+    <string name="textview_password">密        码</string>
     
     <!-- manage center -->
     <string name="add_label">添加手机上的APP账号和密码</string>

@@ -57,9 +57,9 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		line1_label2.setPadding(Conver.dip2px(this, 20), 0, 0, 0);
 		line2_label2.setPadding(Conver.dip2px(this, 20), 0, 0, 0);
 		line3_label2.setPadding(Conver.dip2px(this, 20), 0, 0, 0);
-		detail_line1.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
-		detail_line2.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
-		detail_line3.setPadding(Conver.dip2px(this, 20), 0, Conver.dip2px(this, 20), 0);
+		detail_line1.setPadding(Conver.dip2px(this, 20), Conver.dip2px(this, 10), Conver.dip2px(this, 20), Conver.dip2px(this, 10));
+		detail_line2.setPadding(Conver.dip2px(this, 20), Conver.dip2px(this, 10), Conver.dip2px(this, 20), Conver.dip2px(this, 10));
+		detail_line3.setPadding(Conver.dip2px(this, 20), Conver.dip2px(this, 10), Conver.dip2px(this, 20), Conver.dip2px(this, 10));
 		detail_title.setVisibility(View.GONE);
 		
 		item_logo_big = (ImageView) findViewById(R.id.item_logo_big);
