@@ -103,5 +103,32 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/lock_right_icon" />
     </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/about_us"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_marginTop="8.0dip"
+        android:background="#FFFFFF"
+        android:clickable="true" >
+        <TextView android:id="@+id/about_us_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6.0dip"
+            android:text="@string/textview_about"
+            android:layout_alignParentLeft="true"
+           />
+        <ImageView
+            android:id="@+id/about_right_icon"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6.0dip"
+            android:layout_marginLeft="6.0dip"
+            android:src="@drawable/right_icon2"
+            android:contentDescription="@null" />
+    </RelativeLayout>
 
 </LinearLayout>

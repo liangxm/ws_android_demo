@@ -62,9 +62,9 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 			disable_command_btn.setText("关闭口令");
 			disable_command_btn.setVisibility(View.VISIBLE);
 		}else{
-			set_command_note.setText("密码口令是你每次查看密码时需要输入的一个口令，开通密码口令将保证你的密码助手在访客模式下也同样能保证你的密码安全！");
 			enable_command_btn.setText("开通口令");
 		}
+		set_command_note.setText("密码口令是你每次查看密码时需要输入的一个口令，开通密码口令将保证你的密码助手在访客模式下也同样能保证你的密码安全！");
 	}
 
 	@Override

@@ -109,6 +109,7 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 						if (status.isCreated() || status.isUpdated()) {
 							Tools.showSucessDialog(PersonalActivity.this,
 									"更新成功", "个人昵称成功,返回！", listener);
+							SharedPreferencesUtils.setParam(PersonalActivity.this, SharedPreferencesUtils.NICK_NAME, nickname);
 							dialog.dismiss();
 						}
 					}else{

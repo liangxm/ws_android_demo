@@ -37,6 +37,16 @@
             android:gravity="center"
             android:textColor="#787878"
             android:textSize="22sp"/>
+        <Button 
+            android:id="@+id/open_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打开应用列表"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="5.0dip"
+            android:layout_marginBottom="10.0dip"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_button"/>
     </LinearLayout>
     
     <LinearLayout 
@@ -179,16 +189,6 @@
                 android:layout_centerVertical="true"
                 android:textIsSelectable="true"
                 />
-            <TextView 
-                android:id="@+id/detail_line4_label3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="@string/textview_copy"
-                android:textColor="#2baa3f"
-                android:clickable="true"
-                />
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -215,16 +215,6 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:textIsSelectable="true"
-                />
-            <TextView 
-                android:id="@+id/detail_line5_label3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="@string/textview_copy"
-                android:textColor="#2baa3f"
-                android:clickable="true"
                 />
         </RelativeLayout>
         
@@ -253,16 +243,6 @@
                 android:layout_centerVertical="true"
                 android:textIsSelectable="true"
                 />
-            <TextView 
-                android:id="@+id/detail_line6_label3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="@string/textview_copy"
-                android:textColor="#2baa3f"
-                android:clickable="true"
-                />
         </RelativeLayout>
         
 		<RelativeLayout 
@@ -290,15 +270,6 @@
                 android:layout_centerVertical="true"
                 android:textIsSelectable="true"
                 />
-            <TextView 
-                android:id="@+id/detail_line7_label3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="@string/textview_copy"
-                android:textColor="#2baa3f"
-                android:clickable="true"/>
         </RelativeLayout>
         
         

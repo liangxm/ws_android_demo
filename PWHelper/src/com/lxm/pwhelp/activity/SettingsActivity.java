@@ -22,12 +22,14 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 	private RelativeLayout setEmail;
 	private RelativeLayout setCommand;
 	private RelativeLayout resetPattern;
+	private RelativeLayout about_us;
 	
 	private PWSettingDao pwSettingDao;
 	
 	private static final int SET_EMAIL_CODE = 1;
 	private static final int SET_COMMAND_CODE = 2;
 	private static final int SET_LOCK_CODE = 3;
+	private static final int ABOUT_US_CODE = 4;
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -43,9 +45,11 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		setEmail = (RelativeLayout) findViewById(R.id.set_email);
 		setCommand = (RelativeLayout) findViewById(R.id.set_command);
 		resetPattern = (RelativeLayout) findViewById(R.id.reset_lockpattern);
+		about_us = (RelativeLayout) findViewById(R.id.about_us);
 		setEmail.setOnClickListener(this);
 		setCommand.setOnClickListener(this);
 		resetPattern.setOnClickListener(this);
+		about_us.setOnClickListener(this);
 		pwSettingDao=new PWSettingDao(this);
 		List<PWSetting> settingList1 = pwSettingDao.getSettingByName("email_address");
 		if(settingList1!=null&&settingList1.size()>0){
@@ -77,6 +81,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		case R.id.set_command:
 			Intent intent3 = new Intent(this, SetCommandActivity.class);
 			startActivityForResult(intent3,SET_COMMAND_CODE);
+			finish();
 			break;
 		case R.id.reset_lockpattern:
 			Intent intent4 = new Intent(this,UnlockGesturePasswordActivity.class);
@@ -84,6 +89,11 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 			bundle.putString("action", "reset");
 			intent4.putExtras(bundle);
 			startActivityForResult(intent4,SET_LOCK_CODE);
+			finish();
+			break;
+		case R.id.about_us:
+			Intent intent5 = new Intent(this,AboutUsActivity.class);
+			startActivityForResult(intent5,ABOUT_US_CODE);
 			finish();
 			break;
 		}

@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/searchapp"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rounded_searchbox"
+        android:drawableLeft="@drawable/search_bar"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:layout_margin="6dip"
+        android:paddingLeft="6dip"
+        android:hint="@string/search_app_hint"
+        android:singleLine="true" />
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchapp" />
+</RelativeLayout>

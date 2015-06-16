@@ -14,6 +14,7 @@ public class SharedPreferencesUtils {
 	 */
 	private static final String FILE_NAME = "share_date";
 	public static final String PHOTO_PATH = "myphone";
+	public static final String NICK_NAME = "nickname";
 	
 	
 	/**

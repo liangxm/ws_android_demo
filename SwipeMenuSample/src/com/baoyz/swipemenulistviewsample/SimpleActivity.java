@@ -89,7 +89,6 @@ public class SimpleActivity extends Activity {
 		mListView.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
-				Toast.makeText(getApplicationContext(), position + " index:"+index, 0).show();
 				ApplicationInfo item = mAppList.get(position);
 				switch (index) {
 				case 0:
@@ -98,7 +97,7 @@ public class SimpleActivity extends Activity {
 					break;
 				case 1:
 					// delete
-//					delete(item);
+					delete(item);
 					mAppList.remove(position);
 					mAdapter.notifyDataSetChanged();
 					break;
@@ -138,7 +137,6 @@ public class SimpleActivity extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(getApplicationContext(), position + " long click", 0).show();
 				return false;
 			}
 		});
@@ -203,8 +201,9 @@ public class SimpleActivity extends Activity {
 			}
 			ViewHolder holder = (ViewHolder) convertView.getTag();
 			ApplicationInfo item = getItem(position);
+			String applicationName = (String)getPackageManager().getApplicationLabel(item);
 			holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
-			holder.tv_name.setText("sadfa");
+			holder.tv_name.setText(applicationName);
 			return convertView;
 		}
 

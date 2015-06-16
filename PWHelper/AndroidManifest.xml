@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lxm.pwhelp"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0.1" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -49,6 +49,8 @@
         <activity android:name="com.lxm.pwhelp.activity.EditItemActivity"/>
         <activity android:name="com.lxm.pwhelp.activity.SettingHeaderActivity"/>
         <activity android:name="com.lxm.pwhelp.activity.PersonalActivity"/>
+        <activity android:name="com.lxm.pwhelp.activity.AboutUsActivity"/>
+        <activity android:name="com.lxm.pwhelp.activity.AppListActivity"/>
     </application>
 
 </manifest>

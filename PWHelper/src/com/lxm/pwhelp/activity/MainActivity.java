@@ -125,6 +125,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private List<PWItem> itemList;
 	private List<PWItem> newItemList;
 	private TextView title;
+	private TextView nicknameView;
 
 	private ImageView add_group;
 	
@@ -266,6 +267,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		no_add_item = (Button) tab01.findViewById(R.id.no_add_item);
 		lv_list = (SwipeMenuListView) tab01.findViewById(R.id.list1);
 		searchbox = (EditText) tab01.findViewById(R.id.searchbox);
+		nicknameView = (TextView) tab04.findViewById(R.id.name);
 		searchbox.addTextChangedListener(textWatcher);
 		itemList = new ArrayList<PWItem>();
 		// 设置单个分组展开
@@ -683,7 +685,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}else{
 				try {
 					String content = FileUtil.loadFileFromSdcard(MainActivity.this, path);
-					System.out.println("content:"+content);
 					DesUtils des = new DesUtils();
 					String wrapLine = "\n";
 					//content = content.substring(0, content.length());
@@ -695,7 +696,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					pwSettingDao.deleteAll();
 					//load the data
 					for(String line:wholeData){
-						System.out.println(line);
 						String[] row = line.split("[|]");
 						if(BR_TAG_ITEM.equals(row[0])){
 							PWItem item = new PWItem();
@@ -934,6 +934,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	protected void onResume() {
 		//头像更新
 		String imageUri = String.valueOf(SharedPreferencesUtils.getParam(MainActivity.this, SharedPreferencesUtils.PHOTO_PATH, new String()));
+		String nickname = String.valueOf(SharedPreferencesUtils.getParam(MainActivity.this, SharedPreferencesUtils.NICK_NAME, new String()));
 		File file = new File(imageUri);
 		Uri uri = null;
 		if(imageUri!=null&&file.exists()){
@@ -943,6 +944,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}else{
 			top_header.setImageResource(R.drawable.head_icon);
 			head_icon.setImageResource(R.drawable.head_icon);
+		}
+		if(nickname!=null&&nickname.trim().length()>0){
+			nicknameView.setText(nickname);
 		}
 		super.onResume();
 	}

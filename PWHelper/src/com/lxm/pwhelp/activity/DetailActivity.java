@@ -5,10 +5,12 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,20 +25,20 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
 	private RelativeLayout detail_line1, detail_line2, detail_line3,
 			detail_line4, detail_line5, detail_line6, detail_line7,
-			detail_line8, detail_line9, detail_line10, detail_line11,
-			detail_line12;
+			detail_line8, detail_line9, detail_line10;
 	
 	private TextView detail_line4_label1,detail_line5_label1,detail_line6_label1,
 			detail_line7_label1,detail_line8_label1,detail_line9_label1,
-			detail_line10_label1,detail_line11_label1,detail_line12_label1;
+			detail_line10_label1;
 	private TextView detail_line4_label2,detail_line5_label2,detail_line6_label2,
 			detail_line7_label2,detail_line8_label2,detail_line9_label2,
-			detail_line10_label2,detail_line11_label2,detail_line12_label2;
+			detail_line10_label2;
 	private TextView line1_label2, line2_label2, line3_label2, detail_title;
 	private String default_str, bank_str, web_str, weibo_str, qq_str,
 			email_str, alipay_str;
 	private ImageView item_logo_big;
 	private ClipboardManager cmb;
+	private Button button;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,11 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		findViewById(R.id.detail_line1_label3).setOnClickListener(this);
 		findViewById(R.id.detail_line2_label3).setOnClickListener(this);
 		findViewById(R.id.detail_line3_label3).setOnClickListener(this);
+		button=(Button)findViewById(R.id.open_app);
+		button.setOnClickListener(this);
+		button.setPadding(Conver.dip2px(this, 5),
+				Conver.dip2px(this, 5), Conver.dip2px(this, 5),
+				Conver.dip2px(this, 5));
 
 		detail_line1 = (RelativeLayout) findViewById(R.id.detail_line1);
 		detail_line2 = (RelativeLayout) findViewById(R.id.detail_line2);
@@ -213,57 +220,44 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
 					Conver.dip2px(this, 5));
 		}
-		if(item.getItem_name()!=null&&item.getItem_name().trim().length()>0){
-			detail_line11 = (RelativeLayout) findViewById(R.id.detail_line11);
-			detail_line11.setVisibility(View.VISIBLE);
-			detail_line11_label1 = (TextView) findViewById(R.id.detail_line11_label1);
-			detail_line11_label2 = (TextView) findViewById(R.id.detail_line11_label2);
-			detail_line11.setPadding(Conver.dip2px(this, 20),
-					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
-					Conver.dip2px(this, 5));
-			detail_line12_label2.setPadding(Conver.dip2px(this, 20),
-					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
-					Conver.dip2px(this, 5));
-		}
-		if(item.getItem_name()!=null&&item.getItem_name().trim().length()>0){
-			detail_line12 = (RelativeLayout) findViewById(R.id.detail_line12);
-			detail_line12.setVisibility(View.VISIBLE);
-			detail_line12_label1 = (TextView) findViewById(R.id.detail_line12_label1);
-			detail_line12_label2 = (TextView) findViewById(R.id.detail_line12_label2);
-			detail_line12.setPadding(Conver.dip2px(this, 20),
-					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
-					Conver.dip2px(this, 5));
-			detail_line12_label2.setPadding(Conver.dip2px(this, 20),
-					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
-					Conver.dip2px(this, 5));
-		}
 	}
 
 	@Override
 	public void onClick(View item) {
 		switch (item.getId()) {
 		case R.id.Detail_Return:
-			Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+			Intent intent = new Intent(this, MainActivity.class);
 			setResult(RESULT_OK, intent);
 			finish();
 			break;
 		case R.id.detail_line1_label3:
 			cmb.setPrimaryClip(ClipData.newPlainText("item_type", line1_label2
 					.getText().toString()));
+			button.setTextColor(Color.rgb(78, 78, 78));
 			Toast.makeText(getApplicationContext(), "内容已经被复制到剪切板！",
 					Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.detail_line2_label3:
 			cmb.setPrimaryClip(ClipData.newPlainText("item_username",
 					line2_label2.getText().toString()));
+			button.setTextColor(Color.rgb(78, 78, 78));
 			Toast.makeText(getApplicationContext(), "内容已经被复制到剪切板！",
 					Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.detail_line3_label3:
 			cmb.setPrimaryClip(ClipData.newPlainText("item_password",
 					line3_label2.getText().toString()));
+			button.setTextColor(Color.rgb(78, 78, 78));
 			Toast.makeText(getApplicationContext(), "内容已经被复制到剪切板！",
 					Toast.LENGTH_SHORT).show();
+			break;
+		case R.id.open_app:
+			Intent intent1 = new Intent(this,AppListActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("item_type", line1_label2.getText().toString());
+			intent1.putExtras(bundle);
+			startActivityForResult(intent1,1);
+			finish();
 			break;
 		}
 	}
