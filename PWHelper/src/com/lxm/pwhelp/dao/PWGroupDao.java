@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.bean.PWGroup;
 import com.lxm.pwhelp.db.DatabaseHelper;
+import com.lxm.pwhelp.utils.LogUtil;
 
 public class PWGroupDao {
 
@@ -22,7 +23,7 @@ public class PWGroupDao {
 			helper = DatabaseHelper.getHelper(context);
 			groupDaoOpe = helper.getDao(PWGroup.class);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 	}
 	
@@ -35,7 +36,7 @@ public class PWGroupDao {
 		try {
 			code = groupDaoOpe.createOrUpdate(group);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}
@@ -50,7 +51,7 @@ public class PWGroupDao {
 		try {
 			group = groupDaoOpe.queryForId(id);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return group;
 	}
@@ -64,7 +65,7 @@ public class PWGroupDao {
 		try {
 			groups = groupDaoOpe.queryBuilder().where().eq("deleted", false).query();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return groups;
 	}
@@ -78,7 +79,7 @@ public class PWGroupDao {
 		try {
 			groups = groupDaoOpe.queryBuilder().query();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return groups;
 	}
@@ -86,9 +87,11 @@ public class PWGroupDao {
 	public int deleteAll(){
 		int code = -1;
 		try {
-			code = groupDaoOpe.delete(getGroupAll());
+			groupDaoOpe.queryRaw("delete from pw_group");
+			groupDaoOpe.queryRaw("update sqlite_sequence SET seq = 0 where name ='pw_group'");
+			//code = groupDaoOpe.delete(getGroupAll());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}

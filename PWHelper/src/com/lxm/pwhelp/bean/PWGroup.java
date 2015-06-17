@@ -23,11 +23,12 @@ public class PWGroup implements Serializable {
 	
 	public PWGroup(){}
 	
-	public PWGroup(String group_name, String group_level,
+	public PWGroup(String group_name, String group_level,String created,
 			boolean deleted) {
 		super();
 		this.group_name = group_name;
 		this.group_level = group_level;
+		this.created = created;
 		this.deleted = deleted;
 	}
 

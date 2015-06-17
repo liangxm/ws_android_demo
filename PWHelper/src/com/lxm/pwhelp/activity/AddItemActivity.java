@@ -25,6 +25,7 @@ import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.utils.GroupType;
+import com.lxm.pwhelp.utils.Tools;
 
 public class AddItemActivity extends Activity implements View.OnClickListener {
 
@@ -100,6 +101,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				item.setItem_comment(commentStr);
 				item.setQuestion1(question1Str);
 				item.setQuestion2(question2Str);
+				item.setCreated(Tools.getToday());
 				CreateOrUpdateStatus status = itemDao.createOrUpdate(item);
 				if (status.isCreated()) {
 					new AlertDialog.Builder(this)

@@ -68,6 +68,12 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 			isOn=true;
 			nickname_value.setText(setting.get(0).getSetting_value());
 		}
+		String imageUri = String.valueOf(SharedPreferencesUtils.getParam(this, SharedPreferencesUtils.PHOTO_PATH, new String()));
+		File file = new File(imageUri);
+		if(imageUri!=null&&file.exists()){
+			Uri uri = Uri.fromFile(file);
+			touxiang_picture.setImageURI(uri);
+		}
 	}
 
 	@Override

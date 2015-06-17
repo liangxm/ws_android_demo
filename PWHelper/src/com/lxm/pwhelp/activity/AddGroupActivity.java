@@ -48,7 +48,7 @@ public class AddGroupActivity extends Activity implements View.OnClickListener {
 			if(group_name.trim().length()==0){
 				Tools.showErrorDialog(this, "警告", "请输入有效的分组名称！");
 			}else{
-				CreateOrUpdateStatus status = groupDao.createOrUpdate(new PWGroup(group_name,"0",false));
+				CreateOrUpdateStatus status = groupDao.createOrUpdate(new PWGroup(group_name,"0",Tools.getToday(),false));
 				if(status.isCreated()){
 					showDialog("添加成功","添加新分组成功！返回！");
 				}else{

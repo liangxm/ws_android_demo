@@ -50,7 +50,7 @@
     <string name="recovery_label">恢复原来的数据</string>
     <string name="touxiang_label">头像</string>
     <string name="nickname_label">昵称</string>
-    <string name="nickname_value">Selina</string>
+    <string name="nickname_value">Listener</string>
     
     <!-- add layout -->
     <string name="text_type">账号类型</string>

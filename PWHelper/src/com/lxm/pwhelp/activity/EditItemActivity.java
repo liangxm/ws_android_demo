@@ -21,6 +21,7 @@ import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.dao.PWItemDao;
+import com.lxm.pwhelp.utils.Tools;
 
 public class EditItemActivity extends Activity implements View.OnClickListener {
 
@@ -98,6 +99,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 				item.setItem_comment(commentStr);
 				item.setQuestion1(question1Str);
 				item.setQuestion2(question2Str);
+				item.setModified(Tools.getToday());
 				CreateOrUpdateStatus status = itemDao.createOrUpdate(item);
 				if (status.isUpdated()) {
 					new AlertDialog.Builder(this)

@@ -11,16 +11,18 @@ public class LogUtil {
     private static final String DEBUG_TAG = "pwhelper";
     private static final boolean DEBUG_TRACE = true;
     
-    public static void i(String msg) {
-    	if(DEBUG_TRACE)
+    public static void i(String tag,String msg) {
+    	if(DEBUG_TRACE)	
     		Log.i(DEBUG_TAG, msg);
     }
     
-    public static void d(String msg) {
-        Log.d("pwhelper", msg);
+    public static void d(String tag,String msg) {
+    	if(DEBUG_TRACE)
+    		Log.d(tag, msg);
     }
     
     public static void e(String tag,String msg) {
-        Log.e("pwhelper", msg);
+        if(DEBUG_TRACE)
+        	Log.e(tag, msg);
     }
 }

@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.bean.PWItem;
 import com.lxm.pwhelp.db.DatabaseHelper;
+import com.lxm.pwhelp.utils.LogUtil;
 
 public class PWItemDao {
 
@@ -22,7 +23,7 @@ public class PWItemDao {
 			helper = DatabaseHelper.getHelper(context);
 			itemDaoOpe = helper.getDao(PWItem.class);
 		} catch (SQLException e){
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		} 
 	}
 	
@@ -35,7 +36,7 @@ public class PWItemDao {
 		try {
 			code = itemDaoOpe.createOrUpdate(item);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}
@@ -50,7 +51,7 @@ public class PWItemDao {
 		try {
 			code = itemDaoOpe.deleteById(item_id);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}
@@ -60,7 +61,7 @@ public class PWItemDao {
 		try {
 			code = itemDaoOpe.update(item);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}
@@ -75,7 +76,7 @@ public class PWItemDao {
 		try {
 			item = itemDaoOpe.queryForId(id);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return item;
 	}
@@ -89,7 +90,7 @@ public class PWItemDao {
 		try {
 			items = itemDaoOpe.queryBuilder().where().eq("deleted", false).query();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return items;
 	}
@@ -103,7 +104,7 @@ public class PWItemDao {
 		try {
 			items = itemDaoOpe.queryBuilder().query();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return items;
 	}
@@ -113,7 +114,7 @@ public class PWItemDao {
 		try {
 			items = itemDaoOpe.queryBuilder().where().eq("item_type", item_type).and().eq("deleted", false).query();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return items;
 	}
@@ -123,7 +124,7 @@ public class PWItemDao {
 		try {
 			items = itemDaoOpe.queryBuilder().where().like("item_username", "%"+filterKey+"%").query();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return items;
 	}
@@ -131,9 +132,10 @@ public class PWItemDao {
 	public int deleteAll(){
 		int code = -1;
 		try {
-			code = itemDaoOpe.delete(getPWItemAll());
+	        itemDaoOpe.queryRaw("delete from pw_item");
+	        itemDaoOpe.queryRaw("update sqlite_sequence SET seq = 0 where name ='pw_item'");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}

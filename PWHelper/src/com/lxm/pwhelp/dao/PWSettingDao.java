@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.bean.PWSetting;
 import com.lxm.pwhelp.db.DatabaseHelper;
+import com.lxm.pwhelp.utils.LogUtil;
 
 public class PWSettingDao {
 
@@ -22,7 +23,7 @@ public class PWSettingDao {
 			helper = DatabaseHelper.getHelper(context);
 			settingDaoOpe = helper.getDao(PWSetting.class);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 	}
 	
@@ -31,7 +32,7 @@ public class PWSettingDao {
 		try {
 			code = settingDaoOpe.createOrUpdate(setting);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}
@@ -41,7 +42,7 @@ public class PWSettingDao {
 		try {
 			code = settingDaoOpe.update(setting);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}
@@ -51,7 +52,7 @@ public class PWSettingDao {
 		try {
 			code = settingDaoOpe.delete(setting);
 		} catch (SQLException e){
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 	}
@@ -61,7 +62,7 @@ public class PWSettingDao {
 		try {
 			settings = settingDaoOpe.queryBuilder().query();
 		} catch (SQLException e){
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return settings;
 	}
@@ -71,7 +72,7 @@ public class PWSettingDao {
 		try {
 			setting = settingDaoOpe.queryBuilder().where().eq("setting_name", name).query();
 		} catch (SQLException e){
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return setting;
 	}
@@ -83,9 +84,11 @@ public class PWSettingDao {
 	public int deleteAll(){
 		int code = -1;
 		try {
-			code = settingDaoOpe.delete(getSettingAll());
+//			code = settingDaoOpe.delete(getSettingAll());
+			settingDaoOpe.queryRaw("delete from pw_setting");
+			settingDaoOpe.queryRaw("update sqlite_sequence SET seq = 0 where name ='pw_setting'");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LogUtil.e(context.getClass().getName(), e.getMessage());
 		}
 		return code;
 		

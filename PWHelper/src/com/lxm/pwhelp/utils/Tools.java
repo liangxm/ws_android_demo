@@ -1,5 +1,8 @@
 package com.lxm.pwhelp.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -114,5 +117,10 @@ public class Tools {
 	 */
 	public static String getResources(Context context,int resId){
 		return context.getResources().getString(resId);
+	}
+	
+	public static String getToday(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);
+		return sdf.format(new Date());
 	}
 }

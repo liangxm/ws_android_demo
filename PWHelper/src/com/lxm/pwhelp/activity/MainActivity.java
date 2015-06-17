@@ -24,6 +24,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -72,11 +73,13 @@ import com.lxm.pwhelp.custom.ToggleButton;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.dao.PWSettingDao;
+import com.lxm.pwhelp.db.DatabaseHelper;
 import com.lxm.pwhelp.email.MailSenderInfo;
 import com.lxm.pwhelp.email.SimpleMailSender;
 import com.lxm.pwhelp.utils.Conver;
 import com.lxm.pwhelp.utils.DesUtils;
 import com.lxm.pwhelp.utils.FileUtil;
+import com.lxm.pwhelp.utils.LogUtil;
 import com.lxm.pwhelp.utils.SharedPreferencesUtils;
 import com.lxm.pwhelp.utils.Tools;
 import com.lxm.pwhelp.view.NoScrollViewPager;
@@ -201,7 +204,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     	if(groups.size()==0){
     		//initialize the group data
 	    	for(String groupStr:groupData){
-				pwGroupDao.createOrUpdate(new PWGroup(groupStr,"0",false));
+				pwGroupDao.createOrUpdate(new PWGroup(groupStr,"0",Tools.getToday(),false));
 				List<PWItem> list = new ArrayList<PWItem>();
 				List<PWItem> itemGroups = pwItemDao.getPWItemByType(groupStr);
 				parent.add(groupStr+"("+itemGroups.size()+")");
@@ -694,6 +697,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					pwItemDao.deleteAll();
 					pwGroupDao.deleteAll();
 					pwSettingDao.deleteAll();
+
 					//load the data
 					for(String line:wholeData){
 						String[] row = line.split("[|]");
@@ -712,7 +716,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 							item.setModified(row[11]);
 							item.setCreated(row[12]);
 							item.setDeleted(Boolean.valueOf(row[13]));
-							pwItemDao.createOrUpdate(item);
+							CreateOrUpdateStatus status = pwItemDao.createOrUpdate(item);
+							if(status.isCreated()){
+								LogUtil.d("MainActivity","item_name recovery ["+row[2]+"] sucess");
+							}else{
+								LogUtil.e("MainActivity", "item_name recovery ["+row[2]+"] failure");
+							}
 						}else if(BR_TAG_GROUP.equals(row[0])){
 							PWGroup group = new PWGroup();
 							group.setGroup_id(Integer.parseInt(row[1]));
@@ -720,7 +729,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 							group.setGroup_level(row[3]);
 							group.setCreated(row[4]);
 							group.setDeleted(Boolean.valueOf(row[5]));
-							pwGroupDao.createOrUpdate(group);
+							CreateOrUpdateStatus status = pwGroupDao.createOrUpdate(group);
+							if(status.isCreated()){
+								LogUtil.d("MainActivity","group_name recovery ["+row[2]+"] sucess");
+							}else{
+								LogUtil.e("MainActivity", "group_name recovery ["+row[2]+"] failure");
+							}
 						}else if(BR_TAG_SETTING.equals(row[0])){
 							PWSetting setting = new PWSetting();
 							setting.setSetting_id(Integer.parseInt(row[1]));
@@ -728,8 +742,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
 							setting.setSetting_value(row[3]);
 							setting.setCreated(row[4]);
 							setting.setDeleted(Boolean.valueOf(row[5]));
-							pwSettingDao.createOrUpdate(setting);
+							CreateOrUpdateStatus status = pwSettingDao.createOrUpdate(setting);
+							if(status.isCreated()){
+								LogUtil.d("MainActivity","setting_name recovery ["+row[2]+"] sucess");
+							}else{
+								LogUtil.e("MainActivity", "setting_name recovery ["+row[2]+"] failure");
+							}
 						}
+					}
+					List<PWSetting> settings = pwSettingDao.getSettingAll();
+					for(PWSetting setting:settings){
+						System.out.println(setting.getSetting_name());
 					}
 					message.obj="数据恢复成功！";
 					message.arg2=0;
