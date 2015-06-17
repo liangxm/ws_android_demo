@@ -14273,7 +14273,7 @@ com.lxm.pwhelp.bean.PWGroup: java.lang.String group_level
 com.lxm.pwhelp.bean.PWGroup: java.lang.String created
 com.lxm.pwhelp.bean.PWGroup: boolean deleted
 com.lxm.pwhelp.bean.PWGroup: PWGroup()
-com.lxm.pwhelp.bean.PWGroup: PWGroup(java.lang.String,java.lang.String,boolean)
+com.lxm.pwhelp.bean.PWGroup: PWGroup(java.lang.String,java.lang.String,java.lang.String,boolean)
 com.lxm.pwhelp.bean.PWGroup: java.lang.String toString()
 com.lxm.pwhelp.bean.PWGroup: int getGroup_id()
 com.lxm.pwhelp.bean.PWGroup: void setGroup_id(int)

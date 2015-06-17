@@ -613,7 +613,8 @@ containing a value of this type.
         public static final int top_layout=0x7f030020;
     }
     public static final class raw {
-        public static final int ormlite_config=0x7f050000;
+        public static final int bank=0x7f050000;
+        public static final int ormlite_config=0x7f050001;
     }
     public static final class string {
         public static final int about_title=0x7f090053;

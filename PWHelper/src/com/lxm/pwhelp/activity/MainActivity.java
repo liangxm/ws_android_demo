@@ -1,7 +1,3 @@
-/**
- * Password helper main activity
- * Copyright (C) 2015 Listener
- */
 
 package com.lxm.pwhelp.activity;
 
@@ -24,7 +20,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -34,8 +29,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.InputFilter.LengthFilter;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +70,6 @@ import com.lxm.pwhelp.custom.ToggleButton;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.dao.PWSettingDao;
-import com.lxm.pwhelp.db.DatabaseHelper;
 import com.lxm.pwhelp.email.MailSenderInfo;
 import com.lxm.pwhelp.email.SimpleMailSender;
 import com.lxm.pwhelp.utils.Conver;
@@ -83,7 +79,10 @@ import com.lxm.pwhelp.utils.LogUtil;
 import com.lxm.pwhelp.utils.SharedPreferencesUtils;
 import com.lxm.pwhelp.utils.Tools;
 import com.lxm.pwhelp.view.NoScrollViewPager;
-
+/**
+ * Password helper main activity
+ * Copyright (C) 2015 Listener
+ */
 public class MainActivity extends Activity implements View.OnClickListener {
 
 	private PWItemAdapter adapter;
@@ -282,16 +281,47 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			public boolean onChildClick(ExpandableListView parentlist, View view,
 					int groupPosition, int childPosition, long id) {
 				ToggleButton toggleButton = (ToggleButton)view.findViewById(R.id.mTogBtn);
+				String key = parent.get(groupPosition);
+				PWItem item = map.get(key).get(childPosition);
+				final Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("item", item);
+				intent.putExtras(bundle);
 				if(!toggleButton.isSelected()){
 					Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
+					List<PWSetting> setting = pwSettingDao.getSettingByName("pw_command");
+					final EditText commandStr = new EditText(MainActivity.this);
+					final String command = setting.get(0).getSetting_value();
+					commandStr.setInputType(InputType.TYPE_CLASS_NUMBER);
+					InputFilter[] filters = {new LengthFilter(4)};
+					commandStr.setFilters(filters);
+					commandStr.setHint("默认口令是8888");
+					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+					builder.setTitle("请输入口令");
+					builder.setIcon(android.R.drawable.ic_dialog_info);
+					builder.setView(commandStr);
+					builder.setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if(command.equals(commandStr.getText().toString())){
+								dialog.dismiss();
+								startActivityForResult(intent,VIEW_ITEM_CODE);
+							}else{
+								Tools.showWarningDialog(MainActivity.this,"口令错误","口令错误，请重试！");
+								dialog.dismiss();
+							}
+						}
+					});
+					builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+					builder.setCancelable(false);
+					builder.show();
 					return false;
 				}else{
-					String key = parent.get(groupPosition);
-					PWItem item = map.get(key).get(childPosition);
-					Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putSerializable("item", item);
-					intent.putExtras(bundle);
 					startActivityForResult(intent,VIEW_ITEM_CODE);
 					return true;
 				}
@@ -369,14 +399,46 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long arg3) {
 				ToggleButton toggleButton = (ToggleButton)view.findViewById(R.id.mTogBtn);
+				PWItem item = itemList.get(position);
+				final Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("item", item);
+				intent.putExtras(bundle);
+				
 				if(!toggleButton.isSelected()){
-					Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
+					//Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
+					List<PWSetting> setting = pwSettingDao.getSettingByName("pw_command");
+					final EditText commandStr = new EditText(MainActivity.this);
+					final String command = setting.get(0).getSetting_value();
+					commandStr.setInputType(InputType.TYPE_CLASS_NUMBER);
+					InputFilter[] filters = {new LengthFilter(4)};
+					commandStr.setFilters(filters);
+					commandStr.setHint("默认口令是8888");
+					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+					builder.setTitle("请输入口令");
+					builder.setIcon(android.R.drawable.ic_dialog_info);
+					builder.setView(commandStr);
+					builder.setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if(command.equals(commandStr.getText().toString())){
+								dialog.dismiss();
+								startActivityForResult(intent,VIEW_ITEM_CODE);
+							}else{
+								Tools.showWarningDialog(MainActivity.this,"口令错误","口令错误，请重试！");
+								dialog.dismiss();
+							}
+						}
+					});
+					builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+					builder.setCancelable(false);
+					builder.show();
 				}else{
-					PWItem item = itemList.get(position);
-					Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putSerializable("item", item);
-					intent.putExtras(bundle);
 					startActivityForResult(intent,VIEW_ITEM_CODE);
 				}
 			}
