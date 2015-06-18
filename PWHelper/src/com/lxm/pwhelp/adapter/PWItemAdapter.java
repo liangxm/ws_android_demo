@@ -3,14 +3,14 @@ package com.lxm.pwhelp.adapter;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.text.InputFilter;
-import android.text.InputType;
 import android.text.InputFilter.LengthFilter;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,6 +79,7 @@ public class PWItemAdapter extends BaseAdapter {
 			convertView.setTag(mViewHolder);
 		}else{
 			mViewHolder = (ViewHolder) convertView.getTag();
+			
 		}
 		
 		final String password = getItem(position).getItem_password();
@@ -112,44 +113,15 @@ public class PWItemAdapter extends BaseAdapter {
 		if(!mViewHolder.mTogBtn.isSelected()){
 			mViewHolder.item_password.setText("密码："+"*********************");
 		}
-		mViewHolder.mTogBtn.setOnToggleChanged(new OnToggleChanged(){
+		final ToggleButton button = mViewHolder.mTogBtn;
+		button.setOnToggleChanged(new OnToggleChanged(){
 			@Override
 			public void onToggle(boolean on) {
 				if(on){
 					List<PWSetting> commands = pwSettingDao.getSettingByName("pw_command");
 					if(commands!=null&&commands.size()>0){
 						command = commands.get(0).getSetting_value();
-						final EditText commandStr = new EditText(activity);
-						commandStr.setInputType(InputType.TYPE_CLASS_NUMBER);
-						InputFilter[] filters = {new LengthFilter(4)};
-						commandStr.setFilters(filters);
-						commandStr.setHint("默认口令是8888");
-						AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-						builder.setTitle("请输入口令");
-						builder.setIcon(android.R.drawable.ic_dialog_info);
-						builder.setView(commandStr);
-						builder.setPositiveButton("确定", new android.content.DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								if(command.equals(commandStr.getText().toString())){
-									mViewHolder.item_password.setText("密码：" + password);
-									dialog.dismiss();
-								}else{
-									Tools.showWarningDialog(activity,"口令错误","口令错误，请重试！");
-									mViewHolder.mTogBtn.setToggleOff();
-									dialog.dismiss();
-								}
-							}
-						});
-						builder.setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										mViewHolder.mTogBtn.setToggleOff();
-										dialog.dismiss();
-									}
-						});
-						builder.setCancelable(false);
-						builder.show();
+						showCustomDialog(button,mViewHolder.item_password,password);
 					}else{
 						mViewHolder.item_password.setText("密码：" + password);
 					}
@@ -160,6 +132,40 @@ public class PWItemAdapter extends BaseAdapter {
 		});
         return convertView;
 	}
+	
+	protected void showCustomDialog(final ToggleButton mTogBtn,final TextView item_password, final String password) {
+        final Dialog dialog = new Dialog(activity);
+        dialog.setTitle("请输入口令");
+        dialog.setContentView(R.layout.dialog_comand_layout);
+        final EditText editText = (EditText)dialog.findViewById(R.id.editText1);
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+		InputFilter[] filters = {new LengthFilter(4)};
+		editText.setFilters(filters);
+		editText.setHint("默认口令是8888");
+        Button button2 = (Button)dialog.findViewById(R.id.button1);
+        Button button1 = (Button)dialog.findViewById(R.id.button2); 
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	if(command.equals(editText.getText().toString())){
+					item_password.setText("密码：" + password);
+					dialog.dismiss();
+				}else{
+					Tools.showWarningDialog(activity,"口令错误","口令错误，请重试！");
+					mTogBtn.setToggleOff();
+					dialog.dismiss();
+				}
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	mTogBtn.setToggleOff();
+				dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 	
 	private class ViewHolder{
 		ImageView item_logo;

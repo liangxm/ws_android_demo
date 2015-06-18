@@ -136,13 +136,18 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
 					Conver.dip2px(this, 5));
 		}
-		if(item.getItem_subtype()!=0){
+		if(item.getItem_subtype()>=0){
 			detail_line5 = (RelativeLayout) findViewById(R.id.detail_line5);
 			detail_line5.setVisibility(View.VISIBLE);
 			detail_line5_label1 = (TextView) findViewById(R.id.detail_line5_label1);
 			detail_line5_label2 = (TextView) findViewById(R.id.detail_line5_label2);
 			detail_line5_label1.setText("子类型");
-			detail_line5_label2.setText(item.getItem_subtype());
+			int subtype = item.getItem_subtype();
+			if(subtype==0){
+				detail_line5_label2.setText("储蓄卡");
+			}else if(subtype==1){
+				detail_line5_label2.setText("信用卡");
+			}
 			detail_line5.setPadding(Conver.dip2px(this, 20),
 					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
 					Conver.dip2px(this, 5));

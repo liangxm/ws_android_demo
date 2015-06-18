@@ -288,7 +288,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				bundle.putSerializable("item", item);
 				intent.putExtras(bundle);
 				if(!toggleButton.isSelected()){
-					Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
+					//Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
 					List<PWSetting> setting = pwSettingDao.getSettingByName("pw_command");
 					final EditText commandStr = new EditText(MainActivity.this);
 					final String command = setting.get(0).getSetting_value();

@@ -14083,6 +14083,7 @@ com.lxm.pwhelp.R$layout: int tab02
 com.lxm.pwhelp.R$layout: int tab03
 com.lxm.pwhelp.R$layout: int tab04
 com.lxm.pwhelp.R$layout: int top_layout
+com.lxm.pwhelp.R$raw: int bank
 com.lxm.pwhelp.R$raw: int ormlite_config
 com.lxm.pwhelp.R$string: int about_title
 com.lxm.pwhelp.R$string: int add_group_title
