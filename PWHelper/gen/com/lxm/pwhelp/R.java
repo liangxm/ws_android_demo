@@ -231,12 +231,14 @@ containing a value of this type.
         public static final int swipeOpenOnLongPress=0x7f01000c;
     }
     public static final class color {
-        public static final int color_hei_8=0x7f060001;
-        public static final int gesture_background=0x7f060000;
-        public static final int gray=0x7f060003;
-        public static final int normal=0x7f060005;
-        public static final int theme_color=0x7f060002;
-        public static final int transparent_red=0x7f060004;
+        public static final int blue=0x7f060007;
+        public static final int color_hei_8=0x7f060002;
+        public static final int gesture_background=0x7f060001;
+        public static final int gray=0x7f060004;
+        public static final int normal=0x7f060006;
+        public static final int theme_color=0x7f060003;
+        public static final int transparent=0x7f060000;
+        public static final int transparent_red=0x7f060005;
     }
     public static final class dimen {
         public static final int addActivity_edit=0x7f070001;
@@ -609,11 +611,12 @@ containing a value of this type.
         public static final int set_email_top_layout=0x7f03001a;
         public static final int settings_layout=0x7f03001b;
         public static final int settings_top_layout=0x7f03001c;
-        public static final int tab01=0x7f03001d;
-        public static final int tab02=0x7f03001e;
-        public static final int tab03=0x7f03001f;
-        public static final int tab04=0x7f030020;
-        public static final int top_layout=0x7f030021;
+        public static final int slt_cnt_type=0x7f03001d;
+        public static final int tab01=0x7f03001e;
+        public static final int tab02=0x7f03001f;
+        public static final int tab03=0x7f030020;
+        public static final int tab04=0x7f030021;
+        public static final int top_layout=0x7f030022;
     }
     public static final class raw {
         public static final int bank=0x7f050000;

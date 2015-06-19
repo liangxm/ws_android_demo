@@ -12936,11 +12936,13 @@ com.lxm.pwhelp.R$attr -> com.lxm.pwhelp.b$b:
     int swipeOffsetRight -> swipeOffsetRight
     int swipeOpenOnLongPress -> swipeOpenOnLongPress
 com.lxm.pwhelp.R$color -> com.lxm.pwhelp.b$c:
+    int blue -> blue
     int color_hei_8 -> color_hei_8
     int gesture_background -> gesture_background
     int gray -> gray
     int normal -> normal
     int theme_color -> theme_color
+    int transparent -> transparent
     int transparent_red -> transparent_red
 com.lxm.pwhelp.R$dimen -> com.lxm.pwhelp.b$d:
     int addActivity_edit -> addActivity_edit
@@ -13079,6 +13081,8 @@ com.lxm.pwhelp.R$id -> com.lxm.pwhelp.b$f:
     int btn_takephoto -> btn_takephoto
     int btnadd -> btnadd
     int btnshowpass -> btnshowpass
+    int button1 -> button1
+    int button2 -> button2
     int choice -> choice
     int cloud -> cloud
     int cloud_icon -> cloud_icon
@@ -13284,6 +13288,7 @@ com.lxm.pwhelp.R$layout -> com.lxm.pwhelp.b$g:
     int bottom_layout -> bottom_layout
     int detail_layout -> detail_layout
     int detail_top_layout -> detail_top_layout
+    int dialog_comand_layout -> dialog_comand_layout
     int edit_layout -> edit_layout
     int edit_top_layout -> edit_top_layout
     int email_dialog -> email_dialog
@@ -13303,6 +13308,7 @@ com.lxm.pwhelp.R$layout -> com.lxm.pwhelp.b$g:
     int set_email_top_layout -> set_email_top_layout
     int settings_layout -> settings_layout
     int settings_top_layout -> settings_top_layout
+    int slt_cnt_type -> slt_cnt_type
     int tab01 -> tab01
     int tab02 -> tab02
     int tab03 -> tab03
@@ -14180,28 +14186,30 @@ com.lxm.pwhelp.adapter.PWItemAdapter -> com.lxm.pwhelp.a.e:
     58:58:int getCount() -> getCount
     62:62:com.lxm.pwhelp.bean.PWItem getItem(int) -> a
     66:66:long getItemId(int) -> getItemId
-    71:161:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    71:132:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    136:166:void showCustomDialog(com.lxm.pwhelp.custom.ToggleButton,android.widget.TextView,java.lang.String) -> a
     1:1:java.lang.Object getItem(int) -> getItem
     36:36:com.lxm.pwhelp.dao.PWSettingDao access$1(com.lxm.pwhelp.adapter.PWItemAdapter) -> a
     35:35:void access$2(com.lxm.pwhelp.adapter.PWItemAdapter,java.lang.String) -> a
-    33:33:android.app.Activity access$3(com.lxm.pwhelp.adapter.PWItemAdapter) -> b
-    35:35:java.lang.String access$4(com.lxm.pwhelp.adapter.PWItemAdapter) -> c
+    35:35:java.lang.String access$3(com.lxm.pwhelp.adapter.PWItemAdapter) -> b
+    33:33:android.app.Activity access$4(com.lxm.pwhelp.adapter.PWItemAdapter) -> c
 com.lxm.pwhelp.adapter.PWItemAdapter$1 -> com.lxm.pwhelp.a.f:
     com.lxm.pwhelp.adapter.PWItemAdapter this$0 -> a
-    com.lxm.pwhelp.adapter.PWItemAdapter$ViewHolder val$mViewHolder -> b
-    java.lang.String val$password -> c
-    118:159:void onToggle(boolean) -> a
-    115:115:com.lxm.pwhelp.adapter.PWItemAdapter access$0(com.lxm.pwhelp.adapter.PWItemAdapter$1) -> a
-com.lxm.pwhelp.adapter.PWItemAdapter$1$1 -> com.lxm.pwhelp.a.g:
-    com.lxm.pwhelp.adapter.PWItemAdapter$1 this$1 -> a
-    android.widget.EditText val$commandStr -> b
+    com.lxm.pwhelp.custom.ToggleButton val$button -> b
     com.lxm.pwhelp.adapter.PWItemAdapter$ViewHolder val$mViewHolder -> c
     java.lang.String val$password -> d
-    134:142:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.adapter.PWItemAdapter$1$2 -> com.lxm.pwhelp.a.h:
-    com.lxm.pwhelp.adapter.PWItemAdapter$1 this$1 -> a
-    com.lxm.pwhelp.adapter.PWItemAdapter$ViewHolder val$mViewHolder -> b
-    147:149:void onClick(android.content.DialogInterface,int) -> onClick
+    119:130:void onToggle(boolean) -> a
+com.lxm.pwhelp.adapter.PWItemAdapter$2 -> com.lxm.pwhelp.a.g:
+    com.lxm.pwhelp.adapter.PWItemAdapter this$0 -> a
+    android.widget.EditText val$editText -> b
+    android.widget.TextView val$item_password -> c
+    java.lang.String val$password -> d
+    com.lxm.pwhelp.custom.ToggleButton val$mTogBtn -> e
+    148:156:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.adapter.PWItemAdapter$3 -> com.lxm.pwhelp.a.h:
+    com.lxm.pwhelp.adapter.PWItemAdapter this$0 -> a
+    com.lxm.pwhelp.custom.ToggleButton val$mTogBtn -> b
+    161:163:void onClick(android.content.DialogInterface,int) -> onClick
 com.lxm.pwhelp.adapter.PWItemAdapter$ViewHolder -> com.lxm.pwhelp.a.e$a:
     android.widget.ImageView item_logo -> a
     android.widget.TextView item_type -> b

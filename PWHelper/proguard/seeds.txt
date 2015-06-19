@@ -13715,11 +13715,13 @@ com.lxm.pwhelp.R$attr: int swipeMode
 com.lxm.pwhelp.R$attr: int swipeOffsetLeft
 com.lxm.pwhelp.R$attr: int swipeOffsetRight
 com.lxm.pwhelp.R$attr: int swipeOpenOnLongPress
+com.lxm.pwhelp.R$color: int blue
 com.lxm.pwhelp.R$color: int color_hei_8
 com.lxm.pwhelp.R$color: int gesture_background
 com.lxm.pwhelp.R$color: int gray
 com.lxm.pwhelp.R$color: int normal
 com.lxm.pwhelp.R$color: int theme_color
+com.lxm.pwhelp.R$color: int transparent
 com.lxm.pwhelp.R$color: int transparent_red
 com.lxm.pwhelp.R$dimen: int addActivity_edit
 com.lxm.pwhelp.R$dimen: int addActivity_label
@@ -13855,6 +13857,8 @@ com.lxm.pwhelp.R$id: int btn_selectimage
 com.lxm.pwhelp.R$id: int btn_takephoto
 com.lxm.pwhelp.R$id: int btnadd
 com.lxm.pwhelp.R$id: int btnshowpass
+com.lxm.pwhelp.R$id: int button1
+com.lxm.pwhelp.R$id: int button2
 com.lxm.pwhelp.R$id: int choice
 com.lxm.pwhelp.R$id: int cloud
 com.lxm.pwhelp.R$id: int cloud_icon
@@ -14059,6 +14063,7 @@ com.lxm.pwhelp.R$layout: int app_list_layout
 com.lxm.pwhelp.R$layout: int bottom_layout
 com.lxm.pwhelp.R$layout: int detail_layout
 com.lxm.pwhelp.R$layout: int detail_top_layout
+com.lxm.pwhelp.R$layout: int dialog_comand_layout
 com.lxm.pwhelp.R$layout: int edit_layout
 com.lxm.pwhelp.R$layout: int edit_top_layout
 com.lxm.pwhelp.R$layout: int email_dialog
@@ -14078,6 +14083,7 @@ com.lxm.pwhelp.R$layout: int set_email_layout
 com.lxm.pwhelp.R$layout: int set_email_top_layout
 com.lxm.pwhelp.R$layout: int settings_layout
 com.lxm.pwhelp.R$layout: int settings_top_layout
+com.lxm.pwhelp.R$layout: int slt_cnt_type
 com.lxm.pwhelp.R$layout: int tab01
 com.lxm.pwhelp.R$layout: int tab02
 com.lxm.pwhelp.R$layout: int tab03
