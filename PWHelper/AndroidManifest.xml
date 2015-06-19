@@ -31,26 +31,27 @@
         android:allowBackup="false"
         android:theme="@style/AppTheme" >
         <activity
+            android:exported="true"
             android:name="com.lxm.pwhelp.activity.UnlockGesturePasswordActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.lxm.pwhelp.activity.CreateGesturePasswordActivity" />
-        <activity android:name="com.lxm.pwhelp.activity.GuideGesturePasswordActivity" />
-        <activity android:name="com.lxm.pwhelp.activity.MainActivity" />
-        <activity android:name="com.lxm.pwhelp.activity.AddItemActivity" />
-        <activity android:name="com.lxm.pwhelp.activity.DetailActivity" />
-        <activity android:name="com.lxm.pwhelp.activity.SettingsActivity" />
-        <activity android:name="com.lxm.pwhelp.activity.SetCommandActivity" />
-        <activity android:name="com.lxm.pwhelp.activity.SetEmailActivity" />
-        <activity android:name="com.lxm.pwhelp.activity.AddGroupActivity"/>
-        <activity android:name="com.lxm.pwhelp.activity.EditItemActivity"/>
-        <activity android:name="com.lxm.pwhelp.activity.SettingHeaderActivity"/>
-        <activity android:name="com.lxm.pwhelp.activity.PersonalActivity"/>
-        <activity android:name="com.lxm.pwhelp.activity.AboutUsActivity"/>
-        <activity android:name="com.lxm.pwhelp.activity.AppListActivity"/>
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.CreateGesturePasswordActivity" />
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.GuideGesturePasswordActivity" />
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.MainActivity" />
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.AddItemActivity" />
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.DetailActivity" />
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.SettingsActivity" />
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.SetCommandActivity" />
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.SetEmailActivity" />
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.AddGroupActivity"/>
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.EditItemActivity"/>
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.SettingHeaderActivity"/>
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.PersonalActivity"/>
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.AboutUsActivity"/>
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.AppListActivity"/>
     </application>
 
 </manifest>
