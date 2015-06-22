@@ -5,22 +5,23 @@ import java.io.Serializable;
 public class Setting implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int setting_id;
 	private String setting_name;
 	private String setting_value;
 	private String created;
-	private boolean deleted;
+	private int deleted;
 
-	public Setting() {}
-	
+	public Setting() {
+	}
+
 	@Override
-	public String toString(){
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(setting_id+"|");
-		sb.append(setting_name+"|");
-		sb.append(setting_value+"|");
-		sb.append(created+"|");
+		sb.append(setting_id + "|");
+		sb.append(setting_name + "|");
+		sb.append(setting_value + "|");
+		sb.append(created + "|");
 		sb.append(deleted);
 		return sb.toString();
 	}
@@ -57,11 +58,11 @@ public class Setting implements Serializable {
 		this.created = created;
 	}
 
-	public Boolean getDeleted() {
+	public int getDeleted() {
 		return deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(int deleted) {
 		this.deleted = deleted;
 	}
 

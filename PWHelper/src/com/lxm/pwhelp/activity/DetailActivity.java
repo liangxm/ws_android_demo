@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lxm.pwhelp.R;
-import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.bean.Item;
 import com.lxm.pwhelp.utils.Conver;
 import com.lxm.pwhelp.utils.GroupType;
 
@@ -68,7 +68,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		line3_label2 = (TextView) findViewById(R.id.detail_line3_label2);
 		detail_title = (TextView) findViewById(R.id.detail_title);
 		Bundle bundle = this.getIntent().getExtras();
-		PWItem item = (PWItem) bundle.getSerializable("item");
+		Item item = (Item) bundle.getSerializable("item");
 		line1_label2.setText(item.getItem_type());
 		line2_label2.setText(item.getItem_username());
 		line3_label2.setText(item.getItem_password());
@@ -94,7 +94,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		appendExternal(item);
 	}
 
-	private void initGroupStr(PWItem item) {
+	private void initGroupStr(Item item) {
 		default_str = GroupType.Type_Default.getType();
 		bank_str = GroupType.Type_Bank.getType();
 		web_str = GroupType.Type_Web.getType();
@@ -121,7 +121,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 			item_logo_big.setImageResource(R.drawable.default_item_icon_big);
 	}
 	
-	private void appendExternal(PWItem item){
+	private void appendExternal(Item item){
 		if(item.getItem_name()!=null&&item.getItem_name().trim().length()>0){
 			detail_line4 = (RelativeLayout) findViewById(R.id.detail_line4);
 			detail_line4.setVisibility(View.VISIBLE);

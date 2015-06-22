@@ -35,7 +35,6 @@ public class UnlockGesturePasswordActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gesturepassword_unlock);
-
 		mLockPatternView = (LockPatternView) this
 				.findViewById(R.id.gesturepwd_unlock_lockview);
 		mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
@@ -50,7 +49,7 @@ public class UnlockGesturePasswordActivity extends Activity {
 		String reset = null;
 		if(bundle!=null)
 			reset = bundle.getString("action");
-		if(RESET.equals(reset)){
+		if(reset!=null&&RESET.equals(reset)){
 			mHeadTextView.setText(this.getResources().getString(R.string.verify_figtion_password));
 			isReset = true;
 		}

@@ -3,7 +3,6 @@ package com.lxm.pwhelp.activity;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,9 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
-import com.lxm.pwhelp.bean.PWSetting;
+import com.lxm.pwhelp.bean.Setting;
 import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.dao.PWSettingDao;
 import com.lxm.pwhelp.utils.Conver;
@@ -40,8 +38,10 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 	
 	private ImageView touxiang_picture;
 	private TextView nickname_value;
-	private List<PWSetting> setting;
+	private Setting setting;
+	
 	private PWSettingDao pwSettingDao;
+	
 	private boolean isOn;
 	
 	private String nickname;
@@ -63,10 +63,11 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 		touxiang_picture.setMaxWidth(Conver.dip2px(this, 250));
 		touxiang_picture.setMaxHeight(Conver.dip2px(this, 250));
 		touxiang_picture.setPadding(Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15), Conver.dip2px(this, 15));
-		setting = pwSettingDao.getSettingByName("pw_nickname");
-		if (setting != null && setting.size() > 0) {
+		//setting = pwSettingDao.getSettingByName("pw_nickname");
+		setting = pwSettingDao.querySettingByName("pw_nickname");
+		if (setting != null) {
 			isOn=true;
-			nickname_value.setText(setting.get(0).getSetting_value());
+			nickname_value.setText(setting.getSetting_value());
 		}
 		String imageUri = String.valueOf(SharedPreferencesUtils.getParam(this, SharedPreferencesUtils.PHOTO_PATH, new String()));
 		File file = new File(imageUri);
@@ -89,7 +90,7 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 			break;
 		case R.id.nickname_line:
 			String title = null;
-			if (setting != null && setting.size() > 0) {
+			if (setting != null) {
 				title = "修改你的昵称";
 			} else {
 				title = "请输入一个酷炫昵称";
@@ -103,21 +104,18 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 					nickname = dialog.getEditText().getText()
 							.toString();
 					if(nickname!=null&&nickname.trim().length()>0){
-						PWSetting pwSetting = new PWSetting();
+						Setting pwSetting = new Setting();
 						if (isOn) {
-							pwSetting.setSetting_id(setting.get(0)
+							pwSetting.setSetting_id(setting
 									.getSetting_id());
 						}
 						pwSetting.setSetting_name("pw_nickname");
 						pwSetting.setSetting_value(nickname);
-						CreateOrUpdateStatus status = pwSettingDao
-								.createOrUpdate(pwSetting);
-						if (status.isCreated() || status.isUpdated()) {
-							Tools.showSucessDialog(PersonalActivity.this,
-									"更新成功", "个人昵称成功,返回！", listener);
-							SharedPreferencesUtils.setParam(PersonalActivity.this, SharedPreferencesUtils.NICK_NAME, nickname);
-							dialog.dismiss();
-						}
+						pwSettingDao.addSetting(pwSetting);
+						Tools.showSucessDialog(PersonalActivity.this,
+								"更新成功", "个人昵称成功,返回！", listener);
+						SharedPreferencesUtils.setParam(PersonalActivity.this, SharedPreferencesUtils.NICK_NAME, nickname);
+						dialog.dismiss();
 					}else{
 						Tools.showToast(PersonalActivity.this, "请输入一个有效的昵称！");
 					}

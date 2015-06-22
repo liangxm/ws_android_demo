@@ -13,6 +13,7 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 
+import net.sqlcipher.database.SQLiteDatabase;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,9 +31,9 @@ import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputFilter.LengthFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.InputFilter.LengthFilter;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,13 +58,12 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
-import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.adapter.GroupAdapter;
 import com.lxm.pwhelp.adapter.PWItemAdapter;
-import com.lxm.pwhelp.bean.PWGroup;
-import com.lxm.pwhelp.bean.PWItem;
-import com.lxm.pwhelp.bean.PWSetting;
+import com.lxm.pwhelp.bean.Group;
+import com.lxm.pwhelp.bean.Item;
+import com.lxm.pwhelp.bean.Setting;
 import com.lxm.pwhelp.custom.CircleImageView;
 import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.custom.ToggleButton;
@@ -73,9 +73,9 @@ import com.lxm.pwhelp.dao.PWSettingDao;
 import com.lxm.pwhelp.email.MailSenderInfo;
 import com.lxm.pwhelp.email.SimpleMailSender;
 import com.lxm.pwhelp.utils.Conver;
-import com.lxm.pwhelp.utils.DesUtils;
+import com.lxm.pwhelp.utils.DESUtil;
 import com.lxm.pwhelp.utils.FileUtil;
-import com.lxm.pwhelp.utils.LogUtil;
+import com.lxm.pwhelp.utils.Settings;
 import com.lxm.pwhelp.utils.SharedPreferencesUtils;
 import com.lxm.pwhelp.utils.Tools;
 import com.lxm.pwhelp.view.NoScrollViewPager;
@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private PagerAdapter mPagerAdapter;
 	private ExpandableListView mainlistview;
 	public List<String> parent;
-	public Map<String, List<PWItem>> map;
+	public Map<String, List<Item>> map;
 
 	private ImageButton mSettingImg;
 	private LinearLayout mTabAddress;
@@ -124,8 +124,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private NoScrollViewPager mViewPager;
 	private List<View> mViews;
 	private ImageButton mWeiXinImg;
-	private List<PWItem> itemList;
-	private List<PWItem> newItemList;
+	private List<Item> itemList;
+	private List<Item> newItemList;
 	private TextView title;
 	private TextView nicknameView;
 
@@ -133,6 +133,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	private Button no_add_item;
 
+	private SQLiteDatabase db;
 	private PWItemDao pwItemDao;
 	private PWGroupDao pwGroupDao;
 	private PWSettingDao pwSettingDao;
@@ -143,7 +144,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		
+		SQLiteDatabase.loadLibs(this);
 		initView();
 		initViewPage();
 		initEvent();
@@ -188,7 +189,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	// 初始化数据
     public void initData() {
     	//initialize the group data
-    	List<PWGroup> groups = pwGroupDao.getAvailableGroup();
+    	List<Group> groups = pwGroupDao.queryGroupAll();
     	String[] groupData = new String[]{
     			Tools.getResources(this, R.string.group_default),
     			Tools.getResources(this, R.string.group_bank),
@@ -199,35 +200,40 @@ public class MainActivity extends Activity implements View.OnClickListener {
     			Tools.getResources(this, R.string.group_alipay)
     	};
     	parent = new ArrayList<String>();
-    	map = new HashMap<String, List<PWItem>>();
+    	map = new HashMap<String, List<Item>>();
     	if(groups.size()==0){
     		//initialize the group data
 	    	for(String groupStr:groupData){
-				pwGroupDao.createOrUpdate(new PWGroup(groupStr,"0",Tools.getToday(),false));
-				List<PWItem> list = new ArrayList<PWItem>();
-				List<PWItem> itemGroups = pwItemDao.getPWItemByType(groupStr);
+				Group group = new Group();
+				group.setGroup_name(groupStr);
+				group.setGroup_level("0");
+				group.setCreated(Tools.getToday());
+				group.setDeleted(0);
+				pwGroupDao.addGroup(group);
+				List<Item> list = new ArrayList<Item>();
+				List<Item> itemGroups = pwItemDao.getItemByType(groupStr);
 				parent.add(groupStr+"("+itemGroups.size()+")");
-				for(PWItem item:itemGroups){
+				for(Item item:itemGroups){
 					list.add(item);
 				}
 				map.put(groupStr+"("+itemGroups.size()+")", list);
 			}
 	    	//initialize the settings
-	    	PWSetting pwSetting1 = new PWSetting();
+	    	Setting pwSetting1 = new Setting();
 	    	pwSetting1.setSetting_name("pw_command");
 	    	pwSetting1.setSetting_value("8888");
-	    	pwSettingDao.createOrUpdate(pwSetting1);
+	    	pwSettingDao.addSetting(pwSetting1);
 	    	
-	    	PWSetting pwSetting2 = new PWSetting();
+	    	Setting pwSetting2 = new Setting();
 	    	pwSetting2.setSetting_name("pw_nickname");
 	    	pwSetting2.setSetting_value("Selina");
-	    	pwSettingDao.createOrUpdate(pwSetting2);
+	    	pwSettingDao.addSetting(pwSetting2);
     	}else{
-    		for(PWGroup group:groups){
-    			List<PWItem> list = new ArrayList<PWItem>();
-				List<PWItem> itemGroups = pwItemDao.getPWItemByType(group.getGroup_name());
+    		for(Group group:groups){
+    			List<Item> list = new ArrayList<Item>();
+    			List<Item> itemGroups = pwItemDao.getItemByType(group.getGroup_name());
 				parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
-				for(PWItem item:itemGroups){
+				for(Item item:itemGroups){
 					list.add(item);
 				}
 				map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
@@ -235,9 +241,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     	}
     	
     	//initialize the item data
-    	List<PWItem> items = pwItemDao.getAvailablePWItem();
+    	List<Item> items = pwItemDao.queryItemAll();
 		switchTheNoItem(items);
-		for (PWItem item : items) {
+		for (Item item : items) {
 			itemList.add(item);
 		}
     }
@@ -271,10 +277,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		searchbox = (EditText) tab01.findViewById(R.id.searchbox);
 		nicknameView = (TextView) tab04.findViewById(R.id.name);
 		searchbox.addTextChangedListener(textWatcher);
-		itemList = new ArrayList<PWItem>();
+		itemList = new ArrayList<Item>();
 		// 设置单个分组展开
 		initData();
-		groupAdapter=new GroupAdapter(this, parent, map);
+		groupAdapter=new GroupAdapter(this, parent, map,pwSettingDao);
 		mainlistview.setAdapter(groupAdapter);
 		mainlistview.setOnChildClickListener(new OnChildClickListener(){
 			@Override
@@ -282,16 +288,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					int groupPosition, int childPosition, long id) {
 				ToggleButton toggleButton = (ToggleButton)view.findViewById(R.id.mTogBtn);
 				String key = parent.get(groupPosition);
-				PWItem item = map.get(key).get(childPosition);
+				Item item = map.get(key).get(childPosition);
 				final Intent intent = new Intent(MainActivity.this, DetailActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("item", item);
 				intent.putExtras(bundle);
 				if(!toggleButton.isSelected()){
 					//Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
-					List<PWSetting> setting = pwSettingDao.getSettingByName("pw_command");
+					//List<PWSetting> setting = pwSettingDao.getSettingByName("pw_command");
+					Setting setting = pwSettingDao.querySettingByName("pw_command");
 					final EditText commandStr = new EditText(MainActivity.this);
-					final String command = setting.get(0).getSetting_value();
+					final String command = setting.getSetting_value();
 					commandStr.setInputType(InputType.TYPE_CLASS_NUMBER);
 					InputFilter[] filters = {new LengthFilter(4)};
 					commandStr.setFilters(filters);
@@ -327,7 +334,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				}
 			}
 		});
-		adapter = new PWItemAdapter(MainActivity.this, itemList);
+		adapter = new PWItemAdapter(MainActivity.this, itemList,pwSettingDao);
 		lv_list.setAdapter(adapter);
 		
 		// step 1. create a MenuCreator
@@ -373,7 +380,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		lv_list.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public void onMenuItemClick(int position, SwipeMenu menu, int index) {
-				PWItem item = itemList.get(position);
+				Item item = itemList.get(position);
 				switch (index) {
 				case 0:
 					// edit
@@ -399,17 +406,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long arg3) {
 				ToggleButton toggleButton = (ToggleButton)view.findViewById(R.id.mTogBtn);
-				PWItem item = itemList.get(position);
+				Item item = itemList.get(position);
 				final Intent intent = new Intent(MainActivity.this, DetailActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("item", item);
 				intent.putExtras(bundle);
 				
 				if(!toggleButton.isSelected()){
-					//Tools.showToast(MainActivity.this, "打开开关，触击该项以查看详情！");
-					List<PWSetting> setting = pwSettingDao.getSettingByName("pw_command");
+					Setting setting = pwSettingDao.querySettingByName("pw_command");
 					final EditText commandStr = new EditText(MainActivity.this);
-					final String command = setting.get(0).getSetting_value();
+					final String command = setting.getSetting_value();
 					commandStr.setInputType(InputType.TYPE_CLASS_NUMBER);
 					InputFilter[] filters = {new LengthFilter(4)};
 					commandStr.setFilters(filters);
@@ -550,7 +556,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		}
 		case R.id.settings: {
 			Intent intent = new Intent(this, SettingsActivity.class);
-			startActivityForResult(intent,SYSY_SETTING_CODE);
+			startActivityForResult(intent, SYSY_SETTING_CODE);
 			break;
 		}
 		case R.id.no_add_item: {
@@ -597,10 +603,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				String data = searchbox.getText().toString();
 				itemList.clear();
 				if (data != null && !"".equals(data)) 
-					newItemList = pwItemDao.getPWItemByName(data);
+					newItemList = pwItemDao.getItemByName(data);
 				else
-					newItemList = pwItemDao.getAvailablePWItem();
-				for(PWItem item:newItemList){
+					newItemList = pwItemDao.queryItemAll();
+				for(Item item:newItemList){
 					itemList.add(item);
 				}
 				adapter.notifyDataSetChanged();
@@ -611,24 +617,24 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	// main list view update
 	private void updateListView(){
-		List<PWItem> items = pwItemDao.getAvailablePWItem();
+		List<Item> items = pwItemDao.queryItemAll();
 		switchTheNoItem(items);
 		itemList.clear();
-		for (PWItem item : items) {
+		for (Item item : items) {
 			itemList.add(item);
 			//reverse the list so that newer item is up
 			Collections.reverse(itemList);
 		}
 		adapter.notifyDataSetChanged();
 		
-		List<PWGroup> groups = pwGroupDao.getAvailableGroup();
+		List<Group> groups = pwGroupDao.queryGroupAll();
 		parent.clear();
 		map.clear();
-		for(PWGroup group:groups){
-			List<PWItem> list = new ArrayList<PWItem>();
-			List<PWItem> itemGroups = pwItemDao.getPWItemByType(group.getGroup_name());
+		for(Group group:groups){
+			List<Item> list = new ArrayList<Item>();
+			List<Item> itemGroups = pwItemDao.getItemByType(group.getGroup_name());
 			parent.add(group.getGroup_name()+"("+itemGroups.size()+")");
-			for(PWItem item:itemGroups){
+			for(Item item:itemGroups){
 				list.add(item);
 			}
 			map.put(group.getGroup_name()+"("+itemGroups.size()+")", list);
@@ -668,8 +674,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 					message.obj = "文件创建失败！";
 				}else{
 					//write data to file
-					DesUtils des = new DesUtils();
-					FileUtil.saveFileSdcard("pwhelper.pw", des.encrypt(buildDataString()),false);
+					FileUtil.saveFileSdcard("pwhelper.pw", DESUtil.encode(Settings.strDefaultKey,buildDataString()),false);
 					
 					//send email with attachment
 					MailSenderInfo mailInfo = new MailSenderInfo();   
@@ -689,7 +694,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				    if(sms.sendTextMail(mailInfo)){
 				    	message.obj="数据备份成功！";
 				    }
-				    //sms.sendHtmlMail(mailInfo);//发送html格式
 				}
 			} catch (NotFoundException e) {
 				message.obj="文件没有发现，请在应用管理界面为此App开启文件读写权限！";
@@ -718,18 +722,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			StringBuffer groupBuffer = new StringBuffer();
 			StringBuffer itemBuffer = new StringBuffer();
 			
-			List<PWSetting> pwSettingList = pwSettingDao.getSettingAll();
-			for(PWSetting setting:pwSettingList){
+			List<Setting> pwSettingList = pwSettingDao.querySettingAll();
+			for(Setting setting:pwSettingList){
 				settingBuffer.append("setting|").append(setting.toString()).append(wrapLine);
 			}
 			
-			List<PWGroup> pwGroupList = pwGroupDao.getGroupAll();
-			for(PWGroup group:pwGroupList){
+			List<Group> pwGroupList = pwGroupDao.queryGroupAll();
+			for(Group group:pwGroupList){
 				groupBuffer.append("group|").append(group.toString()).append(wrapLine);
 			}
 			
-			List<PWItem> pwItemList = pwItemDao.getPWItemAll();
-			for(PWItem item:pwItemList){
+			List<Item> pwItemList = pwItemDao.queryItemAll();
+			for(Item item:pwItemList){
 				itemBuffer.append("item|").append(item.toString()).append(wrapLine);
 			}
 			return settingBuffer.toString()+groupBuffer.toString()+itemBuffer.toString();
@@ -750,21 +754,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}else{
 				try {
 					String content = FileUtil.loadFileFromSdcard(MainActivity.this, path);
-					DesUtils des = new DesUtils();
 					String wrapLine = "\n";
-					//content = content.substring(0, content.length());
-					String decryptContent = des.decrypt(content);
+					String decryptContent = DESUtil.decode(Settings.strDefaultKey, content);
 					String[] wholeData = decryptContent.split(wrapLine);
+					
 					//clear the database
-					pwItemDao.deleteAll();
-					pwGroupDao.deleteAll();
-					pwSettingDao.deleteAll();
+					pwItemDao.emptyTable();
+					pwGroupDao.emptyTable();
+					pwSettingDao.emptyTable();
 
 					//load the data
 					for(String line:wholeData){
 						String[] row = line.split("[|]");
 						if(BR_TAG_ITEM.equals(row[0])){
-							PWItem item = new PWItem();
+							Item item = new Item();
 							item.setItem_id(Integer.parseInt(row[1]));
 							item.setItem_name(row[2]);
 							item.setItem_username(row[3]);
@@ -777,44 +780,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
 							item.setQuestion2(row[10]);
 							item.setModified(row[11]);
 							item.setCreated(row[12]);
-							item.setDeleted(Boolean.valueOf(row[13]));
-							CreateOrUpdateStatus status = pwItemDao.createOrUpdate(item);
-							if(status.isCreated()){
-								LogUtil.d("MainActivity","item_name recovery ["+row[2]+"] sucess");
-							}else{
-								LogUtil.e("MainActivity", "item_name recovery ["+row[2]+"] failure");
-							}
+							item.setDeleted(Integer.parseInt(row[13]));
+							pwItemDao.addItem(item);
 						}else if(BR_TAG_GROUP.equals(row[0])){
-							PWGroup group = new PWGroup();
+							Group group = new Group();
 							group.setGroup_id(Integer.parseInt(row[1]));
 							group.setGroup_name(row[2]);
 							group.setGroup_level(row[3]);
 							group.setCreated(row[4]);
-							group.setDeleted(Boolean.valueOf(row[5]));
-							CreateOrUpdateStatus status = pwGroupDao.createOrUpdate(group);
-							if(status.isCreated()){
-								LogUtil.d("MainActivity","group_name recovery ["+row[2]+"] sucess");
-							}else{
-								LogUtil.e("MainActivity", "group_name recovery ["+row[2]+"] failure");
-							}
+							group.setDeleted(Integer.parseInt(row[5]));
+							pwGroupDao.addGroup(group);
 						}else if(BR_TAG_SETTING.equals(row[0])){
-							PWSetting setting = new PWSetting();
+							Setting setting = new Setting();
 							setting.setSetting_id(Integer.parseInt(row[1]));
 							setting.setSetting_name(row[2]);
 							setting.setSetting_value(row[3]);
 							setting.setCreated(row[4]);
-							setting.setDeleted(Boolean.valueOf(row[5]));
-							CreateOrUpdateStatus status = pwSettingDao.createOrUpdate(setting);
-							if(status.isCreated()){
-								LogUtil.d("MainActivity","setting_name recovery ["+row[2]+"] sucess");
-							}else{
-								LogUtil.e("MainActivity", "setting_name recovery ["+row[2]+"] failure");
-							}
+							setting.setDeleted(Integer.parseInt(row[5]));
+							pwSettingDao.addSetting(setting);
 						}
-					}
-					List<PWSetting> settings = pwSettingDao.getSettingAll();
-					for(PWSetting setting:settings){
-						System.out.println(setting.getSetting_name());
 					}
 					message.obj="数据恢复成功！";
 					message.arg2=0;
@@ -832,10 +816,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	}
 	
 	private class ClickListener implements android.content.DialogInterface.OnClickListener {
-		private PWItem item;
+		private Item item;
 		private String type;
 		private String email;
-		public ClickListener(PWItem item,String type){
+		public ClickListener(Item item,String type){
 			this.item = item;
 			this.type = type;
 		}
@@ -856,14 +840,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			}
 		}
 		private void delete(DialogInterface dialog){
-			item.setDeleted(true);
-			CreateOrUpdateStatus status = pwItemDao.createOrUpdate(item);
-			if(status.isUpdated()){
-				itemList.remove(item);
-				adapter.notifyDataSetChanged();
-				dialog.dismiss();
-				handler.post(listViewChanged);
-			}
+			item.setDeleted(1);
+			pwItemDao.updateItem(item);
+			itemList.remove(item);
+			adapter.notifyDataSetChanged();
+			dialog.dismiss();
+			handler.post(listViewChanged);
 		}
 	}
 	
@@ -882,7 +864,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 * modify the item
 	 * @param item
 	 */
-	private void edit(PWItem item){
+	private void edit(Item item){
 		Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("item", item);
@@ -943,9 +925,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 	// 弹窗
 	private void dialogEmail() {
-		List<PWSetting> setting = pwSettingDao.getSettingByName("email_address");
-		if(setting!=null&&setting.size()>0){
-			dialogBackup(setting.get(0).getSetting_value());
+		//List<PWSetting> setting = pwSettingDao.getSettingByName("email_address");
+		Setting setting = pwSettingDao.querySettingByName("email_address");
+		if(setting!=null){
+			dialogBackup(setting.getSetting_value());
 		}else{
 			final EmailDialog dialog = new EmailDialog(MainActivity.this,"请输入邮箱地址");
 			final EditText editText = (EditText) dialog.getEditText();
@@ -958,14 +941,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 						Tools.showWarningDialog(MainActivity.this, "警告",
 								"请输入有效的邮箱地址！");
 					}else{
-						PWSetting pwSetting = new PWSetting();
+						Setting pwSetting = new Setting();
 						pwSetting.setSetting_name("email_address");
 						pwSetting.setSetting_value(email_address);
-						CreateOrUpdateStatus status = pwSettingDao
-								.createOrUpdate(pwSetting);
-						if(status.isCreated()){
-							dialogBackup(email_address);
-						}
+						pwSettingDao.addSetting(pwSetting);
+						dialogBackup(email_address);
 					}
 					dialog.dismiss();
 				}
@@ -1040,7 +1020,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	 * display the no item note and button
 	 * @param items
 	 */
-	private void switchTheNoItem(List<PWItem> items){
+	private void switchTheNoItem(List<Item> items){
 		if(items.size()==0){
 			lv_list.setVisibility(View.GONE);
 			noitem.setVisibility(View.VISIBLE);
@@ -1054,6 +1034,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	protected void onDestroy() {
 		if(progressDialog.isShowing())
 			progressDialog.dismiss();
+		if(db!=null){
+			db.close();
+		}
 		super.onDestroy();
 	}
 	

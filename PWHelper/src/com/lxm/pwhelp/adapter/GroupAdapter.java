@@ -8,8 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.text.InputFilter;
-import android.text.InputType;
 import android.text.InputFilter.LengthFilter;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +21,8 @@ import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.activity.MainActivity;
-import com.lxm.pwhelp.bean.PWItem;
-import com.lxm.pwhelp.bean.PWSetting;
+import com.lxm.pwhelp.bean.Item;
+import com.lxm.pwhelp.bean.Setting;
 import com.lxm.pwhelp.custom.ToggleButton;
 import com.lxm.pwhelp.custom.ToggleButton.OnToggleChanged;
 import com.lxm.pwhelp.dao.PWSettingDao;
@@ -34,17 +34,17 @@ public class GroupAdapter extends BaseExpandableListAdapter {
 
 	private MainActivity activity;
 	private List<String> parent;
-	private Map<String, List<PWItem>> map;
+	private Map<String, List<Item>> map;
 	private String command;
 	private PWSettingDao pwSettingDao;
 	
 	private String default_str,bank_str,web_str,weibo_str,qq_str,email_str,alipay_str;
 	
-	public GroupAdapter(MainActivity activity, List<String> parent, Map<String, List<PWItem>> map){
+	public GroupAdapter(MainActivity activity, List<String> parent, Map<String, List<Item>> map,PWSettingDao pwSettingDao){
 		this.activity = activity;
 		this.parent = parent;
 		this.map = map;
-		pwSettingDao=new PWSettingDao(activity);
+		this.pwSettingDao = pwSettingDao;
 		initGroupStr();
 	}
 	
@@ -74,7 +74,7 @@ public class GroupAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-		PWItem item = (PWItem) getChild(groupPosition, childPosition);
+		Item item = (Item) getChild(groupPosition, childPosition);
 		final ViewHolderChild mViewHolder;
 		if (null == convertView){
 			LayoutInflater inflater = (LayoutInflater) activity
@@ -126,9 +126,10 @@ public class GroupAdapter extends BaseExpandableListAdapter {
 			@Override
 			public void onToggle(boolean on) {
 				if(on){
-					List<PWSetting> commands = pwSettingDao.getSettingByName("pw_command");
-					if(commands!=null&&commands.size()>0){
-						command = commands.get(0).getSetting_value();
+					//List<PWSetting> commands = pwSettingDao.getSettingByName("pw_command");
+					Setting commands = pwSettingDao.querySettingByName("pw_command");
+					if(commands!=null){
+						command = commands.getSetting_value();
 						final EditText commandStr = new EditText(activity);
 						commandStr.setInputType(InputType.TYPE_CLASS_NUMBER);
 						InputFilter[] filters = {new LengthFilter(4)};

@@ -1,7 +1,5 @@
 package com.lxm.pwhelp.activity;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
-import com.lxm.pwhelp.bean.PWSetting;
+import com.lxm.pwhelp.bean.Setting;
 import com.lxm.pwhelp.dao.PWSettingDao;
 
 public class SettingsActivity extends Activity implements View.OnClickListener {
@@ -30,6 +28,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 	private static final int SET_COMMAND_CODE = 2;
 	private static final int SET_LOCK_CODE = 3;
 	private static final int ABOUT_US_CODE = 4;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -51,14 +50,16 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		resetPattern.setOnClickListener(this);
 		about_us.setOnClickListener(this);
 		pwSettingDao=new PWSettingDao(this);
-		List<PWSetting> settingList1 = pwSettingDao.getSettingByName("email_address");
-		if(settingList1!=null&&settingList1.size()>0){
+		//List<PWSetting> settingList1 = pwSettingDao.getSettingByName("email_address");
+		Setting settingList1 = pwSettingDao.querySettingByName("email_address");
+		if(settingList1!=null){
 			emailState.setText("已绑定");
 		}else{
 			emailState.setText("未绑定");
 		}
-		List<PWSetting> settingList2 = pwSettingDao.getSettingByName("pw_command");
-		if(settingList2!=null&&settingList2.size()>0){
+		//List<PWSetting> settingList2 = pwSettingDao.getSettingByName("pw_command");
+		Setting settingList2 = pwSettingDao.querySettingByName("pw_command");
+		if(settingList2!=null){
 			commandState.setText("已开启");	
 		}else{
 			commandState.setText("未开启");
@@ -104,16 +105,18 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		if (resultCode == RESULT_OK) {
 			switch (requestCode){
 			case SET_EMAIL_CODE:
-				List<PWSetting> settingList1 = pwSettingDao.getSettingByName("email_address");
-				if(settingList1!=null&&settingList1.size()>0){
+				//List<PWSetting> settingList1 = pwSettingDao.getSettingByName("email_address");
+				Setting settingList1 = pwSettingDao.querySettingByName("email_address");
+				if(settingList1!=null){
 					emailState.setText("已绑定");
 				}else{
 					emailState.setText("未绑定");
 				}
 				break;
 			case SET_COMMAND_CODE:
-				List<PWSetting> settingList2 = pwSettingDao.getSettingByName("pw_command");
-				if(settingList2!=null&&settingList2.size()>0){
+				//List<PWSetting> settingList2 = pwSettingDao.getSettingByName("pw_command");
+				Setting settingList2 = pwSettingDao.querySettingByName("pw_command");
+				if(settingList2!=null){
 					commandState.setText("已开启");	
 				}else{
 					commandState.setText("未开启");
@@ -124,5 +127,10 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 	}
 }
