@@ -9,9 +9,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 
-import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
-import com.lxm.pwhelp.bean.PWGroup;
+import com.lxm.pwhelp.bean.Group;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.utils.Tools;
 /**
@@ -47,13 +46,16 @@ public class AddGroupActivity extends Activity implements View.OnClickListener {
 			String group_name = new_group.getText().toString();
 			if(group_name.trim().length()==0){
 				Tools.showErrorDialog(this, "警告", "请输入有效的分组名称！");
+			}else if(group_name.trim().length()>14){
+				Tools.showErrorDialog(this, "警告", "自定义分组名称不能超过14个中文字！");
 			}else{
-				CreateOrUpdateStatus status = groupDao.createOrUpdate(new PWGroup(group_name,"0",Tools.getToday(),false));
-				if(status.isCreated()){
-					showDialog("添加成功","添加新分组成功！返回！");
-				}else{
-					showDialog("添加失败","添加新分组失败！返回！");
-				}
+				Group group = new Group();
+				group.setGroup_name(group_name);
+				group.setGroup_level("0");
+				group.setCreated(Tools.getToday());
+				group.setDeleted(0);
+				groupDao.addGroup(group);
+				showDialog("添加成功","添加新分组成功！返回！");
 			}
 			break;
 		}

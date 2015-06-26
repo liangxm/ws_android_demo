@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class LogUtil {
     private static final String DEBUG_TAG = "pwhelper";
-    private static final boolean DEBUG_TRACE = true;
+    private static final boolean DEBUG_TRACE = false;
     
     public static void i(String tag,String msg) {
     	if(DEBUG_TRACE)	

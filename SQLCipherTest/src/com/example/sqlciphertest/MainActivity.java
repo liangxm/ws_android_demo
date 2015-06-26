@@ -20,7 +20,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		SQLiteDatabase.loadLibs(this);
 		MyDatabaseHelper dbHelper = new MyDatabaseHelper(this, "demo.db", null, 1);
 		db = dbHelper.getWritableDatabase("secret_key");
 		Button addData = (Button) findViewById(R.id.add_data);

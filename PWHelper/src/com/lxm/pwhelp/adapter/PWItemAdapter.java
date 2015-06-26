@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
-import com.lxm.pwhelp.bean.PWItem;
-import com.lxm.pwhelp.bean.PWSetting;
+import com.lxm.pwhelp.bean.Item;
+import com.lxm.pwhelp.bean.Setting;
 import com.lxm.pwhelp.custom.ToggleButton;
 import com.lxm.pwhelp.custom.ToggleButton.OnToggleChanged;
 import com.lxm.pwhelp.dao.PWSettingDao;
@@ -31,16 +31,16 @@ import com.lxm.pwhelp.utils.Tools;
 public class PWItemAdapter extends BaseAdapter {
 
 	private Activity activity;
-	private List<PWItem> data;
+	private List<Item> data;
 	private String command;
 	private PWSettingDao pwSettingDao;
 	
 	private String default_str,bank_str,web_str,weibo_str,qq_str,email_str,alipay_str;
 
-	public PWItemAdapter(Activity activity, List<PWItem> data) {
+	public PWItemAdapter(Activity activity, List<Item> data,PWSettingDao pwSettingDao) {
 		this.activity = activity;
 		this.data = data;
-		pwSettingDao=new PWSettingDao(activity);
+		this.pwSettingDao=pwSettingDao;
 		initGroupStr();
 	}
 	
@@ -58,7 +58,7 @@ public class PWItemAdapter extends BaseAdapter {
 		return data.size();
 	}
 
-	public PWItem getItem(int position) {
+	public Item getItem(int position) {
 		return data.get(position);
 	}
 
@@ -117,9 +117,9 @@ public class PWItemAdapter extends BaseAdapter {
 			@Override
 			public void onToggle(boolean on) {
 				if(on){
-					List<PWSetting> commands = pwSettingDao.getSettingByName("pw_command");
-					if(commands!=null&&commands.size()>0){
-						command = commands.get(0).getSetting_value();
+					Setting commands = pwSettingDao.querySettingByName("pw_command");
+					if(commands!=null){
+						command = commands.getSetting_value();
 						showCustomDialog(button,mViewHolder.item_password,password);
 					}else{
 						mViewHolder.item_password.setText("密码：" + password);

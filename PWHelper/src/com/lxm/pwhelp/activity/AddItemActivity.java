@@ -2,9 +2,9 @@ package com.lxm.pwhelp.activity;
 
 import java.util.List;
 
+import net.sqlcipher.database.SQLiteDatabase;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,10 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
-import com.lxm.pwhelp.bean.PWGroup;
-import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.bean.Group;
+import com.lxm.pwhelp.bean.Item;
 import com.lxm.pwhelp.dao.PWGroupDao;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.utils.GroupType;
@@ -29,7 +28,6 @@ import com.lxm.pwhelp.utils.Tools;
 
 public class AddItemActivity extends Activity implements View.OnClickListener {
 
-	private PWItemDao itemDao;
 	private EditText name;
 	private EditText username;
 	private EditText password;
@@ -46,7 +44,9 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	private ArrayAdapter<String> adapter;
 	private String typeStr;
 	
+	private PWItemDao itemDao;
 	private PWGroupDao groupDao;
+	private SQLiteDatabase db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		setContentView(R.layout.add_layout);
 		findViewById(R.id.Dlg_Return).setOnClickListener(this);
 		findViewById(R.id.Dlg_Submit).setOnClickListener(this);
-		init(this);
+		init();
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 						.setMessage("密码不能为空！").setPositiveButton("确定", null)
 						.show();
 			else {
-				PWItem item = new PWItem();
+				Item item = new Item();
 				item.setItem_name(nameStr);
 				item.setItem_username(usernameStr);
 				item.setItem_password(passwordStr);
@@ -102,25 +102,23 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				item.setQuestion1(question1Str);
 				item.setQuestion2(question2Str);
 				item.setCreated(Tools.getToday());
-				CreateOrUpdateStatus status = itemDao.createOrUpdate(item);
-				if (status.isCreated()) {
-					new AlertDialog.Builder(this)
-							.setTitle("添加成功")
-							.setMessage("密码项添加成功,返回！")
-							.setPositiveButton(
-									"确定",
-									new android.content.DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(
-												DialogInterface dialog,
-												int which) {
-											Intent intent = new Intent(AddItemActivity.this, MainActivity.class);
-											setResult(RESULT_OK, intent);
-											finish();
-											dialog.dismiss();
-										}
-							}).show();
-				}
+				itemDao.addItem(item);
+				new AlertDialog.Builder(this)
+						.setTitle("添加成功")
+						.setMessage("密码项添加成功,返回！")
+						.setPositiveButton(
+								"确定",
+								new android.content.DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(
+											DialogInterface dialog,
+											int which) {
+										Intent intent = new Intent(AddItemActivity.this, MainActivity.class);
+										setResult(RESULT_OK, intent);
+										finish();
+										dialog.dismiss();
+									}
+						}).show();
 			}
 			break;
 		}
@@ -133,9 +131,9 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 			return true;
 	}
 
-	private void init(Context context) {
+	private void init() {
 		groupDao = new PWGroupDao(this);
-		itemDao = new PWItemDao(context);
+		itemDao = new PWItemDao(this);
 		name = (EditText) findViewById(R.id.edit_name);
 		username = (EditText) findViewById(R.id.edit_username);
 		password = (EditText) findViewById(R.id.edit_password);
@@ -156,7 +154,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		line_question2 = (LinearLayout) findViewById(R.id.item8);
 		line_banktype = (LinearLayout) findViewById(R.id.item9);
 		
-		List<PWGroup> pwGroups = groupDao.getAvailableGroup();
+		List<Group> pwGroups = groupDao.queryGroupAll();
 		String[] spinnerArr=new String[pwGroups.size()];
 		for(int i=0;i<pwGroups.size();i++){
 			spinnerArr[i] = pwGroups.get(i).getGroup_name();
@@ -257,5 +255,13 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 
 		public void onNothingSelected(AdapterView<?> arg0) {
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		if(db!=null){
+			db.close();
+		}
+		super.onDestroy();
 	}
 }

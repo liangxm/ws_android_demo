@@ -32,8 +32,9 @@
 -libraryjars libs/activation.jar
 -libraryjars libs/additionnal.jar
 -libraryjars libs/mail.jar
--libraryjars libs/ormlite-android-4.48.jar
--libraryjars libs/ormlite-core-4.48.jar
+-libraryjars libs/sqlcipher.jar
+-libraryjars libs/guava-r09.jar
+-libraryjars libs/commons-codec.jar
 -libraryjars libs/rebound-0.3.7.jar
 -libraryjars libs/swipemenu.jar
 
@@ -59,9 +60,6 @@
 
 -keep class com.bank.pingan.model.** { *; }
 
--keep public class * extends com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
--keep public class * extends com.j256.ormlite.android.apptools.OpenHelperManager
- 
 -keep class com.android.vending.licensing.ILicensingService
 -keep class android.support.v4.** { *; }  
 -keep class org.apache.commons.net.** { *; }  
@@ -72,11 +70,6 @@
 -keep class com.umeng.common.** { *; }  
 -keep class com.umeng.newxp.** { *; }  
  
--keep class com.j256.ormlite.** { *; }  
--keep class com.j256.ormlite.android.** { *; }  
--keep class com.j256.ormlite.field.** { *; }  
--keep class com.j256.ormlite.stmt.** { *; }
-
 -keep class javax.mail.**{*;}
 -keep class com.sun.mail.**{*;}
 -keep class javax.activation.**{*;}
@@ -84,6 +77,10 @@
 -keep class java.security.**{*;}
 
 -keep class com.lxm.pwhelp.bean.**{*;}
+-keep class net.sqlcipher.**{*;}
+-keep class net.sqlcipher.database.**{*;}
+-keep class org.apache.commons.codec.**{*;}
+-keep class com.google.common.**{*;}
 
 -dontwarn android.support.v4.**  
 -dontwarn org.apache.commons.net.** 
@@ -120,6 +117,7 @@
 -dontshrink
 -dontoptimize
 -dontwarn com.google.android.maps.**
+-dontwarn com.google.common.**
 -dontwarn android.webkit.WebView
 -dontwarn com.umeng.**
 -dontwarn com.tencent.weibo.sdk.**

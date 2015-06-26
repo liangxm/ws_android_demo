@@ -17,15 +17,15 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 import com.lxm.pwhelp.R;
-import com.lxm.pwhelp.bean.PWItem;
+import com.lxm.pwhelp.bean.Item;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.utils.Tools;
 
 public class EditItemActivity extends Activity implements View.OnClickListener {
 
 	private PWItemDao itemDao;
+	
 	private EditText name;
 	private EditText username;
 	private EditText password;
@@ -82,7 +82,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 						.setMessage("密码不能为空！").setPositiveButton("确定", null)
 						.show();
 			else {
-				PWItem item = (PWItem) bundle.getSerializable("item");
+				Item item = (Item) bundle.getSerializable("item");
 				item.setItem_name(nameStr);
 				item.setItem_username(usernameStr);
 				item.setItem_password(passwordStr);
@@ -100,24 +100,22 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 				item.setQuestion1(question1Str);
 				item.setQuestion2(question2Str);
 				item.setModified(Tools.getToday());
-				CreateOrUpdateStatus status = itemDao.createOrUpdate(item);
-				if (status.isUpdated()) {
-					new AlertDialog.Builder(this)
-							.setTitle("修改成功")
-							.setMessage("密码项修改成功,返回！")
-							.setPositiveButton(
-									"确定",
-									new android.content.DialogInterface.OnClickListener() {
-										@Override
-										public void onClick(
-												DialogInterface dialog,
-												int which) {
-											Intent intent = new Intent(EditItemActivity.this, MainActivity.class);
-											setResult(RESULT_OK, intent);
-											finish();
-										}
-							}).show();
-				}
+				itemDao.updateItem(item);
+				new AlertDialog.Builder(this)
+						.setTitle("修改成功")
+						.setMessage("密码项修改成功,返回！")
+						.setPositiveButton(
+								"确定",
+								new android.content.DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(
+											DialogInterface dialog,
+											int which) {
+										Intent intent = new Intent(EditItemActivity.this, MainActivity.class);
+										setResult(RESULT_OK, intent);
+										finish();
+									}
+						}).show();
 			}
 			break;
 		}
@@ -131,9 +129,9 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 	}
 
 	private void init(Context context) {
-		PWItem item = (PWItem) bundle.getSerializable("item");
+		Item item = (Item) bundle.getSerializable("item");
 		resources = this.getResources();
-		itemDao = new PWItemDao(context);
+		itemDao = new PWItemDao(this);
 		name = (EditText) findViewById(R.id.edit_name);
 		username = (EditText) findViewById(R.id.edit_username);
 		password = (EditText) findViewById(R.id.edit_password);

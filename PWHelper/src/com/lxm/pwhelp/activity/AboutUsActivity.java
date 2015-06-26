@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.utils.Conver;
+import com.lxm.pwhelp.utils.Settings;
 /**
  * introduction about this app
  * @author Listener
@@ -19,7 +20,7 @@ import com.lxm.pwhelp.utils.Conver;
 public class AboutUsActivity extends Activity implements View.OnClickListener {
 	
 	private TextView textview_introduction;
-	private String introduction = "<p>版本号：1.0.1<br/>"+
+	private String introduction = "<p>版本号："+Settings.VERSION+"<br/>"+
 		"作者：梁小满 (Listener)<br/>"+
 		"Emial: pwhelper@163.com<br/>"+
 		"qq: 1247983646<br/>"+
