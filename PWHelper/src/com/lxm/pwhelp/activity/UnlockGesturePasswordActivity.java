@@ -3,6 +3,7 @@ package com.lxm.pwhelp.activity;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,7 +31,9 @@ public class UnlockGesturePasswordActivity extends Activity {
 	private Bundle bundle;
 	private static final String RESET="reset";
 	private static boolean isReset = false;
-
+	
+	private ProgressDialog progressDialog;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,6 +72,8 @@ public class UnlockGesturePasswordActivity extends Activity {
 		super.onDestroy();
 		if (mCountdownTimer != null)
 			mCountdownTimer.cancel();
+		if(progressDialog!=null&&progressDialog.isShowing())
+			progressDialog.dismiss();
 	}
 	private Runnable mClearPatternRunnable = new Runnable() {
 		public void run() {
@@ -94,17 +99,17 @@ public class UnlockGesturePasswordActivity extends Activity {
 				if(!isReset){
 					mLockPatternView
 							.setDisplayMode(LockPatternView.DisplayMode.Correct);
+					progressDialog = ProgressDialog.show(UnlockGesturePasswordActivity.this, "加载中...", "请稍等...", true, false);
 					Intent intent = new Intent(UnlockGesturePasswordActivity.this,
 							MainActivity.class);
 					// 打开新的Activity
 					startActivity(intent);
-					Tools.showToast(UnlockGesturePasswordActivity.this,"解锁成功");
-					finish();
+					UnlockGesturePasswordActivity.this.finish();
 				}else{
 					Intent intent = new Intent(UnlockGesturePasswordActivity.this,CreateGesturePasswordActivity.class);
 					intent.putExtra("reset", "YES");
 					startActivityForResult(intent,1);
-					finish();
+					UnlockGesturePasswordActivity.this.finish();
 				}
 			} else {
 				mLockPatternView
@@ -168,5 +173,4 @@ public class UnlockGesturePasswordActivity extends Activity {
 			}.start();
 		}
 	};
-
 }
