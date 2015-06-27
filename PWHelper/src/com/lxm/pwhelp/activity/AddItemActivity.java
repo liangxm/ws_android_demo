@@ -89,13 +89,17 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				item.setItem_username(usernameStr);
 				item.setItem_password(passwordStr);
 				item.setItem_type(typeStr == null ? "" : typeStr);
-				switch(subtype.getCheckedRadioButtonId()){
-				case R.id.radioCash:
-					item.setItem_subtype(0);
-					break;
-				case R.id.radioCredit:
-					item.setItem_subtype(1);
-					break;
+				if(line_banktype.getVisibility()!=View.VISIBLE){
+					item.setItem_subtype(100);
+				}else{
+					switch(subtype.getCheckedRadioButtonId()){
+					case R.id.radioCash:
+						item.setItem_subtype(0);
+						break;
+					case R.id.radioCredit:
+						item.setItem_subtype(1);
+						break;
+					}
 				}
 				item.setItem_url(urlStr);
 				item.setItem_comment(commentStr);
@@ -106,6 +110,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				new AlertDialog.Builder(this)
 						.setTitle("添加成功")
 						.setMessage("密码项添加成功,返回！")
+						.setCancelable(false)
 						.setPositiveButton(
 								"确定",
 								new android.content.DialogInterface.OnClickListener() {

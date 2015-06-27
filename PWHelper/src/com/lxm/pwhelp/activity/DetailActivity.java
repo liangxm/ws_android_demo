@@ -136,7 +136,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
 					Conver.dip2px(this, 5));
 		}
-		if(item.getItem_subtype()>=0){
+		if(item.getItem_subtype()==0||item.getItem_subtype()==1){
 			detail_line5 = (RelativeLayout) findViewById(R.id.detail_line5);
 			detail_line5.setVisibility(View.VISIBLE);
 			detail_line5_label1 = (TextView) findViewById(R.id.detail_line5_label1);
