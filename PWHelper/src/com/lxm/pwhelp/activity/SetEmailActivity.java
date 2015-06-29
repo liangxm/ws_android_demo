@@ -16,12 +16,17 @@ import com.lxm.pwhelp.bean.Setting;
 import com.lxm.pwhelp.custom.EmailDialog;
 import com.lxm.pwhelp.dao.PWSettingDao;
 import com.lxm.pwhelp.utils.Tools;
-
+/**
+ * set email activity
+ * @author Listener
+ * @version 2015-6-28 15:00:06
+ */
 public class SetEmailActivity extends Activity implements View.OnClickListener {
 
 	private PWSettingDao pwSettingDao;
 	
 	private TextView set_email_note;
+	private TextView title;
 	private Button set_email_btn;
 	private Setting setting;
 	private boolean isOn;
@@ -31,7 +36,9 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.set_email_layout);
-		findViewById(R.id.SetEmail_Return).setOnClickListener(this);
+		title=(TextView)findViewById(R.id.title);
+		title.setText(this.getResources().getString(R.string.set_email_title));
+		findViewById(R.id.Return).setOnClickListener(this);
 		findViewById(R.id.set_email_btn).setOnClickListener(this);
 		initView();
 	}
@@ -57,7 +64,7 @@ public class SetEmailActivity extends Activity implements View.OnClickListener {
 	@Override
 	public void onClick(View item) {
 		switch (item.getId()) {
-		case R.id.SetEmail_Return:
+		case R.id.Return:
 			Intent intent = new Intent(SetEmailActivity.this,
 					SettingsActivity.class);
 			setResult(RESULT_OK, intent);

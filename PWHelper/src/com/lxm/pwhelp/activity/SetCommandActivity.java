@@ -31,6 +31,7 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 	private PWSettingDao pwSettingDao;
 	
 	private TextView set_command_note;
+	private TextView title;
 	private Button enable_command_btn,disable_command_btn;
 	private Setting setting;
 	private boolean isOn;
@@ -40,7 +41,9 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.set_command_layout);
-		findViewById(R.id.SetCommand_Return).setOnClickListener(this);
+		title=(TextView)findViewById(R.id.title);
+		title.setText(this.getResources().getString(R.string.set_command_title));
+		findViewById(R.id.Return).setOnClickListener(this);
 		findViewById(R.id.enable_command_btn).setOnClickListener(this);
 		findViewById(R.id.disable_command_btn).setOnClickListener(this);
 		initView();
@@ -69,7 +72,7 @@ public class SetCommandActivity extends Activity implements View.OnClickListener
 	@Override
 	public void onClick(View item) {
 		switch(item.getId()){
-		case R.id.SetCommand_Return:
+		case R.id.Return:
 			Intent intent = new Intent(SetCommandActivity.this,SettingsActivity.class);
 			setResult(RESULT_OK, intent);
 			finish();

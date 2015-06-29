@@ -7,7 +7,7 @@ package com.lxm.pwhelp.utils;
 public enum GroupType {
 
 	Type_Default("默认分组"), Type_Bank("银行卡密码"), Type_Web("网站密码"), Type_WeiBo(
-			"微博密码"), Type_QQ("QQ密码"), Type_Email("邮箱密码"), Type_Alipay("支付宝密码");
+			"微博密码"), Type_QQ("QQ密码"), Type_Email("邮箱密码"), Type_Alipay("支付宝密码"), Type_Note("私密记事");
 
 	private final String type;
 

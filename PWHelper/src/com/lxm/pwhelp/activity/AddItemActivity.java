@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.bean.Group;
@@ -38,6 +40,8 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	private Spinner type;
 	private RadioGroup subtype;
 	
+	private TextView title;
+	
 	private LinearLayout line_type,line_name,line_username,line_password,line_url,line_comment,line_question1,line_question2,line_banktype;
 	
 
@@ -53,7 +57,9 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.add_layout);
-		findViewById(R.id.Dlg_Return).setOnClickListener(this);
+		title=(TextView)findViewById(R.id.title);
+		title.setText(this.getResources().getText(R.string.add_title));
+		findViewById(R.id.Return).setOnClickListener(this);
 		findViewById(R.id.Dlg_Submit).setOnClickListener(this);
 		init();
 	}
@@ -61,7 +67,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.Dlg_Return:
+		case R.id.Return:
 			Intent intent = new Intent(this, MainActivity.class);
 			setResult(RESULT_OK, intent);
 			finish();
@@ -75,11 +81,11 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 			String question1Str = question1.getText().toString();
 			String question2Str = question2.getText().toString();
 
-			if (emptyStr(usernameStr))
+			if (Tools.emptyStr(usernameStr))
 				new AlertDialog.Builder(this).setTitle("警告")
 						.setMessage("用户名不能为空！").setPositiveButton("确定", null)
 						.show();
-			else if (emptyStr(passwordStr))
+			else if (Tools.emptyStr(passwordStr))
 				new AlertDialog.Builder(this).setTitle("警告")
 						.setMessage("密码不能为空！").setPositiveButton("确定", null)
 						.show();
@@ -127,13 +133,6 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 			}
 			break;
 		}
-	}
-
-	private boolean emptyStr(String str) {
-		if (str != null && str.trim().length() > 0)
-			return false;
-		else
-			return true;
 	}
 
 	private void init() {
@@ -195,6 +194,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				line_question2.setVisibility(View.GONE);
 				line_banktype.setVisibility(View.GONE);
 			}else if(GroupType.Type_Bank.getType().equals(typeStr)){
+				username.setInputType(InputType.TYPE_CLASS_NUMBER);
 				line_type.setVisibility(View.VISIBLE);
 				line_username.setVisibility(View.VISIBLE);
 				line_password.setVisibility(View.VISIBLE);
@@ -225,6 +225,7 @@ public class AddItemActivity extends Activity implements View.OnClickListener {
 				line_question2.setVisibility(View.GONE);
 				line_banktype.setVisibility(View.GONE);
 			}else if(GroupType.Type_QQ.getType().equals(typeStr)){
+				username.setInputType(InputType.TYPE_CLASS_NUMBER);
 				line_type.setVisibility(View.VISIBLE);
 				line_name.setVisibility(View.VISIBLE);
 				line_username.setVisibility(View.VISIBLE);

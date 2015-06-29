@@ -109,6 +109,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private LinearLayout mTabWeiXin;
 
 	private LinearLayout additem;
+	private LinearLayout addnote;
 	private LinearLayout shodow_head;
 	private LinearLayout profiles;
 	private RelativeLayout backupitem;
@@ -156,6 +157,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		mTabFrd.setOnClickListener(this);
 		mTabSetting.setOnClickListener(this);
 		additem.setOnClickListener(this);
+		addnote.setOnClickListener(this);
 		backupitem.setOnClickListener(this);
 		recovery.setOnClickListener(this);
 		profiles.setOnClickListener(this);
@@ -183,6 +185,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		label3 = (TextView) findViewById(R.id.label3);
 		label4 = (TextView) findViewById(R.id.label4);
 		title = (TextView) findViewById(R.id.title);
+		title.setText("首页");
 		add_group = (ImageView) findViewById(R.id.add_group);
 		add_group.setVisibility(View.GONE);
 	}
@@ -226,7 +229,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    	
 	    	Setting pwSetting2 = new Setting();
 	    	pwSetting2.setSetting_name("pw_nickname");
-	    	pwSetting2.setSetting_value("Selina");
+	    	pwSetting2.setSetting_value("Listener");
 	    	pwSettingDao.addSetting(pwSetting2);
     	}else{
     		for(Group group:groups){
@@ -257,6 +260,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		View tab04 = mLayoutInflater.inflate(R.layout.tab04, null);
 
 		additem = (LinearLayout) tab03.findViewById(R.id.additem);
+		addnote = (LinearLayout) tab03.findViewById(R.id.addnote);
 		shodow_head = (LinearLayout) tab04.findViewById(R.id.shodow_head);
 		profiles = (LinearLayout) tab04.findViewById(R.id.profiles);
 		mainlistview = (ExpandableListView) tab02.findViewById(R.id.explistview);
@@ -530,6 +534,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		case R.id.additem: {
 			Intent intent = new Intent(this, AddItemActivity.class);
 			startActivityForResult(intent, ADD_ITEM_CODE);
+			break;
+		}
+		case R.id.addnote: {
+			Intent intent = new Intent(this, AddNoteActivity.class);
+			startActivityForResult(intent, ADD_NOT_CODE);
 			break;
 		}
 		case R.id.cloud: {
@@ -882,6 +891,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			case EDIT_ITEM_CODE:
 			case ADD_GROUP_CODE:
 			case ADD_ITEM_CODE:
+			case ADD_NOT_CODE:
 			case FIRST_ADD_CODE:
 				handler.post(listViewChanged);
 				break;
@@ -1049,6 +1059,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	private static final int SYSY_SETTING_CODE = 8;
 	private static final int FIRST_ADD_CODE = 9;
 	private static final int PROFILE_SETTING_CODE = 10;
+	private static final int ADD_NOT_CODE = 11;
 	
 	//backup and recovery tag
 	private static final String BR_TAG_ITEM = "item";

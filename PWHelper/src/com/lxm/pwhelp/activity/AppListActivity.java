@@ -2,7 +2,7 @@ package com.lxm.pwhelp.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -22,7 +22,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.lxm.pwhelp.R;
 /**
  * app list activity for user forward to special application
@@ -78,6 +77,22 @@ public class AppListActivity extends Activity {
 				String applicationName = (String)getPackageManager().getApplicationLabel(info);
 				if(applicationName.contains("支付宝")){
 					searchApp.setText("支付宝");
+					break;
+				}
+			}
+		} else if(type.contains("银行")){
+			for(ApplicationInfo info:mAppList){
+				String applicationName = (String)getPackageManager().getApplicationLabel(info);
+				if(applicationName.contains("银行")){
+					searchApp.setText("银行");
+					break;
+				}
+			}
+		} else if(type.contains("邮箱")){
+			for(ApplicationInfo info:mAppList){
+				String applicationName = (String)getPackageManager().getApplicationLabel(info);
+				if(applicationName.contains("邮箱")){
+					searchApp.setText("邮箱");
 					break;
 				}
 			}
@@ -154,6 +169,7 @@ public class AppListActivity extends Activity {
 		}
 	}
 	
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg){

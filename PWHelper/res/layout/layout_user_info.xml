@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     
-    <include layout="@layout/layout_user_info_top" />
+    <include layout="@layout/top_layout1" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -25,7 +25,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:text="@string/touxiang_label"
-                android:layout_toRightOf="@+id/recovery_icon"
                 android:textColor="#ff787878"
                 android:textSize="18.0dip" />
             <com.lxm.pwhelp.custom.CircleImageView
@@ -45,7 +44,6 @@
             android:layout_width="fill_parent"
             android:layout_height="0.8dip"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
             android:background="#d2d2d2"/>
 
         <RelativeLayout

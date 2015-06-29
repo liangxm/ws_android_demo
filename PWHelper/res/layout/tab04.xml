@@ -36,7 +36,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Listener"
+                android:text="@string/nickname_value"
                 android:textColor="#ff787878"
                 android:textSize="18.0dip" />
 
@@ -44,41 +44,11 @@
                 android:id="@+id/account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:text="账号: 1247983646"
+                android:text="@string/default_account"
                 android:textColor="#ff787878"
                 android:textSize="18.0dip" />
         </LinearLayout>
     </LinearLayout>
-
-    <!-- <LinearLayout
-        android:id="@id/manage"
-        android:layout_width="fill_parent"
-        android:layout_height="230dip"
-        android:background="@color/theme_color"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <LinearLayout
-            android:id="@+id/shodow_head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="@drawable/shadow_icon">
-	        <com.lxm.pwhelp.custom.CircleImageView
-	            android:id="@+id/head_icon"
-	            android:layout_width="120dip"
-	            android:layout_height="120dip"
-	            android:src="@drawable/head_icon"
-	            android:contentDescription="@null" />
-		</LinearLayout>
-        <TextView
-            android:id="@+id/nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/author"
-            android:textColor="#FFFFFF" />
-    </LinearLayout> -->
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -126,7 +96,6 @@
             android:layout_width="fill_parent"
             android:layout_height="0.8dip"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
             android:background="#d2d2d2"/>
 
         <RelativeLayout
@@ -169,7 +138,6 @@
             android:layout_width="fill_parent"
             android:layout_height="0.8dip"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
             android:background="#d2d2d2"/>
 
         <RelativeLayout

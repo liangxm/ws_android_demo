@@ -119,8 +119,24 @@ public class Tools {
 		return context.getResources().getString(resId);
 	}
 	
+	/**
+	 * get date string with today
+	 * @return
+	 */
 	public static String getToday(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.CHINA);
 		return sdf.format(new Date());
+	}
+	
+	/**
+	 * is empty string check
+	 * @param str
+	 * @return
+	 */
+	public static boolean emptyStr(String str) {
+		if (str != null && str.trim().length() > 0)
+			return false;
+		else
+			return true;
 	}
 }

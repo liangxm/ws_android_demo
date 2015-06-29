@@ -10,7 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="密码管理"
         android:textColor="#ffffffff"
         android:textSize="20.0sp"
         android:textStyle="bold" />
@@ -21,12 +20,12 @@
         android:layout_height="45.0dip"
         android:layout_marginLeft="10.0dip"
         android:layout_marginTop="8.0dip"
-        android:src="@drawable/top_user"
         android:layout_alignParentLeft="true"
         lxm:border_color="@color/theme_color"
         lxm:border_width="1.0dip" />
     <ImageView 
         android:id="@+id/add_group"
+        android:contentDescription="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10.0dip"

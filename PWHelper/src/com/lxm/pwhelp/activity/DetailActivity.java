@@ -27,7 +27,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 			detail_line4, detail_line5, detail_line6, detail_line7,
 			detail_line8, detail_line9, detail_line10;
 	
-	private TextView detail_line4_label1,detail_line5_label1,detail_line6_label1,
+	private TextView detail_line2_label1,detail_line4_label1,detail_line5_label1,detail_line6_label1,
 			detail_line7_label1,detail_line8_label1,detail_line9_label1,
 			detail_line10_label1;
 	private TextView detail_line4_label2,detail_line5_label2,detail_line6_label2,
@@ -35,10 +35,11 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 			detail_line10_label2;
 	private TextView line1_label2, line2_label2, line3_label2, detail_title;
 	private String default_str, bank_str, web_str, weibo_str, qq_str,
-			email_str, alipay_str;
+			email_str, alipay_str, note_str;
 	private ImageView item_logo_big;
 	private ClipboardManager cmb;
 	private Button button;
+	private TextView title;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,9 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
 		cmb = (ClipboardManager) this
 				.getSystemService(Context.CLIPBOARD_SERVICE);
-
-		findViewById(R.id.Detail_Return).setOnClickListener(this);
+		title=(TextView) findViewById(R.id.title);
+		title.setText(this.getResources().getString(R.string.detail_title));
+		findViewById(R.id.Return).setOnClickListener(this);
 		findViewById(R.id.detail_line1_label3).setOnClickListener(this);
 		findViewById(R.id.detail_line2_label3).setOnClickListener(this);
 		findViewById(R.id.detail_line3_label3).setOnClickListener(this);
@@ -58,7 +60,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		button.setPadding(Conver.dip2px(this, 5),
 				Conver.dip2px(this, 5), Conver.dip2px(this, 5),
 				Conver.dip2px(this, 5));
-
+		detail_line2_label1 = (TextView) findViewById(R.id.detail_line2_label1);
 		detail_line1 = (RelativeLayout) findViewById(R.id.detail_line1);
 		detail_line2 = (RelativeLayout) findViewById(R.id.detail_line2);
 		detail_line3 = (RelativeLayout) findViewById(R.id.detail_line3);
@@ -102,6 +104,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 		qq_str = GroupType.Type_QQ.getType();
 		email_str = GroupType.Type_Email.getType();
 		alipay_str = GroupType.Type_Alipay.getType();
+		note_str = GroupType.Type_Note.getType();
 		String item_type = item.getItem_type();
 		if (default_str.equals(item_type))
 			item_logo_big.setImageResource(R.drawable.default_item_icon_big);
@@ -117,7 +120,11 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 			item_logo_big.setImageResource(R.drawable.email_item_icon_big);
 		else if (alipay_str.equals(item_type))
 			item_logo_big.setImageResource(R.drawable.alipay_item_icon_big);
-		else
+		else if (note_str.equals(item_type)){
+			detail_line2_label1.setText("标题");
+			detail_line3.setVisibility(View.GONE);
+			item_logo_big.setImageResource(R.drawable.note_item_icon_big);
+		}else
 			item_logo_big.setImageResource(R.drawable.default_item_icon_big);
 	}
 	
@@ -174,7 +181,10 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 			detail_line7.setVisibility(View.VISIBLE);
 			detail_line7_label1 = (TextView) findViewById(R.id.detail_line7_label1);
 			detail_line7_label2 = (TextView) findViewById(R.id.detail_line7_label2);
-			detail_line7_label1.setText("备注");
+			if(item.getItem_type().equals("私密记事"))
+				detail_line7_label1.setText("正文");
+			else
+				detail_line7_label1.setText("备注");
 			detail_line7_label2.setText(item.getItem_comment());
 			detail_line7.setPadding(Conver.dip2px(this, 20),
 					Conver.dip2px(this, 5), Conver.dip2px(this, 20),
@@ -230,7 +240,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 	@Override
 	public void onClick(View item) {
 		switch (item.getId()) {
-		case R.id.Detail_Return:
+		case R.id.Return:
 			Intent intent = new Intent(this, MainActivity.class);
 			setResult(RESULT_OK, intent);
 			finish();

@@ -42,7 +42,9 @@
     <string name="textview_about">关于我们</string>
     
     <!-- manage center -->
-    <string name="add_label">添加手机上的APP账号和密码</string>
+    <string name="add_label">添加账号和密码记录</string>
+    <string name="add_note">添加私密日志</string>
+    <string name="app_list">打开应用列表</string>
     
     <!-- personal center -->
     <string name="cloud_label">备份到我的私人邮箱</string>
@@ -51,6 +53,7 @@
     <string name="touxiang_label">头像</string>
     <string name="nickname_label">昵称</string>
     <string name="nickname_value">Listener</string>
+    <string name="default_account">账号: 1247983646</string>
     
     <!-- add layout -->
     <string name="text_type">账号类型</string>
@@ -61,6 +64,8 @@
     <string name="text_comment">备注</string>
     <string name="text_question1">密保1</string>
     <string name="text_question2">密保2</string>
+    <string name="text_title">标题</string>
+    <string name="text_content">正文</string>
     
     <string name="name_hint">请输入昵称……</string>
     <string name="username_hint">请输入账号……</string>
@@ -73,6 +78,7 @@
     <string name="search_app_hint">请输入您要搜索的应用名称</string>
     <string name="email_hint">输入你的邮箱地址……</string>
     <string name="group_name_hint">输入一个分组名……</string>
+    <string name="content_hint">请在此处编辑正文内容……</string>
     
     <!-- dialog -->
     <string name="back">返回</string>
@@ -103,7 +109,7 @@
     <string name="cancel">取消</string>
     <string name="save">保存</string>
     <string name="about_title">关于我们</string>
-    
+    <string name="add_note_title">添加私密记事</string>
 
     <!-- description for images -->
     <string name="return_desc">返回上层页面</string>

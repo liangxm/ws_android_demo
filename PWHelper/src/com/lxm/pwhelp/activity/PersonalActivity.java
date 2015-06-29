@@ -38,6 +38,7 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 	
 	private ImageView touxiang_picture;
 	private TextView nickname_value;
+	private TextView title;
 	private Setting setting;
 	
 	private PWSettingDao pwSettingDao;
@@ -50,7 +51,9 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.layout_user_info);
-		findViewById(R.id.User_Info_Return).setOnClickListener(this);
+		title=(TextView)findViewById(R.id.title);
+		title.setText(this.getResources().getString(R.string.personal_info));
+		findViewById(R.id.Return).setOnClickListener(this);
 		findViewById(R.id.touxiang_line).setOnClickListener(this);
 		findViewById(R.id.nickname_line).setOnClickListener(this);
 		initView();
@@ -80,7 +83,7 @@ public class PersonalActivity extends Activity implements View.OnClickListener {
 	@Override
 	public void onClick(View item) {
 		switch(item.getId()){
-		case R.id.User_Info_Return:
+		case R.id.Return:
 			Intent intent1 = new Intent(this,MainActivity.class);
 			setResult(RESULT_OK, intent1);
 			finish();

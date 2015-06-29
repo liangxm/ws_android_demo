@@ -35,7 +35,7 @@ public class PWItemAdapter extends BaseAdapter {
 	private String command;
 	private PWSettingDao pwSettingDao;
 	
-	private String default_str,bank_str,web_str,weibo_str,qq_str,email_str,alipay_str;
+	private String default_str,bank_str,web_str,weibo_str,qq_str,email_str,alipay_str, note_str;
 
 	public PWItemAdapter(Activity activity, List<Item> data,PWSettingDao pwSettingDao) {
 		this.activity = activity;
@@ -52,6 +52,7 @@ public class PWItemAdapter extends BaseAdapter {
 		qq_str = GroupType.Type_QQ.getType();
 		email_str = GroupType.Type_Email.getType();
 		alipay_str = GroupType.Type_Alipay.getType();
+		note_str = GroupType.Type_Note.getType();
 	}
 
 	public int getCount() {
@@ -84,6 +85,7 @@ public class PWItemAdapter extends BaseAdapter {
 		final String password = getItem(position).getItem_password();
 		String item_type = getItem(position).getItem_type();
 		String appendType = "";
+		boolean isnote=false;
 		if(default_str.equals(item_type))
 			mViewHolder.item_logo.setImageResource(R.drawable.default_item_icon);
 		else if(bank_str.equals(item_type)){
@@ -103,14 +105,17 @@ public class PWItemAdapter extends BaseAdapter {
 			mViewHolder.item_logo.setImageResource(R.drawable.email_item_icon);
 		else if(alipay_str.equals(item_type))
 			mViewHolder.item_logo.setImageResource(R.drawable.alipay_item_icon);
-		else
+		else if(note_str.equals(item_type)){
+			mViewHolder.item_logo.setImageResource(R.drawable.note_item_icon);
+			isnote=true;
+		}else
 			mViewHolder.item_logo.setImageResource(R.drawable.default_item_icon);
 			
 		mViewHolder.item_type.setText(getItem(position).getItem_type()+appendType);
-		mViewHolder.item_username.setText("账号：" + getItem(position).getItem_username());
+		mViewHolder.item_username.setText(isnote?"标题："+getItem(position).getItem_username():"账号：" + getItem(position).getItem_username());
 		
 		if(!mViewHolder.mTogBtn.isSelected()){
-			mViewHolder.item_password.setText("密码："+"*********************");
+			mViewHolder.item_password.setText(isnote?"":"密码："+"*********************");
 		}
 		final ToggleButton button = mViewHolder.mTogBtn;
 		button.setOnToggleChanged(new OnToggleChanged(){

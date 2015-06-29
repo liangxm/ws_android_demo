@@ -16,6 +16,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 	
 	private TextView emailState;
 	private TextView commandState;
+	private TextView title;
 	
 	private RelativeLayout setEmail;
 	private RelativeLayout setCommand;
@@ -34,7 +35,9 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.settings_layout);
-		findViewById(R.id.Settings_Return).setOnClickListener(this);
+		title=(TextView)findViewById(R.id.title);
+		title.setText(this.getResources().getString(R.string.settings_title));
+		findViewById(R.id.Return).setOnClickListener(this);
 		initView();
 	}
 	
@@ -69,7 +72,7 @@ public class SettingsActivity extends Activity implements View.OnClickListener {
 	@Override
 	public void onClick(View item) {
 		switch(item.getId()){
-		case R.id.Settings_Return:
+		case R.id.Return:
 			Intent intent1 = new Intent(this,MainActivity.class);
 			setResult(RESULT_OK, intent1);
 			finish();

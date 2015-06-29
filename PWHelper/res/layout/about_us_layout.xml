@@ -3,31 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="60.0dip"
-        android:background="@color/theme_color" >
-
-        <TextView
-            android:id="@id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/about_title"
-            android:textColor="#ffffffff"
-            android:textSize="20.0sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/About_Return"
-            android:layout_width="25.0dip"
-            android:layout_height="25.0dip"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10.0dip"
-            android:contentDescription="@string/return_desc"
-            android:src="@drawable/left_icon" />
-    </RelativeLayout>
-
+    
+    <include layout="@layout/top_layout1" />
     <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -35,6 +12,7 @@
         android:orientation="vertical">
         <ImageView 
             android:id="@+id/app_logo"
+            android:contentDescription="@null"
             android:layout_width="120dip"
             android:layout_height="120dip"
            	android:layout_marginTop="15dip"
@@ -46,7 +24,7 @@
             android:gravity="center"
             android:textSize="30sp"
             android:typeface="serif"
-            android:text="爱密码"/>
+            android:text="@string/app_name"/>
         
         <TextView
             android:id="@+id/about_introduction"

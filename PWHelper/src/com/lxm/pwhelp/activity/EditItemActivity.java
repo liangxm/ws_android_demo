@@ -16,12 +16,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.lxm.pwhelp.R;
 import com.lxm.pwhelp.bean.Item;
 import com.lxm.pwhelp.dao.PWItemDao;
 import com.lxm.pwhelp.utils.Tools;
-
+/**
+ * edit the item activity
+ * @author Listener
+ * @version 2015-6-28 14:51:01
+ */
 public class EditItemActivity extends Activity implements View.OnClickListener {
 
 	private PWItemDao itemDao;
@@ -44,13 +49,16 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 	private ArrayAdapter<String> adapter;
 	private String typeStr;
 	private Bundle bundle;
+	private TextView title;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.edit_layout);
-		findViewById(R.id.Edit_Return).setOnClickListener(this);
+		title=(TextView)findViewById(R.id.title);
+		title.setText(this.getResources().getText(R.string.edit_title));
+		findViewById(R.id.Return).setOnClickListener(this);
 		findViewById(R.id.Edit_Submit).setOnClickListener(this);
 		bundle = this.getIntent().getExtras();
 		init(this);
@@ -59,7 +67,7 @@ public class EditItemActivity extends Activity implements View.OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.Edit_Return:
+		case R.id.Return:
 			Intent intent = new Intent(EditItemActivity.this, MainActivity.class);
 			setResult(RESULT_OK, intent);
 			finish();

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/detail_top_layout" />
+    <include layout="@layout/top_layout1" />
 
     <LinearLayout
         android:id="@+id/detail_top"
@@ -41,7 +41,7 @@
             android:id="@+id/open_app"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="打开应用列表"
+            android:text="@string/app_list"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="5.0dip"
             android:layout_marginBottom="10.0dip"
@@ -248,7 +248,7 @@
 		<RelativeLayout 
             android:id="@+id/detail_line7"
             android:layout_width="fill_parent"
-            android:layout_height="50dip"
+            android:layout_height="wrap_content"
             android:background="@drawable/content_bg"
             android:visibility="gone">
             <TextView 
