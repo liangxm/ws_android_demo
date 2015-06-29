@@ -134,7 +134,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	
 	private Button no_add_item;
 
-	private SQLiteDatabase db;
 	private PWItemDao pwItemDao;
 	private PWGroupDao pwGroupDao;
 	private PWSettingDao pwSettingDao;
@@ -1044,9 +1043,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	protected void onDestroy() {
 		if(progressDialog.isShowing())
 			progressDialog.dismiss();
-		if(db!=null){
-			db.close();
-		}
 		super.onDestroy();
 	}
 	

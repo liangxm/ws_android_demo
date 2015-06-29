@@ -2,6 +2,7 @@ package com.lxm.pwhelp.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -15,6 +16,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -22,24 +24,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.lxm.pwhelp.R;
 /**
  * app list activity for user forward to special application
  * @author Listener
  * @version 2015-6-16 15:56:35
  */
-public class AppListActivity extends Activity {
+public class AppListActivity extends Activity implements View.OnClickListener {
 	private List<ApplicationInfo> mAppList;
 	private List<ApplicationInfo> tempAppList;
 	private AppAdapter mAdapter;
 	private ListView mListView;
 	private EditText searchApp;
 	private Bundle bundle;
+	private TextView title;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.app_list_layout);
+		title=(TextView)findViewById(R.id.title);
+		title.setText(this.getResources().getString(R.string.applist_title));
+		findViewById(R.id.Return).setOnClickListener(this);
 		bundle = this.getIntent().getExtras();
 		mAppList = getPackageManager().getInstalledApplications(0);
 		tempAppList = new ArrayList<ApplicationInfo>();
@@ -93,6 +101,14 @@ public class AppListActivity extends Activity {
 				String applicationName = (String)getPackageManager().getApplicationLabel(info);
 				if(applicationName.contains("邮箱")){
 					searchApp.setText("邮箱");
+					break;
+				}
+			}
+		} else if(type.contains("微博")){
+			for(ApplicationInfo info:mAppList){
+				String applicationName = (String)getPackageManager().getApplicationLabel(info);
+				if(applicationName.contains("微博")){
+					searchApp.setText("微博");
 					break;
 				}
 			}
@@ -221,4 +237,15 @@ public class AppListActivity extends Activity {
 			handler.sendMessage(message);
 		}
 	};
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.Return:
+			Intent intent = new Intent(this, MainActivity.class);
+			setResult(RESULT_OK,intent);
+			finish();
+			break;
+		}
+	}
 }

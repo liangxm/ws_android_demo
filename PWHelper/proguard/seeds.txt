@@ -20053,6 +20053,7 @@ com.lxm.pwhelp.R$attr: int swipeOffsetRight
 com.lxm.pwhelp.R$attr: int swipeOpenOnLongPress
 com.lxm.pwhelp.R$color: int blue
 com.lxm.pwhelp.R$color: int color_hei_8
+com.lxm.pwhelp.R$color: int font_color
 com.lxm.pwhelp.R$color: int gesture_background
 com.lxm.pwhelp.R$color: int gray
 com.lxm.pwhelp.R$color: int normal
@@ -20069,17 +20070,17 @@ com.lxm.pwhelp.R$dimen: int title_font__size
 com.lxm.pwhelp.R$dimen: int widget_height
 com.lxm.pwhelp.R$dimen: int widget_margin
 com.lxm.pwhelp.R$dimen: int widget_padding
+com.lxm.pwhelp.R$drawable: int additem
+com.lxm.pwhelp.R$drawable: int addnote
 com.lxm.pwhelp.R$drawable: int alipay_item_icon
 com.lxm.pwhelp.R$drawable: int alipay_item_icon_big
 com.lxm.pwhelp.R$drawable: int bank_item_icon
 com.lxm.pwhelp.R$drawable: int bank_item_icon_big
+com.lxm.pwhelp.R$drawable: int bg_edittext
+com.lxm.pwhelp.R$drawable: int bg_edittext_focused
+com.lxm.pwhelp.R$drawable: int bg_edittext_normal
 com.lxm.pwhelp.R$drawable: int bottom_bar
 com.lxm.pwhelp.R$drawable: int btn_add
-com.lxm.pwhelp.R$drawable: int btn_browser
-com.lxm.pwhelp.R$drawable: int btn_browser2
-com.lxm.pwhelp.R$drawable: int btn_close
-com.lxm.pwhelp.R$drawable: int btn_open
-com.lxm.pwhelp.R$drawable: int card_avatar
 com.lxm.pwhelp.R$drawable: int cloud_icon
 com.lxm.pwhelp.R$drawable: int common_btn_green
 com.lxm.pwhelp.R$drawable: int common_btn_red
@@ -20109,10 +20110,11 @@ com.lxm.pwhelp.R$drawable: int layout_selecter
 com.lxm.pwhelp.R$drawable: int left_icon
 com.lxm.pwhelp.R$drawable: int list_selector
 com.lxm.pwhelp.R$drawable: int lock_icon
-com.lxm.pwhelp.R$drawable: int login_default
 com.lxm.pwhelp.R$drawable: int manage_noselected
 com.lxm.pwhelp.R$drawable: int manage_selected
 com.lxm.pwhelp.R$drawable: int night_box
+com.lxm.pwhelp.R$drawable: int note_item_icon
+com.lxm.pwhelp.R$drawable: int note_item_icon_big
 com.lxm.pwhelp.R$drawable: int pass_noselected
 com.lxm.pwhelp.R$drawable: int pass_selected
 com.lxm.pwhelp.R$drawable: int person_noselected
@@ -20135,7 +20137,6 @@ com.lxm.pwhelp.R$drawable: int search_box
 com.lxm.pwhelp.R$drawable: int set_command_icon
 com.lxm.pwhelp.R$drawable: int set_email_icon
 com.lxm.pwhelp.R$drawable: int setting_icon
-com.lxm.pwhelp.R$drawable: int shadow_icon
 com.lxm.pwhelp.R$drawable: int sina_item_icon
 com.lxm.pwhelp.R$drawable: int sina_item_icon_big
 com.lxm.pwhelp.R$drawable: int skin_color_button
@@ -20162,29 +20163,24 @@ com.lxm.pwhelp.R$drawable: int toggle_off
 com.lxm.pwhelp.R$drawable: int toggle_on
 com.lxm.pwhelp.R$drawable: int top_add
 com.lxm.pwhelp.R$drawable: int top_search
-com.lxm.pwhelp.R$drawable: int top_user
 com.lxm.pwhelp.R$drawable: int trans
 com.lxm.pwhelp.R$drawable: int wchat_item_icon
 com.lxm.pwhelp.R$drawable: int weibo_icon
 com.lxm.pwhelp.R$drawable: int www_item_icon
 com.lxm.pwhelp.R$drawable: int www_item_icon_big
-com.lxm.pwhelp.R$id: int About_Return
-com.lxm.pwhelp.R$id: int Detail_Return
-com.lxm.pwhelp.R$id: int Dlg_Return
 com.lxm.pwhelp.R$id: int Dlg_Submit
-com.lxm.pwhelp.R$id: int Edit_Return
 com.lxm.pwhelp.R$id: int Edit_Submit
-com.lxm.pwhelp.R$id: int SetCommand_Return
-com.lxm.pwhelp.R$id: int SetEmail_Return
-com.lxm.pwhelp.R$id: int Settings_Return
-com.lxm.pwhelp.R$id: int User_Info_Return
+com.lxm.pwhelp.R$id: int Return
 com.lxm.pwhelp.R$id: int about_introduction
 com.lxm.pwhelp.R$id: int about_right_icon
 com.lxm.pwhelp.R$id: int about_us
 com.lxm.pwhelp.R$id: int about_us_label
 com.lxm.pwhelp.R$id: int account
+com.lxm.pwhelp.R$id: int acount_back
+com.lxm.pwhelp.R$id: int acount_back_label
 com.lxm.pwhelp.R$id: int add_group
 com.lxm.pwhelp.R$id: int additem
+com.lxm.pwhelp.R$id: int addnote
 com.lxm.pwhelp.R$id: int app_logo
 com.lxm.pwhelp.R$id: int artist
 com.lxm.pwhelp.R$id: int back
@@ -20199,6 +20195,7 @@ com.lxm.pwhelp.R$id: int choice
 com.lxm.pwhelp.R$id: int cloud
 com.lxm.pwhelp.R$id: int cloud_icon
 com.lxm.pwhelp.R$id: int cloud_label
+com.lxm.pwhelp.R$id: int command_back
 com.lxm.pwhelp.R$id: int command_label
 com.lxm.pwhelp.R$id: int command_right_icon
 com.lxm.pwhelp.R$id: int command_state
@@ -20251,10 +20248,12 @@ com.lxm.pwhelp.R$id: int duration
 com.lxm.pwhelp.R$id: int editText
 com.lxm.pwhelp.R$id: int editText1
 com.lxm.pwhelp.R$id: int edit_comment
+com.lxm.pwhelp.R$id: int edit_content
 com.lxm.pwhelp.R$id: int edit_name
 com.lxm.pwhelp.R$id: int edit_password
 com.lxm.pwhelp.R$id: int edit_question1
 com.lxm.pwhelp.R$id: int edit_question2
+com.lxm.pwhelp.R$id: int edit_title
 com.lxm.pwhelp.R$id: int edit_type
 com.lxm.pwhelp.R$id: int edit_url
 com.lxm.pwhelp.R$id: int edit_username
@@ -20342,6 +20341,7 @@ com.lxm.pwhelp.R$id: int no_add_item
 com.lxm.pwhelp.R$id: int no_item_desc
 com.lxm.pwhelp.R$id: int noitem
 com.lxm.pwhelp.R$id: int none
+com.lxm.pwhelp.R$id: int notepad
 com.lxm.pwhelp.R$id: int open_app
 com.lxm.pwhelp.R$id: int parent_textview
 com.lxm.pwhelp.R$id: int personal
@@ -20376,10 +20376,12 @@ com.lxm.pwhelp.R$id: int shodow_head
 com.lxm.pwhelp.R$id: int square
 com.lxm.pwhelp.R$id: int text
 com.lxm.pwhelp.R$id: int text_comment
+com.lxm.pwhelp.R$id: int text_content
 com.lxm.pwhelp.R$id: int text_name
 com.lxm.pwhelp.R$id: int text_password
 com.lxm.pwhelp.R$id: int text_question1
 com.lxm.pwhelp.R$id: int text_question2
+com.lxm.pwhelp.R$id: int text_title
 com.lxm.pwhelp.R$id: int text_type
 com.lxm.pwhelp.R$id: int text_url
 com.lxm.pwhelp.R$id: int text_username
@@ -20394,14 +20396,12 @@ com.lxm.pwhelp.R$layout: int about_us_layout
 com.lxm.pwhelp.R$layout: int activity_main
 com.lxm.pwhelp.R$layout: int add_group_layout
 com.lxm.pwhelp.R$layout: int add_layout
-com.lxm.pwhelp.R$layout: int add_top_layout
+com.lxm.pwhelp.R$layout: int add_note_layout
 com.lxm.pwhelp.R$layout: int app_list_layout
 com.lxm.pwhelp.R$layout: int bottom_layout
 com.lxm.pwhelp.R$layout: int detail_layout
-com.lxm.pwhelp.R$layout: int detail_top_layout
 com.lxm.pwhelp.R$layout: int dialog_comand_layout
 com.lxm.pwhelp.R$layout: int edit_layout
-com.lxm.pwhelp.R$layout: int edit_top_layout
 com.lxm.pwhelp.R$layout: int email_dialog
 com.lxm.pwhelp.R$layout: int gesturepassword_create
 com.lxm.pwhelp.R$layout: int gesturepassword_guide
@@ -20411,35 +20411,40 @@ com.lxm.pwhelp.R$layout: int item_list_app
 com.lxm.pwhelp.R$layout: int layout_children
 com.lxm.pwhelp.R$layout: int layout_parent
 com.lxm.pwhelp.R$layout: int layout_user_info
-com.lxm.pwhelp.R$layout: int layout_user_info_top
 com.lxm.pwhelp.R$layout: int list_row
+com.lxm.pwhelp.R$layout: int password_back_layout
 com.lxm.pwhelp.R$layout: int set_command_layout
-com.lxm.pwhelp.R$layout: int set_command_top_layout
 com.lxm.pwhelp.R$layout: int set_email_layout
-com.lxm.pwhelp.R$layout: int set_email_top_layout
 com.lxm.pwhelp.R$layout: int settings_layout
-com.lxm.pwhelp.R$layout: int settings_top_layout
-com.lxm.pwhelp.R$layout: int slt_cnt_type
 com.lxm.pwhelp.R$layout: int tab01
 com.lxm.pwhelp.R$layout: int tab02
 com.lxm.pwhelp.R$layout: int tab03
 com.lxm.pwhelp.R$layout: int tab04
 com.lxm.pwhelp.R$layout: int top_layout
+com.lxm.pwhelp.R$layout: int top_layout1
 com.lxm.pwhelp.R$raw: int bank
 com.lxm.pwhelp.R$raw: int ormlite_config
 com.lxm.pwhelp.R$string: int about_title
+com.lxm.pwhelp.R$string: int account_back
 com.lxm.pwhelp.R$string: int add_group_title
 com.lxm.pwhelp.R$string: int add_label
+com.lxm.pwhelp.R$string: int add_note
+com.lxm.pwhelp.R$string: int add_note_title
 com.lxm.pwhelp.R$string: int add_title
+com.lxm.pwhelp.R$string: int app_list
 com.lxm.pwhelp.R$string: int app_name
+com.lxm.pwhelp.R$string: int applist_title
 com.lxm.pwhelp.R$string: int author
 com.lxm.pwhelp.R$string: int back
 com.lxm.pwhelp.R$string: int cancel
 com.lxm.pwhelp.R$string: int cash_card
 com.lxm.pwhelp.R$string: int cloud_label
+com.lxm.pwhelp.R$string: int command_back
 com.lxm.pwhelp.R$string: int command_label
 com.lxm.pwhelp.R$string: int comment_hint
+com.lxm.pwhelp.R$string: int content_hint
 com.lxm.pwhelp.R$string: int credit_card
+com.lxm.pwhelp.R$string: int default_account
 com.lxm.pwhelp.R$string: int detail_title
 com.lxm.pwhelp.R$string: int draw_figtion_password
 com.lxm.pwhelp.R$string: int draw_unlock_map
@@ -20485,6 +20490,7 @@ com.lxm.pwhelp.R$string: int modify_lockpattern_label
 com.lxm.pwhelp.R$string: int name_hint
 com.lxm.pwhelp.R$string: int nickname_label
 com.lxm.pwhelp.R$string: int nickname_value
+com.lxm.pwhelp.R$string: int password_back_title
 com.lxm.pwhelp.R$string: int password_hint
 com.lxm.pwhelp.R$string: int personal_info
 com.lxm.pwhelp.R$string: int question1_hint
@@ -20504,10 +20510,12 @@ com.lxm.pwhelp.R$string: int string_noitem_note
 com.lxm.pwhelp.R$string: int string_ok
 com.lxm.pwhelp.R$string: int submit
 com.lxm.pwhelp.R$string: int text_comment
+com.lxm.pwhelp.R$string: int text_content
 com.lxm.pwhelp.R$string: int text_name
 com.lxm.pwhelp.R$string: int text_password
 com.lxm.pwhelp.R$string: int text_question1
 com.lxm.pwhelp.R$string: int text_question2
+com.lxm.pwhelp.R$string: int text_title
 com.lxm.pwhelp.R$string: int text_type
 com.lxm.pwhelp.R$string: int text_url
 com.lxm.pwhelp.R$string: int text_username
@@ -20569,8 +20577,12 @@ com.lxm.pwhelp.activity.AddGroupActivity: void onClick(android.view.View)
 com.lxm.pwhelp.activity.AddItemActivity
 com.lxm.pwhelp.activity.AddItemActivity: AddItemActivity()
 com.lxm.pwhelp.activity.AddItemActivity: void onClick(android.view.View)
+com.lxm.pwhelp.activity.AddNoteActivity
+com.lxm.pwhelp.activity.AddNoteActivity: AddNoteActivity()
+com.lxm.pwhelp.activity.AddNoteActivity: void onClick(android.view.View)
 com.lxm.pwhelp.activity.AppListActivity
 com.lxm.pwhelp.activity.AppListActivity: AppListActivity()
+com.lxm.pwhelp.activity.AppListActivity: void onClick(android.view.View)
 com.lxm.pwhelp.activity.CreateGesturePasswordActivity
 com.lxm.pwhelp.activity.CreateGesturePasswordActivity: CreateGesturePasswordActivity()
 com.lxm.pwhelp.activity.CreateGesturePasswordActivity: void onClick(android.view.View)
@@ -20591,6 +20603,9 @@ com.lxm.pwhelp.activity.GuideGesturePasswordActivity: GuideGesturePasswordActivi
 com.lxm.pwhelp.activity.MainActivity
 com.lxm.pwhelp.activity.MainActivity: MainActivity()
 com.lxm.pwhelp.activity.MainActivity: void onClick(android.view.View)
+com.lxm.pwhelp.activity.PasswordBackActivity
+com.lxm.pwhelp.activity.PasswordBackActivity: PasswordBackActivity()
+com.lxm.pwhelp.activity.PasswordBackActivity: void onClick(android.view.View)
 com.lxm.pwhelp.activity.PersonalActivity
 com.lxm.pwhelp.activity.PersonalActivity: PersonalActivity()
 com.lxm.pwhelp.activity.PersonalActivity: void onClick(android.view.View)

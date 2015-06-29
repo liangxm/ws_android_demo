@@ -40,6 +40,8 @@
     <string name="textview_account">账        号</string>
     <string name="textview_password">密        码</string>
     <string name="textview_about">关于我们</string>
+    <string name="command_back">口令验证找回</string>
+    <string name="account_back">存储的账号找回</string>
     
     <!-- manage center -->
     <string name="add_label">添加账号和密码记录</string>
@@ -110,6 +112,8 @@
     <string name="save">保存</string>
     <string name="about_title">关于我们</string>
     <string name="add_note_title">添加私密记事</string>
+    <string name="applist_title">本地应用列表</string>
+    <string name="password_back_title">找回手势密码</string>
 
     <!-- description for images -->
     <string name="return_desc">返回上层页面</string>

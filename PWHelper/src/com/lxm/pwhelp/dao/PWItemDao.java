@@ -302,6 +302,63 @@ public class PWItemDao {
 	}
 	
 	/**
+	 * query the item record by name
+	 * @param filterKey
+	 * @return
+	 */
+	public Item getMaxIdItem() {
+		db = MyDatabaseHelper.getHelper(context).getReadableDatabase(
+				Settings.SECRET_KEY);
+		Item item = null;
+		Cursor cursor = db.rawQuery("SELECT * FROM pw_item ORDER BY item_id desc", null);
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				int item_id = cursor.getInt(cursor.getColumnIndex("item_id"));
+				String item_name = cursor.getString(cursor
+						.getColumnIndex("item_name"));
+				String item_username = cursor.getString(cursor
+						.getColumnIndex("item_username"));
+				String item_password = cursor.getString(cursor
+						.getColumnIndex("item_password"));
+				String item_type = cursor.getString(cursor
+						.getColumnIndex("item_type"));
+				int item_subtype = cursor.getInt(cursor
+						.getColumnIndex("item_subtype"));
+				String item_url = cursor.getString(cursor
+						.getColumnIndex("item_url"));
+				String item_comment = cursor.getString(cursor
+						.getColumnIndex("item_comment"));
+				String question1 = cursor.getString(cursor
+						.getColumnIndex("question1"));
+				String question2 = cursor.getString(cursor
+						.getColumnIndex("question2"));
+				String modified = cursor.getString(cursor
+						.getColumnIndex("modified"));
+				String created = cursor.getString(cursor
+						.getColumnIndex("created"));
+				int deleted = cursor.getInt(cursor.getColumnIndex("deleted"));
+				item = new Item();
+				item.setItem_id(item_id);
+				item.setItem_name(item_name);
+				item.setItem_username(item_username);
+				item.setItem_password(item_password);
+				item.setItem_type(item_type);
+				item.setItem_subtype(item_subtype);
+				item.setItem_url(item_url);
+				item.setItem_comment(item_comment);
+				item.setQuestion1(question1);
+				item.setQuestion2(question2);
+				item.setModified(modified);
+				item.setCreated(created);
+				item.setDeleted(deleted);
+			}
+		}
+		cursor.close();
+		db.close();
+		return item;
+	}
+	
+	/**
 	 * empty whole item table
 	 */
 	public void emptyTable() {

@@ -18577,6 +18577,7 @@ com.lxm.pwhelp.R$attr -> com.lxm.pwhelp.b$b:
 com.lxm.pwhelp.R$color -> com.lxm.pwhelp.b$c:
     int blue -> blue
     int color_hei_8 -> color_hei_8
+    int font_color -> font_color
     int gesture_background -> gesture_background
     int gray -> gray
     int normal -> normal
@@ -18595,17 +18596,17 @@ com.lxm.pwhelp.R$dimen -> com.lxm.pwhelp.b$d:
     int widget_margin -> widget_margin
     int widget_padding -> widget_padding
 com.lxm.pwhelp.R$drawable -> com.lxm.pwhelp.b$e:
+    int additem -> additem
+    int addnote -> addnote
     int alipay_item_icon -> alipay_item_icon
     int alipay_item_icon_big -> alipay_item_icon_big
     int bank_item_icon -> bank_item_icon
     int bank_item_icon_big -> bank_item_icon_big
+    int bg_edittext -> bg_edittext
+    int bg_edittext_focused -> bg_edittext_focused
+    int bg_edittext_normal -> bg_edittext_normal
     int bottom_bar -> bottom_bar
     int btn_add -> btn_add
-    int btn_browser -> btn_browser
-    int btn_browser2 -> btn_browser2
-    int btn_close -> btn_close
-    int btn_open -> btn_open
-    int card_avatar -> card_avatar
     int cloud_icon -> cloud_icon
     int common_btn_green -> common_btn_green
     int common_btn_red -> common_btn_red
@@ -18635,10 +18636,11 @@ com.lxm.pwhelp.R$drawable -> com.lxm.pwhelp.b$e:
     int left_icon -> left_icon
     int list_selector -> list_selector
     int lock_icon -> lock_icon
-    int login_default -> login_default
     int manage_noselected -> manage_noselected
     int manage_selected -> manage_selected
     int night_box -> night_box
+    int note_item_icon -> note_item_icon
+    int note_item_icon_big -> note_item_icon_big
     int pass_noselected -> pass_noselected
     int pass_selected -> pass_selected
     int person_noselected -> person_noselected
@@ -18661,7 +18663,6 @@ com.lxm.pwhelp.R$drawable -> com.lxm.pwhelp.b$e:
     int set_command_icon -> set_command_icon
     int set_email_icon -> set_email_icon
     int setting_icon -> setting_icon
-    int shadow_icon -> shadow_icon
     int sina_item_icon -> sina_item_icon
     int sina_item_icon_big -> sina_item_icon_big
     int skin_color_button -> skin_color_button
@@ -18688,30 +18689,25 @@ com.lxm.pwhelp.R$drawable -> com.lxm.pwhelp.b$e:
     int toggle_on -> toggle_on
     int top_add -> top_add
     int top_search -> top_search
-    int top_user -> top_user
     int trans -> trans
     int wchat_item_icon -> wchat_item_icon
     int weibo_icon -> weibo_icon
     int www_item_icon -> www_item_icon
     int www_item_icon_big -> www_item_icon_big
 com.lxm.pwhelp.R$id -> com.lxm.pwhelp.b$f:
-    int About_Return -> About_Return
-    int Detail_Return -> Detail_Return
-    int Dlg_Return -> Dlg_Return
     int Dlg_Submit -> Dlg_Submit
-    int Edit_Return -> Edit_Return
     int Edit_Submit -> Edit_Submit
-    int SetCommand_Return -> SetCommand_Return
-    int SetEmail_Return -> SetEmail_Return
-    int Settings_Return -> Settings_Return
-    int User_Info_Return -> User_Info_Return
+    int Return -> Return
     int about_introduction -> about_introduction
     int about_right_icon -> about_right_icon
     int about_us -> about_us
     int about_us_label -> about_us_label
     int account -> account
+    int acount_back -> acount_back
+    int acount_back_label -> acount_back_label
     int add_group -> add_group
     int additem -> additem
+    int addnote -> addnote
     int app_logo -> app_logo
     int artist -> artist
     int back -> back
@@ -18726,6 +18722,7 @@ com.lxm.pwhelp.R$id -> com.lxm.pwhelp.b$f:
     int cloud -> cloud
     int cloud_icon -> cloud_icon
     int cloud_label -> cloud_label
+    int command_back -> command_back
     int command_label -> command_label
     int command_right_icon -> command_right_icon
     int command_state -> command_state
@@ -18778,10 +18775,12 @@ com.lxm.pwhelp.R$id -> com.lxm.pwhelp.b$f:
     int editText -> editText
     int editText1 -> editText1
     int edit_comment -> edit_comment
+    int edit_content -> edit_content
     int edit_name -> edit_name
     int edit_password -> edit_password
     int edit_question1 -> edit_question1
     int edit_question2 -> edit_question2
+    int edit_title -> edit_title
     int edit_type -> edit_type
     int edit_url -> edit_url
     int edit_username -> edit_username
@@ -18869,6 +18868,7 @@ com.lxm.pwhelp.R$id -> com.lxm.pwhelp.b$f:
     int no_item_desc -> no_item_desc
     int noitem -> noitem
     int none -> none
+    int notepad -> notepad
     int open_app -> open_app
     int parent_textview -> parent_textview
     int personal -> personal
@@ -18903,10 +18903,12 @@ com.lxm.pwhelp.R$id -> com.lxm.pwhelp.b$f:
     int square -> square
     int text -> text
     int text_comment -> text_comment
+    int text_content -> text_content
     int text_name -> text_name
     int text_password -> text_password
     int text_question1 -> text_question1
     int text_question2 -> text_question2
+    int text_title -> text_title
     int text_type -> text_type
     int text_url -> text_url
     int text_username -> text_username
@@ -18922,14 +18924,12 @@ com.lxm.pwhelp.R$layout -> com.lxm.pwhelp.b$g:
     int activity_main -> activity_main
     int add_group_layout -> add_group_layout
     int add_layout -> add_layout
-    int add_top_layout -> add_top_layout
+    int add_note_layout -> add_note_layout
     int app_list_layout -> app_list_layout
     int bottom_layout -> bottom_layout
     int detail_layout -> detail_layout
-    int detail_top_layout -> detail_top_layout
     int dialog_comand_layout -> dialog_comand_layout
     int edit_layout -> edit_layout
-    int edit_top_layout -> edit_top_layout
     int email_dialog -> email_dialog
     int gesturepassword_create -> gesturepassword_create
     int gesturepassword_guide -> gesturepassword_guide
@@ -18939,37 +18939,42 @@ com.lxm.pwhelp.R$layout -> com.lxm.pwhelp.b$g:
     int layout_children -> layout_children
     int layout_parent -> layout_parent
     int layout_user_info -> layout_user_info
-    int layout_user_info_top -> layout_user_info_top
     int list_row -> list_row
+    int password_back_layout -> password_back_layout
     int set_command_layout -> set_command_layout
-    int set_command_top_layout -> set_command_top_layout
     int set_email_layout -> set_email_layout
-    int set_email_top_layout -> set_email_top_layout
     int settings_layout -> settings_layout
-    int settings_top_layout -> settings_top_layout
-    int slt_cnt_type -> slt_cnt_type
     int tab01 -> tab01
     int tab02 -> tab02
     int tab03 -> tab03
     int tab04 -> tab04
     int top_layout -> top_layout
+    int top_layout1 -> top_layout1
 com.lxm.pwhelp.R$raw -> com.lxm.pwhelp.b$h:
     int bank -> bank
     int ormlite_config -> ormlite_config
 com.lxm.pwhelp.R$string -> com.lxm.pwhelp.b$i:
     int about_title -> about_title
+    int account_back -> account_back
     int add_group_title -> add_group_title
     int add_label -> add_label
+    int add_note -> add_note
+    int add_note_title -> add_note_title
     int add_title -> add_title
+    int app_list -> app_list
     int app_name -> app_name
+    int applist_title -> applist_title
     int author -> author
     int back -> back
     int cancel -> cancel
     int cash_card -> cash_card
     int cloud_label -> cloud_label
+    int command_back -> command_back
     int command_label -> command_label
     int comment_hint -> comment_hint
+    int content_hint -> content_hint
     int credit_card -> credit_card
+    int default_account -> default_account
     int detail_title -> detail_title
     int draw_figtion_password -> draw_figtion_password
     int draw_unlock_map -> draw_unlock_map
@@ -19015,6 +19020,7 @@ com.lxm.pwhelp.R$string -> com.lxm.pwhelp.b$i:
     int name_hint -> name_hint
     int nickname_label -> nickname_label
     int nickname_value -> nickname_value
+    int password_back_title -> password_back_title
     int password_hint -> password_hint
     int personal_info -> personal_info
     int question1_hint -> question1_hint
@@ -19034,10 +19040,12 @@ com.lxm.pwhelp.R$string -> com.lxm.pwhelp.b$i:
     int string_ok -> string_ok
     int submit -> submit
     int text_comment -> text_comment
+    int text_content -> text_content
     int text_name -> text_name
     int text_password -> text_password
     int text_question1 -> text_question1
     int text_question2 -> text_question2
+    int text_title -> text_title
     int text_type -> text_type
     int text_url -> text_url
     int text_username -> text_username
@@ -19094,9 +19102,10 @@ com.lxm.pwhelp.R$styleable -> com.lxm.pwhelp.b$k:
     int ToggleButton_spotColor -> ToggleButton_spotColor
 com.lxm.pwhelp.activity.AboutUsActivity -> com.lxm.pwhelp.activity.AboutUsActivity:
     android.widget.TextView textview_introduction -> a
-    java.lang.String introduction -> b
-    33:41:void onCreate(android.os.Bundle) -> onCreate
-    45:52:void onClick(android.view.View) -> onClick
+    android.widget.TextView title -> b
+    java.lang.String introduction -> c
+    38:48:void onCreate(android.os.Bundle) -> onCreate
+    52:59:void onClick(android.view.View) -> onClick
 com.lxm.pwhelp.activity.AddGroupActivity -> com.lxm.pwhelp.activity.AddGroupActivity:
     android.widget.EditText new_group -> a
     com.lxm.pwhelp.dao.PWGroupDao groupDao -> b
@@ -19116,44 +19125,55 @@ com.lxm.pwhelp.activity.AddItemActivity -> com.lxm.pwhelp.activity.AddItemActivi
     android.widget.EditText question2 -> g
     android.widget.Spinner type -> h
     android.widget.RadioGroup subtype -> i
-    android.widget.LinearLayout line_type -> j
-    android.widget.LinearLayout line_name -> k
-    android.widget.LinearLayout line_username -> l
-    android.widget.LinearLayout line_password -> m
-    android.widget.LinearLayout line_url -> n
-    android.widget.LinearLayout line_comment -> o
-    android.widget.LinearLayout line_question1 -> p
-    android.widget.LinearLayout line_question2 -> q
-    android.widget.LinearLayout line_banktype -> r
-    android.widget.ArrayAdapter adapter -> s
-    java.lang.String typeStr -> t
-    com.lxm.pwhelp.dao.PWItemDao itemDao -> u
-    com.lxm.pwhelp.dao.PWGroupDao groupDao -> v
-    net.sqlcipher.database.SQLiteDatabase db -> w
-    53:59:void onCreate(android.os.Bundle) -> onCreate
-    63:125:void onClick(android.view.View) -> onClick
-    128:131:boolean emptyStr(java.lang.String) -> a
-    135:174:void init() -> a
-    262:266:void onDestroy() -> onDestroy
-    44:44:android.widget.ArrayAdapter access$0(com.lxm.pwhelp.activity.AddItemActivity) -> a
-    45:45:void access$1(com.lxm.pwhelp.activity.AddItemActivity,java.lang.String) -> a
-    45:45:java.lang.String access$2(com.lxm.pwhelp.activity.AddItemActivity) -> b
-    41:41:android.widget.LinearLayout access$3(com.lxm.pwhelp.activity.AddItemActivity) -> c
-    41:41:android.widget.LinearLayout access$4(com.lxm.pwhelp.activity.AddItemActivity) -> d
-    41:41:android.widget.LinearLayout access$5(com.lxm.pwhelp.activity.AddItemActivity) -> e
-    41:41:android.widget.LinearLayout access$6(com.lxm.pwhelp.activity.AddItemActivity) -> f
-    41:41:android.widget.LinearLayout access$7(com.lxm.pwhelp.activity.AddItemActivity) -> g
-    41:41:android.widget.LinearLayout access$8(com.lxm.pwhelp.activity.AddItemActivity) -> h
-    41:41:android.widget.LinearLayout access$9(com.lxm.pwhelp.activity.AddItemActivity) -> i
-    41:41:android.widget.LinearLayout access$10(com.lxm.pwhelp.activity.AddItemActivity) -> j
-    41:41:android.widget.LinearLayout access$11(com.lxm.pwhelp.activity.AddItemActivity) -> k
+    android.widget.TextView title -> j
+    android.widget.LinearLayout line_type -> k
+    android.widget.LinearLayout line_name -> l
+    android.widget.LinearLayout line_username -> m
+    android.widget.LinearLayout line_password -> n
+    android.widget.LinearLayout line_url -> o
+    android.widget.LinearLayout line_comment -> p
+    android.widget.LinearLayout line_question1 -> q
+    android.widget.LinearLayout line_question2 -> r
+    android.widget.LinearLayout line_banktype -> s
+    android.widget.ArrayAdapter adapter -> t
+    java.lang.String typeStr -> u
+    com.lxm.pwhelp.dao.PWItemDao itemDao -> v
+    com.lxm.pwhelp.dao.PWGroupDao groupDao -> w
+    net.sqlcipher.database.SQLiteDatabase db -> x
+    57:65:void onCreate(android.os.Bundle) -> onCreate
+    69:136:void onClick(android.view.View) -> onClick
+    139:178:void init() -> a
+    268:272:void onDestroy() -> onDestroy
+    48:48:android.widget.ArrayAdapter access$0(com.lxm.pwhelp.activity.AddItemActivity) -> a
+    49:49:void access$1(com.lxm.pwhelp.activity.AddItemActivity,java.lang.String) -> a
+    49:49:java.lang.String access$2(com.lxm.pwhelp.activity.AddItemActivity) -> b
+    45:45:android.widget.LinearLayout access$3(com.lxm.pwhelp.activity.AddItemActivity) -> c
+    45:45:android.widget.LinearLayout access$4(com.lxm.pwhelp.activity.AddItemActivity) -> d
+    45:45:android.widget.LinearLayout access$5(com.lxm.pwhelp.activity.AddItemActivity) -> e
+    45:45:android.widget.LinearLayout access$6(com.lxm.pwhelp.activity.AddItemActivity) -> f
+    45:45:android.widget.LinearLayout access$7(com.lxm.pwhelp.activity.AddItemActivity) -> g
+    45:45:android.widget.LinearLayout access$8(com.lxm.pwhelp.activity.AddItemActivity) -> h
+    45:45:android.widget.LinearLayout access$9(com.lxm.pwhelp.activity.AddItemActivity) -> i
+    45:45:android.widget.LinearLayout access$10(com.lxm.pwhelp.activity.AddItemActivity) -> j
+    45:45:android.widget.LinearLayout access$11(com.lxm.pwhelp.activity.AddItemActivity) -> k
+    34:34:android.widget.EditText access$12(com.lxm.pwhelp.activity.AddItemActivity) -> l
 com.lxm.pwhelp.activity.AddItemActivity$1 -> com.lxm.pwhelp.activity.b:
     com.lxm.pwhelp.activity.AddItemActivity this$0 -> a
-    116:120:void onClick(android.content.DialogInterface,int) -> onClick
+    127:131:void onClick(android.content.DialogInterface,int) -> onClick
 com.lxm.pwhelp.activity.AddItemActivity$SpinnerSelectedListener -> com.lxm.pwhelp.activity.AddItemActivity$a:
     com.lxm.pwhelp.activity.AddItemActivity this$0 -> a
-    181:254:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
-    257:257:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+    185:260:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    263:263:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+com.lxm.pwhelp.activity.AddNoteActivity -> com.lxm.pwhelp.activity.AddNoteActivity:
+    android.widget.TextView title -> a
+    android.widget.EditText text_title -> b
+    android.widget.EditText text_content -> c
+    com.lxm.pwhelp.dao.PWItemDao itemDao -> d
+    28:38:void onCreate(android.os.Bundle) -> onCreate
+    42:87:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.AddNoteActivity$1 -> com.lxm.pwhelp.activity.c:
+    com.lxm.pwhelp.activity.AddNoteActivity this$0 -> a
+    78:82:void onClick(android.content.DialogInterface,int) -> onClick
 com.lxm.pwhelp.activity.AppListActivity -> com.lxm.pwhelp.activity.AppListActivity:
     java.util.List mAppList -> a
     java.util.List tempAppList -> b
@@ -19161,41 +19181,43 @@ com.lxm.pwhelp.activity.AppListActivity -> com.lxm.pwhelp.activity.AppListActivi
     android.widget.ListView mListView -> d
     android.widget.EditText searchApp -> e
     android.os.Bundle bundle -> f
-    android.os.Handler handler -> g
-    android.text.TextWatcher textWatcher -> h
-    java.lang.Runnable eChanged -> i
-    42:61:void onCreate(android.os.Bundle) -> onCreate
-    68:85:void fastShow(java.lang.String) -> a
-    89:107:void open(android.content.pm.ApplicationInfo) -> a
-    111:116:void onWindowFocusChanged(boolean) -> onWindowFocusChanged
-    37:37:android.widget.EditText access$0(com.lxm.pwhelp.activity.AppListActivity) -> a
-    34:34:java.util.List access$1(com.lxm.pwhelp.activity.AppListActivity) -> b
-    33:33:java.util.List access$2(com.lxm.pwhelp.activity.AppListActivity) -> c
-    33:33:void access$3(com.lxm.pwhelp.activity.AppListActivity,java.util.List) -> a
-    35:35:com.lxm.pwhelp.activity.AppListActivity$AppAdapter access$4(com.lxm.pwhelp.activity.AppListActivity) -> d
-    157:157:android.os.Handler access$5(com.lxm.pwhelp.activity.AppListActivity) -> e
-    200:200:java.lang.Runnable access$6(com.lxm.pwhelp.activity.AppListActivity) -> f
-    87:87:void access$7(com.lxm.pwhelp.activity.AppListActivity,android.content.pm.ApplicationInfo) -> a
-com.lxm.pwhelp.activity.AppListActivity$1 -> com.lxm.pwhelp.activity.c:
+    android.widget.TextView title -> g
+    android.os.Handler handler -> h
+    android.text.TextWatcher textWatcher -> i
+    java.lang.Runnable eChanged -> j
+    45:68:void onCreate(android.os.Bundle) -> onCreate
+    75:116:void fastShow(java.lang.String) -> a
+    120:138:void open(android.content.pm.ApplicationInfo) -> a
+    142:147:void onWindowFocusChanged(boolean) -> onWindowFocusChanged
+    243:250:void onClick(android.view.View) -> onClick
+    39:39:android.widget.EditText access$0(com.lxm.pwhelp.activity.AppListActivity) -> a
+    36:36:java.util.List access$1(com.lxm.pwhelp.activity.AppListActivity) -> b
+    35:35:java.util.List access$2(com.lxm.pwhelp.activity.AppListActivity) -> c
+    35:35:void access$3(com.lxm.pwhelp.activity.AppListActivity,java.util.List) -> a
+    37:37:com.lxm.pwhelp.activity.AppListActivity$AppAdapter access$4(com.lxm.pwhelp.activity.AppListActivity) -> d
+    189:189:android.os.Handler access$5(com.lxm.pwhelp.activity.AppListActivity) -> e
+    232:232:java.lang.Runnable access$6(com.lxm.pwhelp.activity.AppListActivity) -> f
+    118:118:void access$7(com.lxm.pwhelp.activity.AppListActivity,android.content.pm.ApplicationInfo) -> a
+com.lxm.pwhelp.activity.AppListActivity$1 -> com.lxm.pwhelp.activity.d:
     com.lxm.pwhelp.activity.AppListActivity this$0 -> a
-    160:180:void handleMessage(android.os.Message) -> handleMessage
-com.lxm.pwhelp.activity.AppListActivity$2 -> com.lxm.pwhelp.activity.d:
+    192:212:void handleMessage(android.os.Message) -> handleMessage
+com.lxm.pwhelp.activity.AppListActivity$2 -> com.lxm.pwhelp.activity.e:
     com.lxm.pwhelp.activity.AppListActivity this$0 -> a
-    188:189:void afterTextChanged(android.text.Editable) -> afterTextChanged
-    192:192:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
-    196:196:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-com.lxm.pwhelp.activity.AppListActivity$3 -> com.lxm.pwhelp.activity.e:
+    220:221:void afterTextChanged(android.text.Editable) -> afterTextChanged
+    224:224:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
+    228:228:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+com.lxm.pwhelp.activity.AppListActivity$3 -> com.lxm.pwhelp.activity.f:
     com.lxm.pwhelp.activity.AppListActivity this$0 -> a
-    203:206:void run() -> run
-com.lxm.pwhelp.activity.AppListActivity$4 -> com.lxm.pwhelp.activity.f:
+    235:238:void run() -> run
+com.lxm.pwhelp.activity.AppListActivity$4 -> com.lxm.pwhelp.activity.g:
     com.lxm.pwhelp.activity.AppListActivity this$0 -> a
-    57:59:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    64:66:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 com.lxm.pwhelp.activity.AppListActivity$AppAdapter -> com.lxm.pwhelp.activity.AppListActivity$a:
     com.lxm.pwhelp.activity.AppListActivity this$0 -> a
-    121:121:int getCount() -> getCount
-    125:125:android.content.pm.ApplicationInfo getItem(int) -> a
-    129:129:long getItemId(int) -> getItemId
-    133:143:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    152:152:int getCount() -> getCount
+    156:156:android.content.pm.ApplicationInfo getItem(int) -> a
+    160:160:long getItemId(int) -> getItemId
+    164:174:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     1:1:java.lang.Object getItem(int) -> getItem
 com.lxm.pwhelp.activity.AppListActivity$AppAdapter$ViewHolder -> com.lxm.pwhelp.activity.AppListActivity$a$a:
     android.widget.ImageView iv_icon -> a
@@ -19235,10 +19257,10 @@ com.lxm.pwhelp.activity.CreateGesturePasswordActivity -> com.lxm.pwhelp.activity
     31:31:android.widget.Button access$4(com.lxm.pwhelp.activity.CreateGesturePasswordActivity) -> d
     30:30:android.widget.Button access$5(com.lxm.pwhelp.activity.CreateGesturePasswordActivity) -> e
     24:24:int[] $SWITCH_TABLE$com$lxm$pwhelp$activity$CreateGesturePasswordActivity$Stage() -> a
-com.lxm.pwhelp.activity.CreateGesturePasswordActivity$1 -> com.lxm.pwhelp.activity.g:
+com.lxm.pwhelp.activity.CreateGesturePasswordActivity$1 -> com.lxm.pwhelp.activity.h:
     com.lxm.pwhelp.activity.CreateGesturePasswordActivity this$0 -> a
     253:254:void run() -> run
-com.lxm.pwhelp.activity.CreateGesturePasswordActivity$2 -> com.lxm.pwhelp.activity.h:
+com.lxm.pwhelp.activity.CreateGesturePasswordActivity$2 -> com.lxm.pwhelp.activity.i:
     com.lxm.pwhelp.activity.CreateGesturePasswordActivity this$0 -> a
     260:262:void onPatternStart() -> a
     265:266:void onPatternCleared() -> b
@@ -19294,39 +19316,42 @@ com.lxm.pwhelp.activity.DetailActivity -> com.lxm.pwhelp.activity.DetailActivity
     android.widget.RelativeLayout detail_line8 -> h
     android.widget.RelativeLayout detail_line9 -> i
     android.widget.RelativeLayout detail_line10 -> j
-    android.widget.TextView detail_line4_label1 -> k
-    android.widget.TextView detail_line5_label1 -> l
-    android.widget.TextView detail_line6_label1 -> m
-    android.widget.TextView detail_line7_label1 -> n
-    android.widget.TextView detail_line8_label1 -> o
-    android.widget.TextView detail_line9_label1 -> p
-    android.widget.TextView detail_line10_label1 -> q
-    android.widget.TextView detail_line4_label2 -> r
-    android.widget.TextView detail_line5_label2 -> s
-    android.widget.TextView detail_line6_label2 -> t
-    android.widget.TextView detail_line7_label2 -> u
-    android.widget.TextView detail_line8_label2 -> v
-    android.widget.TextView detail_line9_label2 -> w
-    android.widget.TextView detail_line10_label2 -> x
-    android.widget.TextView line1_label2 -> y
-    android.widget.TextView line2_label2 -> z
-    android.widget.TextView line3_label2 -> A
-    android.widget.TextView detail_title -> B
-    java.lang.String default_str -> C
-    java.lang.String bank_str -> D
-    java.lang.String web_str -> E
-    java.lang.String weibo_str -> F
-    java.lang.String qq_str -> G
-    java.lang.String email_str -> H
-    java.lang.String alipay_str -> I
-    android.widget.ImageView item_logo_big -> J
-    android.content.ClipboardManager cmb -> K
-    android.widget.Button button -> L
-    45:95:void onCreate(android.os.Bundle) -> onCreate
-    98:122:void initGroupStr(com.lxm.pwhelp.bean.Item) -> a
-    125:228:void appendExternal(com.lxm.pwhelp.bean.Item) -> b
-    232:268:void onClick(android.view.View) -> onClick
-    272:278:boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    android.widget.TextView detail_line2_label1 -> k
+    android.widget.TextView detail_line4_label1 -> l
+    android.widget.TextView detail_line5_label1 -> m
+    android.widget.TextView detail_line6_label1 -> n
+    android.widget.TextView detail_line7_label1 -> o
+    android.widget.TextView detail_line8_label1 -> p
+    android.widget.TextView detail_line9_label1 -> q
+    android.widget.TextView detail_line10_label1 -> r
+    android.widget.TextView detail_line4_label2 -> s
+    android.widget.TextView detail_line5_label2 -> t
+    android.widget.TextView detail_line6_label2 -> u
+    android.widget.TextView detail_line7_label2 -> v
+    android.widget.TextView detail_line8_label2 -> w
+    android.widget.TextView detail_line9_label2 -> x
+    android.widget.TextView detail_line10_label2 -> y
+    android.widget.TextView line1_label2 -> z
+    android.widget.TextView line2_label2 -> A
+    android.widget.TextView line3_label2 -> B
+    android.widget.TextView detail_title -> C
+    java.lang.String default_str -> D
+    java.lang.String bank_str -> E
+    java.lang.String web_str -> F
+    java.lang.String weibo_str -> G
+    java.lang.String qq_str -> H
+    java.lang.String email_str -> I
+    java.lang.String alipay_str -> J
+    java.lang.String note_str -> K
+    android.widget.ImageView item_logo_big -> L
+    android.content.ClipboardManager cmb -> M
+    android.widget.Button button -> N
+    android.widget.TextView title -> O
+    46:97:void onCreate(android.os.Bundle) -> onCreate
+    100:129:void initGroupStr(com.lxm.pwhelp.bean.Item) -> a
+    132:238:void appendExternal(com.lxm.pwhelp.bean.Item) -> b
+    242:278:void onClick(android.view.View) -> onClick
+    282:288:boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
 com.lxm.pwhelp.activity.EditItemActivity -> com.lxm.pwhelp.activity.EditItemActivity:
     com.lxm.pwhelp.dao.PWItemDao itemDao -> a
     android.widget.EditText name -> b
@@ -19357,38 +19382,39 @@ com.lxm.pwhelp.activity.EditItemActivity -> com.lxm.pwhelp.activity.EditItemActi
     android.widget.ArrayAdapter adapter -> A
     java.lang.String typeStr -> B
     android.os.Bundle bundle -> C
-    50:57:void onCreate(android.os.Bundle) -> onCreate
-    61:122:void onClick(android.view.View) -> onClick
-    125:128:boolean emptyStr(java.lang.String) -> a
-    132:184:void init(android.content.Context) -> a
-    44:44:android.widget.ArrayAdapter access$0(com.lxm.pwhelp.activity.EditItemActivity) -> a
-    45:45:void access$1(com.lxm.pwhelp.activity.EditItemActivity,java.lang.String) -> a
-    38:38:java.lang.String access$2(com.lxm.pwhelp.activity.EditItemActivity) -> b
-    45:45:java.lang.String access$3(com.lxm.pwhelp.activity.EditItemActivity) -> c
-    40:40:android.widget.LinearLayout access$4(com.lxm.pwhelp.activity.EditItemActivity) -> d
-    40:40:android.widget.LinearLayout access$5(com.lxm.pwhelp.activity.EditItemActivity) -> e
-    40:40:android.widget.LinearLayout access$6(com.lxm.pwhelp.activity.EditItemActivity) -> f
-    40:40:android.widget.LinearLayout access$7(com.lxm.pwhelp.activity.EditItemActivity) -> g
-    40:40:android.widget.LinearLayout access$8(com.lxm.pwhelp.activity.EditItemActivity) -> h
-    40:40:android.widget.LinearLayout access$9(com.lxm.pwhelp.activity.EditItemActivity) -> i
-    40:40:android.widget.LinearLayout access$10(com.lxm.pwhelp.activity.EditItemActivity) -> j
-    40:40:android.widget.LinearLayout access$11(com.lxm.pwhelp.activity.EditItemActivity) -> k
-    40:40:android.widget.LinearLayout access$12(com.lxm.pwhelp.activity.EditItemActivity) -> l
-    38:38:java.lang.String access$13(com.lxm.pwhelp.activity.EditItemActivity) -> m
-    38:38:java.lang.String access$14(com.lxm.pwhelp.activity.EditItemActivity) -> n
-    38:38:java.lang.String access$15(com.lxm.pwhelp.activity.EditItemActivity) -> o
-    38:38:java.lang.String access$16(com.lxm.pwhelp.activity.EditItemActivity) -> p
-    38:38:java.lang.String access$17(com.lxm.pwhelp.activity.EditItemActivity) -> q
-com.lxm.pwhelp.activity.EditItemActivity$1 -> com.lxm.pwhelp.activity.i:
+    android.widget.TextView title -> D
+    56:65:void onCreate(android.os.Bundle) -> onCreate
+    69:130:void onClick(android.view.View) -> onClick
+    133:136:boolean emptyStr(java.lang.String) -> a
+    140:192:void init(android.content.Context) -> a
+    49:49:android.widget.ArrayAdapter access$0(com.lxm.pwhelp.activity.EditItemActivity) -> a
+    50:50:void access$1(com.lxm.pwhelp.activity.EditItemActivity,java.lang.String) -> a
+    43:43:java.lang.String access$2(com.lxm.pwhelp.activity.EditItemActivity) -> b
+    50:50:java.lang.String access$3(com.lxm.pwhelp.activity.EditItemActivity) -> c
+    45:45:android.widget.LinearLayout access$4(com.lxm.pwhelp.activity.EditItemActivity) -> d
+    45:45:android.widget.LinearLayout access$5(com.lxm.pwhelp.activity.EditItemActivity) -> e
+    45:45:android.widget.LinearLayout access$6(com.lxm.pwhelp.activity.EditItemActivity) -> f
+    45:45:android.widget.LinearLayout access$7(com.lxm.pwhelp.activity.EditItemActivity) -> g
+    45:45:android.widget.LinearLayout access$8(com.lxm.pwhelp.activity.EditItemActivity) -> h
+    45:45:android.widget.LinearLayout access$9(com.lxm.pwhelp.activity.EditItemActivity) -> i
+    45:45:android.widget.LinearLayout access$10(com.lxm.pwhelp.activity.EditItemActivity) -> j
+    45:45:android.widget.LinearLayout access$11(com.lxm.pwhelp.activity.EditItemActivity) -> k
+    45:45:android.widget.LinearLayout access$12(com.lxm.pwhelp.activity.EditItemActivity) -> l
+    43:43:java.lang.String access$13(com.lxm.pwhelp.activity.EditItemActivity) -> m
+    43:43:java.lang.String access$14(com.lxm.pwhelp.activity.EditItemActivity) -> n
+    43:43:java.lang.String access$15(com.lxm.pwhelp.activity.EditItemActivity) -> o
+    43:43:java.lang.String access$16(com.lxm.pwhelp.activity.EditItemActivity) -> p
+    43:43:java.lang.String access$17(com.lxm.pwhelp.activity.EditItemActivity) -> q
+com.lxm.pwhelp.activity.EditItemActivity$1 -> com.lxm.pwhelp.activity.j:
     com.lxm.pwhelp.activity.EditItemActivity this$0 -> a
-    114:117:void onClick(android.content.DialogInterface,int) -> onClick
+    122:125:void onClick(android.content.DialogInterface,int) -> onClick
 com.lxm.pwhelp.activity.EditItemActivity$SpinnerSelectedListener -> com.lxm.pwhelp.activity.EditItemActivity$a:
     com.lxm.pwhelp.activity.EditItemActivity this$0 -> a
-    191:254:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
-    257:257:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+    199:262:void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    265:265:void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
 com.lxm.pwhelp.activity.GuideGesturePasswordActivity -> com.lxm.pwhelp.activity.GuideGesturePasswordActivity:
     16:29:void onCreate(android.os.Bundle) -> onCreate
-com.lxm.pwhelp.activity.GuideGesturePasswordActivity$1 -> com.lxm.pwhelp.activity.j:
+com.lxm.pwhelp.activity.GuideGesturePasswordActivity$1 -> com.lxm.pwhelp.activity.k:
     com.lxm.pwhelp.activity.GuideGesturePasswordActivity this$0 -> a
     21:27:void onClick(android.view.View) -> onClick
 com.lxm.pwhelp.activity.MainActivity -> com.lxm.pwhelp.activity.MainActivity:
@@ -19411,25 +19437,25 @@ com.lxm.pwhelp.activity.MainActivity -> com.lxm.pwhelp.activity.MainActivity:
     android.widget.LinearLayout mTabSetting -> q
     android.widget.LinearLayout mTabWeiXin -> r
     android.widget.LinearLayout additem -> s
-    android.widget.LinearLayout shodow_head -> t
-    android.widget.LinearLayout profiles -> u
-    android.widget.RelativeLayout backupitem -> v
-    android.widget.RelativeLayout recovery -> w
-    android.widget.RelativeLayout settings -> x
-    com.lxm.pwhelp.custom.CircleImageView head_icon -> y
-    com.lxm.pwhelp.custom.CircleImageView top_header -> z
-    android.widget.EditText searchbox -> A
-    android.widget.LinearLayout noitem -> B
-    com.lxm.pwhelp.view.NoScrollViewPager mViewPager -> C
-    java.util.List mViews -> D
-    android.widget.ImageButton mWeiXinImg -> E
-    java.util.List itemList -> F
-    java.util.List newItemList -> G
-    android.widget.TextView title -> H
-    android.widget.TextView nicknameView -> I
-    android.widget.ImageView add_group -> J
-    android.widget.Button no_add_item -> K
-    net.sqlcipher.database.SQLiteDatabase db -> L
+    android.widget.LinearLayout addnote -> t
+    android.widget.LinearLayout shodow_head -> u
+    android.widget.LinearLayout profiles -> v
+    android.widget.RelativeLayout backupitem -> w
+    android.widget.RelativeLayout recovery -> x
+    android.widget.RelativeLayout settings -> y
+    com.lxm.pwhelp.custom.CircleImageView head_icon -> z
+    com.lxm.pwhelp.custom.CircleImageView top_header -> A
+    android.widget.EditText searchbox -> B
+    android.widget.LinearLayout noitem -> C
+    com.lxm.pwhelp.view.NoScrollViewPager mViewPager -> D
+    java.util.List mViews -> E
+    android.widget.ImageButton mWeiXinImg -> F
+    java.util.List itemList -> G
+    java.util.List newItemList -> H
+    android.widget.TextView title -> I
+    android.widget.TextView nicknameView -> J
+    android.widget.ImageView add_group -> K
+    android.widget.Button no_add_item -> L
     com.lxm.pwhelp.dao.PWItemDao pwItemDao -> M
     com.lxm.pwhelp.dao.PWGroupDao pwGroupDao -> N
     com.lxm.pwhelp.dao.PWSettingDao pwSettingDao -> O
@@ -19446,243 +19472,274 @@ com.lxm.pwhelp.activity.MainActivity -> com.lxm.pwhelp.activity.MainActivity:
     int SYSY_SETTING_CODE -> Z
     int FIRST_ADD_CODE -> aa
     int PROFILE_SETTING_CODE -> ab
-    java.lang.String BR_TAG_ITEM -> ac
-    java.lang.String BR_TAG_GROUP -> ad
-    java.lang.String BR_TAG_SETTING -> ae
+    int ADD_NOT_CODE -> ac
+    java.lang.String BR_TAG_ITEM -> ad
+    java.lang.String BR_TAG_GROUP -> ae
+    java.lang.String BR_TAG_SETTING -> af
     144:151:void onCreate(android.os.Bundle) -> onCreate
-    154:165:void initEvent() -> c
-    168:188:void initView() -> d
-    192:249:void initData() -> a
-    253:485:void initViewPage() -> e
-    488:568:void onClick(android.view.View) -> onClick
-    620:643:void updateListView() -> f
-    853:861:void resetImg() -> g
-    868:873:void edit(com.lxm.pwhelp.bean.Item) -> a
-    878:901:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    905:909:boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
-    914:924:void showFileChooser() -> h
-    929:961:void dialogEmail() -> i
-    967:987:void dialogExit() -> b
-    990:996:void dialogBackup(java.lang.String) -> a
-    1001:1017:void onResume() -> onResume
-    1024:1031:void switchTheNoItem(java.util.List) -> a
-    1035:1041:void onDestroy() -> onDestroy
-    587:587:android.os.Handler access$0(com.lxm.pwhelp.activity.MainActivity) -> a
-    646:646:java.lang.Runnable access$1(com.lxm.pwhelp.activity.MainActivity) -> b
-    619:619:void access$2(com.lxm.pwhelp.activity.MainActivity) -> c
+    154:166:void initEvent() -> c
+    169:190:void initView() -> d
+    194:251:void initData() -> a
+    255:488:void initViewPage() -> e
+    491:576:void onClick(android.view.View) -> onClick
+    628:651:void updateListView() -> f
+    861:869:void resetImg() -> g
+    876:881:void edit(com.lxm.pwhelp.bean.Item) -> a
+    886:910:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    914:918:boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
+    923:933:void showFileChooser() -> h
+    938:970:void dialogEmail() -> i
+    976:996:void dialogExit() -> b
+    999:1005:void dialogBackup(java.lang.String) -> a
+    1010:1026:void onResume() -> onResume
+    1033:1040:void switchTheNoItem(java.util.List) -> a
+    1044:1047:void onDestroy() -> onDestroy
+    595:595:android.os.Handler access$0(com.lxm.pwhelp.activity.MainActivity) -> a
+    654:654:java.lang.Runnable access$1(com.lxm.pwhelp.activity.MainActivity) -> b
+    627:627:void access$2(com.lxm.pwhelp.activity.MainActivity) -> c
     141:141:android.app.ProgressDialog access$3(com.lxm.pwhelp.activity.MainActivity) -> d
-    120:120:android.widget.EditText access$4(com.lxm.pwhelp.activity.MainActivity) -> e
-    127:127:java.util.List access$5(com.lxm.pwhelp.activity.MainActivity) -> f
+    121:121:android.widget.EditText access$4(com.lxm.pwhelp.activity.MainActivity) -> e
+    128:128:java.util.List access$5(com.lxm.pwhelp.activity.MainActivity) -> f
     137:137:com.lxm.pwhelp.dao.PWItemDao access$6(com.lxm.pwhelp.activity.MainActivity) -> g
-    128:128:void access$7(com.lxm.pwhelp.activity.MainActivity,java.util.List) -> a
-    128:128:java.util.List access$8(com.lxm.pwhelp.activity.MainActivity) -> h
+    129:129:void access$7(com.lxm.pwhelp.activity.MainActivity,java.util.List) -> a
+    129:129:java.util.List access$8(com.lxm.pwhelp.activity.MainActivity) -> h
     88:88:com.lxm.pwhelp.adapter.PWItemAdapter access$9(com.lxm.pwhelp.activity.MainActivity) -> i
     139:139:com.lxm.pwhelp.dao.PWSettingDao access$10(com.lxm.pwhelp.activity.MainActivity) -> j
     138:138:com.lxm.pwhelp.dao.PWGroupDao access$11(com.lxm.pwhelp.activity.MainActivity) -> k
     141:141:void access$12(com.lxm.pwhelp.activity.MainActivity,android.app.ProgressDialog) -> a
-    655:655:java.lang.Runnable access$13(com.lxm.pwhelp.activity.MainActivity) -> l
-    867:867:void access$14(com.lxm.pwhelp.activity.MainActivity,com.lxm.pwhelp.bean.Item) -> a
-    125:125:java.util.List access$15(com.lxm.pwhelp.activity.MainActivity) -> m
-com.lxm.pwhelp.activity.MainActivity$1 -> com.lxm.pwhelp.activity.k:
+    663:663:java.lang.Runnable access$13(com.lxm.pwhelp.activity.MainActivity) -> l
+    875:875:void access$14(com.lxm.pwhelp.activity.MainActivity,com.lxm.pwhelp.bean.Item) -> a
+    126:126:java.util.List access$15(com.lxm.pwhelp.activity.MainActivity) -> m
+com.lxm.pwhelp.activity.MainActivity$1 -> com.lxm.pwhelp.activity.l:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    574:575:void afterTextChanged(android.text.Editable) -> afterTextChanged
-    578:578:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
-    582:582:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-com.lxm.pwhelp.activity.MainActivity$10 -> com.lxm.pwhelp.activity.l:
+    582:583:void afterTextChanged(android.text.Editable) -> afterTextChanged
+    586:586:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
+    590:590:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+com.lxm.pwhelp.activity.MainActivity$10 -> com.lxm.pwhelp.activity.m:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
     android.widget.EditText val$editText -> b
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> c
-    939:951:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.MainActivity$11 -> com.lxm.pwhelp.activity.m:
+    948:960:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.MainActivity$11 -> com.lxm.pwhelp.activity.n:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
-    956:957:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.MainActivity$12 -> com.lxm.pwhelp.activity.n:
+    965:966:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.MainActivity$12 -> com.lxm.pwhelp.activity.o:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    974:976:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.MainActivity$13 -> com.lxm.pwhelp.activity.o:
+    983:985:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.MainActivity$13 -> com.lxm.pwhelp.activity.p:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    983:984:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.MainActivity$2 -> com.lxm.pwhelp.activity.p:
+    992:993:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.MainActivity$2 -> com.lxm.pwhelp.activity.q:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    590:615:void handleMessage(android.os.Message) -> handleMessage
-com.lxm.pwhelp.activity.MainActivity$3 -> com.lxm.pwhelp.activity.q:
+    598:623:void handleMessage(android.os.Message) -> handleMessage
+com.lxm.pwhelp.activity.MainActivity$3 -> com.lxm.pwhelp.activity.r:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    649:652:void run() -> run
-com.lxm.pwhelp.activity.MainActivity$4 -> com.lxm.pwhelp.activity.r:
+    657:660:void run() -> run
+com.lxm.pwhelp.activity.MainActivity$4 -> com.lxm.pwhelp.activity.s:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    658:661:void run() -> run
-com.lxm.pwhelp.activity.MainActivity$5 -> com.lxm.pwhelp.activity.s:
+    666:669:void run() -> run
+com.lxm.pwhelp.activity.MainActivity$5 -> com.lxm.pwhelp.activity.t:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    289:333:boolean onChildClick(android.widget.ExpandableListView,android.view.View,int,int,long) -> onChildClick
-    285:285:com.lxm.pwhelp.activity.MainActivity access$0(com.lxm.pwhelp.activity.MainActivity$5) -> a
-com.lxm.pwhelp.activity.MainActivity$5$1 -> com.lxm.pwhelp.activity.t:
+    292:336:boolean onChildClick(android.widget.ExpandableListView,android.view.View,int,int,long) -> onChildClick
+    288:288:com.lxm.pwhelp.activity.MainActivity access$0(com.lxm.pwhelp.activity.MainActivity$5) -> a
+com.lxm.pwhelp.activity.MainActivity$5$1 -> com.lxm.pwhelp.activity.u:
     com.lxm.pwhelp.activity.MainActivity$5 this$1 -> a
     java.lang.String val$command -> b
     android.widget.EditText val$commandStr -> c
     android.content.Intent val$intent -> d
-    313:320:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.MainActivity$5$2 -> com.lxm.pwhelp.activity.u:
+    316:323:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.MainActivity$5$2 -> com.lxm.pwhelp.activity.v:
     com.lxm.pwhelp.activity.MainActivity$5 this$1 -> a
-    325:326:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.MainActivity$6 -> com.lxm.pwhelp.activity.v:
+    328:329:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.MainActivity$6 -> com.lxm.pwhelp.activity.w:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    345:373:void create(com.baoyz.swipemenulistview.SwipeMenu) -> a
-com.lxm.pwhelp.activity.MainActivity$7 -> com.lxm.pwhelp.activity.w:
+    348:376:void create(com.baoyz.swipemenulistview.SwipeMenu) -> a
+com.lxm.pwhelp.activity.MainActivity$7 -> com.lxm.pwhelp.activity.x:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    383:400:void onMenuItemClick(int,com.baoyz.swipemenulistview.SwipeMenu,int) -> a
-com.lxm.pwhelp.activity.MainActivity$8 -> com.lxm.pwhelp.activity.x:
+    386:403:void onMenuItemClick(int,com.baoyz.swipemenulistview.SwipeMenu,int) -> a
+com.lxm.pwhelp.activity.MainActivity$8 -> com.lxm.pwhelp.activity.y:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    408:450:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-    404:404:com.lxm.pwhelp.activity.MainActivity access$0(com.lxm.pwhelp.activity.MainActivity$8) -> a
-com.lxm.pwhelp.activity.MainActivity$8$1 -> com.lxm.pwhelp.activity.y:
+    411:453:void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    407:407:com.lxm.pwhelp.activity.MainActivity access$0(com.lxm.pwhelp.activity.MainActivity$8) -> a
+com.lxm.pwhelp.activity.MainActivity$8$1 -> com.lxm.pwhelp.activity.z:
     com.lxm.pwhelp.activity.MainActivity$8 this$1 -> a
     java.lang.String val$command -> b
     android.widget.EditText val$commandStr -> c
     android.content.Intent val$intent -> d
-    430:437:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.MainActivity$8$2 -> com.lxm.pwhelp.activity.z:
+    433:440:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.MainActivity$8$2 -> com.lxm.pwhelp.activity.aa:
     com.lxm.pwhelp.activity.MainActivity$8 this$1 -> a
-    442:443:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.MainActivity$9 -> com.lxm.pwhelp.activity.aa:
+    445:446:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.MainActivity$9 -> com.lxm.pwhelp.activity.ab:
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    463:464:void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> destroyItem
-    468:470:java.lang.Object instantiateItem(android.view.ViewGroup,int) -> instantiateItem
-    475:475:boolean isViewFromObject(android.view.View,java.lang.Object) -> isViewFromObject
-    480:480:int getCount() -> getCount
+    466:467:void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> destroyItem
+    471:473:java.lang.Object instantiateItem(android.view.ViewGroup,int) -> instantiateItem
+    478:478:boolean isViewFromObject(android.view.View,java.lang.Object) -> isViewFromObject
+    483:483:int getCount() -> getCount
 com.lxm.pwhelp.activity.MainActivity$ClickListener -> com.lxm.pwhelp.activity.MainActivity$a:
     com.lxm.pwhelp.bean.Item item -> b
     java.lang.String type -> c
     java.lang.String email -> d
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    832:841:void onClick(android.content.DialogInterface,int) -> onClick
-    843:849:void delete(android.content.DialogInterface) -> a
+    840:849:void onClick(android.content.DialogInterface,int) -> onClick
+    851:857:void delete(android.content.DialogInterface) -> a
 com.lxm.pwhelp.activity.MainActivity$DataRecovery -> com.lxm.pwhelp.activity.MainActivity$b:
     java.lang.String path -> b
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    750:815:void run() -> run
+    758:823:void run() -> run
 com.lxm.pwhelp.activity.MainActivity$SendEmail -> com.lxm.pwhelp.activity.MainActivity$c:
     java.lang.String email -> b
     com.lxm.pwhelp.activity.MainActivity this$0 -> a
-    670:713:void run() -> run
-    716:716:java.lang.String getString(int) -> a
-    720:739:java.lang.String buildDataString() -> a
+    678:721:void run() -> run
+    724:724:java.lang.String getString(int) -> a
+    728:747:java.lang.String buildDataString() -> a
+com.lxm.pwhelp.activity.PasswordBackActivity -> com.lxm.pwhelp.activity.PasswordBackActivity:
+    android.widget.TextView title -> a
+    android.widget.RelativeLayout command_back -> b
+    android.widget.RelativeLayout acount_back -> c
+    com.lxm.pwhelp.dao.PWSettingDao pwSettingDao -> d
+    com.lxm.pwhelp.dao.PWItemDao pwItemDao -> e
+    34:39:void onCreate(android.os.Bundle) -> onCreate
+    42:51:void init() -> a
+    55:132:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.PasswordBackActivity$1 -> com.lxm.pwhelp.activity.ac:
+    com.lxm.pwhelp.activity.PasswordBackActivity this$0 -> a
+    java.lang.String val$command -> b
+    android.widget.EditText val$commandStr -> c
+    android.content.Intent val$intent1 -> d
+    77:85:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.PasswordBackActivity$2 -> com.lxm.pwhelp.activity.ad:
+    com.lxm.pwhelp.activity.PasswordBackActivity this$0 -> a
+    90:91:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.PasswordBackActivity$3 -> com.lxm.pwhelp.activity.ae:
+    com.lxm.pwhelp.activity.PasswordBackActivity this$0 -> a
+    java.lang.String val$passwrd -> b
+    android.widget.EditText val$acountStr -> c
+    android.content.Intent val$intent2 -> d
+    112:120:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.PasswordBackActivity$4 -> com.lxm.pwhelp.activity.af:
+    com.lxm.pwhelp.activity.PasswordBackActivity this$0 -> a
+    125:126:void onClick(android.content.DialogInterface,int) -> onClick
 com.lxm.pwhelp.activity.PersonalActivity -> com.lxm.pwhelp.activity.PersonalActivity:
     android.widget.ImageView touxiang_picture -> a
     android.widget.TextView nickname_value -> b
-    com.lxm.pwhelp.bean.Setting setting -> c
-    com.lxm.pwhelp.dao.PWSettingDao pwSettingDao -> d
-    boolean isOn -> e
-    java.lang.String nickname -> f
-    android.content.DialogInterface$OnClickListener listener -> g
-    int IMAGE_REQUEST_CODE -> h
-    int CAMERA_REQUEST_CODE -> i
-    int RESIZE_REQUEST_CODE -> j
-    java.lang.String IMAGE_FILE_NAME -> k
-    50:57:void onCreate(android.os.Bundle) -> onCreate
-    60:78:void initView() -> a
-    82:133:void onClick(android.view.View) -> onClick
-    145:166:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    172:211:void showDialog() -> b
-    214:226:void resizeImage(android.net.Uri) -> a
-    229:236:void showResizeImage(android.content.Intent) -> a
-    239:255:void savePic(android.graphics.Bitmap) -> a
-    258:259:java.lang.String getDir(java.lang.String) -> a
-    263:263:android.net.Uri getImageUri() -> c
+    android.widget.TextView title -> c
+    com.lxm.pwhelp.bean.Setting setting -> d
+    com.lxm.pwhelp.dao.PWSettingDao pwSettingDao -> e
+    boolean isOn -> f
+    java.lang.String nickname -> g
+    android.content.DialogInterface$OnClickListener listener -> h
+    int IMAGE_REQUEST_CODE -> i
+    int CAMERA_REQUEST_CODE -> j
+    int RESIZE_REQUEST_CODE -> k
+    java.lang.String IMAGE_FILE_NAME -> l
+    51:60:void onCreate(android.os.Bundle) -> onCreate
+    63:81:void initView() -> a
+    85:136:void onClick(android.view.View) -> onClick
+    148:169:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    175:214:void showDialog() -> b
+    217:229:void resizeImage(android.net.Uri) -> a
+    232:239:void showResizeImage(android.content.Intent) -> a
+    242:258:void savePic(android.graphics.Bitmap) -> a
+    261:262:java.lang.String getDir(java.lang.String) -> a
+    266:266:android.net.Uri getImageUri() -> c
     40:40:android.widget.TextView access$0(com.lxm.pwhelp.activity.PersonalActivity) -> a
-    47:47:java.lang.String access$1(com.lxm.pwhelp.activity.PersonalActivity) -> b
-    47:47:void access$2(com.lxm.pwhelp.activity.PersonalActivity,java.lang.String) -> a
-    45:45:boolean access$3(com.lxm.pwhelp.activity.PersonalActivity) -> c
-    41:41:com.lxm.pwhelp.bean.Setting access$4(com.lxm.pwhelp.activity.PersonalActivity) -> d
-    43:43:com.lxm.pwhelp.dao.PWSettingDao access$5(com.lxm.pwhelp.activity.PersonalActivity) -> e
-    135:135:android.content.DialogInterface$OnClickListener access$6(com.lxm.pwhelp.activity.PersonalActivity) -> f
-com.lxm.pwhelp.activity.PersonalActivity$1 -> com.lxm.pwhelp.activity.ab:
+    48:48:java.lang.String access$1(com.lxm.pwhelp.activity.PersonalActivity) -> b
+    48:48:void access$2(com.lxm.pwhelp.activity.PersonalActivity,java.lang.String) -> a
+    46:46:boolean access$3(com.lxm.pwhelp.activity.PersonalActivity) -> c
+    42:42:com.lxm.pwhelp.bean.Setting access$4(com.lxm.pwhelp.activity.PersonalActivity) -> d
+    44:44:com.lxm.pwhelp.dao.PWSettingDao access$5(com.lxm.pwhelp.activity.PersonalActivity) -> e
+    138:138:android.content.DialogInterface$OnClickListener access$6(com.lxm.pwhelp.activity.PersonalActivity) -> f
+com.lxm.pwhelp.activity.PersonalActivity$1 -> com.lxm.pwhelp.activity.ag:
     com.lxm.pwhelp.activity.PersonalActivity this$0 -> a
-    138:140:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.PersonalActivity$2 -> com.lxm.pwhelp.activity.ac:
-    com.lxm.pwhelp.activity.PersonalActivity this$0 -> a
-    com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
-    104:122:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.PersonalActivity$3 -> com.lxm.pwhelp.activity.ad:
+    141:143:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.PersonalActivity$2 -> com.lxm.pwhelp.activity.ah:
     com.lxm.pwhelp.activity.PersonalActivity this$0 -> a
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
-    127:128:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.PersonalActivity$4 -> com.lxm.pwhelp.activity.ae:
+    107:125:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.PersonalActivity$3 -> com.lxm.pwhelp.activity.ai:
     com.lxm.pwhelp.activity.PersonalActivity this$0 -> a
-    177:201:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.PersonalActivity$5 -> com.lxm.pwhelp.activity.af:
+    com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
+    130:131:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.PersonalActivity$4 -> com.lxm.pwhelp.activity.aj:
     com.lxm.pwhelp.activity.PersonalActivity this$0 -> a
-    207:208:void onClick(android.content.DialogInterface,int) -> onClick
+    180:204:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.PersonalActivity$5 -> com.lxm.pwhelp.activity.ak:
+    com.lxm.pwhelp.activity.PersonalActivity this$0 -> a
+    210:211:void onClick(android.content.DialogInterface,int) -> onClick
 com.lxm.pwhelp.activity.SetCommandActivity -> com.lxm.pwhelp.activity.SetCommandActivity:
     com.lxm.pwhelp.dao.PWSettingDao pwSettingDao -> a
     android.widget.TextView set_command_note -> b
-    android.widget.Button enable_command_btn -> c
-    android.widget.Button disable_command_btn -> d
-    com.lxm.pwhelp.bean.Setting setting -> e
-    boolean isOn -> f
-    android.content.DialogInterface$OnClickListener listener -> g
-    40:47:void onCreate(android.os.Bundle) -> onCreate
-    50:67:void initView() -> a
-    71:191:void onClick(android.view.View) -> onClick
-    35:35:com.lxm.pwhelp.bean.Setting access$0(com.lxm.pwhelp.activity.SetCommandActivity) -> a
+    android.widget.TextView title -> c
+    android.widget.Button enable_command_btn -> d
+    android.widget.Button disable_command_btn -> e
+    com.lxm.pwhelp.bean.Setting setting -> f
+    boolean isOn -> g
+    android.content.DialogInterface$OnClickListener listener -> h
+    41:50:void onCreate(android.os.Bundle) -> onCreate
+    53:70:void initView() -> a
+    74:194:void onClick(android.view.View) -> onClick
+    36:36:com.lxm.pwhelp.bean.Setting access$0(com.lxm.pwhelp.activity.SetCommandActivity) -> a
     31:31:com.lxm.pwhelp.dao.PWSettingDao access$1(com.lxm.pwhelp.activity.SetCommandActivity) -> b
-    193:193:android.content.DialogInterface$OnClickListener access$2(com.lxm.pwhelp.activity.SetCommandActivity) -> c
-com.lxm.pwhelp.activity.SetCommandActivity$1 -> com.lxm.pwhelp.activity.ag:
+    196:196:android.content.DialogInterface$OnClickListener access$2(com.lxm.pwhelp.activity.SetCommandActivity) -> c
+com.lxm.pwhelp.activity.SetCommandActivity$1 -> com.lxm.pwhelp.activity.al:
     com.lxm.pwhelp.activity.SetCommandActivity this$0 -> a
-    198:202:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.SetCommandActivity$2 -> com.lxm.pwhelp.activity.ah:
+    201:205:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.SetCommandActivity$2 -> com.lxm.pwhelp.activity.am:
     com.lxm.pwhelp.activity.SetCommandActivity this$0 -> a
     android.widget.EditText val$editText -> b
     android.widget.EditText val$editText1 -> c
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> d
-    93:113:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.SetCommandActivity$3 -> com.lxm.pwhelp.activity.ai:
+    96:116:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.SetCommandActivity$3 -> com.lxm.pwhelp.activity.an:
     com.lxm.pwhelp.activity.SetCommandActivity this$0 -> a
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
-    118:119:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.SetCommandActivity$4 -> com.lxm.pwhelp.activity.aj:
+    121:122:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.SetCommandActivity$4 -> com.lxm.pwhelp.activity.ao:
     com.lxm.pwhelp.activity.SetCommandActivity this$0 -> a
     android.widget.EditText val$editText -> b
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> c
-    132:143:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.SetCommandActivity$5 -> com.lxm.pwhelp.activity.ak:
+    135:146:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.SetCommandActivity$5 -> com.lxm.pwhelp.activity.ap:
     com.lxm.pwhelp.activity.SetCommandActivity this$0 -> a
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
-    148:149:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.SetCommandActivity$6 -> com.lxm.pwhelp.activity.al:
+    151:152:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.SetCommandActivity$6 -> com.lxm.pwhelp.activity.aq:
     com.lxm.pwhelp.activity.SetCommandActivity this$0 -> a
     android.widget.EditText val$editText -> b
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> c
-    165:179:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.SetCommandActivity$7 -> com.lxm.pwhelp.activity.am:
+    168:182:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.SetCommandActivity$7 -> com.lxm.pwhelp.activity.ar:
     com.lxm.pwhelp.activity.SetCommandActivity this$0 -> a
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
-    184:185:void onClick(android.view.View) -> onClick
+    187:188:void onClick(android.view.View) -> onClick
 com.lxm.pwhelp.activity.SetEmailActivity -> com.lxm.pwhelp.activity.SetEmailActivity:
     com.lxm.pwhelp.dao.PWSettingDao pwSettingDao -> a
     android.widget.TextView set_email_note -> b
-    android.widget.Button set_email_btn -> c
-    com.lxm.pwhelp.bean.Setting setting -> d
-    boolean isOn -> e
-    android.content.DialogInterface$OnClickListener listener -> f
-    31:37:void onCreate(android.os.Bundle) -> onCreate
-    40:55:void initView() -> a
-    59:114:void onClick(android.view.View) -> onClick
-    27:27:boolean access$0(com.lxm.pwhelp.activity.SetEmailActivity) -> a
-    26:26:com.lxm.pwhelp.bean.Setting access$1(com.lxm.pwhelp.activity.SetEmailActivity) -> b
-    22:22:com.lxm.pwhelp.dao.PWSettingDao access$2(com.lxm.pwhelp.activity.SetEmailActivity) -> c
-    116:116:android.content.DialogInterface$OnClickListener access$3(com.lxm.pwhelp.activity.SetEmailActivity) -> d
-com.lxm.pwhelp.activity.SetEmailActivity$1 -> com.lxm.pwhelp.activity.an:
+    android.widget.TextView title -> c
+    android.widget.Button set_email_btn -> d
+    com.lxm.pwhelp.bean.Setting setting -> e
+    boolean isOn -> f
+    android.content.DialogInterface$OnClickListener listener -> g
+    36:44:void onCreate(android.os.Bundle) -> onCreate
+    47:62:void initView() -> a
+    66:121:void onClick(android.view.View) -> onClick
+    32:32:boolean access$0(com.lxm.pwhelp.activity.SetEmailActivity) -> a
+    31:31:com.lxm.pwhelp.bean.Setting access$1(com.lxm.pwhelp.activity.SetEmailActivity) -> b
+    26:26:com.lxm.pwhelp.dao.PWSettingDao access$2(com.lxm.pwhelp.activity.SetEmailActivity) -> c
+    123:123:android.content.DialogInterface$OnClickListener access$3(com.lxm.pwhelp.activity.SetEmailActivity) -> d
+com.lxm.pwhelp.activity.SetEmailActivity$1 -> com.lxm.pwhelp.activity.as:
     com.lxm.pwhelp.activity.SetEmailActivity this$0 -> a
-    119:124:void onClick(android.content.DialogInterface,int) -> onClick
-com.lxm.pwhelp.activity.SetEmailActivity$2 -> com.lxm.pwhelp.activity.ao:
-    com.lxm.pwhelp.activity.SetEmailActivity this$0 -> a
-    com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
-    79:103:void onClick(android.view.View) -> onClick
-com.lxm.pwhelp.activity.SetEmailActivity$3 -> com.lxm.pwhelp.activity.ap:
+    126:131:void onClick(android.content.DialogInterface,int) -> onClick
+com.lxm.pwhelp.activity.SetEmailActivity$2 -> com.lxm.pwhelp.activity.at:
     com.lxm.pwhelp.activity.SetEmailActivity this$0 -> a
     com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
-    108:109:void onClick(android.view.View) -> onClick
+    86:110:void onClick(android.view.View) -> onClick
+com.lxm.pwhelp.activity.SetEmailActivity$3 -> com.lxm.pwhelp.activity.au:
+    com.lxm.pwhelp.activity.SetEmailActivity this$0 -> a
+    com.lxm.pwhelp.custom.EmailDialog val$dialog -> b
+    115:116:void onClick(android.view.View) -> onClick
 com.lxm.pwhelp.activity.SettingHeaderActivity -> com.lxm.pwhelp.activity.SettingHeaderActivity:
     int IMAGE_REQUEST_CODE -> a
     int CAMERA_REQUEST_CODE -> b
@@ -19703,64 +19760,71 @@ com.lxm.pwhelp.activity.SettingHeaderActivity -> com.lxm.pwhelp.activity.Setting
 com.lxm.pwhelp.activity.SettingsActivity -> com.lxm.pwhelp.activity.SettingsActivity:
     android.widget.TextView emailState -> a
     android.widget.TextView commandState -> b
-    android.widget.RelativeLayout setEmail -> c
-    android.widget.RelativeLayout setCommand -> d
-    android.widget.RelativeLayout resetPattern -> e
-    android.widget.RelativeLayout about_us -> f
-    com.lxm.pwhelp.dao.PWSettingDao pwSettingDao -> g
-    int SET_EMAIL_CODE -> h
-    int SET_COMMAND_CODE -> i
-    int SET_LOCK_CODE -> j
-    int ABOUT_US_CODE -> k
-    34:39:void onCreate(android.os.Bundle) -> onCreate
-    42:67:void initView() -> a
-    71:101:void onClick(android.view.View) -> onClick
-    105:130:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    134:135:void onDestroy() -> onDestroy
+    android.widget.TextView title -> c
+    android.widget.RelativeLayout setEmail -> d
+    android.widget.RelativeLayout setCommand -> e
+    android.widget.RelativeLayout resetPattern -> f
+    android.widget.RelativeLayout about_us -> g
+    com.lxm.pwhelp.dao.PWSettingDao pwSettingDao -> h
+    int SET_EMAIL_CODE -> i
+    int SET_COMMAND_CODE -> j
+    int SET_LOCK_CODE -> k
+    int ABOUT_US_CODE -> l
+    35:42:void onCreate(android.os.Bundle) -> onCreate
+    45:70:void initView() -> a
+    74:104:void onClick(android.view.View) -> onClick
+    108:133:void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    137:138:void onDestroy() -> onDestroy
 com.lxm.pwhelp.activity.UnlockGesturePasswordActivity -> com.lxm.pwhelp.activity.UnlockGesturePasswordActivity:
     com.lxm.pwhelp.utils.LockPatternView mLockPatternView -> c
     int mFailedPatternAttemptsSinceLastTimeout -> d
     android.os.CountDownTimer mCountdownTimer -> e
     android.os.Handler mHandler -> f
     android.widget.TextView mHeadTextView -> g
-    android.view.animation.Animation mShakeAnim -> h
-    android.os.Bundle bundle -> i
-    java.lang.String RESET -> j
-    boolean isReset -> k
-    java.lang.Runnable mClearPatternRunnable -> l
+    android.widget.TextView gesturepwd_unlock_forget -> h
+    android.view.animation.Animation mShakeAnim -> i
+    android.os.Bundle bundle -> j
+    java.lang.String RESET -> k
+    boolean isReset -> l
+    android.app.ProgressDialog progressDialog -> m
+    java.lang.Runnable mClearPatternRunnable -> n
     com.lxm.pwhelp.utils.LockPatternView$OnPatternListener mChooseNewLockPatternListener -> a
     java.lang.Runnable attemptLockout -> b
-    36:45:void onCreate(android.os.Bundle) -> onCreate
-    48:56:void init() -> b
-    60:65:void onResume() -> onResume
-    69:72:void onDestroy() -> onDestroy
-    23:23:com.lxm.pwhelp.utils.LockPatternView access$0(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> a
-    73:73:java.lang.Runnable access$1(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> b
-    32:32:boolean access$2() -> a
-    24:24:int access$3(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> c
-    24:24:void access$4(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity,int) -> a
-    27:27:android.widget.TextView access$5(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> d
-    28:28:android.view.animation.Animation access$6(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> e
-    26:26:android.os.Handler access$7(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> f
-    25:25:void access$8(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity,android.os.CountDownTimer) -> a
-com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$1 -> com.lxm.pwhelp.activity.aq:
+    41:51:void onCreate(android.os.Bundle) -> onCreate
+    54:70:void init() -> b
+    74:79:void onResume() -> onResume
+    83:88:void onDestroy() -> onDestroy
+    25:25:com.lxm.pwhelp.utils.LockPatternView access$0(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> a
+    90:90:java.lang.Runnable access$1(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> b
+    35:35:boolean access$2() -> a
+    37:37:void access$3(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity,android.app.ProgressDialog) -> a
+    26:26:int access$4(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> c
+    26:26:void access$5(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity,int) -> a
+    29:29:android.widget.TextView access$6(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> d
+    31:31:android.view.animation.Animation access$7(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> e
+    28:28:android.os.Handler access$8(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity) -> f
+    27:27:void access$9(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity,android.os.CountDownTimer) -> a
+com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$1 -> com.lxm.pwhelp.activity.av:
     com.lxm.pwhelp.activity.UnlockGesturePasswordActivity this$0 -> a
-    75:76:void run() -> run
-com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$2 -> com.lxm.pwhelp.activity.ar:
+    92:93:void run() -> run
+com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$2 -> com.lxm.pwhelp.activity.aw:
     com.lxm.pwhelp.activity.UnlockGesturePasswordActivity this$0 -> a
-    82:84:void onPatternStart() -> a
-    87:88:void onPatternCleared() -> b
-    91:134:void onPatternDetected(java.util.List) -> a
-    138:138:void onPatternCellAdded(java.util.List) -> b
-    141:141:void patternInProgress() -> c
-com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$3 -> com.lxm.pwhelp.activity.as:
+    99:101:void onPatternStart() -> a
+    104:105:void onPatternCleared() -> b
+    108:158:void onPatternDetected(java.util.List) -> a
+    162:162:void onPatternCellAdded(java.util.List) -> b
+    165:165:void patternInProgress() -> c
+com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$3 -> com.lxm.pwhelp.activity.ax:
     com.lxm.pwhelp.activity.UnlockGesturePasswordActivity this$0 -> a
-    147:169:void run() -> run
-    143:143:com.lxm.pwhelp.activity.UnlockGesturePasswordActivity access$0(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$3) -> a
-com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$3$1 -> com.lxm.pwhelp.activity.at:
+    171:193:void run() -> run
+    167:167:com.lxm.pwhelp.activity.UnlockGesturePasswordActivity access$0(com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$3) -> a
+com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$3$1 -> com.lxm.pwhelp.activity.ay:
     com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$3 this$1 -> a
-    154:161:void onTick(long) -> onTick
-    165:167:void onFinish() -> onFinish
+    178:185:void onTick(long) -> onTick
+    189:191:void onFinish() -> onFinish
+com.lxm.pwhelp.activity.UnlockGesturePasswordActivity$4 -> com.lxm.pwhelp.activity.az:
+    com.lxm.pwhelp.activity.UnlockGesturePasswordActivity this$0 -> a
+    57:59:void onClick(android.view.View) -> onClick
 com.lxm.pwhelp.adapter.GroupAdapter -> com.lxm.pwhelp.a.a:
     com.lxm.pwhelp.activity.MainActivity activity -> a
     java.util.List parent -> b
@@ -19825,12 +19889,13 @@ com.lxm.pwhelp.adapter.PWItemAdapter -> com.lxm.pwhelp.a.e:
     java.lang.String qq_str -> i
     java.lang.String email_str -> j
     java.lang.String alipay_str -> k
-    48:55:void initGroupStr() -> a
-    58:58:int getCount() -> getCount
-    62:62:com.lxm.pwhelp.bean.Item getItem(int) -> a
-    66:66:long getItemId(int) -> getItemId
-    71:132:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-    136:166:void showCustomDialog(com.lxm.pwhelp.custom.ToggleButton,android.widget.TextView,java.lang.String) -> a
+    java.lang.String note_str -> l
+    48:56:void initGroupStr() -> a
+    59:59:int getCount() -> getCount
+    63:63:com.lxm.pwhelp.bean.Item getItem(int) -> a
+    67:67:long getItemId(int) -> getItemId
+    72:137:android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    141:171:void showCustomDialog(com.lxm.pwhelp.custom.ToggleButton,android.widget.TextView,java.lang.String) -> a
     1:1:java.lang.Object getItem(int) -> getItem
     36:36:com.lxm.pwhelp.dao.PWSettingDao access$1(com.lxm.pwhelp.adapter.PWItemAdapter) -> a
     35:35:void access$2(com.lxm.pwhelp.adapter.PWItemAdapter,java.lang.String) -> a
@@ -19841,18 +19906,18 @@ com.lxm.pwhelp.adapter.PWItemAdapter$1 -> com.lxm.pwhelp.a.f:
     com.lxm.pwhelp.custom.ToggleButton val$button -> b
     com.lxm.pwhelp.adapter.PWItemAdapter$ViewHolder val$mViewHolder -> c
     java.lang.String val$password -> d
-    119:130:void onToggle(boolean) -> a
+    124:135:void onToggle(boolean) -> a
 com.lxm.pwhelp.adapter.PWItemAdapter$2 -> com.lxm.pwhelp.a.g:
     com.lxm.pwhelp.adapter.PWItemAdapter this$0 -> a
     android.widget.EditText val$editText -> b
     android.widget.TextView val$item_password -> c
     java.lang.String val$password -> d
     com.lxm.pwhelp.custom.ToggleButton val$mTogBtn -> e
-    148:156:void onClick(android.content.DialogInterface,int) -> onClick
+    153:161:void onClick(android.content.DialogInterface,int) -> onClick
 com.lxm.pwhelp.adapter.PWItemAdapter$3 -> com.lxm.pwhelp.a.h:
     com.lxm.pwhelp.adapter.PWItemAdapter this$0 -> a
     com.lxm.pwhelp.custom.ToggleButton val$mTogBtn -> b
-    161:163:void onClick(android.content.DialogInterface,int) -> onClick
+    166:168:void onClick(android.content.DialogInterface,int) -> onClick
 com.lxm.pwhelp.adapter.PWItemAdapter$ViewHolder -> com.lxm.pwhelp.a.e$a:
     android.widget.ImageView item_logo -> a
     android.widget.TextView item_type -> b
@@ -20073,7 +20138,8 @@ com.lxm.pwhelp.dao.PWItemDao -> com.lxm.pwhelp.dao.PWItemDao:
     131:181:java.util.List queryItemAll() -> a
     190:241:java.util.List getItemByName(java.lang.String) -> a
     250:301:java.util.List getItemByType(java.lang.String) -> b
-    308:314:void emptyTable() -> b
+    310:358:com.lxm.pwhelp.bean.Item getMaxIdItem() -> b
+    365:371:void emptyTable() -> c
 com.lxm.pwhelp.dao.PWSettingDao -> com.lxm.pwhelp.dao.PWSettingDao:
     android.content.Context context -> a
     net.sqlcipher.database.SQLiteDatabase db -> b
@@ -20160,8 +20226,9 @@ com.lxm.pwhelp.utils.GroupType -> com.lxm.pwhelp.utils.d:
     com.lxm.pwhelp.utils.GroupType Type_QQ -> e
     com.lxm.pwhelp.utils.GroupType Type_Email -> f
     com.lxm.pwhelp.utils.GroupType Type_Alipay -> g
-    java.lang.String type -> h
-    com.lxm.pwhelp.utils.GroupType[] ENUM$VALUES -> i
+    com.lxm.pwhelp.utils.GroupType Type_Note -> h
+    java.lang.String type -> i
+    com.lxm.pwhelp.utils.GroupType[] ENUM$VALUES -> j
     19:19:java.lang.String getType() -> a
     1:1:com.lxm.pwhelp.utils.GroupType[] values() -> values
     1:1:com.lxm.pwhelp.utils.GroupType valueOf(java.lang.String) -> valueOf
@@ -20318,7 +20385,8 @@ com.lxm.pwhelp.utils.Tools -> com.lxm.pwhelp.utils.h:
     95:98:boolean isEmail(java.lang.String) -> a
     105:112:boolean isWiFiConnected(android.content.Context) -> a
     119:119:java.lang.String getResources(android.content.Context,int) -> a
-    123:124:java.lang.String getToday() -> b
+    127:128:java.lang.String getToday() -> b
+    137:140:boolean emptyStr(java.lang.String) -> b
 com.lxm.pwhelp.view.BaseSwipeListViewListener -> com.lxm.pwhelp.view.a:
     6:6:void onOpened(int,boolean) -> a
     10:10:void onClosed(int,boolean) -> b

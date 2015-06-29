@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -26,14 +27,15 @@ public class UnlockGesturePasswordActivity extends Activity {
 	private CountDownTimer mCountdownTimer = null;
 	private Handler mHandler = new Handler();
 	private TextView mHeadTextView;
+	private TextView gesturepwd_unlock_forget;
 	private Animation mShakeAnim;
-	
+
 	private Bundle bundle;
-	private static final String RESET="reset";
+	private static final String RESET = "reset";
 	private static boolean isReset = false;
-	
+
 	private ProgressDialog progressDialog;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,17 +45,26 @@ public class UnlockGesturePasswordActivity extends Activity {
 		mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
 		mLockPatternView.setTactileFeedbackEnabled(true);
 		mHeadTextView = (TextView) findViewById(R.id.gesturepwd_unlock_text);
+		gesturepwd_unlock_forget = (TextView) findViewById(R.id.gesturepwd_unlock_forget);
 		mShakeAnim = AnimationUtils.loadAnimation(this, R.anim.shake_x);
 		init();
 	}
-	
-	private void init(){
+
+	private void init() {
+		gesturepwd_unlock_forget.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(UnlockGesturePasswordActivity.this,PasswordBackActivity.class));
+				finish();
+			}
+		});
 		bundle = this.getIntent().getExtras();
 		String reset = null;
-		if(bundle!=null)
+		if (bundle != null)
 			reset = bundle.getString("action");
-		if(reset!=null&&RESET.equals(reset)){
-			mHeadTextView.setText(this.getResources().getString(R.string.verify_figtion_password));
+		if (reset != null && RESET.equals(reset)) {
+			mHeadTextView.setText(this.getResources().getString(
+					R.string.verify_figtion_password));
 			isReset = true;
 		}
 	}
@@ -72,9 +83,10 @@ public class UnlockGesturePasswordActivity extends Activity {
 		super.onDestroy();
 		if (mCountdownTimer != null)
 			mCountdownTimer.cancel();
-		if(progressDialog!=null&&progressDialog.isShowing())
+		if (progressDialog != null && progressDialog.isShowing())
 			progressDialog.dismiss();
 	}
+
 	private Runnable mClearPatternRunnable = new Runnable() {
 		public void run() {
 			mLockPatternView.clearPattern();
@@ -96,19 +108,24 @@ public class UnlockGesturePasswordActivity extends Activity {
 			if (pattern == null)
 				return;
 			if (App.getInstance().getLockPatternUtils().checkPattern(pattern)) {
-				if(!isReset){
+				if (!isReset) {
 					mLockPatternView
 							.setDisplayMode(LockPatternView.DisplayMode.Correct);
-					progressDialog = ProgressDialog.show(UnlockGesturePasswordActivity.this, "加载中...", "请稍等...", true, false);
-					Intent intent = new Intent(UnlockGesturePasswordActivity.this,
+					progressDialog = ProgressDialog.show(
+							UnlockGesturePasswordActivity.this, "加载中...",
+							"请稍等...", true, false);
+					Intent intent = new Intent(
+							UnlockGesturePasswordActivity.this,
 							MainActivity.class);
 					// 打开新的Activity
 					startActivity(intent);
 					UnlockGesturePasswordActivity.this.finish();
-				}else{
-					Intent intent = new Intent(UnlockGesturePasswordActivity.this,CreateGesturePasswordActivity.class);
+				} else {
+					Intent intent = new Intent(
+							UnlockGesturePasswordActivity.this,
+							CreateGesturePasswordActivity.class);
 					intent.putExtra("reset", "YES");
-					startActivityForResult(intent,1);
+					startActivityForResult(intent, 1);
 					UnlockGesturePasswordActivity.this.finish();
 				}
 			} else {
@@ -120,14 +137,16 @@ public class UnlockGesturePasswordActivity extends Activity {
 							- mFailedPatternAttemptsSinceLastTimeout;
 					if (retry >= 0) {
 						if (retry == 0)
-							Tools.showToast(UnlockGesturePasswordActivity.this,"您已5次输错密码，请30秒后再试");
+							Tools.showToast(UnlockGesturePasswordActivity.this,
+									"您已5次输错密码，请30秒后再试");
 						mHeadTextView.setText("密码错误，还可以再输入" + retry + "次");
 						mHeadTextView.setTextColor(Color.RED);
 						mHeadTextView.startAnimation(mShakeAnim);
 					}
 
-				}else{
-					Tools.showToast(UnlockGesturePasswordActivity.this,"输入长度不够，请重试");
+				} else {
+					Tools.showToast(UnlockGesturePasswordActivity.this,
+							"输入长度不够，请重试");
 				}
 
 				if (mFailedPatternAttemptsSinceLastTimeout >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {

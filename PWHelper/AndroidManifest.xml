@@ -53,6 +53,7 @@
         <activity android:exported="false" android:name="com.lxm.pwhelp.activity.AboutUsActivity"/>
         <activity android:exported="false" android:name="com.lxm.pwhelp.activity.AppListActivity"/>
         <activity android:exported="false" android:name="com.lxm.pwhelp.activity.AddNoteActivity"/>
+        <activity android:exported="false" android:name="com.lxm.pwhelp.activity.PasswordBackActivity"/>
     </application>
 
 </manifest>
