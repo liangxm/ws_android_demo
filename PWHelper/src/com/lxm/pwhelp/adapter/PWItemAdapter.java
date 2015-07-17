@@ -68,7 +68,7 @@ public class PWItemAdapter extends BaseAdapter {
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		final ViewHolder mViewHolder;
+		ViewHolder mViewHolder;
 		if (null == convertView){
 			convertView = View.inflate(activity.getApplicationContext(),R.layout.list_row, null);
 			mViewHolder = new ViewHolder();
@@ -82,7 +82,7 @@ public class PWItemAdapter extends BaseAdapter {
 			mViewHolder = (ViewHolder) convertView.getTag();
 		}
 		
-		final String password = getItem(position).getItem_password();
+		String password = getItem(position).getItem_password();
 		String item_type = getItem(position).getItem_type();
 		String appendType = "";
 		boolean isnote=false;
@@ -117,27 +117,41 @@ public class PWItemAdapter extends BaseAdapter {
 		if(!mViewHolder.mTogBtn.isSelected()){
 			mViewHolder.item_password.setText(isnote?"":"密码："+"*********************");
 		}
-		final ToggleButton button = mViewHolder.mTogBtn;
-		button.setOnToggleChanged(new OnToggleChanged(){
-			@Override
-			public void onToggle(boolean on) {
-				if(on){
-					Setting commands = pwSettingDao.querySettingByName("pw_command");
-					if(commands!=null){
-						command = commands.getSetting_value();
-						showCustomDialog(button,mViewHolder.item_password,password);
-					}else{
-						mViewHolder.item_password.setText("密码：" + password);
-					}
-				}else{
-					mViewHolder.item_password.setText("密码："+"*********************");
-				}
-			}
-		});
+		ToggleButton button = mViewHolder.mTogBtn;
+		button.setOnToggleChanged(new ToggleChangeListener(isnote,button,mViewHolder.item_password,password));
         return convertView;
 	}
 	
-	protected void showCustomDialog(final ToggleButton mTogBtn,final TextView item_password, final String password) {
+	private class ToggleChangeListener implements OnToggleChanged {
+		
+		private ToggleButton button;
+		private TextView item_password;
+		private String password;
+		private boolean isNote;
+		
+		public ToggleChangeListener(boolean isNote,ToggleButton button,TextView item_password,String password){
+			this.isNote = isNote;
+			this.button = button;
+			this.item_password = item_password;
+			this.password = password;
+		}
+		@Override
+		public void onToggle(boolean on) {
+			if(on){
+				Setting commands = pwSettingDao.querySettingByName("pw_command");
+				if(commands!=null){
+					command = commands.getSetting_value();
+					showCustomDialog(button,item_password,password,isNote);
+				}else{
+					item_password.setText(isNote?"":"密码：" + password);
+				}
+			}else{
+				item_password.setText(isNote?"":"密码："+"*********************");
+			}
+		}
+	}
+	
+	protected void showCustomDialog(final ToggleButton mTogBtn,final TextView item_password, final String password, final boolean isNote) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setTitle("请输入口令");
         dialog.setIcon(android.R.drawable.ic_dialog_info);
@@ -151,7 +165,7 @@ public class PWItemAdapter extends BaseAdapter {
         	@Override
 			public void onClick(DialogInterface dialog, int which) {
             	if(command.equals(editText.getText().toString())){
-					item_password.setText("密码：" + password);
+					item_password.setText(isNote?"":"密码：" + password);
 					dialog.dismiss();
 				}else{
 					Tools.showWarningDialog(activity,"口令错误","口令错误，请重试！");

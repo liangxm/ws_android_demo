@@ -1038,6 +1038,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 			lv_list.setVisibility(View.VISIBLE);
 		}
 	}
+	
+	@Override
+    protected void onRestart() {
+        super.onRestart();
+        System.out.println("onRestart");
+        //handler.post(listViewChanged);
+	}
 
 	@Override
 	protected void onDestroy() {
