@@ -6,9 +6,8 @@ demoHListView/bin
 PinnedHeaderExpandable/bin
 SwipeMenuSample/bin
 SwipeMenu/bin
-PWHelper/bin
+PWHelper
 PinnedHeaderExpandable/bin
-PWHelper/language.properties
 SwipeMenu/outdir
 CompoundButtonView/bin
 sample/bin
